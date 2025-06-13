@@ -1,0 +1,19 @@
+query GetHomepage($id: String!, $version: String!) {
+  viewerAnyAuth {
+    contentItem(key: $id, version: $version) {
+      id: key
+      contentType
+      properties
+    }
+  }
+}
+
+query GetHomepageWithAuth($id: String!, $version: String!, $token: String!) {
+  viewerBearerAuth(token: $token) {
+    contentItem(key: $id, version: $version) {
+      id: key
+      contentType
+      properties
+    }
+  }
+}
