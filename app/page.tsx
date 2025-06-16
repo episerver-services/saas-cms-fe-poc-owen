@@ -1,44 +1,49 @@
 import { GetHomepageDocument } from './gql/graphql'
-import { graphql } from './gql'
+// import { graphql } from './gql'
 import { print } from 'graphql'
 
-// TEMPORARY MOCK DATA while token access is pending
-async function getData() {
-  return {
-    contentType: 'MockPage',
-    properties: {
-      title: 'Welcome to the mock homepage',
-      description: 'This is placeholder content until the API is connected.',
-    },
+type HomepageData = {
+  contentType: string
+  properties: Record<string, unknown>
+}
+
+async function getData(): Promise<HomepageData> {
+  const isMock = true
+
+  if (isMock) {
+    return {
+      contentType: 'MockPage',
+      properties: {
+        title: 'Welcome to the mock homepage',
+        description: 'This is placeholder content until the API is connected.',
+      },
+    }
+  } else {
+    const query = print(GetHomepageDocument)
+
+    const variables = {
+      id: 'contentreference:/content/optimizely.com/en/homepage/',
+      version: 'published',
+    }
+
+    const res = await fetch('https://cg.optimizely.com/content/v3/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.OPTIMIZELY_BEARER_TOKEN}`,
+      },
+      body: JSON.stringify({ query, variables }),
+      next: { revalidate: 10 },
+    })
+
+    if (!res.ok) {
+      const text = await res.text()
+      throw new Error(`Failed to fetch: ${res.status} – ${text}`)
+    }
+
+    const json = await res.json()
+    return json.data.viewerAnyAuth.contentItem
   }
-
-  // Uncomment this block when your token is ready:
-  /*
-  const query = print(GetHomepageDocument)
-
-  const variables = {
-    id: 'contentreference:/content/optimizely.com/en/homepage/',
-    version: 'published',
-  }
-
-  const res = await fetch('https://cg.optimizely.com/content/v3/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.OPTIMIZELY_BEARER_TOKEN}`,
-    },
-    body: JSON.stringify({ query, variables }),
-    next: { revalidate: 10 },
-  })
-
-  if (!res.ok) {
-    const text = await res.text()
-    throw new Error(`Failed to fetch: ${res.status} – ${text}`)
-  }
-
-  const json = await res.json()
-  return json.data.viewerAnyAuth.contentItem
-  */
 }
 
 export default async function HomePage() {
