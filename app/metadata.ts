@@ -1,23 +1,25 @@
 import type { Metadata } from 'next'
-import { getHomepageContent } from '@/lib/content'
+import { getHomepageContent } from '@/lib/content/homepage'
+
+const FALLBACK_TITLE = 'Optimizely FE PoC'
+const FALLBACK_DESCRIPTION = 'Frontend demo for Optimizely CMS SaaS'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getHomepageContent()
+  try {
+    const content = await getHomepageContent()
 
-  const title = String(content.properties?.title ?? 'Default Title')
-  const description = String(
-    content.properties?.description ?? 'Default description.'
-  )
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-      locale: 'en_GB',
-      url: 'https://yourdomain.com/', // You can update this to match the actual deployed URL
-    },
+    return {
+      title: content?.properties?.title || FALLBACK_TITLE,
+      description: content?.properties?.description || FALLBACK_DESCRIPTION,
+      openGraph: {
+        title: content?.properties?.title || FALLBACK_TITLE,
+        description: content?.properties?.description || FALLBACK_DESCRIPTION,
+      },
+    }
+  } catch {
+    return {
+      title: FALLBACK_TITLE,
+      description: FALLBACK_DESCRIPTION,
+    }
   }
 }

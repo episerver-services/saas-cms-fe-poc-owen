@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getLayoutContent } from '@/lib/content'
+import { getLayoutContent } from '@/lib/content/layout'
 
 export const metadata: Metadata = {
   title: 'Optimizely FE PoC',
@@ -14,23 +14,22 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const layout = await getLayoutContent()
-  const { menuLinks, footerText } = layout.properties
 
   return (
     <html lang="en">
       <body className="bg-white text-gray-900 min-h-screen flex flex-col">
         <nav className="bg-blue-600 text-white p-4">
           <div className="max-w-4xl mx-auto flex space-x-6">
-            {menuLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.text}
+            {layout.properties.menuLinks.map(({ text, href }) => (
+              <Link key={href} href={href}>
+                {text}
               </Link>
             ))}
           </div>
         </nav>
-        <main className="max-w-4xl mx-auto p-6 flex-grow">{children}</main>
-        <footer className="bg-gray-100 text-center text-sm py-4">
-          {footerText}
+        <main className="max-w-4xl mx-auto p-6 flex-1">{children}</main>
+        <footer className="bg-gray-100 text-sm text-center py-4 text-gray-600">
+          {layout.properties.footerText}
         </footer>
       </body>
     </html>

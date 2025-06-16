@@ -1,4 +1,4 @@
-import { getHomepageContent } from '@/lib/content'
+import { getHomepageContent } from '@/lib/content/homepage'
 
 export default async function HomePage() {
   const content = await getHomepageContent()
