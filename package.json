@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "clean": "rm -rf .next/cache",
+    "dev": "npm run clean && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts",
+    "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
+    "test:features": "cucumber-js --require-module ts-node/register --require features/**/*.ts",
     "codegen": "graphql-codegen --config codegen.ts",
     "generate:schema": "ts-node scripts/generate-schema.ts"
   },
@@ -16,6 +20,8 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "@cucumber/pretty-formatter": "^1.0.1",
     "@eslint/eslintrc": "^3",
     "@graphql-codegen/cli": "5.0.7",
     "@graphql-codegen/client-preset": "4.8.2",
@@ -23,15 +29,19 @@
     "@graphql-codegen/typescript-document-nodes": "^4.0.16",
     "@graphql-codegen/typescript-operations": "^4.6.1",
     "@tailwindcss/postcss": "^4",
+    "@types/chai": "^5.2.2",
     "@types/node": "^20",
+    "@types/node-fetch": "^2.6.12",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "chai": "^5.2.0",
     "eslint": "^9.28.0",
     "eslint-config-next": "^15.3.3",
     "openapi-to-graphql": "^3.0.7",
     "prettier": "^3.5.3",
+    "start-server-and-test": "^2.0.12",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   }
 }
