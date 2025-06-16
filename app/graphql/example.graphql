@@ -1,4 +1,4 @@
-query GetHomepage($id: String!, $version: String!) {
+query GetExampleHomepage($id: String!, $version: String!) {
   viewerAnyAuth {
     contentItem(key: $id, version: $version) {
       id: key
@@ -8,7 +8,7 @@ query GetHomepage($id: String!, $version: String!) {
   }
 }
 
-query GetHomepageWithAuth($id: String!, $version: String!, $token: String!) {
+query GetExampleHomepageWithAuth($id: String!, $version: String!, $token: String!) {
   viewerBearerAuth(token: $token) {
     contentItem(key: $id, version: $version) {
       id: key

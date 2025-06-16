@@ -1,0 +1,9 @@
+query GetHomepage {
+  viewerAnyAuth {
+    contentItem(key: "homepage-id", version: "published") {
+      id: key
+      contentType
+      properties
+    }
+  }
+}
