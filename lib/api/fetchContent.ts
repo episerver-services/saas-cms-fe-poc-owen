@@ -1,51 +1,49 @@
 import { print } from 'graphql'
-import { GetHomepageDocument } from '@/app/gql/graphql'
+import { logger } from '../utils/logger'
 
 type Options = {
-  id: string
-  version?: 'published' | 'latest'
+  query: any
+  variables: Record<string, any>
   token?: string
 }
 
-export async function fetchHomepage({
-  id,
-  version = 'published',
+export async function fetchContent<T>({
+  query,
+  variables,
   token,
-}: Options) {
-  const query = print(GetHomepageDocument)
-  const variables = { id, version }
-
-  const viewerField = token ? 'viewerBearerAuth' : 'viewerAnyAuth'
-
-  const graphqlQuery = {
-    query: `
-      query GetHomepage($id: String!, $version: String!) {
-        ${viewerField}${token ? `(token: "${token}")` : ''} {
-          contentItem(key: $id, version: $version) {
-            id: key
-            contentType
-            properties
-          }
-        }
-      }
-    `,
+}: Options): Promise<T> {
+  const body = {
+    query: print(query),
     variables,
   }
 
-  const res = await fetch('https://cg.optimizely.com/content/v3/graphql', {
-    method: 'POST',
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token ?? process.env.OPTIMIZELY_BEARER_TOKEN}`,
+  }
+
+  const endpoint = 'https://cg.optimizely.com/content/v3/graphql'
+
+  logger.info('Fetching content from Optimizely CMS', {
+    endpoint,
+    variables,
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token ?? process.env.OPTIMIZELY_BEARER_TOKEN}`,
+      Authorization: '[REDACTED]',
     },
-    body: JSON.stringify(graphqlQuery),
+  })
+
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
     next: { revalidate: 10 },
   })
 
   if (!res.ok) {
+    logger.error(`Optimizely CMS fetch failed`, res.status, res.statusText)
     throw new Error(`Failed to fetch content: ${res.statusText}`)
   }
 
   const json = await res.json()
-  return json.data?.[viewerField]?.contentItem
+  return json.data
 }

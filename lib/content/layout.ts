@@ -1,16 +1,7 @@
 import { fetchContent } from '../cms'
 import { GetLayoutDocument } from '@/app/gql/graphql'
-
-export type LayoutProperties = {
-  menuLinks: { text: string; href: string }[]
-  footerText: string
-}
-
-export type LayoutContent = {
-  id: string
-  contentType: string
-  properties: LayoutProperties
-}
+import type { LayoutContent } from '@/types/cms'
+import { logger } from '../utils/logger'
 
 type LayoutResponse = {
   viewerAnyAuth: {
@@ -20,8 +11,10 @@ type LayoutResponse = {
 
 export async function getLayoutContent(): Promise<LayoutContent> {
   const isDev = process.env.NODE_ENV === 'development'
+  const token = process.env.OPTIMIZELY_BEARER_TOKEN
 
-  if (isDev || !process.env.OPTIMIZELY_BEARER_TOKEN) {
+  if (isDev || !token) {
+    logger.warn('Using mock layout content (no token or dev environment)')
     return {
       id: 'mock-layout',
       contentType: 'Layout',
@@ -40,6 +33,7 @@ export async function getLayoutContent(): Promise<LayoutContent> {
   const contentVersion = process.env.OPTIMIZELY_LAYOUT_VERSION || 'published'
 
   if (!contentId) {
+    logger.error('Missing OPTIMIZELY_LAYOUT_ID in environment')
     throw new Error('OPTIMIZELY_LAYOUT_ID is not defined in environment.')
   }
 

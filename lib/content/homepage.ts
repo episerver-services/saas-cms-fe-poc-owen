@@ -1,17 +1,7 @@
 import { fetchContent } from '../cms'
 import { GetHomepageDocument } from '@/app/gql/graphql'
-
-export type HomepageProperties = {
-  title: string
-  description: string
-  callToAction?: string
-}
-
-export type HomepageContent = {
-  id: string
-  contentType: string
-  properties: HomepageProperties
-}
+import type { HomepageContent } from '@/types/cms'
+import { logger } from '../utils/logger'
 
 type HomepageResponse = {
   viewerAnyAuth: {
@@ -21,8 +11,10 @@ type HomepageResponse = {
 
 export async function getHomepageContent(): Promise<HomepageContent> {
   const isDev = process.env.NODE_ENV === 'development'
+  const token = process.env.OPTIMIZELY_BEARER_TOKEN
 
-  if (isDev || !process.env.OPTIMIZELY_BEARER_TOKEN) {
+  if (isDev || !token) {
+    logger.warn('Using mock homepage content (no token or dev environment)')
     return {
       id: 'mock-id',
       contentType: 'Homepage',
@@ -38,6 +30,7 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   const contentVersion = process.env.OPTIMIZELY_CONTENT_VERSION || 'published'
 
   if (!contentId) {
+    logger.error('Missing OPTIMIZELY_CONTENT_ID in environment')
     throw new Error('OPTIMIZELY_CONTENT_ID is not defined in environment.')
   }
 
