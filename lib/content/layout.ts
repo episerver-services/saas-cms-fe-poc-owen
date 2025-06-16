@@ -36,11 +36,18 @@ export async function getLayoutContent(): Promise<LayoutContent> {
     }
   }
 
+  const contentId = process.env.OPTIMIZELY_LAYOUT_ID
+  const contentVersion = process.env.OPTIMIZELY_LAYOUT_VERSION || 'published'
+
+  if (!contentId) {
+    throw new Error('OPTIMIZELY_LAYOUT_ID is not defined in environment.')
+  }
+
   const data = await fetchContent<LayoutResponse>({
     query: GetLayoutDocument,
     variables: {
-      id: 'contentreference:/content/optimizely.com/en/layout/',
-      version: 'published',
+      id: contentId,
+      version: contentVersion,
     },
   })
 

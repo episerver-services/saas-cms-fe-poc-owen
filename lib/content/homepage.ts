@@ -34,11 +34,18 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     }
   }
 
+  const contentId = process.env.OPTIMIZELY_CONTENT_ID
+  const contentVersion = process.env.OPTIMIZELY_CONTENT_VERSION || 'published'
+
+  if (!contentId) {
+    throw new Error('OPTIMIZELY_CONTENT_ID is not defined in environment.')
+  }
+
   const data = await fetchContent<HomepageResponse>({
     query: GetHomepageDocument,
     variables: {
-      id: 'contentreference:/content/optimizely.com/en/homepage/',
-      version: 'published',
+      id: contentId,
+      version: contentVersion,
     },
   })
 
