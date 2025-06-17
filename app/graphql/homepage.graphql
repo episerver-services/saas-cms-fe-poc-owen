@@ -1,6 +1,6 @@
-query GetHomepage {
+query GetHomepage($id: String!, $version: String!) {
   viewerAnyAuth {
-    contentItem(key: "homepage-id", version: "published") {
+    contentItem(key: $id, version: $version) {
       id: key
       contentType
       properties

@@ -1,9 +1,9 @@
 export async function fetchFromOptimizely<T = unknown>(
   query: string,
-  variables?: Record<string, any>
+  variables?: Record<string, unknown>
 ): Promise<T> {
   const res = await fetch('/api/mock-content', {
-    method: 'POST', // Will eventually be GraphQL POST
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },

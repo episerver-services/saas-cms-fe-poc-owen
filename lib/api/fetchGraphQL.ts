@@ -1,9 +1,9 @@
-import { print } from 'graphql'
+import { print, DocumentNode } from 'graphql'
 
 interface GraphQLFetchOptions {
-  query: any
-  variables?: Record<string, any>
-  token?: string // optional for viewerBearerAuth if needed
+  query: string | DocumentNode
+  variables?: Record<string, unknown>
+  token?: string
   nextOptions?: RequestInit['next']
 }
 

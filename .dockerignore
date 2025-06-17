@@ -1,0 +1,24 @@
+# Node modules & build output
+node_modules
+.next
+out
+dist
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Git & dev artifacts
+.git
+.gitignore
+.DS_Store
+
+# Local env
+.env*
+*.local
+
+# Editor/OS files
+*.swp
+.vscode
+.idea

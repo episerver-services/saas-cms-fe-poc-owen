@@ -125,6 +125,7 @@ Defined in `features/step_definitions/`.
 - [ ] Add preview/edit mode
 - [ ] Integrate Optimizely Graph Management API
 - [ ] Add unit tests with Jest
+- [ ] Add E2E tests with Playwright
 
 ---
 

@@ -1,17 +1,17 @@
-import { print } from 'graphql'
+import { DocumentNode, print } from 'graphql'
 import { logger } from '../utils/logger'
 
-type Options = {
-  query: any
-  variables: Record<string, any>
+type Options<Vars> = {
+  query: DocumentNode
+  variables: Vars
   token?: string
 }
 
-export async function fetchContent<T>({
+export async function fetchContent<T, Vars = Record<string, unknown>>({
   query,
   variables,
   token,
-}: Options): Promise<T> {
+}: Options<Vars>): Promise<T> {
   const body = {
     query: print(query),
     variables,
@@ -45,5 +45,5 @@ export async function fetchContent<T>({
   }
 
   const json = await res.json()
-  return json.data
+  return json.data as T
 }

@@ -1,8 +1,8 @@
-import { print } from 'graphql'
+import { print, DocumentNode } from 'graphql'
 
 type FetchContentArgs = {
-  query: any // e.g., from graphql-tag or graphql-codegen
-  variables?: Record<string, any>
+  query: string | DocumentNode // Accept either a parsed query or raw string
+  variables?: Record<string, unknown>
   token?: string
 }
 
@@ -18,7 +18,7 @@ export async function fetchContent<T = unknown>({
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      query: print(query),
+      query: typeof query === 'string' ? query : print(query),
       variables,
     }),
     next: { revalidate: 10 },

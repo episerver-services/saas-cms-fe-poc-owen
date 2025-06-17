@@ -15,12 +15,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "query GetExampleHomepage($id: String!, $version: String!) {\n  viewerAnyAuth {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}\n\nquery GetExampleHomepageWithAuth($id: String!, $version: String!, $token: String!) {\n  viewerBearerAuth(token: $token) {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}": typeof types.GetExampleHomepageDocument,
-    "query GetHomepage {\n  viewerAnyAuth {\n    contentItem(key: \"homepage-id\", version: \"published\") {\n      id: key\n      contentType\n      properties\n    }\n  }\n}": typeof types.GetHomepageDocument,
+    "query GetHomepage($id: String!, $version: String!) {\n  viewerAnyAuth {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}": typeof types.GetHomepageDocument,
     "query GetLayout($id: String!, $version: String!) {\n  viewerAnyAuth {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}": typeof types.GetLayoutDocument,
 };
 const documents: Documents = {
     "query GetExampleHomepage($id: String!, $version: String!) {\n  viewerAnyAuth {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}\n\nquery GetExampleHomepageWithAuth($id: String!, $version: String!, $token: String!) {\n  viewerBearerAuth(token: $token) {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}": types.GetExampleHomepageDocument,
-    "query GetHomepage {\n  viewerAnyAuth {\n    contentItem(key: \"homepage-id\", version: \"published\") {\n      id: key\n      contentType\n      properties\n    }\n  }\n}": types.GetHomepageDocument,
+    "query GetHomepage($id: String!, $version: String!) {\n  viewerAnyAuth {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}": types.GetHomepageDocument,
     "query GetLayout($id: String!, $version: String!) {\n  viewerAnyAuth {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}": types.GetLayoutDocument,
 };
 
@@ -45,7 +45,7 @@ export function graphql(source: "query GetExampleHomepage($id: String!, $version
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetHomepage {\n  viewerAnyAuth {\n    contentItem(key: \"homepage-id\", version: \"published\") {\n      id: key\n      contentType\n      properties\n    }\n  }\n}"): (typeof documents)["query GetHomepage {\n  viewerAnyAuth {\n    contentItem(key: \"homepage-id\", version: \"published\") {\n      id: key\n      contentType\n      properties\n    }\n  }\n}"];
+export function graphql(source: "query GetHomepage($id: String!, $version: String!) {\n  viewerAnyAuth {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}"): (typeof documents)["query GetHomepage($id: String!, $version: String!) {\n  viewerAnyAuth {\n    contentItem(key: $id, version: $version) {\n      id: key\n      contentType\n      properties\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
