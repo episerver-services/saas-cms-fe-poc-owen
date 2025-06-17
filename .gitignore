@@ -20,22 +20,36 @@
 # production
 /build
 
-# misc
-.DS_Store
-*.pem
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
 
-# debug
+# Environment variables
+.env*
+!.env.example
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# OS metadata
+.DS_Store
 
-# vercel
+# Misc
+*.pem
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Vercel
 .vercel
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Editor settings
+.vscode/
+.idea/
+
+# GitHub Actions (optional, remove if using GitHub workflows)
+# .github/
