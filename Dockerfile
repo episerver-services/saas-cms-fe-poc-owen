@@ -7,13 +7,14 @@ RUN npm install
 # Rebuild the source code
 FROM node:20-alpine AS builder
 WORKDIR /app
+
+# Accept NODE_ENV as build-time argument
+ARG NODE_ENV
+ENV NODE_ENV=${NODE_ENV}
+ENV NEXT_TELEMETRY_DISABLED=1
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Use production environment for build
-ENV NODE_ENV=production
-# Add NEXT_TELEMETRY_DISABLED if you don't want telemetry
-ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build
 
@@ -24,7 +25,6 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Copy only needed files
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
