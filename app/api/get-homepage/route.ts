@@ -2,6 +2,18 @@ import { GetHomepageDocument } from '@/app/gql/graphql'
 import { logger } from '@/lib/utils/logger'
 import { fetchFromOptimizely } from '@/app/utils/fetchFromOptimizely'
 
+/**
+ * API route handler for fetching the homepage content item from Optimizely.
+ *
+ * This function sends a GraphQL request to the Optimizely Delivery API using a
+ * statically defined content reference for the homepage.
+ *
+ * It returns the content item as a JSON response or an error message with appropriate
+ * HTTP status codes depending on the result.
+ *
+ * @returns {Promise<Response>} A promise resolving to a Response object containing
+ * either the homepage content JSON or an error message.
+ */
 export async function POST(): Promise<Response> {
   try {
     const contentItem = await fetchFromOptimizely(GetHomepageDocument, {

@@ -1,6 +1,16 @@
 import { print } from 'graphql'
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 
+/**
+ * Fetches content from the Optimizely GraphQL Delivery API.
+ *
+ * @template TQuery - The shape of the GraphQL query result.
+ * @template TVariables - The shape of the variables required by the query.
+ * @template TReturn - Inferred return type extracted from viewerAnyAuth.contentItem.
+ * @param document - A typed GraphQL query document.
+ * @param variables - Variables required by the query.
+ * @returns The fetched content item or null if not found.
+ */
 export async function fetchFromOptimizely<
   TQuery,
   TVariables,
@@ -26,6 +36,7 @@ export async function fetchFromOptimizely<
 
   if (!res.ok) {
     const text = await res.text()
+    console.error('[Optimizely Fetch Error]', res.status, text)
     throw new Error(`Optimizely fetch failed: ${res.status} ${text}`)
   }
 
@@ -34,5 +45,10 @@ export async function fetchFromOptimizely<
   const contentItem = json?.data?.viewerAnyAuth?.contentItem as
     | TReturn
     | undefined
+
+  if (!contentItem) {
+    console.warn('[Optimizely] contentItem is null or undefined')
+  }
+
   return contentItem ?? null
 }
