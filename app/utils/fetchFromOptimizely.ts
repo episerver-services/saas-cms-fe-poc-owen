@@ -2,25 +2,18 @@ import { print } from 'graphql'
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 
 /**
- * Fetches content from the Optimizely GraphQL Delivery API.
+ * Executes a typed GraphQL query against the Optimizely Delivery API.
  *
- * @template TQuery - The shape of the GraphQL query result.
- * @template TVariables - The shape of the variables required by the query.
- * @template TReturn - Inferred return type extracted from viewerAnyAuth.contentItem.
- * @param document - A typed GraphQL query document.
- * @param variables - Variables required by the query.
- * @returns The fetched content item or null if not found.
+ * @template TQuery - The result type of the query.
+ * @template TVariables - The variables shape expected by the query.
+ * @param document - A TypedDocumentNode representing the GraphQL query.
+ * @param variables - The input variables for the query.
+ * @returns The full data object from the GraphQL response.
  */
-export async function fetchFromOptimizely<
-  TQuery,
-  TVariables,
-  TReturn = TQuery extends { viewerAnyAuth?: { contentItem?: infer T } }
-    ? T
-    : never,
->(
+export async function fetchFromOptimizely<TQuery, TVariables>(
   document: TypedDocumentNode<TQuery, TVariables>,
   variables: TVariables
-): Promise<TReturn | null> {
+): Promise<TQuery> {
   const query = print(document)
 
   const res = await fetch('https://cg.optimizely.com/content/v3/graphql', {
@@ -41,14 +34,5 @@ export async function fetchFromOptimizely<
   }
 
   const json = await res.json()
-
-  const contentItem = json?.data?.viewerAnyAuth?.contentItem as
-    | TReturn
-    | undefined
-
-  if (!contentItem) {
-    console.warn('[Optimizely] contentItem is null or undefined')
-  }
-
-  return contentItem ?? null
+  return json.data as TQuery
 }

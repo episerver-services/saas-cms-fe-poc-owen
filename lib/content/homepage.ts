@@ -2,11 +2,12 @@ import { fetchContent } from '../cms'
 import { GetHomepageDocument } from '@/app/gql/graphql'
 import type { HomepageContent } from '@/types/cms'
 import { logger } from '../utils/logger'
+import { ensureExists } from '../utils/assert'
 
 type HomepageResponse = {
   viewerAnyAuth: {
     contentItem: HomepageContent
-  }
+  } | null
 }
 
 export async function getHomepageContent(): Promise<HomepageContent> {
@@ -42,10 +43,10 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     },
   })
 
-  const contentItem = data.viewerAnyAuth?.contentItem
-  if (!contentItem) {
-    throw new Error('No homepage content returned from CMS.')
-  }
+  const contentItem = ensureExists(
+    data?.viewerAnyAuth?.contentItem,
+    'No homepage content returned from CMS.'
+  )
 
   return contentItem
 }

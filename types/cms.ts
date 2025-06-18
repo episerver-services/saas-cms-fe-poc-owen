@@ -1,13 +1,13 @@
-export type HomepageProperties = {
-  title: string
-  description: string
-  callToAction?: string
-}
+import type { GetHomepageQuery } from '@/app/gql/graphql'
 
-export type HomepageContent = {
-  id: string
-  contentType: string
-  properties: HomepageProperties
+export type HomepageContent = NonNullable<
+  NonNullable<GetHomepageQuery['viewerAnyAuth']>['contentItem']
+>
+
+// Minimal Block type (expand as needed)
+export type Block = {
+  contentType?: string
+  [key: string]: any
 }
 
 export type LayoutProperties = {
