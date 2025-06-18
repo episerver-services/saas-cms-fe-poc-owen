@@ -1,17 +1,17 @@
 # Optimizely SaaS CMS FE Template
 
-This is a proof-of-concept front-end application built with **Next.js 15** using the **App Router** and TypeScript. It fetches content from the **Optimizely SaaS CMS** Delivery API and demonstrates integration patterns including fallback mocks, global layout content, and BDD testing with Cucumber.
+A **Next.js 15** proof-of-concept front-end app using the **App Router** and **TypeScript** to fetch structured content from the **Optimizely SaaS CMS Delivery API**. Designed for real-world scenarios like authenticated content access, layout-aware rendering, and robust testability via Cucumber.
 
 ---
 
 ## 🧩 Features
 
-- ✅ Fetches content using GraphQL from Optimizely Delivery API
-- 🧪 Fallback to mock content in development
-- 🌍 Global layout and page content via CMS
-- 🔐 Uses environment variables for secure content delivery
-- ⚙️ BDD-style testing with Cucumber and Gherkin syntax
-- 💡 Extensible structure for future routes and CMS content types
+- ✅ **GraphQL-powered content fetching** from the Optimizely Delivery API
+- 🧪 **Fallback mock data** in local development
+- 🧱 **Global layout content** from CMS (e.g., header, footer)
+- 🔐 **Environment-based configuration** for secure delivery
+- 🧬 **BDD testing** with Cucumber + Gherkin syntax
+- 🧠 **Scalable structure** for routing and content modelling
 
 ---
 
@@ -25,7 +25,7 @@ cd optimizely-fe-template
 npm install
 ```
 
-### 2. Environment Setup
+### 2. Set Up Environment
 
 Create a `.env.local` file at the root:
 
@@ -44,33 +44,33 @@ OPTIMIZELY_LAYOUT_VERSION=published
 # === Frontend-specific settings ===
 SITE_DOMAIN=localhost:3000
 
-# === Development-only ===
+# === Dev only: allow local TLS requests to self-signed CMS endpoints ===
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
 
-### 3. Run the App
+### 3. Run Locally
 
 ```bash
 npm run dev
 ```
 
-The app will be available at [http://localhost:3000](http://localhost:3000)
+Visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
 ## 🧪 Testing
 
-### 🧬 BDD with Cucumber
+### BDD with Cucumber
 
-You can run feature tests written in Gherkin:
+Run all behaviour tests:
 
 ```bash
 npm run test:bdd
 ```
 
-### Example Feature
+#### Sample Feature File
 
-`features/homepage.feature`
+`features/homepage.feature`:
 
 ```gherkin
 Feature: Homepage Content
@@ -82,9 +82,7 @@ Feature: Homepage Content
     And the page should include the call to action
 ```
 
-### Step Definitions
-
-Defined in `features/step_definitions/`.
+Step definitions live in `features/step_definitions/`.
 
 ---
 
@@ -92,46 +90,57 @@ Defined in `features/step_definitions/`.
 
 ```
 ├── app/
-│   └── page.tsx            # Homepage using SSR
-│   └── layout.tsx          # Global layout pulling from CMS
+│   ├── layout.tsx              # Global layout
+│   ├── page.tsx                # Homepage route
+│   └── utils/fetchFromOptimizely.ts
 ├── lib/
-│   └── content/            # Data fetching logic
+│   └── content/                # GraphQL logic, mocks, helpers
 ├── types/
-│   └── cms.ts              # Shared CMS types
+│   └── cms.ts                  # CMS-specific TypeScript types
 ├── features/
-│   ├── homepage.feature
+│   ├── homepage.feature        # BDD test scenarios
 │   └── step_definitions/
-├── .env.local              # Local environment variables
+├── public/                     # Static assets
+├── .env.local                  # Local config
 ```
 
 ---
 
-## 📦 Scripts
+## 📦 NPM Scripts
 
 | Command               | Description                                 |
 |-----------------------|---------------------------------------------|
-| `npm run dev`         | Start dev server                            |
-| `npm run build`       | Build the production app                    |
-| `npm run start`       | Start the production server                 |
-| `npm run test:bdd`    | Run Cucumber BDD tests                      |
+| `npm run dev`         | Start local dev server                      |
+| `npm run build`       | Create production build                     |
+| `npm run start`       | Serve production build                      |
+| `npm run test:bdd`    | Run Cucumber BDD feature tests              |
 | `npm run codegen`     | Generate GraphQL types from schema/queries  |
 
 ---
 
-## 📚 Next Steps
+## 🛠️ CI/CD Pipeline
 
-- [ ] Add actual production CMS content
-- [ ] Extend to other routes (e.g. Products, About)
-- [ ] Add preview/edit mode
-- [ ] Integrate Optimizely Graph Management API
-- [ ] Add unit tests with Jest
-- [ ] Add E2E tests with Playwright
+- GitHub Actions workflow: `.github/workflows/ci-cd.yml`
+- Lint, test, build, and Dockerize
+- Docker image published to DockerHub on `main` branch push
 
 ---
 
-## 🧑‍💻 Maintainer
+## 🧭 Next Steps
 
-Owen Liversidge  
-🌐 Weymouth, UK
+- [ ] Add real content IDs and live token
+- [ ] Extend routing (e.g., `/products`, `/about`)
+- [ ] Enable Optimizely Preview/Edit mode
+- [ ] Integrate Optimizely Graph Management API
+- [ ] Add Jest unit tests
+- [ ] Add Playwright E2E test suite
+
+---
+
+## 👨‍💻 Maintainer
+
+**Owen Liversidge**  
+📍 Weymouth, UK  
+🐕 Likes dogs, accessibility, and clean React code.
 
 ---
