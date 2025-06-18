@@ -1,5 +1,9 @@
 import { print, type DocumentNode, type OperationDefinitionNode } from 'graphql'
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
+import {
+  mockHomepageResponse,
+  mockLayoutResponse,
+} from '@/mocks/optimizelyResponses'
 
 /**
  * Safely extracts the name of the GraphQL operation from a document.
@@ -47,50 +51,18 @@ export async function fetchFromOptimizely<TQuery, TVariables>(
 
     const opName = getOperationName(document)
 
-    if (opName === 'GetHomepage') {
-      return {
-        viewerAnyAuth: {
-          contentItem: {
-            __typename: 'Homepage',
-            id: 'mock-homepage',
-            contentType: 'Homepage',
-            properties: {
-              title: 'Mock Homepage',
-              description:
-                'This is local mock content for development use only.',
-              callToAction: 'Replace this with live CMS data once ready.',
-              blocks: [],
-            },
+    switch (opName) {
+      case 'GetHomepage':
+        return mockHomepageResponse as TQuery
+      case 'GetLayout':
+        return mockLayoutResponse as TQuery
+      default:
+        return {
+          viewerAnyAuth: {
+            contentItem: null,
           },
-        },
-      } as TQuery
+        } as unknown as TQuery
     }
-
-    if (opName === 'GetLayout') {
-      return {
-        viewerAnyAuth: {
-          contentItem: {
-            __typename: 'Layout',
-            id: 'mock-layout',
-            contentType: 'Layout',
-            properties: {
-              menuLinks: [
-                { text: 'Home', href: '/' },
-                { text: 'Products', href: '/products' },
-                { text: 'About', href: '/about' },
-              ],
-              footerText: '© Mock Company 2025',
-            },
-          },
-        },
-      } as TQuery
-    }
-
-    return {
-      viewerAnyAuth: {
-        contentItem: null,
-      },
-    } as unknown as TQuery
   }
 
   const res = await fetch('https://cg.optimizely.com/content/v3/graphql', {
