@@ -10,7 +10,7 @@
     "lint": "next lint",
     "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts",
     "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
-    "test:features": "cucumber-js --require-module ts-node/register --require features/**/*.ts",
+    "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require features/step-definitions/**/*.ts --require features/support/**/*.ts",
     "codegen": "graphql-codegen --config codegen.ts",
     "generate:schema": "ts-node scripts/generate-schema.ts"
   },
