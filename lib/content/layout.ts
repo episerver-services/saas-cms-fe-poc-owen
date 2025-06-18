@@ -1,14 +1,17 @@
-import { fetchContent } from '../cms'
+import { fetchFromOptimizely } from './fetchFromOptimizely'
 import { GetLayoutDocument } from '@/app/gql/graphql'
 import type { LayoutContent } from '@/types/cms'
 import { logger } from '../utils/logger'
+import { ensureExists } from '../utils/assert'
 
-type LayoutResponse = {
-  viewerAnyAuth: {
-    contentItem: LayoutContent
-  }
-}
-
+/**
+ * Fetches layout content from the Optimizely Delivery API.
+ *
+ * Falls back to mock data if running in development or missing an API token.
+ *
+ * @returns A promise that resolves to layout content.
+ * @throws If required environment variables are missing or no content is returned.
+ */
 export async function getLayoutContent(): Promise<LayoutContent> {
   const isDev = process.env.NODE_ENV === 'development'
   const token = process.env.OPTIMIZELY_BEARER_TOKEN
@@ -37,18 +40,19 @@ export async function getLayoutContent(): Promise<LayoutContent> {
     throw new Error('OPTIMIZELY_LAYOUT_ID is not defined in environment.')
   }
 
-  const data = await fetchContent<LayoutResponse>({
-    query: GetLayoutDocument,
-    variables: {
-      id: contentId,
-      version: contentVersion,
-    },
+  const data = await fetchFromOptimizely(GetLayoutDocument, {
+    id: contentId,
+    version: contentVersion,
   })
 
-  const contentItem = data.viewerAnyAuth?.contentItem
-  if (!contentItem) {
-    throw new Error('No layout content returned from CMS.')
+  const contentItem = ensureExists(
+    data?.viewerAnyAuth?.contentItem,
+    'No layout content returned from CMS.'
+  )
+
+  if (!contentItem.contentType) {
+    throw new Error('CMS layout content is missing a contentType.')
   }
 
-  return contentItem
+  return contentItem as LayoutContent
 }

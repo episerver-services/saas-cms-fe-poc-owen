@@ -1,6 +1,6 @@
 import { GetHomepageDocument } from '@/app/gql/graphql'
 import { logger } from '@/lib/utils/logger'
-import { fetchFromOptimizely } from '@/app/utils/fetchFromOptimizely'
+import { fetchFromOptimizely } from '@/lib/content/fetchFromOptimizely'
 
 /**
  * API route handler for fetching the homepage content item from Optimizely.

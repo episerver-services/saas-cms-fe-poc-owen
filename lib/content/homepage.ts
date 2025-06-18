@@ -1,15 +1,23 @@
-import { fetchContent } from '../cms'
-import { GetHomepageDocument } from '@/app/gql/graphql'
+import { fetchFromOptimizely } from './fetchFromOptimizely'
+import { GetHomepageDocument, type GetHomepageQuery } from '@/app/gql/graphql'
 import type { HomepageContent } from '@/types/cms'
 import { logger } from '../utils/logger'
 import { ensureExists } from '../utils/assert'
 
-type HomepageResponse = {
-  viewerAnyAuth: {
-    contentItem: HomepageContent
-  } | null
-}
-
+/**
+ * Retrieves homepage content from the Optimizely Delivery API using a GraphQL query.
+ *
+ * Falls back to a mock object if:
+ * - `NODE_ENV` is 'development'
+ * - `OPTIMIZELY_BEARER_TOKEN` is not set
+ *
+ * Environment variables required:
+ * - `OPTIMIZELY_CONTENT_ID`: The content reference ID of the homepage
+ * - `OPTIMIZELY_CONTENT_VERSION`: The content version to fetch (e.g., 'published')
+ *
+ * @returns A `HomepageContent` object containing the page data
+ * @throws If the content ID is missing or if the CMS returns no content
+ */
 export async function getHomepageContent(): Promise<HomepageContent> {
   const isDev = process.env.NODE_ENV === 'development'
   const token = process.env.OPTIMIZELY_BEARER_TOKEN
@@ -35,18 +43,16 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     throw new Error('OPTIMIZELY_CONTENT_ID is not defined in environment.')
   }
 
-  const data = await fetchContent<HomepageResponse>({
-    query: GetHomepageDocument,
-    variables: {
-      id: contentId,
-      version: contentVersion,
-    },
+  const data = await fetchFromOptimizely<
+    GetHomepageQuery,
+    { id: string; version: string }
+  >(GetHomepageDocument, {
+    id: contentId,
+    version: contentVersion,
   })
 
-  const contentItem = ensureExists(
+  return ensureExists(
     data?.viewerAnyAuth?.contentItem,
     'No homepage content returned from CMS.'
   )
-
-  return contentItem
 }

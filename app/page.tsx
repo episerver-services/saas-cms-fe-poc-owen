@@ -1,4 +1,4 @@
-import { fetchFromOptimizely } from '@/app/utils/fetchFromOptimizely'
+import { fetchFromOptimizely } from '@/lib/content/fetchFromOptimizely'
 import {
   GetHomepageDocument,
   GetHomepageQuery,
