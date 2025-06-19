@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "types"
-, "scripts/generate-schema.ts"  ],
+, "scripts/generate-schema.ts", "stylelint.config.mjs", "next.config.js"  ],
   "exclude": ["node_modules"]
 }
