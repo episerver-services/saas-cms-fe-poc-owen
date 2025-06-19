@@ -13,8 +13,13 @@ RUN pnpm install --frozen-lockfile
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# Accept build-time args
 ARG NODE_ENV
+ARG OPTIMIZELY_BEARER_TOKEN
+
+# Set environment variables for build
 ENV NODE_ENV=${NODE_ENV}
+ENV OPTIMIZELY_BEARER_TOKEN=${OPTIMIZELY_BEARER_TOKEN}
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN corepack enable && corepack prepare pnpm@8.15.4 --activate
