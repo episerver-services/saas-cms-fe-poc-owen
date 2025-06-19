@@ -11,13 +11,15 @@ RUN pnpm install --frozen-lockfile
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# === Accept build-time flags (non-secret only) ===
+# === Accept build-time secrets and flags ===
 ARG NODE_ENV
+ARG OPTIMIZELY_BEARER_TOKEN
 ARG OPTIMIZELY_LAYOUT_ID
 ARG IS_BUILD=false
 
 # === Set environment variables ===
 ENV NODE_ENV=${NODE_ENV}
+ENV OPTIMIZELY_BEARER_TOKEN=${OPTIMIZELY_BEARER_TOKEN}
 ENV OPTIMIZELY_LAYOUT_ID=${OPTIMIZELY_LAYOUT_ID}
 ENV IS_BUILD=${IS_BUILD}
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -28,10 +30,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY . .
 
-# === Use secret mount for the bearer token ===
-RUN --mount=type=secret,id=optly_token \
-    export OPTIMIZELY_BEARER_TOKEN=$(cat /run/secrets/optly_token) && \
-    pnpm build
+RUN pnpm build
 
 # Production image
 FROM node:20-alpine AS runner
