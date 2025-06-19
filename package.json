@@ -15,6 +15,7 @@
     "generate:schema": "ts-node scripts/generate-schema.ts"
   },
   "dependencies": {
+    "graphql": "^16.11.0",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -28,7 +29,9 @@
     "@graphql-codegen/typescript": "^4.1.6",
     "@graphql-codegen/typescript-document-nodes": "^4.0.16",
     "@graphql-codegen/typescript-operations": "^4.6.1",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@types/chai": "^5.2.2",
+    "@types/graphql": "^14.5.0",
     "@types/node": "^20",
     "@types/node-fetch": "^2.6.12",
     "@types/react": "^19",
