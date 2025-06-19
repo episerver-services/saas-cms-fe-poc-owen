@@ -10,6 +10,7 @@ A **Next.js 15** proof-of-concept front-end app using the **App Router** and **T
 - 🧪 **Fallback mock data** in local development
 - 🧱 **Global layout content** from CMS (e.g., header, footer)
 - 🔐 **Environment-based configuration** for secure delivery
+- 🐳 **Docker-compatible build pipeline** for CI/CD
 - 🧬 **BDD testing** with Cucumber + Gherkin syntax
 - 🧠 **Scalable structure** for routing and content modelling
 
@@ -22,7 +23,7 @@ A **Next.js 15** proof-of-concept front-end app using the **App Router** and **T
 ```bash
 git clone https://github.com/your-org/optimizely-fe-template.git
 cd optimizely-fe-template
-npm install
+pnpm install
 ```
 
 ### 2. Set Up Environment
@@ -51,7 +52,7 @@ NODE_TLS_REJECT_UNAUTHORIZED=0
 ### 3. Run Locally
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000)
@@ -65,7 +66,7 @@ Visit [http://localhost:3000](http://localhost:3000)
 Run all behaviour tests:
 
 ```bash
-npm run test:bdd
+pnpm test:bdd
 ```
 
 #### Sample Feature File
@@ -92,7 +93,7 @@ Step definitions live in `features/step_definitions/`.
 ├── app/
 │   ├── layout.tsx              # Global layout
 │   ├── page.tsx                # Homepage route
-│   └── utils/fetchFromOptimizely.ts
+│   └── components/             # BlockRenderer etc.
 ├── lib/
 │   └── content/                # GraphQL logic, mocks, helpers
 ├── types/
@@ -102,19 +103,21 @@ Step definitions live in `features/step_definitions/`.
 │   └── step_definitions/
 ├── public/                     # Static assets
 ├── .env.local                  # Local config
+├── Dockerfile                  # Multi-stage build definition
+├── .github/workflows/ci-cd.yml # GitHub Actions workflow
 ```
 
 ---
 
-## 📦 NPM Scripts
+## 📦 PNPM Scripts
 
 | Command               | Description                                 |
 |-----------------------|---------------------------------------------|
-| `npm run dev`         | Start local dev server                      |
-| `npm run build`       | Create production build                     |
-| `npm run start`       | Serve production build                      |
-| `npm run test:bdd`    | Run Cucumber BDD feature tests              |
-| `npm run codegen`     | Generate GraphQL types from schema/queries  |
+| `pnpm dev`            | Start local dev server                      |
+| `pnpm build`          | Create production build                     |
+| `pnpm start`          | Serve production build                      |
+| `pnpm test:bdd`       | Run Cucumber BDD feature tests              |
+| `pnpm codegen`        | Generate GraphQL types from schema/queries  |
 
 ---
 
@@ -123,6 +126,7 @@ Step definitions live in `features/step_definitions/`.
 - GitHub Actions workflow: `.github/workflows/ci-cd.yml`
 - Lint, test, build, and Dockerize
 - Docker image published to DockerHub on `main` branch push
+- Environment variables passed via `--build-arg` into Docker build
 
 ---
 
@@ -142,5 +146,3 @@ Step definitions live in `features/step_definitions/`.
 **Owen Liversidge**  
 📍 Weymouth, UK  
 🐕 Likes dogs, accessibility, and clean React code.
-
----
