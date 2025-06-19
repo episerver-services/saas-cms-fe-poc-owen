@@ -10,24 +10,43 @@ import { BlockRenderer } from './components/BlockRenderer'
  * HomePage is the main route for the site. It loads and renders content blocks
  * from the Optimizely CMS using a strongly typed GraphQL query.
  *
- * - Fetches the homepage content via the GraphQL Delivery API.
- * - Renders each content block using the BlockRenderer component.
- * - Falls back to a message if no valid content blocks are returned.
- *
  * Environment variables required:
  * - `OPTIMIZELY_CONTENT_ID`: Content reference for the homepage.
  * - `OPTIMIZELY_CONTENT_VERSION`: The version to fetch (e.g., 'published').
  *
- * @returns A server-rendered React component containing homepage blocks or a fallback.
+ * Behaviours:
+ * - If required env vars are missing, logs a warning and renders fallback markup.
+ * - If the Optimizely fetch fails (e.g. blocked by Cloudflare), logs the error and
+ *   renders fallback markup.
+ * - If no content blocks are returned, renders a default message.
+ *
+ * @returns A server-rendered React component containing homepage blocks or fallback UI.
  */
 export default async function HomePage() {
-  const homepage = await fetchFromOptimizely<
-    GetHomepageQuery,
-    GetHomepageQueryVariables
-  >(GetHomepageDocument, {
-    id: process.env.OPTIMIZELY_CONTENT_ID!,
-    version: process.env.OPTIMIZELY_CONTENT_VERSION!,
-  })
+  const contentId = process.env.OPTIMIZELY_CONTENT_ID
+  const version = process.env.OPTIMIZELY_CONTENT_VERSION
+
+  if (!contentId || !version) {
+    console.warn(
+      '[BUILD] Missing OPTIMIZELY_CONTENT_ID or OPTIMIZELY_CONTENT_VERSION'
+    )
+    return <p>Homepage content is temporarily unavailable (missing config).</p>
+  }
+
+  let homepage: GetHomepageQuery | null = null
+
+  try {
+    homepage = await fetchFromOptimizely<
+      GetHomepageQuery,
+      GetHomepageQueryVariables
+    >(GetHomepageDocument, {
+      id: contentId,
+      version,
+    })
+  } catch (error) {
+    console.error('[BUILD] Optimizely fetch failed:', error)
+    return <p>Homepage content could not be loaded (fetch error).</p>
+  }
 
   const blocks = homepage?.viewerAnyAuth?.contentItem?.properties?.blocks
 
