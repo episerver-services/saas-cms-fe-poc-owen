@@ -2,10 +2,8 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 
-# Enable and install pnpm via Corepack
 RUN corepack enable && corepack prepare pnpm@8.15.4 --activate
 
-# Copy only what's needed for dependency resolution
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
@@ -13,13 +11,15 @@ RUN pnpm install --frozen-lockfile
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Accept build-time args
+# === Accept build-time flags (non-secret only) ===
 ARG NODE_ENV
-ARG OPTIMIZELY_BEARER_TOKEN
+ARG OPTIMIZELY_LAYOUT_ID
+ARG IS_BUILD=false
 
-# Set environment variables for build
+# === Set environment variables ===
 ENV NODE_ENV=${NODE_ENV}
-ENV OPTIMIZELY_BEARER_TOKEN=${OPTIMIZELY_BEARER_TOKEN}
+ENV OPTIMIZELY_LAYOUT_ID=${OPTIMIZELY_LAYOUT_ID}
+ENV IS_BUILD=${IS_BUILD}
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN corepack enable && corepack prepare pnpm@8.15.4 --activate
@@ -28,7 +28,10 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY . .
 
-RUN pnpm build
+# === Use secret mount for the bearer token ===
+RUN --mount=type=secret,id=optly_token \
+    export OPTIMIZELY_BEARER_TOKEN=$(cat /run/secrets/optly_token) && \
+    pnpm build
 
 # Production image
 FROM node:20-alpine AS runner

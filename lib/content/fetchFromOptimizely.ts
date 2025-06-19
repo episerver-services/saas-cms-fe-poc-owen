@@ -18,9 +18,18 @@ export async function fetchFromOptimizely<TQuery, TVariables>(
   const query = print(document)
   const token = process.env.OPTIMIZELY_BEARER_TOKEN
 
+  const isBuild =
+    process.env.NODE_ENV === 'production' &&
+    (process.env.IS_BUILD === 'true' || process.env.CI === 'true')
+
+  if (isBuild) {
+    console.warn('🛠 Skipping Optimizely fetch during Docker build')
+    return {} as TQuery // fallback to empty object to prevent crash
+  }
+
   if (!token) {
     throw new Error(
-      '❌ OPTIMIZELY_BEARER_TOKEN is not defined in your .env.local'
+      '❌ OPTIMIZELY_BEARER_TOKEN is not defined in your environment'
     )
   }
 
