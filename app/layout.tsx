@@ -26,27 +26,24 @@ export default async function RootLayout({
     footerText = layoutContent.properties.footerText
   } catch (err) {
     console.warn('⚠️ Failed to load layout content:', err)
-    // Use fallback menuLinks and footerText
   }
 
   return (
     <html lang="en">
-      <body className="bg-white text-gray-900 min-h-screen flex flex-col">
-        <nav className="bg-blue-600 text-white p-4">
-          <div className="max-w-4xl mx-auto flex space-x-6">
+      <body className="site-body">
+        <nav className="site-nav">
+          <div className="nav-container">
             {menuLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
+              <Link key={link.href} href={link.href} className="nav-link">
                 {link.text}
               </Link>
             ))}
           </div>
         </nav>
 
-        <main className="max-w-4xl mx-auto p-6 flex-grow">{children}</main>
+        <main className="site-main">{children}</main>
 
-        <footer className="bg-gray-100 text-center py-4 text-sm text-gray-600">
-          {footerText}
-        </footer>
+        <footer className="site-footer">{footerText}</footer>
       </body>
     </html>
   )
