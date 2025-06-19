@@ -28,7 +28,6 @@
     "@graphql-codegen/typescript": "^4.1.6",
     "@graphql-codegen/typescript-document-nodes": "^4.0.16",
     "@graphql-codegen/typescript-operations": "^4.6.1",
-    "@tailwindcss/postcss": "^4",
     "@types/chai": "^5.2.2",
     "@types/node": "^20",
     "@types/node-fetch": "^2.6.12",
@@ -42,8 +41,6 @@
     "start-server-and-test": "^2.0.12",
     "stylelint": "^16.21.0",
     "stylelint-config-standard": "^38.0.0",
-    "stylelint-config-tailwindcss": "^1.0.0",
-    "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
