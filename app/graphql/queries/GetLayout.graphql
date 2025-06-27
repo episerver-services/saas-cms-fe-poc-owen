@@ -1,9 +1,0 @@
-query GetLayout($id: String!, $version: String!) {
-  viewerAnyAuth {
-    contentItem(key: $id, version: $version) {
-      id: key
-      contentType
-      properties
-    }
-  }
-}

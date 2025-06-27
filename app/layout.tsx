@@ -2,6 +2,17 @@ import './globals.css'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getLayoutContent } from '@/lib/content/layout'
+import { Geist, Geist_Mono } from 'next/font/google'
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+})
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: 'Optimizely FE PoC',
@@ -30,7 +41,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="site-body">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} site-body antialiased`}
+      >
         <nav className="site-nav">
           <div className="nav-container">
             {menuLinks.map((link) => (

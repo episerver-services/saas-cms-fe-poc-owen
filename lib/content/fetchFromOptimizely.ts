@@ -1,53 +1,56 @@
 import { print } from 'graphql'
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 
+interface GraphqlResponse<T> {
+  data: T
+  errors?: unknown[]
+}
+
 /**
- * Executes a typed GraphQL query against the Optimizely Delivery API.
+ * Executes a typed GraphQL query against the Optimizely Content Graph v2 API.
  *
  * @template TQuery - The result type of the query.
  * @template TVariables - The variables shape expected by the query.
  * @param document - A TypedDocumentNode representing the GraphQL query.
  * @param variables - The input variables for the query.
+ * @param options - Optional preview or cache settings.
  * @returns The full data object from the GraphQL response.
- * @throws If the fetch fails with a non-OK response.
+ * @throws If the fetch fails or returns a non-OK response.
  */
 export async function fetchFromOptimizely<TQuery, TVariables>(
   document: TypedDocumentNode<TQuery, TVariables>,
-  variables: TVariables
+  variables?: TVariables,
+  options: { preview?: boolean; cacheTag?: string } = {}
 ): Promise<TQuery> {
   const query = print(document)
-  const token = process.env.OPTIMIZELY_BEARER_TOKEN
+  const endpoint = `${process.env.OPTIMIZELY_API_URL}?auth=${process.env.OPTIMIZELY_SINGLE_KEY}`
 
-  const isBuild =
-    process.env.NODE_ENV === 'production' &&
-    (process.env.IS_BUILD === 'true' || process.env.CI === 'true')
-
-  if (isBuild) {
-    console.warn('🛠 Skipping Optimizely fetch during Docker build')
-    return {} as TQuery // fallback to empty object to prevent crash
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
   }
 
-  if (!token) {
-    throw new Error(
-      '❌ OPTIMIZELY_BEARER_TOKEN is not defined in your environment'
-    )
+  if (options.preview && process.env.OPTIMIZELY_PREVIEW_SECRET) {
+    headers.Authorization = `Basic ${process.env.OPTIMIZELY_PREVIEW_SECRET}`
   }
 
-  const res = await fetch('https://cg.optimizely.com/content/v3/graphql', {
+  const cacheTags = ['optimizely-content']
+  if (options.cacheTag) cacheTags.push(options.cacheTag)
+
+  const response = await fetch(endpoint, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+    headers,
     body: JSON.stringify({ query, variables }),
+    cache: options.preview ? 'no-store' : 'force-cache',
+    next: { tags: cacheTags },
   })
 
-  if (!res.ok) {
-    const text = await res.text()
-    console.error('[Optimizely Fetch Error]', res.status, text)
-    throw new Error(`Optimizely fetch failed: ${res.status} ${text}`)
+  if (!response.ok) {
+    const errorText = await response.text()
+    console.error('[Optimizely Fetch Error]', response.status, errorText)
+    throw new Error(`Optimizely fetch failed: ${response.status} ${errorText}`)
   }
 
-  const json = await res.json()
-  return json.data as TQuery
+  const json = (await response.json()) as GraphqlResponse<TQuery>
+  return json.data
 }
