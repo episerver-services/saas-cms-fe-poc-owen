@@ -1,5 +1,3 @@
-// components/content-area/block.tsx
-
 import dynamic from 'next/dynamic'
 import blocksMapperFactory from '@/lib/utils/block-factory'
 

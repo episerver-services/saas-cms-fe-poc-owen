@@ -1,1882 +1,3574 @@
-type Query {
-  """
-  A viewer that wraps all operations authenticated via security scheme 'Http', which is of type 'http' 'bearer'
-  """
-  viewerBearerAuth(token: String!): ViewerBearerAuth
+directive @config(source: String, searchable: Boolean, index: Boolean, esType: String, link: LinkConfig, preset: String) on FIELD_DEFINITION | ENUM_VALUE
 
-  """
-  A viewer that wraps operations for all available authentication mechanisms
-  """
-  viewerAnyAuth(http: HttpInput): ViewerAnyAuth
+"""Repeat fragment fields as children selection by `depth`"""
+directive @recursive(
+  """Recursion level (default: `1`, max: `10`)"""
+  depth: Int = 1
+) on FIELD | INLINE_FRAGMENT
+
+type _Component implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
 }
 
-"""A viewer for security scheme 'Http'"""
-type ViewerBearerAuth {
-  """
-  Gets the changeset with the provided key.
-  
-  Equivalent to GET /changesets/{key}
-  """
-  changeset(
-    """The key of the changeset to retrieve."""
-    key: String!
-  ): Changeset
-
-  """
-  Gets the changeset item for the specified content reference.
-  
-  Equivalent to GET /changesets/{changeset}/items/{key}/versions/{version}
-  """
-  changesetItem(
-    """The changeset key"""
-    changeset: String!
-
-    """The content key"""
-    key: String!
-
-    """The content version"""
-    version: String!
-  ): ChangesetItem
-
-  "Lists the available changeset items for the specified changeset using\r\nthe provided options.\n\nEquivalent to GET /changesets/{changeset}/items"
-  changesetItemPage(
-    """The changeset key"""
-    changeset: String!
-    pageIndex: Int
-    pageSize: Int
-  ): ChangesetItemPage
-
-  """
-  Lists all changeset using the provided options.
-  
-  Equivalent to GET /changesets
-  """
-  changesetPage(pageIndex: Int, pageSize: Int): ChangesetPage
-
-  """
-  Get the content item with the provided key and version.
-  
-  Equivalent to GET /content/{key}/versions/{version}
-  """
-  contentItem(key: String!, locale: String, version: String!): ContentItem
-
-  """
-  List content versions based on the provided query options.
-  
-  Equivalent to GET /content/versions
-  """
-  contentItemPage(
-    "Indicates which content locales that should be listed. Use 'NEUTRAL' to include locale-neutral content.\r\nLocale must be a valid IETF BCP-47 language tag."
-    locales: [String]
-    pageIndex: Int
-    pageSize: Int
-
-    """Indicates which status content versions must have to be listed."""
-    statuses: [VersionStatus]
-  ): ContentItemPage
-
-  """
-  List the assets that belongs to a content instance.
-  
-  Equivalent to GET /content/{key}/assets
-  """
-  contentListAssets(
-    """Indicates which content types or base types to include in the list."""
-    contentTypes: [String]
-
-    """The key of the content to retrieve assets for."""
-    key: String!
-    pageIndex: Int
-    pageSize: Int
-  ): ContentMetadataPage
-
-  """
-  List the content items located in a specific container.
-  
-  Equivalent to GET /content/{key}/items
-  """
-  contentListItems(
-    """Indicates which content types or base types to include in the list."""
-    contentTypes: [String]
-
-    """The key of the content to retrieve items for."""
-    key: String!
-    pageIndex: Int
-    pageSize: Int
-  ): ContentMetadataPage
-
-  """
-  List versions of the content item with the provided key and the provided options.
-  
-  Equivalent to GET /content/{key}/versions
-  """
-  contentListVersions(
-    key: String!
-
-    "Indicates which content locales that should be listed. Use 'NEUTRAL' to include locale-neutral content.\r\nLocale must be a valid IETF BCP-47 language tag."
-    locales: [String]
-    pageIndex: Int
-    pageSize: Int
-
-    """Indicates which status content versions must have to be listed."""
-    statuses: [VersionStatus]
-  ): ContentItemPage
-
-  """
-  Get shared metadata about the content instance with the provided key.
-  
-  Equivalent to GET /content/{key}
-  """
-  contentMetadata(
-    """Indicates that metadata for a deleted content may be returned."""
-    allowDeleted: Boolean
-
-    """The key of the content to retrieve metadata for."""
-    key: String!
-  ): ContentMetadata
-
-  """
-  Get the content path with the provided key.
-  
-  Equivalent to GET /content/{key}/path
-  """
-  contentMetadataPage(
-    """The key of the content path to retrieve."""
-    key: String!
-    pageIndex: Int
-    pageSize: Int
-  ): ContentMetadataPage
-
-  """
-  Get the content type with the provided key.
-  
-  Equivalent to GET /contenttypes/{key}
-  """
-  contentType(
-    """The key of the content type to retrieve."""
-    key: String!
-  ): ContentType
-
-  """
-  List content types using the provided options.
-  
-  Equivalent to GET /contenttypes
-  """
-  contentTypePage(
-    """
-    Only include types that are available for creation under the provided container type
-    """
-    forContainerType: String
-    pageIndex: Int
-    pageSize: Int
-
-    "Indicates which sources should be included when listing content types.\r\nUse All to include content types from all sources or\r\nDefault to include content types without a specific sources."
-    sources: [String]
-  ): ContentTypePage
-
-  """
-  Get the display template with the provided key.
-  
-  Equivalent to GET /displaytemplates/{key}
-  """
-  displayTemplate(
-    """The key of the display template to retrieve."""
-    key: String!
-  ): DisplayTemplate
-
-  """
-  List display templates using the provided options.
-  
-  Equivalent to GET /displaytemplates
-  """
-  displayTemplatePage(pageIndex: Int, pageSize: Int): DisplayTemplatePage
-
-  """
-  Get the property format with the provided key.
-  
-  Equivalent to GET /propertyformats/{key}
-  """
-  propertyFormat(
-    """Indicates that a deleted property format may be returned."""
-    allowDeleted: Boolean
-
-    """The key of the property format to retrieve."""
-    key: String!
-  ): PropertyFormat
-
-  """
-  List all property formats using the provided options.
-  
-  Equivalent to GET /propertyformats
-  """
-  propertyFormatPage(pageIndex: Int, pageSize: Int): PropertyFormatPage
-
-  """
-  Get the property group with the provided key.
-  
-  Equivalent to GET /propertygroups/{key}
-  """
-  propertyGroup(
-    """The key of the property group to retrieve."""
-    key: String!
-  ): PropertyGroup
-
-  """
-  List property groups using the provided options.
-  
-  Equivalent to GET /propertygroups
-  """
-  propertyGroupPage(
-    "Indicates which property groups sources that should be listed.\r\nUse All to include groups from all sources or\r\nDefault to include groups without a specific sources."
-    sources: [String]
-  ): PropertyGroupPage
+type _ComponentAutocomplete {
+  _metadata: IContentMetadataAutocomplete
 }
 
-"""Changesets are used to group work on several content items together."""
-type Changeset {
-  """A timestamp indicating when this changeset was first created."""
-  created: String
-
-  """The username of the user that created this changeset."""
-  createdBy: String
-
-  """The name of this Changeset."""
-  displayName: String!
-
-  """The unique key of this Changeset."""
-  key: String!
-  lastModified: String
-
-  """The source of this Changeset"""
-  source: String
+type _ComponentFacet {
+  _metadata: IContentMetadataFacet
 }
 
-"""
-Items in an changeset that contains a link to the specific content version.
-"""
-type ChangesetItem {
-  """Gets/sets the changeset item category."""
-  category: String
+input _ComponentOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
 
-  """A reference to a specific content instance."""
-  reference: ContentReference!
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
 }
 
-"""A reference to a specific content instance."""
+type _ComponentOutput {
+  items: [_IComponent]
+  item: _IComponent
+  cursor: String
+  total(all: Boolean): Int
+  facets: _ComponentFacet
+  autocomplete: _ComponentAutocomplete
+}
+
+input _ComponentWhereInput {
+  _and: [_ComponentWhereInput]
+  _or: [_ComponentWhereInput]
+  _not: [_ComponentWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+type _Content implements IData & _IContent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _ContentAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type _ContentFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input _ContentOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type _ContentOutput {
+  items: [_IContent]
+  item: _IContent
+  cursor: String
+  total(all: Boolean): Int
+  facets: _ContentFacet
+  autocomplete: _ContentAutocomplete
+}
+
+input _ContentWhereInput {
+  _and: [_ContentWhereInput]
+  _or: [_ContentWhereInput]
+  _not: [_ContentWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+type _Experience implements IData & _IContent & _IPage & _IExperience {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  composition: CompositionStructureNode
+}
+
+type _ExperienceAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  composition: CompositionStructureNodeAutocomplete
+}
+
+type _ExperienceFacet {
+  _metadata: IContentMetadataFacet
+  composition: CompositionStructureNodeFacet
+}
+
+input _ExperienceOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  composition: CompositionStructureNodeOrderByInput
+}
+
+type _ExperienceOutput {
+  items: [_IExperience]
+  item: _IExperience
+  cursor: String
+  total(all: Boolean): Int
+  facets: _ExperienceFacet
+  autocomplete: _ExperienceAutocomplete
+}
+
+input _ExperienceWhereInput {
+  _and: [_ExperienceWhereInput]
+  _or: [_ExperienceWhereInput]
+  _not: [_ExperienceWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  composition: CompositionStructureNodeWhereInput
+}
+
+type _Folder implements IData & _IContent & _IFolder {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _FolderAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type _FolderFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input _FolderOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type _FolderOutput {
+  items: [_IFolder]
+  item: _IFolder
+  cursor: String
+  total(all: Boolean): Int
+  facets: _FolderFacet
+  autocomplete: _FolderAutocomplete
+}
+
+input _FolderWhereInput {
+  _and: [_FolderWhereInput]
+  _or: [_FolderWhereInput]
+  _not: [_FolderWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+interface _IComponent implements IData & _IContent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+interface _IContent implements IData {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _IContentAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type _IContentFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input _IContentOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+input _IContentWhereInput {
+  _and: [_IContentWhereInput]
+  _or: [_IContentWhereInput]
+  _not: [_IContentWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+interface _IExperience implements IData & _IContent & _IPage {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  composition: CompositionStructureNode
+}
+
+interface _IFolder implements IData & _IContent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+interface _IImage implements IData & _IContent & _IMedia {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _Image implements IData & _IContent & _IMedia & _IImage {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _ImageAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type _ImageFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input _ImageOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type _ImageOutput {
+  items: [_IImage]
+  item: _IImage
+  cursor: String
+  total(all: Boolean): Int
+  facets: _ImageFacet
+  autocomplete: _ImageAutocomplete
+}
+
+input _ImageWhereInput {
+  _and: [_ImageWhereInput]
+  _or: [_ImageWhereInput]
+  _not: [_ImageWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+interface _IMedia implements IData & _IContent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+interface _IPage implements IData & _IContent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+interface _ISection implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  composition: CompositionStructureNode
+}
+
+interface _IVideo implements IData & _IContent & _IMedia {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _Media implements IData & _IContent & _IMedia {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _MediaAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type _MediaFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input _MediaOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type _MediaOutput {
+  items: [_IMedia]
+  item: _IMedia
+  cursor: String
+  total(all: Boolean): Int
+  facets: _MediaFacet
+  autocomplete: _MediaAutocomplete
+}
+
+input _MediaWhereInput {
+  _and: [_MediaWhereInput]
+  _or: [_MediaWhereInput]
+  _not: [_MediaWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+type _Page implements IData & _IContent & _IPage {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _PageAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type _PageFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input _PageOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type _PageOutput {
+  items: [_IPage]
+  item: _IPage
+  cursor: String
+  total(all: Boolean): Int
+  facets: _PageFacet
+  autocomplete: _PageAutocomplete
+}
+
+input _PageWhereInput {
+  _and: [_PageWhereInput]
+  _or: [_PageWhereInput]
+  _not: [_PageWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+type _Section implements IData & _IContent & _IComponent & _ISection {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  composition: CompositionStructureNode
+}
+
+type _SectionAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  composition: CompositionStructureNodeAutocomplete
+}
+
+type _SectionFacet {
+  _metadata: IContentMetadataFacet
+  composition: CompositionStructureNodeFacet
+}
+
+input _SectionOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  composition: CompositionStructureNodeOrderByInput
+}
+
+type _SectionOutput {
+  items: [_ISection]
+  item: _ISection
+  cursor: String
+  total(all: Boolean): Int
+  facets: _SectionFacet
+  autocomplete: _SectionAutocomplete
+}
+
+input _SectionWhereInput {
+  _and: [_SectionWhereInput]
+  _or: [_SectionWhereInput]
+  _not: [_SectionWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  composition: CompositionStructureNodeWhereInput
+}
+
+type _Video implements IData & _IContent & _IMedia & _IVideo {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type _VideoAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type _VideoFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input _VideoOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type _VideoOutput {
+  items: [_IVideo]
+  item: _IVideo
+  cursor: String
+  total(all: Boolean): Int
+  facets: _VideoFacet
+  autocomplete: _VideoAutocomplete
+}
+
+input _VideoWhereInput {
+  _and: [_VideoWhereInput]
+  _or: [_VideoWhereInput]
+  _not: [_VideoWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+type ArticleListElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  articleListCount: Int
+  topics: [String]
+}
+
+type ArticleListElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type ArticleListElementFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input ArticleListElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type ArticleListElementOutput {
+  items: [ArticleListElement]
+  item: ArticleListElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: ArticleListElementFacet
+  autocomplete: ArticleListElementAutocomplete
+}
+
+input ArticleListElementWhereInput {
+  _and: [ArticleListElementWhereInput]
+  _or: [ArticleListElementWhereInput]
+  _not: [ArticleListElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+type BlankExperience implements IData & _IContent & _IPage & _IExperience {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  composition: CompositionStructureNode
+  BlankExperienceSeoSettings: PageSeoSettingsProperty
+}
+
+type BlankExperienceAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  composition: CompositionStructureNodeAutocomplete
+  BlankExperienceSeoSettings: PageSeoSettingsPropertyAutocomplete
+}
+
+type BlankExperienceFacet {
+  _metadata: IContentMetadataFacet
+  composition: CompositionStructureNodeFacet
+  BlankExperienceSeoSettings: PageSeoSettingsPropertyFacet
+}
+
+input BlankExperienceOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  composition: CompositionStructureNodeOrderByInput
+  BlankExperienceSeoSettings: PageSeoSettingsPropertyOrderByInput
+}
+
+type BlankExperienceOutput {
+  items: [BlankExperience]
+  item: BlankExperience
+  cursor: String
+  total(all: Boolean): Int
+  facets: BlankExperienceFacet
+  autocomplete: BlankExperienceAutocomplete
+}
+
+input BlankExperienceWhereInput {
+  _and: [BlankExperienceWhereInput]
+  _or: [BlankExperienceWhereInput]
+  _not: [BlankExperienceWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  composition: CompositionStructureNodeWhereInput
+  BlankExperienceSeoSettings: PageSeoSettingsPropertyWhereInput
+}
+
+type BlankSection implements IData & _IContent & _IComponent & _ISection {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  composition: CompositionStructureNode
+}
+
+type BlankSectionAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  composition: CompositionStructureNodeAutocomplete
+}
+
+type BlankSectionFacet {
+  _metadata: IContentMetadataFacet
+  composition: CompositionStructureNodeFacet
+}
+
+input BlankSectionOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  composition: CompositionStructureNodeOrderByInput
+}
+
+type BlankSectionOutput {
+  items: [BlankSection]
+  item: BlankSection
+  cursor: String
+  total(all: Boolean): Int
+  facets: BlankSectionFacet
+  autocomplete: BlankSectionAutocomplete
+}
+
+input BlankSectionWhereInput {
+  _and: [BlankSectionWhereInput]
+  _or: [BlankSectionWhereInput]
+  _not: [BlankSectionWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  composition: CompositionStructureNodeWhereInput
+}
+
+type BlogPostPage implements IData & _IContent & _IPage {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  Heading(highlight: HighlightOptions): String
+  ArticleSubHeading(highlight: HighlightOptions): String
+  Topic(highlight: HighlightOptions): [String]
+  BlogPostBody: SearchableRichText
+  ArticleAuthor(highlight: HighlightOptions): String
+  BlogPostPromoImage: ContentReference
+  continueReading: [_IContent]
+  SeoSettings: PageSeoSettingsProperty
+}
+
+type BlogPostPageAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  BlogPostPromoImage: ContentReferenceAutocomplete
+  continueReading: _IContentAutocomplete
+  SeoSettings: PageSeoSettingsPropertyAutocomplete
+}
+
+type BlogPostPageFacet {
+  _metadata: IContentMetadataFacet
+  Heading(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  ArticleSubHeading(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  Topic(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  BlogPostBody: SearchableRichTextFacet
+  ArticleAuthor(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  BlogPostPromoImage: ContentReferenceFacet
+  continueReading: _IContentFacet
+  SeoSettings: PageSeoSettingsPropertyFacet
+}
+
+input BlogPostPageOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  Heading: OrderBy
+  ArticleSubHeading: OrderBy
+  Topic: OrderBy
+  BlogPostBody: SearchableRichTextOrderByInput
+  ArticleAuthor: OrderBy
+  BlogPostPromoImage: ContentReferenceOrderByInput
+  continueReading: _IContentOrderByInput
+  SeoSettings: PageSeoSettingsPropertyOrderByInput
+}
+
+type BlogPostPageOutput {
+  items: [BlogPostPage]
+  item: BlogPostPage
+  cursor: String
+  total(all: Boolean): Int
+  facets: BlogPostPageFacet
+  autocomplete: BlogPostPageAutocomplete
+}
+
+input BlogPostPageWhereInput {
+  _and: [BlogPostPageWhereInput]
+  _or: [BlogPostPageWhereInput]
+  _not: [BlogPostPageWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  Heading: SearchableStringFilterInput
+  ArticleSubHeading: SearchableStringFilterInput
+  Topic: SearchableStringFilterInput
+  BlogPostBody: SearchableRichTextWhereInput
+  ArticleAuthor: SearchableStringFilterInput
+  BlogPostPromoImage: ContentReferenceWhereInput
+  continueReading: _IContentWhereInput
+  SeoSettings: PageSeoSettingsPropertyWhereInput
+}
+
+type BlogSectionExperience implements IData & _IContent & _IPage & _IExperience {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  composition: CompositionStructureNode
+  seo_data: PageSeoSettingsProperty
+}
+
+type BlogSectionExperienceAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  composition: CompositionStructureNodeAutocomplete
+  seo_data: PageSeoSettingsPropertyAutocomplete
+}
+
+type BlogSectionExperienceFacet {
+  _metadata: IContentMetadataFacet
+  composition: CompositionStructureNodeFacet
+  seo_data: PageSeoSettingsPropertyFacet
+}
+
+input BlogSectionExperienceOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  composition: CompositionStructureNodeOrderByInput
+  seo_data: PageSeoSettingsPropertyOrderByInput
+}
+
+type BlogSectionExperienceOutput {
+  items: [BlogSectionExperience]
+  item: BlogSectionExperience
+  cursor: String
+  total(all: Boolean): Int
+  facets: BlogSectionExperienceFacet
+  autocomplete: BlogSectionExperienceAutocomplete
+}
+
+input BlogSectionExperienceWhereInput {
+  _and: [BlogSectionExperienceWhereInput]
+  _or: [BlogSectionExperienceWhereInput]
+  _not: [BlogSectionExperienceWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  composition: CompositionStructureNodeWhereInput
+  seo_data: PageSeoSettingsPropertyWhereInput
+}
+
+scalar Bool
+
+input BoolFilterInput {
+  """`exist` matches results that have this field."""
+  exist: Boolean
+
+  """`eq` matches on an exact value, but the value is case-insensitive."""
+  eq: Boolean
+
+  """
+  `not_eq` retrieves results not matching with an exact (but case-insensitive) value.
+  """
+  notEq: Boolean
+
+  """
+  `boost` influences the weight of a field by boosting a match with a number (default: 1) — counts more towards the eventual relevance score which can be projected with `_score` — at query time. Note that `boost` cannot be a negative number.
+  """
+  boost: Int
+}
+
+type ButtonBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  ButtonText: String
+  ButtonUrl: ContentUrl
+  ButtonClass: String
+  ButtonType: String
+  ButtonVariant: String
+}
+
+type ButtonBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  ButtonUrl: ContentUrlAutocomplete
+}
+
+type ButtonBlockFacet {
+  _metadata: IContentMetadataFacet
+  ButtonUrl: ContentUrlFacet
+}
+
+input ButtonBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  ButtonUrl: ContentUrlOrderByInput
+}
+
+type ButtonBlockOutput {
+  items: [ButtonBlock]
+  item: ButtonBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: ButtonBlockFacet
+  autocomplete: ButtonBlockAutocomplete
+}
+
+type ButtonBlockProperty {
+  ButtonText: String
+  ButtonUrl: ContentUrl
+  ButtonClass: String
+  ButtonType: String
+  ButtonVariant: String
+}
+
+type ButtonBlockPropertyAutocomplete {
+  ButtonUrl: ContentUrlAutocomplete
+}
+
+type ButtonBlockPropertyFacet {
+  ButtonUrl: ContentUrlFacet
+}
+
+input ButtonBlockPropertyOrderByInput {
+  ButtonUrl: ContentUrlOrderByInput
+}
+
+input ButtonBlockPropertyWhereInput {
+  ButtonUrl: ContentUrlWhereInput
+}
+
+input ButtonBlockWhereInput {
+  _and: [ButtonBlockWhereInput]
+  _or: [ButtonBlockWhereInput]
+  _not: [ButtonBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  ButtonUrl: ContentUrlWhereInput
+}
+
+type CarouselBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  CarouselItemsContentArea: [_IContent]
+}
+
+type CarouselBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  CarouselItemsContentArea: _IContentAutocomplete
+}
+
+type CarouselBlockFacet {
+  _metadata: IContentMetadataFacet
+  CarouselItemsContentArea: _IContentFacet
+}
+
+input CarouselBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  CarouselItemsContentArea: _IContentOrderByInput
+}
+
+type CarouselBlockOutput {
+  items: [CarouselBlock]
+  item: CarouselBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: CarouselBlockFacet
+  autocomplete: CarouselBlockAutocomplete
+}
+
+input CarouselBlockWhereInput {
+  _and: [CarouselBlockWhereInput]
+  _or: [CarouselBlockWhereInput]
+  _not: [CarouselBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  CarouselItemsContentArea: _IContentWhereInput
+}
+
+type CompositionComponentNode implements ICompositionNode & ICompositionComponentNode {
+  type: String
+  nodeType: String
+  displayName: String
+  key: String
+  displayTemplateKey: String
+  displaySettings: [CompositionDisplaySetting]
+  component: _IComponent
+}
+
+type CompositionDisplaySetting {
+  key: String
+  value: String
+}
+
+type CompositionDisplaySettingAutocomplete {
+  key(value: String!, limit: Int! = 10): [String]
+  value(value: String!, limit: Int! = 10): [String]
+}
+
+type CompositionDisplaySettingFacet {
+  key(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  value(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+}
+
+input CompositionDisplaySettingOrderByInput {
+  key: OrderBy
+  value: OrderBy
+}
+
+input CompositionDisplaySettingWhereInput {
+  key: StringFilterInput
+  value: StringFilterInput
+}
+
+type CompositionNode implements ICompositionNode {
+  type: String
+  nodeType: String
+  displayName: String
+  key: String
+  displayTemplateKey: String
+  displaySettings: [CompositionDisplaySetting]
+}
+
+type CompositionStructureNode implements ICompositionNode & ICompositionStructureNode {
+  type: String
+  nodeType: String
+  displayName: String
+  key: String
+  displayTemplateKey: String
+  displaySettings: [CompositionDisplaySetting]
+  nodes: [ICompositionNode]
+}
+
+type CompositionStructureNodeAutocomplete {
+  type(value: String!, limit: Int! = 10): [String]
+  nodeType(value: String!, limit: Int! = 10): [String]
+  displayName(value: String!, limit: Int! = 10): [String]
+  key(value: String!, limit: Int! = 10): [String]
+  displayTemplateKey(value: String!, limit: Int! = 10): [String]
+  displaySettings: CompositionDisplaySettingAutocomplete
+  nodes: ICompositionNodeAutocomplete
+}
+
+type CompositionStructureNodeFacet {
+  type(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  nodeType(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  displayName(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  key(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  displayTemplateKey(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  displaySettings: CompositionDisplaySettingFacet
+  nodes: ICompositionNodeFacet
+}
+
+input CompositionStructureNodeOrderByInput {
+  type: OrderBy
+  nodeType: OrderBy
+  displayName: OrderBy
+  key: OrderBy
+  displayTemplateKey: OrderBy
+  displaySettings: CompositionDisplaySettingOrderByInput
+  nodes: ICompositionNodeOrderByInput
+}
+
+input CompositionStructureNodeWhereInput {
+  type: StringFilterInput
+  nodeType: StringFilterInput
+  displayName: StringFilterInput
+  key: StringFilterInput
+  displayTemplateKey: StringFilterInput
+  displaySettings: CompositionDisplaySettingWhereInput
+  nodes: ICompositionNodeWhereInput
+}
+
+type ContentMetadata implements IContentMetadata {
+  key: String
+  locale: String
+  fallbackForLocale: String
+  version: String
+  displayName(highlight: HighlightOptions): String
+  url: ContentUrl
+  types: [String]
+  published: DateTime
+  status: String
+  changeset: String
+  created: DateTime
+  lastModified: DateTime
+  sortOrder: Int
+}
+
+type ContentRecsElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  ElementDeliveryApiKey: String
+  ElementRecommendationCount: Int
+}
+
+type ContentRecsElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type ContentRecsElementFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input ContentRecsElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type ContentRecsElementOutput {
+  items: [ContentRecsElement]
+  item: ContentRecsElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: ContentRecsElementFacet
+  autocomplete: ContentRecsElementAutocomplete
+}
+
+input ContentRecsElementWhereInput {
+  _and: [ContentRecsElementWhereInput]
+  _or: [ContentRecsElementWhereInput]
+  _not: [ContentRecsElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
 type ContentReference {
-  """The content key that identifies the content."""
   key: String
-
-  """The name of the content locale"""
-  locale: String
-
-  """The identifier of a specific version of the content."""
-  version: String
+  url: ContentUrl
 }
 
-type ChangesetItemPage {
-  """The items in this paged collection."""
-  items: [ChangesetItem]
-
-  """The zero-based index of the current page."""
-  pageIndex: Int
-
-  """
-  The number of item in each page. Not necessarily the same as the number of items in this page.
-  """
-  pageSize: Int
-
-  """
-  The estimated total number of items in the collection. May be omitted if the total item count is unknown.
-  """
-  totalItemCount: Int
+type ContentReferenceAutocomplete {
+  key(value: String!, limit: Int! = 10): [String]
+  url: ContentUrlAutocomplete
 }
 
-type ChangesetPage {
-  """The items in this paged collection."""
-  items: [Changeset]
-
-  """The zero-based index of the current page."""
-  pageIndex: Int
-
-  """
-  The number of item in each page. Not necessarily the same as the number of items in this page.
-  """
-  pageSize: Int
-
-  """
-  The estimated total number of items in the collection. May be omitted if the total item count is unknown.
-  """
-  totalItemCount: Int
+type ContentReferenceFacet {
+  key(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  url: ContentUrlFacet
 }
 
-"""Represents a version of a content item."""
-type ContentItem {
-  """
-  The key that identifies the container content that this content item belongs to.
-  """
-  container: String
-
-  """The content type of this content item."""
-  contentType: String
-
-  """
-  Indicates a time when this content version should transition to published status. Must only be assigned when Status is set to Scheduled.
-  """
-  delayPublishUntil: String
-
-  """The display name of this content item."""
-  displayName: String!
-
-  """Indicates a time when this content expired or should expire."""
-  expired: String
-
-  """The key that identifies this content item."""
-  key: String!
-  lastModified: String
-
-  """
-  The username of the user that made the latest modification to this content instance.
-  """
-  lastModifiedBy: String
-
-  """The locale of this content instance."""
-  locale: String
-
-  """
-  The key that identifies the owner of this content. Content that is own by another content is also known as an asset.
-  """
-  owner: String
-
-  """
-  Properties as they are defined by corresponding component or content type.
-  """
-  properties: JSON
-
-  """
-  Indicates a time when this content was published or should be published.
-  """
-  published: String
-
-  """
-  A string that represents the segment that should be used when routing or generate routes to the current content instance.
-  """
-  routeSegment: String
-
-  """Represent the different status values of a content version."""
-  status: VersionStatus
-
-  """The version identifier of this content instance."""
-  version: String
+input ContentReferenceOrderByInput {
+  key: OrderBy
+  url: ContentUrlOrderByInput
 }
+
+input ContentReferenceWhereInput {
+  key: StringFilterInput
+  url: ContentUrlWhereInput
+}
+
+type ContentUrl {
+  type: String
+  default: String
+  hierarchical: String
+  internal: String
+  graph: String
+  base: String
+}
+
+type ContentUrlAutocomplete {
+  type(value: String!, limit: Int! = 10): [String]
+  default(value: String!, limit: Int! = 10): [String]
+  hierarchical(value: String!, limit: Int! = 10): [String]
+  internal(value: String!, limit: Int! = 10): [String]
+  graph(value: String!, limit: Int! = 10): [String]
+  base(value: String!, limit: Int! = 10): [String]
+}
+
+type ContentUrlFacet {
+  type(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  default(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  hierarchical(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  internal(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  graph(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  base(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+}
+
+input ContentUrlOrderByInput {
+  type: OrderBy
+  default: OrderBy
+  hierarchical: OrderBy
+  internal: OrderBy
+  graph: OrderBy
+  base: OrderBy
+}
+
+input ContentUrlWhereInput {
+  type: StringFilterInput
+  default: StringFilterInput
+  hierarchical: StringFilterInput
+  internal: StringFilterInput
+  graph: StringFilterInput
+  base: StringFilterInput
+}
+
+type ContinueReadingComponent implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  topline: String
+  shared: Boolean
+  heading: String
+  content: [_IContent]
+}
+
+type ContinueReadingComponentAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  content: _IContentAutocomplete
+}
+
+type ContinueReadingComponentFacet {
+  _metadata: IContentMetadataFacet
+  shared(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  content: _IContentFacet
+}
+
+input ContinueReadingComponentOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  shared: OrderBy
+  content: _IContentOrderByInput
+}
+
+type ContinueReadingComponentOutput {
+  items: [ContinueReadingComponent]
+  item: ContinueReadingComponent
+  cursor: String
+  total(all: Boolean): Int
+  facets: ContinueReadingComponentFacet
+  autocomplete: ContinueReadingComponentAutocomplete
+}
+
+input ContinueReadingComponentWhereInput {
+  _and: [ContinueReadingComponentWhereInput]
+  _or: [ContinueReadingComponentWhereInput]
+  _not: [ContinueReadingComponentWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  shared: BoolFilterInput
+  content: _IContentWhereInput
+}
+
+type CTAElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  Text(highlight: HighlightOptions): String
+  Link: ContentUrl
+}
+
+type CTAElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  Link: ContentUrlAutocomplete
+}
+
+type CTAElementFacet {
+  _metadata: IContentMetadataFacet
+  Text(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  Link: ContentUrlFacet
+}
+
+input CTAElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  Text: OrderBy
+  Link: ContentUrlOrderByInput
+}
+
+type CTAElementOutput {
+  items: [CTAElement]
+  item: CTAElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: CTAElementFacet
+  autocomplete: CTAElementAutocomplete
+}
+
+input CTAElementWhereInput {
+  _and: [CTAElementWhereInput]
+  _or: [CTAElementWhereInput]
+  _not: [CTAElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  Text: SearchableStringFilterInput
+  Link: ContentUrlWhereInput
+}
+
+type Data implements IData {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+}
+
+input DataOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+}
+
+type DataOutput {
+  items: [IData]
+  item: IData
+  cursor: String
+  total(all: Boolean): Int
+}
+
+input DataWhereInput {
+  _and: [DataWhereInput]
+  _or: [DataWhereInput]
+  _not: [DataWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+}
+
+scalar Date
+
+type DateFacet {
+  name: String
+  count: Int
+}
+
+enum DateFacetUnit {
+  """Defined as 1000 milliseconds each."""
+  MINUTE
+
+  """
+  Defined as 60 minutes each (3,600,000 milliseconds). All hours begin at 00 minutes and 00 seconds.
+  """
+  HOUR
+
+  """
+  Defined as 24 hours (86,400,000 milliseconds). All days begin at the earliest possible time, which is usually 00:00:00 (midnight).
+  """
+  DAY
+}
+
+input DateFilterInput {
+  """`eq` matches on an exact value, but the value is case-insensitive."""
+  eq: Date
+
+  """
+  `not_eq` retrieves results not matching with an exact (but case-insensitive) value.
+  """
+  notEq: Date
+
+  """
+  `gt` retrieves results with matches that have a value which is `greater than` it.
+  """
+  gt: Date
+
+  """
+  `gte` retrieves results with matches that have a value which is `greater than or equal to` it.
+  """
+  gte: Date
+
+  """
+  `lt` retrieves results with matches that have a value which is `lower than` it.
+  """
+  lt: Date
+
+  """
+  `lte` retrieves results with matches that have a value which is `lower than or equal to` it.
+  """
+  lte: Date
+
+  """`exist` matches results that have this field."""
+  exist: Boolean
+
+  """
+  `boost` influences the weight of a field by boosting a match with a number (default: 1) — counts more towards the eventual relevance score which can be projected with `_score` — at query time. Note that `boost` cannot be a negative number.
+  """
+  boost: Int
+
+  """
+  `decay` influences the weight of the score with a decay function. For example, results that have a more recent datetime will be ranked higher. The `origin` will be `now()` in case not specified. The `scale` is by default 10. The `rate` must be in the range `[0..1]`.
+  """
+  decay: Decay
+}
+
+scalar DateTime
 
 """
-The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+Decay influences the weight of the score based on field values with a decay function
 """
-scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
-
-enum VersionStatus {
-  DRAFT
-  READY
-  PUBLISHED
-  PREVIOUS
-  SCHEDULED
-  REJECTED
-  INREVIEW
+input Decay {
+  origin: Date
+  scale: Int = 10
+  rate: Float
 }
 
-type ContentItemPage {
-  """The items in this paged collection."""
-  items: [ContentItem]
-
-  """The zero-based index of the current page."""
-  pageIndex: Int
-
-  """
-  The number of item in each page. Not necessarily the same as the number of items in this page.
-  """
-  pageSize: Int
-
-  """
-  The estimated total number of items in the collection. May be omitted if the total item count is unknown.
-  """
-  totalItemCount: Int
+type Document implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  Description: String
 }
 
-type ContentMetadataPage {
-  """The items in this paged collection."""
-  items: [ContentMetadata]
-
-  """The zero-based index of the current page."""
-  pageIndex: Int
-
-  """
-  The number of item in each page. Not necessarily the same as the number of items in this page.
-  """
-  pageSize: Int
-
-  """
-  The estimated total number of items in the collection. May be omitted if the total item count is unknown.
-  """
-  totalItemCount: Int
+type DocumentAutocomplete {
+  _metadata: IContentMetadataAutocomplete
 }
 
-"""Represents metadata about a content item."""
-type ContentMetadata {
-  """
-  The key that identifies the container content that this content belongs to.
-  """
-  container: String
-
-  """The content type of this content."""
-  contentType: String
-
-  """
-  A timestamp, which if provided, indicates when this content was deleted.
-  """
-  deleted: String
-
-  """The username of the user that deleted this content."""
-  deletedBy: String
-
-  """Indicates if the content contains any content items."""
-  hasItems: Boolean
-
-  """The key that identifies this content."""
-  key: String
-
-  """Set of locales that this content has been created for."""
-  locales: JSON
-
-  """
-  The key that identifies the owner of this content. Content that is own by another content is also known as an asset.
-  """
-  owner: String
+type DocumentFacet {
+  _metadata: IContentMetadataFacet
 }
 
-"""A writable implementation of an ContentType."""
-type ContentType {
-  """Represent the base type of a ContentType."""
-  baseType: ContentBaseType
+input DocumentOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
 
   """
-  Provides a set of composition behaviors specifying how this content type can be used within compositions.
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
   """
-  compositionBehaviors: [CompositionBehavior]
-
-  """A timestamp indicating when this ContentType was first created."""
-  created: String
-
-  """A description of this ContentType."""
-  description: String
-
-  """The display name of this ContentType."""
-  displayName: String
-
-  "Provides a set of features that content based on this ContentType supports.\r\nThis value is assigned based on the BaseType and cannot be modified."
-  features: [ContentTypeFeature]
-
-  """The key that identifies this ContentType."""
-  key: String!
-
-  """Indicates the last time this content type was modified."""
-  lastModified: String
-
-  """
-  The username of the user that made the latest modification to this ContentType.
-  """
-  lastModifiedBy: String
-
-  """
-  Provides a set of content types that can be created in container of this type
-  """
-  mayContainTypes: [String]
-
-  """
-  Provides a set of media file extensions that this content type can handle.
-  """
-  mediaFileExtensions: [String]
-
-  """Dictionary with all custom properties of this ContentType."""
-  properties: JSON
-
-  """An value that is used to when sorting ContentType instances."""
-  sortOrder: Int
-
-  """A string that is used to indicate the source of this ContentType."""
-  source: String
-
-  """Specifies how this ContentType can be used."""
-  usage: [ContentTypeUsage]
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
 }
 
-enum ContentBaseType {
-  PAGE
-  COMPONENT
-  MEDIA
-  IMAGE
-  VIDEO
-  FOLDER
-  EXPERIENCE
-  SECTION
-  ELEMENT
+type DocumentOutput {
+  items: [Document]
+  item: Document
+  cursor: String
+  total(all: Boolean): Int
+  facets: DocumentFacet
+  autocomplete: DocumentAutocomplete
 }
 
-enum CompositionBehavior {
-  SECTIONENABLED
-  ELEMENTENABLED
+input DocumentWhereInput {
+  _and: [DocumentWhereInput]
+  _or: [DocumentWhereInput]
+  _not: [DocumentWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
 }
 
-enum ContentTypeFeature {
-  LOCALIZATION
-  VERSIONING
-  PUBLISHPERIOD
-  ROUTING
-  BINARY
+enum FactorModifier {
+  """Do not apply any multiplier to the field value"""
+  NONE
+
+  """Square the field value (multiply it by itself)"""
+  SQUARE
+
+  """Take the square root of the field value"""
+  SQRT
+
+  """Add 1 to the field value and take the natural logarithm"""
+  LOG
+
+  """Reciprocate the field value, same as 1/x where x is the field's value"""
+  RECIPROCAL
 }
 
-enum ContentTypeUsage {
-  PROPERTY
-  INSTANCE
+type GenericMedia implements IData & _IContent & _IMedia {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
 }
 
-type ContentTypePage {
-  """The items in this paged collection."""
-  items: [ContentType]
-
-  """The zero-based index of the current page."""
-  pageIndex: Int
-
-  """
-  The number of item in each page. Not necessarily the same as the number of items in this page.
-  """
-  pageSize: Int
-
-  """
-  The estimated total number of items in the collection. May be omitted if the total item count is unknown.
-  """
-  totalItemCount: Int
+type GenericMediaAutocomplete {
+  _metadata: IContentMetadataAutocomplete
 }
 
-"""Describes a display template that can be assigned to content."""
-type DisplayTemplate {
-  """Represent the base type of a ContentType."""
-  baseType: ContentBaseType
+type GenericMediaFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input GenericMediaOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
 
   """
-  The optional key of the content type this display template is valid for.
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
   """
-  contentType: String
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
 
-  """A timestamp indicating when this display template was first created."""
-  created: String
+type GenericMediaOutput {
+  items: [GenericMedia]
+  item: GenericMedia
+  cursor: String
+  total(all: Boolean): Int
+  facets: GenericMediaFacet
+  autocomplete: GenericMediaAutocomplete
+}
 
-  """The username of the user that created this display template."""
-  createdBy: String
+input GenericMediaWhereInput {
+  _and: [GenericMediaWhereInput]
+  _or: [GenericMediaWhereInput]
+  _not: [GenericMediaWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
 
-  """The display name of this display template."""
-  displayName: String!
+type HeadingElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  headingText(highlight: HighlightOptions): String
+}
 
-  "If this is the default display template for the associated base type,\r\nnode type or content type."
-  isDefault: Boolean
+type HeadingElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
 
-  """The key that identifies this display template."""
-  key: String!
+type HeadingElementFacet {
+  _metadata: IContentMetadataFacet
+  headingText(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+}
 
-  """A timestamp indicating when this display template was last modified."""
-  lastModified: String
+input HeadingElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
 
-  """The username of the user that last modified this display template."""
-  lastModifiedBy: String
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  headingText: OrderBy
+}
 
-  """The optional node type this display template is valid for."""
+type HeadingElementOutput {
+  items: [HeadingElement]
+  item: HeadingElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: HeadingElementFacet
+  autocomplete: HeadingElementAutocomplete
+}
+
+input HeadingElementWhereInput {
+  _and: [HeadingElementWhereInput]
+  _or: [HeadingElementWhereInput]
+  _not: [HeadingElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  headingText: SearchableStringFilterInput
+}
+
+type HeroBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  HeroImage: ContentReference
+  Icon: String
+  Eyebrow: String
+  Heading: String
+  SubHeading: String
+  Description: RichText
+  HeroColor: String
+  HeroButton: ButtonBlockProperty
+}
+
+type HeroBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  HeroImage: ContentReferenceAutocomplete
+  Description: RichTextAutocomplete
+  HeroButton: ButtonBlockPropertyAutocomplete
+}
+
+type HeroBlockFacet {
+  _metadata: IContentMetadataFacet
+  HeroImage: ContentReferenceFacet
+  Description: RichTextFacet
+  HeroButton: ButtonBlockPropertyFacet
+}
+
+input HeroBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  HeroImage: ContentReferenceOrderByInput
+  Description: RichTextOrderByInput
+  HeroButton: ButtonBlockPropertyOrderByInput
+}
+
+type HeroBlockOutput {
+  items: [HeroBlock]
+  item: HeroBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: HeroBlockFacet
+  autocomplete: HeroBlockAutocomplete
+}
+
+input HeroBlockWhereInput {
+  _and: [HeroBlockWhereInput]
+  _or: [HeroBlockWhereInput]
+  _not: [HeroBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  HeroImage: ContentReferenceWhereInput
+  Description: RichTextWhereInput
+  HeroButton: ButtonBlockPropertyWhereInput
+}
+
+"""Options for highlighting"""
+input HighlightOptions {
+  enabled: Boolean
+  startToken: String
+  endToken: String
+}
+
+interface ICompositionComponentNode implements ICompositionNode {
+  type: String
   nodeType: String
-
-  """The available settings for this display template."""
-  settings: JSON
-}
-
-type DisplayTemplatePage {
-  """The items in this paged collection."""
-  items: [DisplayTemplate]
-
-  """The zero-based index of the current page."""
-  pageIndex: Int
-
-  """
-  The number of item in each page. Not necessarily the same as the number of items in this page.
-  """
-  pageSize: Int
-
-  """
-  The estimated total number of items in the collection. May be omitted if the total item count is unknown.
-  """
-  totalItemCount: Int
-}
-
-"""
-Represent the definition of semantic property formats for content items.
-"""
-type PropertyFormat {
-  "Represent the basic type that a PropertyFormat\r\nis using for data storage and data transport."
-  dataType: PropertyDataType
-
-  """Indicates if this property format has been deleted."""
-  deleted: Boolean
-
-  """The name and identifier of this PropertyFormat."""
   displayName: String
-
-  """Editor used for managing properties with this format."""
-  editor: String
-
-  """Settings for the editor."""
-  editorSettings: JSON
-
-  """Enumerations for the format."""
-  enum: Enum
-
-  "Represent the basic type that a PropertyFormat\r\nis using for data storage and data transport."
-  itemType: PropertyDataType
-
-  """The key that identifies this PropertyFormat."""
   key: String
+  displayTemplateKey: String
+  displaySettings: [CompositionDisplaySetting]
+  component: _IComponent
 }
 
-enum PropertyDataType {
-  STRING
-  URL
-  BOOLEAN
-  INTEGER
-  FLOAT
-  DATETIME
-  CONTENTREFERENCE
-  CONTENT
-  BINARY
-  JSON
-  ARRAY
-  COMPONENT
-}
-
-"""Enumerations for the format."""
-type Enum {
-  values: [ValuesListItem]
-}
-
-type ValuesListItem {
-  displayName: String
-  value: JSON
-}
-
-type PropertyFormatPage {
-  """The items in this paged collection."""
-  items: [PropertyFormat]
-
-  """The zero-based index of the current page."""
-  pageIndex: Int
-
-  """
-  The number of item in each page. Not necessarily the same as the number of items in this page.
-  """
-  pageSize: Int
-
-  """
-  The estimated total number of items in the collection. May be omitted if the total item count is unknown.
-  """
-  totalItemCount: Int
-}
-
-"""Describes a property group of a ContentType in the CMS."""
-type PropertyGroup {
-  """The display name of this PropertyGroup."""
-  displayName: String
-
-  """The key that identifies this PropertyGroup."""
-  key: String!
-
-  """An value that is used to when sorting PropertyGroup instances."""
-  sortOrder: Int
-
-  """A string that is used to indicate the source of this PropertyGroup."""
-  source: String
-}
-
-type PropertyGroupPage {
-  """The items in this paged collection."""
-  items: [PropertyGroup]
-
-  """The zero-based index of the current page."""
-  pageIndex: Int
-
-  """
-  The number of item in each page. Not necessarily the same as the number of items in this page.
-  """
-  pageSize: Int
-
-  """
-  The estimated total number of items in the collection. May be omitted if the total item count is unknown.
-  """
-  totalItemCount: Int
-}
-
-"""Warning: Not every request will work with this viewer type"""
-type ViewerAnyAuth {
-  """
-  Gets the changeset with the provided key.
-  
-  Equivalent to GET /changesets/{key}
-  """
-  changeset(
-    """The key of the changeset to retrieve."""
-    key: String!
-  ): Changeset
-
-  """
-  Gets the changeset item for the specified content reference.
-  
-  Equivalent to GET /changesets/{changeset}/items/{key}/versions/{version}
-  """
-  changesetItem(
-    """The changeset key"""
-    changeset: String!
-
-    """The content key"""
-    key: String!
-
-    """The content version"""
-    version: String!
-  ): ChangesetItem
-
-  "Lists the available changeset items for the specified changeset using\r\nthe provided options.\n\nEquivalent to GET /changesets/{changeset}/items"
-  changesetItemPage(
-    """The changeset key"""
-    changeset: String!
-    pageIndex: Int
-    pageSize: Int
-  ): ChangesetItemPage
-
-  """
-  Lists all changeset using the provided options.
-  
-  Equivalent to GET /changesets
-  """
-  changesetPage(pageIndex: Int, pageSize: Int): ChangesetPage
-
-  """
-  Get the content item with the provided key and version.
-  
-  Equivalent to GET /content/{key}/versions/{version}
-  """
-  contentItem(key: String!, locale: String, version: String!): ContentItem
-
-  """
-  List content versions based on the provided query options.
-  
-  Equivalent to GET /content/versions
-  """
-  contentItemPage(
-    "Indicates which content locales that should be listed. Use 'NEUTRAL' to include locale-neutral content.\r\nLocale must be a valid IETF BCP-47 language tag."
-    locales: [String]
-    pageIndex: Int
-    pageSize: Int
-
-    """Indicates which status content versions must have to be listed."""
-    statuses: [VersionStatus]
-  ): ContentItemPage
-
-  """
-  List the assets that belongs to a content instance.
-  
-  Equivalent to GET /content/{key}/assets
-  """
-  contentListAssets(
-    """Indicates which content types or base types to include in the list."""
-    contentTypes: [String]
-
-    """The key of the content to retrieve assets for."""
-    key: String!
-    pageIndex: Int
-    pageSize: Int
-  ): ContentMetadataPage
-
-  """
-  List the content items located in a specific container.
-  
-  Equivalent to GET /content/{key}/items
-  """
-  contentListItems(
-    """Indicates which content types or base types to include in the list."""
-    contentTypes: [String]
-
-    """The key of the content to retrieve items for."""
-    key: String!
-    pageIndex: Int
-    pageSize: Int
-  ): ContentMetadataPage
-
-  """
-  List versions of the content item with the provided key and the provided options.
-  
-  Equivalent to GET /content/{key}/versions
-  """
-  contentListVersions(
-    key: String!
-
-    "Indicates which content locales that should be listed. Use 'NEUTRAL' to include locale-neutral content.\r\nLocale must be a valid IETF BCP-47 language tag."
-    locales: [String]
-    pageIndex: Int
-    pageSize: Int
-
-    """Indicates which status content versions must have to be listed."""
-    statuses: [VersionStatus]
-  ): ContentItemPage
-
-  """
-  Get shared metadata about the content instance with the provided key.
-  
-  Equivalent to GET /content/{key}
-  """
-  contentMetadata(
-    """Indicates that metadata for a deleted content may be returned."""
-    allowDeleted: Boolean
-
-    """The key of the content to retrieve metadata for."""
-    key: String!
-  ): ContentMetadata
-
-  """
-  Get the content path with the provided key.
-  
-  Equivalent to GET /content/{key}/path
-  """
-  contentMetadataPage(
-    """The key of the content path to retrieve."""
-    key: String!
-    pageIndex: Int
-    pageSize: Int
-  ): ContentMetadataPage
-
-  """
-  Get the content type with the provided key.
-  
-  Equivalent to GET /contenttypes/{key}
-  """
-  contentType(
-    """The key of the content type to retrieve."""
-    key: String!
-  ): ContentType
-
-  """
-  List content types using the provided options.
-  
-  Equivalent to GET /contenttypes
-  """
-  contentTypePage(
-    """
-    Only include types that are available for creation under the provided container type
-    """
-    forContainerType: String
-    pageIndex: Int
-    pageSize: Int
-
-    "Indicates which sources should be included when listing content types.\r\nUse All to include content types from all sources or\r\nDefault to include content types without a specific sources."
-    sources: [String]
-  ): ContentTypePage
-
-  """
-  Get the display template with the provided key.
-  
-  Equivalent to GET /displaytemplates/{key}
-  """
-  displayTemplate(
-    """The key of the display template to retrieve."""
-    key: String!
-  ): DisplayTemplate
-
-  """
-  List display templates using the provided options.
-  
-  Equivalent to GET /displaytemplates
-  """
-  displayTemplatePage(pageIndex: Int, pageSize: Int): DisplayTemplatePage
-
-  """
-  Get the property format with the provided key.
-  
-  Equivalent to GET /propertyformats/{key}
-  """
-  propertyFormat(
-    """Indicates that a deleted property format may be returned."""
-    allowDeleted: Boolean
-
-    """The key of the property format to retrieve."""
-    key: String!
-  ): PropertyFormat
-
-  """
-  List all property formats using the provided options.
-  
-  Equivalent to GET /propertyformats
-  """
-  propertyFormatPage(pageIndex: Int, pageSize: Int): PropertyFormatPage
-
-  """
-  Get the property group with the provided key.
-  
-  Equivalent to GET /propertygroups/{key}
-  """
-  propertyGroup(
-    """The key of the property group to retrieve."""
-    key: String!
-  ): PropertyGroup
-
-  """
-  List property groups using the provided options.
-  
-  Equivalent to GET /propertygroups
-  """
-  propertyGroupPage(
-    "Indicates which property groups sources that should be listed.\r\nUse All to include groups from all sources or\r\nDefault to include groups without a specific sources."
-    sources: [String]
-  ): PropertyGroupPage
-}
-
-"""Bearer auth credentials for security protocol 'Http'"""
-input HttpInput {
-  token: String
-}
-
-type Mutation {
-  """
-  A viewer that wraps all operations authenticated via security scheme 'Http', which is of type 'http' 'bearer'
-  """
-  mutationViewerBearerAuth(token: String!): MutationViewerBearerAuth
-
-  """
-  A viewer that wraps operations for all available authentication mechanisms
-  """
-  mutationViewerAnyAuth(http: HttpInput): MutationViewerAnyAuth
-}
-
-"""A viewer for security scheme 'Http'"""
-type MutationViewerBearerAuth {
-  """
-  Creates a new changeset.
-  
-  Equivalent to POST /changesets
-  """
-  changesetsCreate(
-    """Changesets are used to group work on several content items together."""
-    changesetInput: ChangesetInput!
-  ): Changeset
-
-  """
-  Creates the given changeset item.
-  
-  Equivalent to POST /changesets/{changeset}/items
-  """
-  changesetsCreateItem(
-    """The changeset key"""
-    changeset: String!
-
-    """
-    Items in an changeset that contains a link to the specific content version.
-    """
-    changesetItemInput: ChangesetItemInput!
-  ): ChangesetItem
-
-  """
-  Deletes the changeset with the provided key. If a changeset with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /changesets/{key}
-  """
-  changesetsDelete(
-    """The key of the changeset to delete."""
-    key: String!
-  ): Changeset
-
-  """
-  Deletes the specified changeset item from the changeset.
-  
-  Equivalent to DELETE /changesets/{changeset}/items/{key}/versions/{version}
-  """
-  changesetsDeleteItem(
-    """The changeset key"""
-    changeset: String!
-
-    """The content key"""
-    key: String!
-
-    """The content version"""
-    version: String!
-  ): ChangesetItem
-
-  "Creates or replaces a changeset. If a changeset with the provided key exist it is replaced.\r\nOtherwise a new changeset is created.\n\nEquivalent to PUT /changesets/{key}"
-  changesetsPut(
-    """Changesets are used to group work on several content items together."""
-    changesetInput: ChangesetInput!
-
-    """The key of the changeset to update or create."""
-    key: String!
-  ): Changeset
-
-  """
-  Create a copy of the content item with the provided key.
-  
-  Equivalent to POST /content/{key}:copy
-  """
-  contentCopy(
-    """Options for copying content."""
-    copyContentOptionsInput: CopyContentOptionsInput
-
-    """The key of the content item to copy."""
-    key: String!
-  ): ContentMetadata
-
-  """
-  Create a new content item.
-  
-  Equivalent to POST /content
-  """
-  contentCreate(
-    """Represents a version of a content item."""
-    contentItemInput: ContentItemInput!
-
-    """Indicates that the content validation should be ignored."""
-    skipValidation: Boolean
-  ): ContentItem
-
-  """
-  Create a new version of a content item.
-  
-  Equivalent to POST /content/{key}/versions
-  """
-  contentCreateVersion(
-    """Represents a version of a content item."""
-    contentItemInput: ContentItemInput!
-
-    """
-    The key of the content item for which a new content version should be created.
-    """
-    key: String!
-
-    """Indicates that the content validation should be ignored."""
-    skipValidation: Boolean
-  ): ContentItem
-
-  """
-  Deletes the content item with the provided key. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /content/{key}
-  """
-  contentDelete(
-    """The key of the content item to delete."""
-    key: String!
-
-    """
-    Indicates that the content item should be permanently deleted immediately or if it should be soft deleted first.
-    """
-    permanent: Boolean
-  ): ContentMetadata
-
-  """
-  Deletes the content item with the provided key. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /content/{key}/versions
-  """
-  contentDeleteLocale(key: String!, locale: String): ContentItem
-
-  """
-  Deletes the content item with the provided key. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /content/{key}/versions/{version}
-  """
-  contentDeleteVersion(key: String!, version: String!): ContentItem
-
-  """
-  Update an existing content item. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to PATCH /content/{key}
-  """
-  contentPatchMetadata(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """The key of the content item to patch."""
-    key: String!
-  ): ContentMetadata
-
-  """
-  Update an existing content item. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to PATCH /content/{key}/versions/{version}
-  """
-  contentPatchVersion(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """The key of the content item that should be updated."""
-    key: String!
-
-    """The locale of the content that should be updated."""
-    locale: String
-
-    """Indicates that the content validation should be ignored."""
-    skipValidation: Boolean
-
-    """The version of the content that should be updated."""
-    version: String!
-  ): ContentItem
-
-  """
-  Create a new content type.
-  
-  Equivalent to POST /contenttypes
-  """
-  contentTypesCreate(
-    """A writable implementation of an ContentType."""
-    contentTypeInput: ContentTypeInput!
-  ): ContentType
-
-  """
-  Deletes the content type with the provided key. If a content type with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /contenttypes/{key}
-  """
-  contentTypesDelete(
-    """The key of the content type to delete."""
-    key: String!
-  ): ContentType
-
-  """
-  Update an existing content type. If a content type with the provided key does not exist an error is returned.
-  
-  Equivalent to PATCH /contenttypes/{key}
-  """
-  contentTypesPatch(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """
-    Update the content type even though the changes might result in data loss.
-    """
-    ignoreDataLossWarnings: Boolean
-
-    """The key of the content type to patch."""
-    key: String!
-  ): ContentType
-
-  "Create or replace a content type. If a content type with the provided key exist it is replaced.\r\nOtherwise a new content type is created.\n\nEquivalent to PUT /contenttypes/{key}"
-  contentTypesPut(
-    """A writable implementation of an ContentType."""
-    contentTypeInput: ContentTypeInput!
-
-    """
-    Update the content type even though the changes might result in data loss.
-    """
-    ignoreDataLossWarnings: Boolean
-
-    """The key of the content type to update or create."""
-    key: String!
-  ): ContentType
-
-  """
-  Restore the deleted content item with the provided key. If a content item with the provided key is not deleted an error is returned.
-  
-  Equivalent to POST /content/{key}:undelete
-  """
-  contentUndelete(
-    """The key of the content item to undelete."""
-    key: String!
-  ): ContentMetadata
-
-  """
-  Create a new display template.
-  
-  Equivalent to POST /displaytemplates
-  """
-  displayTemplatesCreate(
-    """Describes a display template that can be assigned to content."""
-    displayTemplateInput: DisplayTemplateInput!
-  ): DisplayTemplate
-
-  """
-  Deletes the display template with the provided key.
-  
-  Equivalent to DELETE /displaytemplates/{key}
-  """
-  displayTemplatesDelete(
-    """The key of the display template to delete."""
-    key: String!
-  ): DisplayTemplate
-
-  """
-  Update an existing display template.
-  
-  Equivalent to PATCH /displaytemplates/{key}
-  """
-  displayTemplatesPatch(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """The key of the display template to patch."""
-    key: String!
-  ): DisplayTemplate
-
-  "Create or replace a display template. If a display template with the provided key exist it is replaced.\r\nOtherwise a new display template is created.\n\nEquivalent to PUT /displaytemplates/{key}"
-  displayTemplatesPut(
-    """Describes a display template that can be assigned to content."""
-    displayTemplateInput: DisplayTemplateInput!
-
-    """The key of the display template to update or create."""
-    key: String!
-  ): DisplayTemplate
-
-  "Request an access token. This endpoint only supports the 'client_credentials' grant type\r\nand will only issue short-lived tokens.\n\nEquivalent to POST /oauth/token"
-  oauthToken(
-    """Represents an OAuth token request."""
-    oauthTokenRequestInput: OauthTokenRequestInput!
-  ): OauthToken
-
-  """
-  Create a new property group.
-  
-  Equivalent to POST /propertygroups
-  """
-  propertyGroupsCreate(
-    """Describes a property group of a ContentType in the CMS."""
-    propertyGroupInput: PropertyGroupInput!
-  ): PropertyGroup
-
-  """
-  Deletes the property group with the provided key.
-  
-  Equivalent to DELETE /propertygroups/{key}
-  """
-  propertyGroupsDelete(
-    """The key of the property group to delete."""
-    key: String!
-  ): PropertyGroup
-
-  """
-  Update an existing property group.
-  
-  Equivalent to PATCH /propertygroups/{key}
-  """
-  propertyGroupsPatch(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """The key of the property group to patch."""
-    key: String!
-  ): PropertyGroup
-
-  "Create or replace a property group. If a property group with the provided key exist it is replaced.\r\nOtherwise a new property group is created.\n\nEquivalent to PUT /propertygroups/{key}"
-  propertyGroupsPut(
-    """The key of the property group to update or create."""
-    key: String!
-
-    """Describes a property group of a ContentType in the CMS."""
-    propertyGroupInput: PropertyGroupInput!
-  ): PropertyGroup
-}
-
-"""Changesets are used to group work on several content items together."""
-input ChangesetInput {
-  """A timestamp indicating when this changeset was first created."""
-  created: String
-
-  """The username of the user that created this changeset."""
-  createdBy: String
-
-  """The name of this Changeset."""
-  displayName: String!
-
-  """The unique key of this Changeset."""
-  key: String!
-  lastModified: String
-
-  """The source of this Changeset"""
-  source: String
-}
-
-"""
-Items in an changeset that contains a link to the specific content version.
-"""
-input ChangesetItemInput {
-  """Gets/sets the changeset item category."""
-  category: String
-
-  """A reference to a specific content instance."""
-  reference: ContentReferenceInput!
-}
-
-"""A reference to a specific content instance."""
-input ContentReferenceInput {
-  """The content key that identifies the content."""
-  key: String
-
-  """The name of the content locale"""
-  locale: String
-
-  """The identifier of a specific version of the content."""
-  version: String
-}
-
-"""Options for copying content."""
-input CopyContentOptionsInput {
-  """Indicates if deleted content could be used as source."""
-  allowDeleted: Boolean
-
-  """
-  Optional key of the container where the copied content should be placed.
-  """
-  container: String
-
-  """
-  Indicates if published versions of the content should keep their published status rather than being created as a draft version at the destination.
-  """
-  keepPublishedStatus: Boolean
-
-  """Optional key of the owner where the copied content should be placed."""
-  owner: String
-}
-
-"""Represents a version of a content item."""
-input ContentItemInput {
-  """
-  The key that identifies the container content that this content item belongs to.
-  """
-  container: String
-
-  """The content type of this content item."""
-  contentType: String
-
-  """
-  Indicates a time when this content version should transition to published status. Must only be assigned when Status is set to Scheduled.
-  """
-  delayPublishUntil: String
-
-  """The display name of this content item."""
-  displayName: String!
-
-  """Indicates a time when this content expired or should expire."""
-  expired: String
-
-  """The key that identifies this content item."""
-  key: String!
-  lastModified: String
-
-  """
-  The username of the user that made the latest modification to this content instance.
-  """
-  lastModifiedBy: String
-
-  """The locale of this content instance."""
-  locale: String
-
-  """
-  The key that identifies the owner of this content. Content that is own by another content is also known as an asset.
-  """
-  owner: String
-
-  """
-  Properties as they are defined by corresponding component or content type.
-  """
-  properties: JSON
-
-  """
-  Indicates a time when this content was published or should be published.
-  """
-  published: String
-
-  """
-  A string that represents the segment that should be used when routing or generate routes to the current content instance.
-  """
-  routeSegment: String
-
-  """Represent the different status values of a content version."""
-  status: VersionStatus
-
-  """The version identifier of this content instance."""
-  version: String
-}
-
-"""A writable implementation of an ContentType."""
-input ContentTypeInput {
-  """Represent the base type of a ContentType."""
-  baseType: ContentBaseType
-
-  """
-  Provides a set of composition behaviors specifying how this content type can be used within compositions.
-  """
-  compositionBehaviors: [CompositionBehavior]
-
-  """A timestamp indicating when this ContentType was first created."""
-  created: String
-
-  """A description of this ContentType."""
-  description: String
-
-  """The display name of this ContentType."""
-  displayName: String
-
-  "Provides a set of features that content based on this ContentType supports.\r\nThis value is assigned based on the BaseType and cannot be modified."
-  features: [ContentTypeFeature]
-
-  """The key that identifies this ContentType."""
-  key: String!
-
-  """Indicates the last time this content type was modified."""
-  lastModified: String
-
-  """
-  The username of the user that made the latest modification to this ContentType.
-  """
-  lastModifiedBy: String
-
-  """
-  Provides a set of content types that can be created in container of this type
-  """
-  mayContainTypes: [String]
-
-  """
-  Provides a set of media file extensions that this content type can handle.
-  """
-  mediaFileExtensions: [String]
-
-  """Dictionary with all custom properties of this ContentType."""
-  properties: JSON
-
-  """An value that is used to when sorting ContentType instances."""
-  sortOrder: Int
-
-  """A string that is used to indicate the source of this ContentType."""
-  source: String
-
-  """Specifies how this ContentType can be used."""
-  usage: [ContentTypeUsage]
-}
-
-"""Describes a display template that can be assigned to content."""
-input DisplayTemplateInput {
-  """Represent the base type of a ContentType."""
-  baseType: ContentBaseType
-
-  """
-  The optional key of the content type this display template is valid for.
-  """
-  contentType: String
-
-  """A timestamp indicating when this display template was first created."""
-  created: String
-
-  """The username of the user that created this display template."""
-  createdBy: String
-
-  """The display name of this display template."""
-  displayName: String!
-
-  "If this is the default display template for the associated base type,\r\nnode type or content type."
-  isDefault: Boolean
-
-  """The key that identifies this display template."""
-  key: String!
-
-  """A timestamp indicating when this display template was last modified."""
-  lastModified: String
-
-  """The username of the user that last modified this display template."""
-  lastModifiedBy: String
-
-  """The optional node type this display template is valid for."""
+interface ICompositionNode {
+  type: String
   nodeType: String
-
-  """The available settings for this display template."""
-  settings: JSON
-}
-
-"Represents an OAuth JSON Web Token (JWT) and\r\nits expiry in seconds."
-type OauthToken {
-  """Gets or sets the access token."""
-  accessToken: String
-
-  """Gets or sets the expiry time in seconds."""
-  expiresIn: Int
-
-  """Gets or sets the token type."""
-  tokenType: String
-}
-
-"""Represents an OAuth token request."""
-input OauthTokenRequestInput {
-  """Get or sets the subject to act as."""
-  actAs: String
-
-  """Gets or sets the client id."""
-  clientId: String
-
-  """Gets or sets the client secret."""
-  clientSecret: String
-
-  """Gets or sets the grant type."""
-  grantType: String
-}
-
-"""Describes a property group of a ContentType in the CMS."""
-input PropertyGroupInput {
-  """The display name of this PropertyGroup."""
   displayName: String
-
-  """The key that identifies this PropertyGroup."""
-  key: String!
-
-  """An value that is used to when sorting PropertyGroup instances."""
-  sortOrder: Int
-
-  """A string that is used to indicate the source of this PropertyGroup."""
-  source: String
+  key: String
+  displayTemplateKey: String
+  displaySettings: [CompositionDisplaySetting]
 }
 
-"""Warning: Not every request will work with this viewer type"""
-type MutationViewerAnyAuth {
-  """
-  Creates a new changeset.
-  
-  Equivalent to POST /changesets
-  """
-  changesetsCreate(
-    """Changesets are used to group work on several content items together."""
-    changesetInput: ChangesetInput!
-  ): Changeset
+type ICompositionNodeAutocomplete {
+  type(value: String!, limit: Int! = 10): [String]
+  nodeType(value: String!, limit: Int! = 10): [String]
+  displayName(value: String!, limit: Int! = 10): [String]
+  key(value: String!, limit: Int! = 10): [String]
+  displayTemplateKey(value: String!, limit: Int! = 10): [String]
+  displaySettings: CompositionDisplaySettingAutocomplete
+}
+
+type ICompositionNodeFacet {
+  type(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  nodeType(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  displayName(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  key(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  displayTemplateKey(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  displaySettings: CompositionDisplaySettingFacet
+}
+
+input ICompositionNodeOrderByInput {
+  type: OrderBy
+  nodeType: OrderBy
+  displayName: OrderBy
+  key: OrderBy
+  displayTemplateKey: OrderBy
+  displaySettings: CompositionDisplaySettingOrderByInput
+}
+
+input ICompositionNodeWhereInput {
+  type: StringFilterInput
+  nodeType: StringFilterInput
+  displayName: StringFilterInput
+  key: StringFilterInput
+  displayTemplateKey: StringFilterInput
+  displaySettings: CompositionDisplaySettingWhereInput
+}
+
+interface ICompositionStructureNode implements ICompositionNode {
+  type: String
+  nodeType: String
+  displayName: String
+  key: String
+  displayTemplateKey: String
+  displaySettings: [CompositionDisplaySetting]
+  nodes: [ICompositionNode]
+}
+
+interface IContentMetadata {
+  key: String
+  locale: String
+  fallbackForLocale: String
+  version: String
+  displayName(highlight: HighlightOptions): String
+  url: ContentUrl
+  types: [String]
+  published: DateTime
+  status: String
+  changeset: String
+  created: DateTime
+  lastModified: DateTime
+  sortOrder: Int
+}
+
+type IContentMetadataAutocomplete {
+  key(value: String!, limit: Int! = 10): [String]
+  locale(value: String!, limit: Int! = 10): [String]
+  fallbackForLocale(value: String!, limit: Int! = 10): [String]
+  version(value: String!, limit: Int! = 10): [String]
+  url: ContentUrlAutocomplete
+  types(value: String!, limit: Int! = 10): [String]
+  status(value: String!, limit: Int! = 10): [String]
+  changeset(value: String!, limit: Int! = 10): [String]
+}
+
+type IContentMetadataFacet {
+  key(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  locale(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  fallbackForLocale(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  version(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  displayName(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  url: ContentUrlFacet
+  types(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  published(value: Int = 1, unit: DateFacetUnit = DAY): [DateFacet]
+  status(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  changeset(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  created(value: Int = 1, unit: DateFacetUnit = DAY): [DateFacet]
+  lastModified(value: Int = 1, unit: DateFacetUnit = DAY): [DateFacet]
+  sortOrder(ranges: [RangeFacetsInput], orderType: OrderByFacetType, orderBy: OrderBy, limit: Int, filters: [String!]): [NumberFacet]
+}
+
+input IContentMetadataOrderByInput {
+  key: OrderBy
+  locale: OrderBy
+  fallbackForLocale: OrderBy
+  version: OrderBy
+  displayName: OrderBy
+  url: ContentUrlOrderByInput
+  types: OrderBy
+  published: OrderBy
+  status: OrderBy
+  changeset: OrderBy
+  created: OrderBy
+  lastModified: OrderBy
+  sortOrder: OrderBy
+}
+
+input IContentMetadataWhereInput {
+  key: StringFilterInput
+  locale: StringFilterInput
+  fallbackForLocale: StringFilterInput
+  version: StringFilterInput
+  displayName: SearchableStringFilterInput
+  url: ContentUrlWhereInput
+  types: StringFilterInput
+  published: DateFilterInput
+  status: StringFilterInput
+  changeset: StringFilterInput
+  created: DateFilterInput
+  lastModified: DateFilterInput
+  sortOrder: IntFilterInput
+}
+
+interface IData {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+}
+
+interface IInstanceMetadata implements IContentMetadata {
+  key: String
+  locale: String
+  fallbackForLocale: String
+  version: String
+  displayName(highlight: HighlightOptions): String
+  url: ContentUrl
+  types: [String]
+  published: DateTime
+  status: String
+  changeset: String
+  created: DateTime
+  lastModified: DateTime
+  sortOrder: Int
+  locales: [String]
+  expired: DateTime
+  container: String
+  owner: String
+  routeSegment: String
+  lastModifiedBy: String
+  path: [String]
+  createdBy: String
+}
+
+interface IItemMetadata implements IContentMetadata {
+  key: String
+  locale: String
+  fallbackForLocale: String
+  version: String
+  displayName(highlight: HighlightOptions): String
+  url: ContentUrl
+  types: [String]
+  published: DateTime
+  status: String
+  changeset: String
+  created: DateTime
+  lastModified: DateTime
+  sortOrder: Int
+  displayOption: String
+}
+
+type ImageElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  altText: String
+  imageLink: ContentReference
+}
+
+type ImageElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  imageLink: ContentReferenceAutocomplete
+}
+
+type ImageElementFacet {
+  _metadata: IContentMetadataFacet
+  imageLink: ContentReferenceFacet
+}
+
+input ImageElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
 
   """
-  Creates the given changeset item.
-  
-  Equivalent to POST /changesets/{changeset}/items
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
   """
-  changesetsCreateItem(
-    """The changeset key"""
-    changeset: String!
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  imageLink: ContentReferenceOrderByInput
+}
 
-    """
-    Items in an changeset that contains a link to the specific content version.
-    """
-    changesetItemInput: ChangesetItemInput!
-  ): ChangesetItem
+type ImageElementOutput {
+  items: [ImageElement]
+  item: ImageElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: ImageElementFacet
+  autocomplete: ImageElementAutocomplete
+}
 
-  """
-  Deletes the changeset with the provided key. If a changeset with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /changesets/{key}
-  """
-  changesetsDelete(
-    """The key of the changeset to delete."""
-    key: String!
-  ): Changeset
+input ImageElementWhereInput {
+  _and: [ImageElementWhereInput]
+  _or: [ImageElementWhereInput]
+  _not: [ImageElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  imageLink: ContentReferenceWhereInput
+}
 
-  """
-  Deletes the specified changeset item from the changeset.
-  
-  Equivalent to DELETE /changesets/{changeset}/items/{key}/versions/{version}
-  """
-  changesetsDeleteItem(
-    """The changeset key"""
-    changeset: String!
+type ImageMedia implements IData & _IContent & _IMedia & _IImage {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  AltText: String
+}
 
-    """The content key"""
-    key: String!
+type ImageMediaAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
 
-    """The content version"""
-    version: String!
-  ): ChangesetItem
+type ImageMediaFacet {
+  _metadata: IContentMetadataFacet
+}
 
-  "Creates or replaces a changeset. If a changeset with the provided key exist it is replaced.\r\nOtherwise a new changeset is created.\n\nEquivalent to PUT /changesets/{key}"
-  changesetsPut(
-    """Changesets are used to group work on several content items together."""
-    changesetInput: ChangesetInput!
-
-    """The key of the changeset to update or create."""
-    key: String!
-  ): Changeset
-
-  """
-  Create a copy of the content item with the provided key.
-  
-  Equivalent to POST /content/{key}:copy
-  """
-  contentCopy(
-    """Options for copying content."""
-    copyContentOptionsInput: CopyContentOptionsInput
-
-    """The key of the content item to copy."""
-    key: String!
-  ): ContentMetadata
+input ImageMediaOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
 
   """
-  Create a new content item.
-  
-  Equivalent to POST /content
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
   """
-  contentCreate(
-    """Represents a version of a content item."""
-    contentItemInput: ContentItemInput!
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
 
-    """Indicates that the content validation should be ignored."""
-    skipValidation: Boolean
-  ): ContentItem
+type ImageMediaOutput {
+  items: [ImageMedia]
+  item: ImageMedia
+  cursor: String
+  total(all: Boolean): Int
+  facets: ImageMediaFacet
+  autocomplete: ImageMediaAutocomplete
+}
 
-  """
-  Create a new version of a content item.
-  
-  Equivalent to POST /content/{key}/versions
-  """
-  contentCreateVersion(
-    """Represents a version of a content item."""
-    contentItemInput: ContentItemInput!
+input ImageMediaWhereInput {
+  _and: [ImageMediaWhereInput]
+  _or: [ImageMediaWhereInput]
+  _not: [ImageMediaWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
 
-    """
-    The key of the content item for which a new content version should be created.
-    """
-    key: String!
+interface IMediaMetadata implements IContentMetadata & IInstanceMetadata {
+  key: String
+  locale: String
+  fallbackForLocale: String
+  version: String
+  displayName(highlight: HighlightOptions): String
+  url: ContentUrl
+  types: [String]
+  published: DateTime
+  status: String
+  changeset: String
+  created: DateTime
+  lastModified: DateTime
+  sortOrder: Int
+  locales: [String]
+  expired: DateTime
+  container: String
+  owner: String
+  routeSegment: String
+  lastModifiedBy: String
+  path: [String]
+  createdBy: String
+  thumbnail: String
+  mimeType: String
+  content(highlight: HighlightOptions): String
+}
 
-    """Indicates that the content validation should be ignored."""
-    skipValidation: Boolean
-  ): ContentItem
+type InstanceMetadata implements IContentMetadata & IInstanceMetadata {
+  key: String
+  locale: String
+  fallbackForLocale: String
+  version: String
+  displayName(highlight: HighlightOptions): String
+  url: ContentUrl
+  types: [String]
+  published: DateTime
+  status: String
+  changeset: String
+  created: DateTime
+  lastModified: DateTime
+  sortOrder: Int
+  locales: [String]
+  expired: DateTime
+  container: String
+  owner: String
+  routeSegment: String
+  lastModifiedBy: String
+  path: [String]
+  createdBy: String
+}
 
-  """
-  Deletes the content item with the provided key. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /content/{key}
-  """
-  contentDelete(
-    """The key of the content item to delete."""
-    key: String!
-
-    """
-    Indicates that the content item should be permanently deleted immediately or if it should be soft deleted first.
-    """
-    permanent: Boolean
-  ): ContentMetadata
-
-  """
-  Deletes the content item with the provided key. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /content/{key}/versions
-  """
-  contentDeleteLocale(key: String!, locale: String): ContentItem
-
-  """
-  Deletes the content item with the provided key. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /content/{key}/versions/{version}
-  """
-  contentDeleteVersion(key: String!, version: String!): ContentItem
-
-  """
-  Update an existing content item. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to PATCH /content/{key}
-  """
-  contentPatchMetadata(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """The key of the content item to patch."""
-    key: String!
-  ): ContentMetadata
-
-  """
-  Update an existing content item. If a content item with the provided key does not exist an error is returned.
-  
-  Equivalent to PATCH /content/{key}/versions/{version}
-  """
-  contentPatchVersion(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """The key of the content item that should be updated."""
-    key: String!
-
-    """The locale of the content that should be updated."""
-    locale: String
-
-    """Indicates that the content validation should be ignored."""
-    skipValidation: Boolean
-
-    """The version of the content that should be updated."""
-    version: String!
-  ): ContentItem
+input IntFilterInput {
+  """`eq` matches on an exact value, but the value is case-insensitive."""
+  eq: Int
 
   """
-  Create a new content type.
-  
-  Equivalent to POST /contenttypes
+  `not_eq` retrieves results not matching with an exact (but case-insensitive) value.
   """
-  contentTypesCreate(
-    """A writable implementation of an ContentType."""
-    contentTypeInput: ContentTypeInput!
-  ): ContentType
+  notEq: Int
 
   """
-  Deletes the content type with the provided key. If a content type with the provided key does not exist an error is returned.
-  
-  Equivalent to DELETE /contenttypes/{key}
+  `gt` retrieves results with matches that have a value which is `greater than` it.
   """
-  contentTypesDelete(
-    """The key of the content type to delete."""
-    key: String!
-  ): ContentType
+  gt: Int
 
   """
-  Update an existing content type. If a content type with the provided key does not exist an error is returned.
-  
-  Equivalent to PATCH /contenttypes/{key}
+  `gte` retrieves results with matches that have a value which is `greater than or equal to` it.
   """
-  contentTypesPatch(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """
-    Update the content type even though the changes might result in data loss.
-    """
-    ignoreDataLossWarnings: Boolean
-
-    """The key of the content type to patch."""
-    key: String!
-  ): ContentType
-
-  "Create or replace a content type. If a content type with the provided key exist it is replaced.\r\nOtherwise a new content type is created.\n\nEquivalent to PUT /contenttypes/{key}"
-  contentTypesPut(
-    """A writable implementation of an ContentType."""
-    contentTypeInput: ContentTypeInput!
-
-    """
-    Update the content type even though the changes might result in data loss.
-    """
-    ignoreDataLossWarnings: Boolean
-
-    """The key of the content type to update or create."""
-    key: String!
-  ): ContentType
+  gte: Int
 
   """
-  Restore the deleted content item with the provided key. If a content item with the provided key is not deleted an error is returned.
-  
-  Equivalent to POST /content/{key}:undelete
+  `lt` retrieves results with matches that have a value which is `lower than` it.
   """
-  contentUndelete(
-    """The key of the content item to undelete."""
-    key: String!
-  ): ContentMetadata
+  lt: Int
 
   """
-  Create a new display template.
-  
-  Equivalent to POST /displaytemplates
+  `lte` retrieves results with matches that have a value which is `lower than or equal to` it.
   """
-  displayTemplatesCreate(
-    """Describes a display template that can be assigned to content."""
-    displayTemplateInput: DisplayTemplateInput!
-  ): DisplayTemplate
+  lte: Int
+
+  """`exist` matches results that have this field."""
+  exist: Boolean
 
   """
-  Deletes the display template with the provided key.
-  
-  Equivalent to DELETE /displaytemplates/{key}
+  `in` matches with 1 or more exact values in a list. Example: `in: ["word1", "word2", "this is a phrase"]`
   """
-  displayTemplatesDelete(
-    """The key of the display template to delete."""
-    key: String!
-  ): DisplayTemplate
+  in: [Int]
 
   """
-  Update an existing display template.
-  
-  Equivalent to PATCH /displaytemplates/{key}
+  `not_in` returns results that do not match with 1 or more exact values in a list. Example: `not_in: ["word1", "word2", "this is a phrase"]`
   """
-  displayTemplatesPatch(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
-
-    """The key of the display template to patch."""
-    key: String!
-  ): DisplayTemplate
-
-  "Create or replace a display template. If a display template with the provided key exist it is replaced.\r\nOtherwise a new display template is created.\n\nEquivalent to PUT /displaytemplates/{key}"
-  displayTemplatesPut(
-    """Describes a display template that can be assigned to content."""
-    displayTemplateInput: DisplayTemplateInput!
-
-    """The key of the display template to update or create."""
-    key: String!
-  ): DisplayTemplate
-
-  "Request an access token. This endpoint only supports the 'client_credentials' grant type\r\nand will only issue short-lived tokens.\n\nEquivalent to POST /oauth/token"
-  oauthToken(
-    """Represents an OAuth token request."""
-    oauthTokenRequestInput: OauthTokenRequestInput!
-  ): OauthToken
+  notIn: [Int]
 
   """
-  Create a new property group.
-  
-  Equivalent to POST /propertygroups
+  `boost` influences the weight of a field by boosting a match with a number (default: 1) — counts more towards the eventual relevance score which can be projected with `_score` — at query time. Note that `boost` cannot be a negative number.
   """
-  propertyGroupsCreate(
-    """Describes a property group of a ContentType in the CMS."""
-    propertyGroupInput: PropertyGroupInput!
-  ): PropertyGroup
+  boost: Int
 
   """
-  Deletes the property group with the provided key.
-  
-  Equivalent to DELETE /propertygroups/{key}
+  `Factor` allows you to use a number value in a field to influence the `_score` directly. If used on a multi-valued field, then only the lowest value of the field is used in calculations. Default for `value` is `1`. Default for `modifier` is `NONE`.
   """
-  propertyGroupsDelete(
-    """The key of the property group to delete."""
-    key: String!
-  ): PropertyGroup
+  factor: NumberFactor
+}
+
+type ItemMetadata implements IContentMetadata & IItemMetadata {
+  key: String
+  locale: String
+  fallbackForLocale: String
+  version: String
+  displayName(highlight: HighlightOptions): String
+  url: ContentUrl
+  types: [String]
+  published: DateTime
+  status: String
+  changeset: String
+  created: DateTime
+  lastModified: DateTime
+  sortOrder: Int
+  displayOption: String
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](https://ecma-international.org/publications-and-standards/standards/ecma-404/).
+"""
+scalar JSON
+
+type LandingPage implements IData & _IContent & _IPage {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  TopContentArea: [_IContent]
+  MainContentArea: [_IContent]
+  SeoSettings: PageSeoSettingsProperty
+}
+
+type LandingPageAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  TopContentArea: _IContentAutocomplete
+  MainContentArea: _IContentAutocomplete
+  SeoSettings: PageSeoSettingsPropertyAutocomplete
+}
+
+type LandingPageFacet {
+  _metadata: IContentMetadataFacet
+  TopContentArea: _IContentFacet
+  MainContentArea: _IContentFacet
+  SeoSettings: PageSeoSettingsPropertyFacet
+}
+
+input LandingPageOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
 
   """
-  Update an existing property group.
-  
-  Equivalent to PATCH /propertygroups/{key}
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
   """
-  propertyGroupsPatch(
-    """
-    String represents payload of content type 'application/merge-patch+json'
-    """
-    applicationMergePatchJsonInput: String!
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  TopContentArea: _IContentOrderByInput
+  MainContentArea: _IContentOrderByInput
+  SeoSettings: PageSeoSettingsPropertyOrderByInput
+}
 
-    """The key of the property group to patch."""
-    key: String!
-  ): PropertyGroup
+type LandingPageOutput {
+  items: [LandingPage]
+  item: LandingPage
+  cursor: String
+  total(all: Boolean): Int
+  facets: LandingPageFacet
+  autocomplete: LandingPageAutocomplete
+}
 
-  "Create or replace a property group. If a property group with the provided key exist it is replaced.\r\nOtherwise a new property group is created.\n\nEquivalent to PUT /propertygroups/{key}"
-  propertyGroupsPut(
-    """The key of the property group to update or create."""
-    key: String!
+input LandingPageWhereInput {
+  _and: [LandingPageWhereInput]
+  _or: [LandingPageWhereInput]
+  _not: [LandingPageWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  TopContentArea: _IContentWhereInput
+  MainContentArea: _IContentWhereInput
+  SeoSettings: PageSeoSettingsPropertyWhereInput
+}
 
-    """Describes a property group of a ContentType in the CMS."""
-    propertyGroupInput: PropertyGroupInput!
-  ): PropertyGroup
+type LayoutSettingsBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  mainMenu: [_IContent]
+  contactInfoHeading: String
+  serviceButtons: [_IContent]
+  contactInfo: RichText
+  footerMenus: [_IContent]
+  copyright: String
+  legalLinks: [Link]
+  appIdentifiers: String
+  PartnerTokens: PartnerTokensProperty
+}
+
+type LayoutSettingsBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  mainMenu: _IContentAutocomplete
+  serviceButtons: _IContentAutocomplete
+  contactInfo: RichTextAutocomplete
+  footerMenus: _IContentAutocomplete
+  legalLinks: LinkAutocomplete
+  appIdentifiers(value: String!, limit: Int! = 10): [String]
+  PartnerTokens: PartnerTokensPropertyAutocomplete
+}
+
+type LayoutSettingsBlockFacet {
+  _metadata: IContentMetadataFacet
+  mainMenu: _IContentFacet
+  serviceButtons: _IContentFacet
+  contactInfo: RichTextFacet
+  footerMenus: _IContentFacet
+  legalLinks: LinkFacet
+  appIdentifiers(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  PartnerTokens: PartnerTokensPropertyFacet
+}
+
+input LayoutSettingsBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  mainMenu: _IContentOrderByInput
+  serviceButtons: _IContentOrderByInput
+  contactInfo: RichTextOrderByInput
+  footerMenus: _IContentOrderByInput
+  legalLinks: LinkOrderByInput
+  appIdentifiers: OrderBy
+  PartnerTokens: PartnerTokensPropertyOrderByInput
+}
+
+type LayoutSettingsBlockOutput {
+  items: [LayoutSettingsBlock]
+  item: LayoutSettingsBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: LayoutSettingsBlockFacet
+  autocomplete: LayoutSettingsBlockAutocomplete
+}
+
+input LayoutSettingsBlockWhereInput {
+  _and: [LayoutSettingsBlockWhereInput]
+  _or: [LayoutSettingsBlockWhereInput]
+  _not: [LayoutSettingsBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  mainMenu: _IContentWhereInput
+  serviceButtons: _IContentWhereInput
+  contactInfo: RichTextWhereInput
+  footerMenus: _IContentWhereInput
+  legalLinks: LinkWhereInput
+  appIdentifiers: StringFilterInput
+  PartnerTokens: PartnerTokensPropertyWhereInput
+}
+
+type Link {
+  url: ContentUrl
+  title: String
+  text(highlight: HighlightOptions): String
+  target: String
+}
+
+type LinkAutocomplete {
+  url: ContentUrlAutocomplete
+  title(value: String!, limit: Int! = 10): [String]
+  target(value: String!, limit: Int! = 10): [String]
+}
+
+input LinkConfig {
+  from: String
+  to: String
+}
+
+type LinkFacet {
+  url: ContentUrlFacet
+  title(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  text(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  target(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+}
+
+input LinkOrderByInput {
+  url: ContentUrlOrderByInput
+  title: OrderBy
+  text: OrderBy
+  target: OrderBy
+}
+
+enum LinkTypes {
+  "\n| *Direction* | &nbsp; | *Field*     |\n| ----------: | ------ | :---------- |\n| *from*      |        | `_metadata.key` |\n| *to*        |        | `_metadata.container`   |"
+  DEFAULT
+
+  "\n| *Direction* | &nbsp; | *Field*     |\n| ----------: | ------ | :---------- |\n| *from*      |        | `_metadata.key` |\n| *to*        |        | `_metadata.container`   |"
+  ITEMS
+
+  "\n| *Direction* | &nbsp; | *Field*     |\n| ----------: | ------ | :---------- |\n| *from*      |        | `_metadata.key` |\n| *to*        |        | `_metadata.owner`   |"
+  ASSETS
+
+  "\n| *Direction* | &nbsp; | *Field*     |\n| ----------: | ------ | :---------- |\n| *from*      |        | `_metadata.path` |\n| *to*        |        | `_metadata.key`   |"
+  PATH
+}
+
+input LinkWhereInput {
+  url: ContentUrlWhereInput
+  title: StringFilterInput
+  text: SearchableStringFilterInput
+  target: StringFilterInput
+}
+
+enum Locales {
+  ALL
+  NEUTRAL
+  en
+  fr_CA
+}
+
+type MediaMetadata implements IContentMetadata & IInstanceMetadata & IMediaMetadata {
+  key: String
+  locale: String
+  fallbackForLocale: String
+  version: String
+  displayName(highlight: HighlightOptions): String
+  url: ContentUrl
+  types: [String]
+  published: DateTime
+  status: String
+  changeset: String
+  created: DateTime
+  lastModified: DateTime
+  sortOrder: Int
+  locales: [String]
+  expired: DateTime
+  container: String
+  owner: String
+  routeSegment: String
+  lastModifiedBy: String
+  path: [String]
+  createdBy: String
+  thumbnail: String
+  mimeType: String
+  content(highlight: HighlightOptions): String
+}
+
+type MegaMenuGroupBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  MenuMenuHeading: String
+  MegaMenuUrl: ContentUrl
+  MegaMenuContentArea: [_IContent]
+}
+
+type MegaMenuGroupBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  MegaMenuUrl: ContentUrlAutocomplete
+  MegaMenuContentArea: _IContentAutocomplete
+}
+
+type MegaMenuGroupBlockFacet {
+  _metadata: IContentMetadataFacet
+  MegaMenuUrl: ContentUrlFacet
+  MegaMenuContentArea: _IContentFacet
+}
+
+input MegaMenuGroupBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  MegaMenuUrl: ContentUrlOrderByInput
+  MegaMenuContentArea: _IContentOrderByInput
+}
+
+type MegaMenuGroupBlockOutput {
+  items: [MegaMenuGroupBlock]
+  item: MegaMenuGroupBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: MegaMenuGroupBlockFacet
+  autocomplete: MegaMenuGroupBlockAutocomplete
+}
+
+input MegaMenuGroupBlockWhereInput {
+  _and: [MegaMenuGroupBlockWhereInput]
+  _or: [MegaMenuGroupBlockWhereInput]
+  _not: [MegaMenuGroupBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  MegaMenuUrl: ContentUrlWhereInput
+  MegaMenuContentArea: _IContentWhereInput
+}
+
+type MenuNavigationBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  MenuNavigationHeading: String
+  NavigationLinks: [Link]
+}
+
+type MenuNavigationBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  NavigationLinks: LinkAutocomplete
+}
+
+type MenuNavigationBlockFacet {
+  _metadata: IContentMetadataFacet
+  NavigationLinks: LinkFacet
+}
+
+input MenuNavigationBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  NavigationLinks: LinkOrderByInput
+}
+
+type MenuNavigationBlockOutput {
+  items: [MenuNavigationBlock]
+  item: MenuNavigationBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: MenuNavigationBlockFacet
+  autocomplete: MenuNavigationBlockAutocomplete
+}
+
+input MenuNavigationBlockWhereInput {
+  _and: [MenuNavigationBlockWhereInput]
+  _or: [MenuNavigationBlockWhereInput]
+  _not: [MenuNavigationBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  NavigationLinks: LinkWhereInput
+}
+
+type NumberFacet {
+  name: String
+  count: Int
+}
+
+"""
+Factor influences the score based of number values with a factor function
+"""
+input NumberFactor {
+  value: Float
+  modifier: FactorModifier
+}
+
+type OdpEmbedBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  ContentId: String
+}
+
+type OdpEmbedBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type OdpEmbedBlockFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input OdpEmbedBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type OdpEmbedBlockOutput {
+  items: [OdpEmbedBlock]
+  item: OdpEmbedBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: OdpEmbedBlockFacet
+  autocomplete: OdpEmbedBlockAutocomplete
+}
+
+input OdpEmbedBlockWhereInput {
+  _and: [OdpEmbedBlockWhereInput]
+  _or: [OdpEmbedBlockWhereInput]
+  _not: [OdpEmbedBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+enum OrderBy {
+  ASC
+  DESC
+}
+
+enum OrderByFacetType {
+  COUNT
+  VALUE
+}
+
+type PageSeoSettings implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  MetaTitle(highlight: HighlightOptions): String
+  MetaDescription(highlight: HighlightOptions): String
+  MetaKeywords(highlight: HighlightOptions): [String]
+  SharingImage: ContentReference
+  GraphType(highlight: HighlightOptions): String
+}
+
+type PageSeoSettingsAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  SharingImage: ContentReferenceAutocomplete
+}
+
+type PageSeoSettingsFacet {
+  _metadata: IContentMetadataFacet
+  MetaTitle(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  MetaDescription(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  MetaKeywords(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  SharingImage: ContentReferenceFacet
+  GraphType(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+}
+
+input PageSeoSettingsOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  MetaTitle: OrderBy
+  MetaDescription: OrderBy
+  MetaKeywords: OrderBy
+  SharingImage: ContentReferenceOrderByInput
+  GraphType: OrderBy
+}
+
+type PageSeoSettingsOutput {
+  items: [PageSeoSettings]
+  item: PageSeoSettings
+  cursor: String
+  total(all: Boolean): Int
+  facets: PageSeoSettingsFacet
+  autocomplete: PageSeoSettingsAutocomplete
+}
+
+type PageSeoSettingsProperty {
+  MetaTitle(highlight: HighlightOptions): String
+  MetaDescription(highlight: HighlightOptions): String
+  MetaKeywords(highlight: HighlightOptions): [String]
+  SharingImage: ContentReference
+  GraphType(highlight: HighlightOptions): String
+}
+
+type PageSeoSettingsPropertyAutocomplete {
+  SharingImage: ContentReferenceAutocomplete
+}
+
+type PageSeoSettingsPropertyFacet {
+  MetaTitle(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  MetaDescription(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  MetaKeywords(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+  SharingImage: ContentReferenceFacet
+  GraphType(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+}
+
+input PageSeoSettingsPropertyOrderByInput {
+  MetaTitle: OrderBy
+  MetaDescription: OrderBy
+  MetaKeywords: OrderBy
+  SharingImage: ContentReferenceOrderByInput
+  GraphType: OrderBy
+}
+
+input PageSeoSettingsPropertyWhereInput {
+  MetaTitle: SearchableStringFilterInput
+  MetaDescription: SearchableStringFilterInput
+  MetaKeywords: SearchableStringFilterInput
+  SharingImage: ContentReferenceWhereInput
+  GraphType: SearchableStringFilterInput
+}
+
+input PageSeoSettingsWhereInput {
+  _and: [PageSeoSettingsWhereInput]
+  _or: [PageSeoSettingsWhereInput]
+  _not: [PageSeoSettingsWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  MetaTitle: SearchableStringFilterInput
+  MetaDescription: SearchableStringFilterInput
+  MetaKeywords: SearchableStringFilterInput
+  SharingImage: ContentReferenceWhereInput
+  GraphType: SearchableStringFilterInput
+}
+
+type ParagraphElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  text: SearchableRichText
+}
+
+type ParagraphElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type ParagraphElementFacet {
+  _metadata: IContentMetadataFacet
+  text: SearchableRichTextFacet
+}
+
+input ParagraphElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  text: SearchableRichTextOrderByInput
+}
+
+type ParagraphElementOutput {
+  items: [ParagraphElement]
+  item: ParagraphElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: ParagraphElementFacet
+  autocomplete: ParagraphElementAutocomplete
+}
+
+input ParagraphElementWhereInput {
+  _and: [ParagraphElementWhereInput]
+  _or: [ParagraphElementWhereInput]
+  _not: [ParagraphElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  text: SearchableRichTextWhereInput
+}
+
+type PartnerTokens implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  URL: ContentUrl
+  Phone: String
+  MemberPhone: String
+  DiscountLabel: String
+  ButtonColor: String
+  ButtonColorRBG: String
+}
+
+type PartnerTokensAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  URL: ContentUrlAutocomplete
+}
+
+type PartnerTokensFacet {
+  _metadata: IContentMetadataFacet
+  URL: ContentUrlFacet
+}
+
+input PartnerTokensOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  URL: ContentUrlOrderByInput
+}
+
+type PartnerTokensOutput {
+  items: [PartnerTokens]
+  item: PartnerTokens
+  cursor: String
+  total(all: Boolean): Int
+  facets: PartnerTokensFacet
+  autocomplete: PartnerTokensAutocomplete
+}
+
+type PartnerTokensProperty {
+  URL: ContentUrl
+  Phone: String
+  MemberPhone: String
+  DiscountLabel: String
+  ButtonColor: String
+  ButtonColorRBG: String
+}
+
+type PartnerTokensPropertyAutocomplete {
+  URL: ContentUrlAutocomplete
+}
+
+type PartnerTokensPropertyFacet {
+  URL: ContentUrlFacet
+}
+
+input PartnerTokensPropertyOrderByInput {
+  URL: ContentUrlOrderByInput
+}
+
+input PartnerTokensPropertyWhereInput {
+  URL: ContentUrlWhereInput
+}
+
+input PartnerTokensWhereInput {
+  _and: [PartnerTokensWhereInput]
+  _or: [PartnerTokensWhereInput]
+  _not: [PartnerTokensWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  URL: ContentUrlWhereInput
+}
+
+type Query {
+  Data(where: DataWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: DataOrderByInput, locale: [system_Locales], ids: [String], cursor: String, variation: VariationInput): DataOutput
+  _Content(where: _ContentWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _ContentOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _ContentOutput
+  _Component(where: _ComponentWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _ComponentOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _ComponentOutput
+  _Media(where: _MediaWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _MediaOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _MediaOutput
+  _Page(where: _PageWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _PageOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _PageOutput
+  _Image(where: _ImageWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _ImageOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _ImageOutput
+  _Video(where: _VideoWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _VideoOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _VideoOutput
+  _Folder(where: _FolderWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _FolderOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _FolderOutput
+  _Experience(where: _ExperienceWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _ExperienceOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _ExperienceOutput
+  _Section(where: _SectionWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _SectionOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _SectionOutput
+  BlankSection(where: BlankSectionWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: BlankSectionOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): BlankSectionOutput
+  ContentRecsElement(where: ContentRecsElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ContentRecsElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ContentRecsElementOutput
+  BlogSectionExperience(where: BlogSectionExperienceWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: BlogSectionExperienceOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): BlogSectionExperienceOutput
+  TestimonialElement(where: TestimonialElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: TestimonialElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): TestimonialElementOutput
+  VideoElement(where: VideoElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: VideoElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): VideoElementOutput
+  BlankExperience(where: BlankExperienceWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: BlankExperienceOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): BlankExperienceOutput
+  RichTextElement(where: RichTextElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: RichTextElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): RichTextElementOutput
+  ParagraphElement(where: ParagraphElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ParagraphElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ParagraphElementOutput
+  CTAElement(where: CTAElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: CTAElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): CTAElementOutput
+  HeadingElement(where: HeadingElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: HeadingElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): HeadingElementOutput
+  ImageElement(where: ImageElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ImageElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ImageElementOutput
+  ContinueReadingComponent(where: ContinueReadingComponentWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ContinueReadingComponentOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ContinueReadingComponentOutput
+  ArticleListElement(where: ArticleListElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ArticleListElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ArticleListElementOutput
+  OdpEmbedBlock(where: OdpEmbedBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: OdpEmbedBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): OdpEmbedBlockOutput
+  PageSeoSettings(where: PageSeoSettingsWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: PageSeoSettingsOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): PageSeoSettingsOutput
+  QuoteBlock(where: QuoteBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: QuoteBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): QuoteBlockOutput
+  CarouselBlock(where: CarouselBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: CarouselBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): CarouselBlockOutput
+  TextBlock(where: TextBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: TextBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): TextBlockOutput
+  MenuNavigationBlock(where: MenuNavigationBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: MenuNavigationBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): MenuNavigationBlockOutput
+  HeroBlock(where: HeroBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: HeroBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): HeroBlockOutput
+  ButtonBlock(where: ButtonBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ButtonBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ButtonBlockOutput
+  BlogPostPage(where: BlogPostPageWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: BlogPostPageOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): BlogPostPageOutput
+  LandingPage(where: LandingPageWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: LandingPageOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): LandingPageOutput
+  GenericMedia(where: GenericMediaWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: GenericMediaOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): GenericMediaOutput
+  ImageMedia(where: ImageMediaWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ImageMediaOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ImageMediaOutput
+  VideoMedia(where: VideoMediaWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: VideoMediaOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): VideoMediaOutput
+  SysContentFolder(where: SysContentFolderWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: SysContentFolderOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): SysContentFolderOutput
+  LayoutSettingsBlock(where: LayoutSettingsBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: LayoutSettingsBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): LayoutSettingsBlockOutput
+  MegaMenuGroupBlock(where: MegaMenuGroupBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: MegaMenuGroupBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): MegaMenuGroupBlockOutput
+  Tokens(where: TokensWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: TokensOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): TokensOutput
+  PartnerTokens(where: PartnerTokensWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: PartnerTokensOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): PartnerTokensOutput
+  Document(where: DocumentWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: DocumentOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): DocumentOutput
+}
+
+""""""
+type QueryRef {
+  Data(where: DataWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: DataOrderByInput, locale: [system_Locales], ids: [String], cursor: String, variation: VariationInput): DataOutput
+  _Content(where: _ContentWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _ContentOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _ContentOutput
+  _Component(where: _ComponentWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _ComponentOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _ComponentOutput
+  _Media(where: _MediaWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _MediaOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _MediaOutput
+  _Page(where: _PageWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _PageOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _PageOutput
+  _Image(where: _ImageWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _ImageOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _ImageOutput
+  _Video(where: _VideoWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _VideoOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _VideoOutput
+  _Folder(where: _FolderWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _FolderOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _FolderOutput
+  _Experience(where: _ExperienceWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _ExperienceOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _ExperienceOutput
+  _Section(where: _SectionWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: _SectionOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): _SectionOutput
+  BlankSection(where: BlankSectionWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: BlankSectionOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): BlankSectionOutput
+  ContentRecsElement(where: ContentRecsElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ContentRecsElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ContentRecsElementOutput
+  BlogSectionExperience(where: BlogSectionExperienceWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: BlogSectionExperienceOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): BlogSectionExperienceOutput
+  TestimonialElement(where: TestimonialElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: TestimonialElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): TestimonialElementOutput
+  VideoElement(where: VideoElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: VideoElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): VideoElementOutput
+  BlankExperience(where: BlankExperienceWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: BlankExperienceOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): BlankExperienceOutput
+  RichTextElement(where: RichTextElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: RichTextElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): RichTextElementOutput
+  ParagraphElement(where: ParagraphElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ParagraphElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ParagraphElementOutput
+  CTAElement(where: CTAElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: CTAElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): CTAElementOutput
+  HeadingElement(where: HeadingElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: HeadingElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): HeadingElementOutput
+  ImageElement(where: ImageElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ImageElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ImageElementOutput
+  ContinueReadingComponent(where: ContinueReadingComponentWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ContinueReadingComponentOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ContinueReadingComponentOutput
+  ArticleListElement(where: ArticleListElementWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ArticleListElementOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ArticleListElementOutput
+  OdpEmbedBlock(where: OdpEmbedBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: OdpEmbedBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): OdpEmbedBlockOutput
+  PageSeoSettings(where: PageSeoSettingsWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: PageSeoSettingsOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): PageSeoSettingsOutput
+  QuoteBlock(where: QuoteBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: QuoteBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): QuoteBlockOutput
+  CarouselBlock(where: CarouselBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: CarouselBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): CarouselBlockOutput
+  TextBlock(where: TextBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: TextBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): TextBlockOutput
+  MenuNavigationBlock(where: MenuNavigationBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: MenuNavigationBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): MenuNavigationBlockOutput
+  HeroBlock(where: HeroBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: HeroBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): HeroBlockOutput
+  ButtonBlock(where: ButtonBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ButtonBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ButtonBlockOutput
+  BlogPostPage(where: BlogPostPageWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: BlogPostPageOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): BlogPostPageOutput
+  LandingPage(where: LandingPageWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: LandingPageOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): LandingPageOutput
+  GenericMedia(where: GenericMediaWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: GenericMediaOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): GenericMediaOutput
+  ImageMedia(where: ImageMediaWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: ImageMediaOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): ImageMediaOutput
+  VideoMedia(where: VideoMediaWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: VideoMediaOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): VideoMediaOutput
+  SysContentFolder(where: SysContentFolderWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: SysContentFolderOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): SysContentFolderOutput
+  LayoutSettingsBlock(where: LayoutSettingsBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: LayoutSettingsBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): LayoutSettingsBlockOutput
+  MegaMenuGroupBlock(where: MegaMenuGroupBlockWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: MegaMenuGroupBlockOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): MegaMenuGroupBlockOutput
+  Tokens(where: TokensWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: TokensOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): TokensOutput
+  PartnerTokens(where: PartnerTokensWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: PartnerTokensOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): PartnerTokensOutput
+  Document(where: DocumentWhereInput, limit: Int! = 20, skip: Int! = 0, orderBy: DocumentOrderByInput, locale: [Locales], ids: [String], cursor: String, variation: VariationInput): DocumentOutput
+}
+
+type QuoteBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  QuoteText: String
+  QuoteColor: String
+  QuoteProfilePicture: ContentReference
+  QuoteProfileName: String
+  QuoteProfileLocation: String
+  QuoteActive: Boolean
+}
+
+type QuoteBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  QuoteProfilePicture: ContentReferenceAutocomplete
+}
+
+type QuoteBlockFacet {
+  _metadata: IContentMetadataFacet
+  QuoteProfilePicture: ContentReferenceFacet
+}
+
+input QuoteBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  QuoteProfilePicture: ContentReferenceOrderByInput
+}
+
+type QuoteBlockOutput {
+  items: [QuoteBlock]
+  item: QuoteBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: QuoteBlockFacet
+  autocomplete: QuoteBlockAutocomplete
+}
+
+input QuoteBlockWhereInput {
+  _and: [QuoteBlockWhereInput]
+  _or: [QuoteBlockWhereInput]
+  _not: [QuoteBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  QuoteProfilePicture: ContentReferenceWhereInput
+}
+
+input RangeFacetsInput {
+  from: Int
+  to: Int
+}
+
+enum Ranking {
+  RELEVANCE
+  SEMANTIC
+  BOOST_ONLY
+  DOC
+}
+
+type RichText {
+  html: String
+  json: JSON
+}
+
+type RichTextAutocomplete {
+  html(value: String!, limit: Int! = 10): [String]
+}
+
+type RichTextElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  text: SearchableRichText
+}
+
+type RichTextElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type RichTextElementFacet {
+  _metadata: IContentMetadataFacet
+  text: SearchableRichTextFacet
+}
+
+input RichTextElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  text: SearchableRichTextOrderByInput
+}
+
+type RichTextElementOutput {
+  items: [RichTextElement]
+  item: RichTextElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: RichTextElementFacet
+  autocomplete: RichTextElementAutocomplete
+}
+
+input RichTextElementWhereInput {
+  _and: [RichTextElementWhereInput]
+  _or: [RichTextElementWhereInput]
+  _not: [RichTextElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  text: SearchableRichTextWhereInput
+}
+
+type RichTextFacet {
+  html(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+}
+
+input RichTextOrderByInput {
+  html: OrderBy
+}
+
+input RichTextWhereInput {
+  html: StringFilterInput
+}
+
+type SearchableRichText {
+  html(highlight: HighlightOptions): String
+  json: JSON
+}
+
+type SearchableRichTextFacet {
+  html(orderType: OrderByFacetType = COUNT, orderBy: OrderBy = DESC, limit: Int! = 10, filters: [String!]): [StringFacet]
+}
+
+input SearchableRichTextOrderByInput {
+  html: OrderBy
+}
+
+input SearchableRichTextWhereInput {
+  html: SearchableStringFilterInput
+}
+
+input SearchableStringFilterInput {
+  """`eq` matches on an exact value, but the value is case-insensitive."""
+  eq: String
+
+  """
+  `not_eq` retrieves results not matching with an exact (but case-insensitive) value.
+  """
+  notEq: String
+
+  """
+  `like` matches on substrings with wildcard support: `%` to match on 0 or more characters, `_` to match on any character. 
+  """
+  like: String
+
+  """`exist` matches results that have this field."""
+  exist: Boolean
+
+  """
+  `starts_with` retrieves matches that start with a certain value (prefix).
+  """
+  startsWith: String
+
+  """
+  `in` matches with 1 or more exact values in a list. Example: `in: ["word1", "word2", "this is a phrase"]`
+  """
+  in: [String]
+
+  """
+  `not_in` returns results that do not match with 1 or more exact values in a list. Example: `not_in: ["word1", "word2", "this is a phrase"]`
+  """
+  notIn: [String]
+
+  """
+  `match` performs full-text search on a word or phrase where less relevant items are also returned. The `match` operator is only supported for `searchable` fields. It will improve fulltext search by making it easier to match on words. More exact matches will be ranked higher, less exact matches will be ranked lower. The `match` operator is supported with synonyms and fuzzy search.
+  """
+  match: String
+
+  """`contains` performs full-text search on a word or phrase."""
+  contains: String
+
+  """
+  `boost` influences the weight of a field by boosting a match with a number (default: 1) — counts more towards the eventual relevance score which can be projected with `_score` — at query time. Note that `boost` cannot be a negative number.
+  """
+  boost: Int
+
+  """
+  expands query value with synonyms. Example: if `H2O` is a synonym of `water`, then querying for `water` will also return results with `H2O`.
+  """
+  synonyms: [SynonymSlot]
+
+  """
+  enables supporting fuzzy matching on the query terms (keywords), which returns items that contain terms in the content similar to the keywords, as measured by a _Levenshtein edit distance_. An edit distance is the number of one-character changes needed to turn one term into another. The edit distance is based on the length of the term. 
+  """
+  fuzzy: Boolean
+}
+
+type StringFacet {
+  name: String
+  count: Int
+}
+
+input StringFilterInput {
+  """`eq` matches on an exact value, but the value is case-insensitive."""
+  eq: String
+
+  """
+  `not_eq` retrieves results not matching with an exact (but case-insensitive) value.
+  """
+  notEq: String
+
+  """
+  `like` matches on substrings with wildcard support: `%` to match on 0 or more characters, `_` to match on any character. 
+  """
+  like: String
+
+  """`exist` matches results that have this field."""
+  exist: Boolean
+
+  """
+  `starts_with` retrieves matches that start with a certain value (prefix).
+  """
+  startsWith: String
+
+  """`ends_with` retrieves matches that end with a certain value (suffix)."""
+  endsWith: String
+
+  """
+  `in` matches with 1 or more exact values in a list. Example: `in: ["word1", "word2", "this is a phrase"]`
+  """
+  in: [String]
+
+  """
+  `not_in` returns results that do not match with 1 or more exact values in a list. Example: `not_in: ["word1", "word2", "this is a phrase"]`
+  """
+  notIn: [String]
+
+  """
+  `boost` influences the weight of a field by boosting a match with a number (default: 1) — counts more towards the eventual relevance score which can be projected with `_score` — at query time. Note that `boost` cannot be a negative number.
+  """
+  boost: Int
+
+  """
+  expands query value with synonyms. Example: if `H2O` is a synonym of `water`, then querying for `water` will also return results with `H2O`.
+  """
+  synonyms: [SynonymSlot]
+
+  """
+  enables supporting fuzzy matching on the query terms (keywords), which returns items that contain terms in the content similar to the keywords, as measured by a _Levenshtein edit distance_. An edit distance is the number of one-character changes needed to turn one term into another. The edit distance is based on the length of the term. 
+  """
+  fuzzy: Boolean
+}
+
+enum SynonymSlot {
+  """synonym slot 1"""
+  ONE
+
+  """synonym slot 2"""
+  TWO
+}
+
+type SysContentFolder implements IData & _IContent & _IFolder {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type SysContentFolderAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type SysContentFolderFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input SysContentFolderOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type SysContentFolderOutput {
+  items: [SysContentFolder]
+  item: SysContentFolder
+  cursor: String
+  total(all: Boolean): Int
+  facets: SysContentFolderFacet
+  autocomplete: SysContentFolderAutocomplete
+}
+
+input SysContentFolderWhereInput {
+  _and: [SysContentFolderWhereInput]
+  _or: [SysContentFolderWhereInput]
+  _not: [SysContentFolderWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+}
+
+enum system_Locales {
+  ALL
+  NEUTRAL
+}
+
+type TestimonialElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  customerName: String
+  customerLocation: String
+  customerImage: ContentReference
+  referenceTitle: String
+  referenceText: RichText
+}
+
+type TestimonialElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  customerImage: ContentReferenceAutocomplete
+  referenceText: RichTextAutocomplete
+}
+
+type TestimonialElementFacet {
+  _metadata: IContentMetadataFacet
+  customerImage: ContentReferenceFacet
+  referenceText: RichTextFacet
+}
+
+input TestimonialElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  customerImage: ContentReferenceOrderByInput
+  referenceText: RichTextOrderByInput
+}
+
+type TestimonialElementOutput {
+  items: [TestimonialElement]
+  item: TestimonialElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: TestimonialElementFacet
+  autocomplete: TestimonialElementAutocomplete
+}
+
+input TestimonialElementWhereInput {
+  _and: [TestimonialElementWhereInput]
+  _or: [TestimonialElementWhereInput]
+  _not: [TestimonialElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  customerImage: ContentReferenceWhereInput
+  referenceText: RichTextWhereInput
+}
+
+type TextBlock implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  TextBlockOverline: String
+  TextBlockHeading: String
+  TextBlockHeadingSize: String
+  TextBlockDescription: RichText
+  TextBlockWidth: String
+  TextCenter: Boolean
+  TextClassName: String
+}
+
+type TextBlockAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  TextBlockDescription: RichTextAutocomplete
+}
+
+type TextBlockFacet {
+  _metadata: IContentMetadataFacet
+  TextBlockDescription: RichTextFacet
+}
+
+input TextBlockOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  TextBlockDescription: RichTextOrderByInput
+}
+
+type TextBlockOutput {
+  items: [TextBlock]
+  item: TextBlock
+  cursor: String
+  total(all: Boolean): Int
+  facets: TextBlockFacet
+  autocomplete: TextBlockAutocomplete
+}
+
+input TextBlockWhereInput {
+  _and: [TextBlockWhereInput]
+  _or: [TextBlockWhereInput]
+  _not: [TextBlockWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  TextBlockDescription: RichTextWhereInput
+}
+
+type Tokens implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  URL: ContentUrl
+  Phone: String
+  MemberPhone: String
+  DiscountLabel: String
+}
+
+type TokensAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  URL: ContentUrlAutocomplete
+}
+
+type TokensFacet {
+  _metadata: IContentMetadataFacet
+  URL: ContentUrlFacet
+}
+
+input TokensOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  URL: ContentUrlOrderByInput
+}
+
+type TokensOutput {
+  items: [Tokens]
+  item: Tokens
+  cursor: String
+  total(all: Boolean): Int
+  facets: TokensFacet
+  autocomplete: TokensAutocomplete
+}
+
+input TokensWhereInput {
+  _and: [TokensWhereInput]
+  _or: [TokensWhereInput]
+  _not: [TokensWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  URL: ContentUrlWhereInput
+}
+
+enum VariationIncludeMode {
+  ALL
+  SOME
+  NONE
+}
+
+input VariationInput {
+  include: VariationIncludeMode
+  value: [String]
+  includeOriginal: Boolean
+}
+
+type VideoElement implements IData & _IContent & _IComponent {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+  video: ContentReference
+  title: String
+  placeholder: ContentReference
+}
+
+type VideoElementAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+  video: ContentReferenceAutocomplete
+  placeholder: ContentReferenceAutocomplete
+}
+
+type VideoElementFacet {
+  _metadata: IContentMetadataFacet
+  video: ContentReferenceFacet
+  placeholder: ContentReferenceFacet
+}
+
+input VideoElementOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+  video: ContentReferenceOrderByInput
+  placeholder: ContentReferenceOrderByInput
+}
+
+type VideoElementOutput {
+  items: [VideoElement]
+  item: VideoElement
+  cursor: String
+  total(all: Boolean): Int
+  facets: VideoElementFacet
+  autocomplete: VideoElementAutocomplete
+}
+
+input VideoElementWhereInput {
+  _and: [VideoElementWhereInput]
+  _or: [VideoElementWhereInput]
+  _not: [VideoElementWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
+  video: ContentReferenceWhereInput
+  placeholder: ContentReferenceWhereInput
+}
+
+type VideoMedia implements IData & _IContent & _IMedia & _IVideo {
+  _children: QueryRef @deprecated(reason: "Use `_link` field instead")
+  _link(type: LinkTypes): QueryRef
+  _deleted: Bool
+  _fulltext(highlight: HighlightOptions): [String]
+  _modified: Date
+  _score: Float
+  _id: String
+  _metadata: IContentMetadata
+}
+
+type VideoMediaAutocomplete {
+  _metadata: IContentMetadataAutocomplete
+}
+
+type VideoMediaFacet {
+  _metadata: IContentMetadataFacet
+}
+
+input VideoMediaOrderByInput {
+  _ranking: Ranking
+  _modified: OrderBy
+  _minimumScore: Float
+
+  """
+  The value needs to be a positive value, but cannot exceed the maximum value of an integer. In case it is exceeded, the maximum of an integer is used. In case of a negative value, semantic search will be disabled.
+  """
+  _semanticWeight: Float
+  _metadata: IContentMetadataOrderByInput
+}
+
+type VideoMediaOutput {
+  items: [VideoMedia]
+  item: VideoMedia
+  cursor: String
+  total(all: Boolean): Int
+  facets: VideoMediaFacet
+  autocomplete: VideoMediaAutocomplete
+}
+
+input VideoMediaWhereInput {
+  _and: [VideoMediaWhereInput]
+  _or: [VideoMediaWhereInput]
+  _not: [VideoMediaWhereInput]
+  _fulltext: SearchableStringFilterInput
+  _modified: DateFilterInput
+  _metadata: IContentMetadataWhereInput
 }

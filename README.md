@@ -1,18 +1,19 @@
 # Optimizely SaaS CMS FE Template
 
-A **Next.js 15** proof-of-concept front-end app using the **App Router** and **TypeScript** to fetch structured content from the **Optimizely SaaS CMS Delivery API**. Designed for real-world scenarios like authenticated content access, layout-aware rendering, and robust testability via Cucumber.
+A **Next.js 15** front-end template using the **App Router** and **TypeScript** to integrate with the **Optimizely SaaS CMS Delivery API**. Built for real-world headless CMS needs like authenticated content, scalable rendering, Dockerized CI/CD, and BDD testing with Cucumber.
 
 ---
 
 ## 🧩 Features
 
-- ✅ **GraphQL-powered content fetching** from the Optimizely Delivery API
-- 🧪 **Fallback mock data** in local development
-- 🧱 **Global layout content** from CMS (e.g., header, footer)
-- 🔐 **Environment-based configuration** for secure delivery
-- 🐳 **Docker-compatible build pipeline** for CI/CD
-- 🧬 **BDD testing** with Cucumber + Gherkin syntax
-- 🧠 **Scalable structure** for routing and content modelling
+- ✅ **Structured GraphQL content fetching** from Optimizely CMS
+- 🔧 **Environment-driven** layout and homepage IDs
+- 🐳 **Docker-optimised build pipeline** for production
+- 🧪 **BDD testing** via Cucumber + Gherkin syntax
+- 🧠 **Scalable folder structure** supporting CMS blocks and preview mode
+- 🌐 **Mock fallback data** for local development
+- 📐 **Type-safe CMS integration** with `graphql-codegen`
+- 🧾 **Metadata generation** from CMS for SEO
 
 ---
 
@@ -26,13 +27,13 @@ cd optimizely-fe-template
 pnpm install
 ```
 
-### 2. Set Up Environment
+### 2. Configure Environment
 
-Create a `.env.local` file at the root:
+Create `.env.local`:
 
 ```env
 # === Delivery API ===
-OPTIMIZELY_BEARER_TOKEN=your_real_delivery_api_token_here
+OPTIMIZELY_BEARER_TOKEN=your_real_token_here
 
 # Homepage content ID and version
 OPTIMIZELY_CONTENT_ID=contentreference:/content/optimizely.com/en/homepage/
@@ -42,36 +43,27 @@ OPTIMIZELY_CONTENT_VERSION=published
 OPTIMIZELY_LAYOUT_ID=contentreference:/content/optimizely.com/en/layout/
 OPTIMIZELY_LAYOUT_VERSION=published
 
-# === Frontend-specific settings ===
-SITE_DOMAIN=localhost:3000
-
-# === Dev only: allow local TLS requests to self-signed CMS endpoints ===
-NODE_TLS_REJECT_UNAUTHORIZED=0
+# === Frontend-specific ===
+SITE_DOMAIN=http://localhost:3000
 ```
 
-### 3. Run Locally
+### 3. Run the Dev Server
 
 ```bash
 pnpm dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🧪 Testing
-
-### BDD with Cucumber
-
-Run all behaviour tests:
+## 🧪 BDD Testing (Cucumber)
 
 ```bash
 pnpm test:bdd
 ```
 
-#### Sample Feature File
-
-`features/homepage.feature`:
+Sample test: `features/homepage.feature`
 
 ```gherkin
 Feature: Homepage Content
@@ -80,64 +72,79 @@ Feature: Homepage Content
     Given the CMS is returning homepage content
     When the user visits the homepage
     Then the page should include the title "Mock Homepage"
-    And the page should include the call to action
 ```
-
-Step definitions live in `features/step_definitions/`.
 
 ---
 
-## 📁 Project Structure
+## 🗂️ Project Structure
 
 ```
-├── app/
-│   ├── layout.tsx              # Global layout
-│   ├── page.tsx                # Homepage route
-│   └── components/             # BlockRenderer etc.
-├── lib/
-│   └── content/                # GraphQL logic, mocks, helpers
-├── types/
-│   └── cms.ts                  # CMS-specific TypeScript types
-├── features/
-│   ├── homepage.feature        # BDD test scenarios
-│   └── step_definitions/
-├── public/                     # Static assets
-├── .env.local                  # Local config
-├── Dockerfile                  # Multi-stage build definition
-├── .github/workflows/ci-cd.yml # GitHub Actions workflow
+📁 app/                     # Next.js App Router structure
+│  ├─ [...slug]/           # Dynamic page loading by GUID
+│  ├─ components/          # React block/component mappers
+│  ├─ page.tsx             # Homepage route
+│  ├─ layout.tsx           # Shared layout
+│  ├─ metadata.ts          # Metadata pulled from CMS
+│
+📁 lib/
+│  ├─ content/             # CMS fetch logic and helpers
+│  ├─ optimizely/          # GraphQL SDK and schema handling
+│  ├─ session/             # Placeholder for auth/session logic
+│  └─ utils/               # Misc utilities like logger
+│
+📁 features/               # Cucumber BDD files
+│  ├─ homepage.feature
+│  └─ step-definitions/
+│
+📁 types/                  # Type overrides and shims
+📁 mocks/                  # OpenAPI mock responses
+📁 scripts/                # Schema tooling
+📁 public/                 # Static assets
+📄 schema.graphql          # Latest schema
+📄 codegen.yaml            # GraphQL Codegen config
+📄 Dockerfile              # Production Dockerfile
+📄 docker-compose.yml      # Optional Docker support
 ```
 
 ---
 
 ## 📦 PNPM Scripts
 
-| Command         | Description                                 |
-|-----------------|---------------------------------------------|
-| `pnpm dev`      | Start local dev server                      |
-| `pnpm build`    | Create production build                     |
-| `pnpm start`    | Serve production build                      |
-| `pnpm test:bdd` | Run Cucumber BDD feature tests              |
-| `pnpm codegen`  | Generate GraphQL types from schema/queries  |
+| Command         | Description                                   |
+| --------------- | --------------------------------------------- |
+| `pnpm dev`      | Start dev server                              |
+| `pnpm build`    | Production build                              |
+| `pnpm start`    | Serve production build                        |
+| `pnpm test:bdd` | Run Cucumber tests                            |
+| `pnpm codegen`  | Generate TypeScript types from schema/queries |
 
 ---
 
-## 🛠️ CI/CD Pipeline
+## 🛠️ Docker Support
 
-- GitHub Actions workflow: `.github/workflows/ci-cd.yml`
-- Lint, test, build, and Dockerize
-- Docker image published to DockerHub on `main` branch push
-- Environment variables passed via `--build-arg` into Docker build
+Build the app into a production-ready image:
+
+```bash
+docker build -t optimizely-fe-template .
+```
+
+Then run it:
+
+```bash
+docker run -p 3000:3000 optimizely-fe-template
+```
+
+> ⚠️ Pass `OPTIMIZELY_BEARER_TOKEN` securely as a Docker build arg or secret at runtime.
 
 ---
 
-## 🧭 Next Steps
+## 📌 Known Gaps / Next Steps
 
-- [ ] Add real content IDs and live token
-- [ ] Extend routing (e.g., `/products`, `/about`)
-- [ ] Enable Optimizely Preview/Edit mode
-- [ ] Integrate Optimizely Graph Management API
-- [ ] Add Jest unit tests
-- [ ] Add Playwright E2E test suite
+- [ ] Preview/edit mode for CMS authoring
+- [ ] Better layout type coverage (e.g. footer, menu nav)
+- [ ] Add Jest unit tests alongside Cucumber
+- [ ] Extend routing with content modelling patterns
+- [ ] Add full E2E suite via Playwright or Cypress
 
 ---
 
@@ -145,4 +152,4 @@ Step definitions live in `features/step_definitions/`.
 
 **Owen Liversidge**  
 📍 Weymouth, UK  
-🐕 Likes dogs, accessibility, and clean React code.
+🐕 Dog enthusiast. React/Next specialist. FE Architect for Optimizely SaaS CMS.

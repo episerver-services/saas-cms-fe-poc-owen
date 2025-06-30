@@ -1,5 +1,8 @@
 declare module 'openapi-to-graphql' {
+  import { GraphQLSchema } from 'graphql'
+  import { OpenAPIObject } from 'openapi3-ts'
+
   export function createGraphQLSchema(
-    spec: any
-  ): Promise<{ schema: import('graphql').GraphQLSchema }>
+    spec: OpenAPIObject
+  ): Promise<{ schema: GraphQLSchema }>
 }

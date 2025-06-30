@@ -1,56 +1,86 @@
-import { print } from 'graphql'
-import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
+import { DocumentNode, print } from 'graphql'
 
-interface GraphqlResponse<T> {
-  data: T
-  errors?: unknown[]
+/**
+ * Options for fetching content from the Optimizely Delivery API.
+ */
+interface FetchFromOptimizelyOptions {
+  /**
+   * Whether to use preview mode (Basic Auth + no caching).
+   */
+  preview?: boolean
+
+  /**
+   * Cache strategy for the request (default: 'force-cache').
+   */
+  cache?: RequestCache
+
+  /**
+   * Optional Next.js cache tag to associate with the request.
+   */
+  cacheTag?: string
+
+  /**
+   * Additional headers to include in the fetch request.
+   */
+  headers?: Record<string, string>
 }
 
 /**
- * Executes a typed GraphQL query against the Optimizely Content Graph v2 API.
+ * Fetches content from the Optimizely Delivery API using GraphQL.
  *
- * @template TQuery - The result type of the query.
- * @template TVariables - The variables shape expected by the query.
- * @param document - A TypedDocumentNode representing the GraphQL query.
- * @param variables - The input variables for the query.
- * @param options - Optional preview or cache settings.
- * @returns The full data object from the GraphQL response.
- * @throws If the fetch fails or returns a non-OK response.
+ * @template TData - The expected shape of the response data.
+ * @template TVariables - The expected shape of the query variables.
+ *
+ * @param query - A typed GraphQL DocumentNode.
+ * @param variables - Variables to include with the query.
+ * @param options - Additional options for auth, caching, and headers.
+ *
+ * @returns A promise resolving to the parsed GraphQL response data.
+ *
+ * @throws If the fetch fails or the response contains errors.
  */
-export async function fetchFromOptimizely<TQuery, TVariables>(
-  document: TypedDocumentNode<TQuery, TVariables>,
+export async function fetchFromOptimizely<TData, TVariables = object>(
+  query: DocumentNode,
   variables?: TVariables,
-  options: { preview?: boolean; cacheTag?: string } = {}
-): Promise<TQuery> {
-  const query = print(document)
+  {
+    preview = false,
+    cache = 'force-cache',
+    cacheTag,
+    headers = {},
+  }: FetchFromOptimizelyOptions = {}
+): Promise<TData> {
   const endpoint = `${process.env.OPTIMIZELY_API_URL}?auth=${process.env.OPTIMIZELY_SINGLE_KEY}`
 
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  }
-
-  if (options.preview && process.env.OPTIMIZELY_PREVIEW_SECRET) {
+  // Preview mode disables caching and switches to Basic Auth
+  if (preview) {
     headers.Authorization = `Basic ${process.env.OPTIMIZELY_PREVIEW_SECRET}`
+    cache = 'no-store'
   }
-
-  const cacheTags = ['optimizely-content']
-  if (options.cacheTag) cacheTags.push(options.cacheTag)
 
   const response = await fetch(endpoint, {
     method: 'POST',
-    headers,
-    body: JSON.stringify({ query, variables }),
-    cache: options.preview ? 'no-store' : 'force-cache',
-    next: { tags: cacheTags },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    body: JSON.stringify({
+      query: print(query),
+      ...(variables && { variables }),
+    }),
+    cache,
+    next: {
+      tags: ['optimizely-content', ...(cacheTag ? [cacheTag] : [])],
+    },
   })
 
-  if (!response.ok) {
-    const errorText = await response.text()
-    console.error('[Optimizely Fetch Error]', response.status, errorText)
-    throw new Error(`Optimizely fetch failed: ${response.status} ${errorText}`)
+  const result = await response.json()
+
+  if (result.errors) {
+    throw new Error(
+      `Optimizely Delivery API returned errors: ${JSON.stringify(result.errors)}`
+    )
   }
 
-  const json = (await response.json()) as GraphqlResponse<TQuery>
-  return json.data
+  return result.data
 }
