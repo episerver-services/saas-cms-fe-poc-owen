@@ -3,25 +3,45 @@ import {
   GetContentByGuidDocument,
   type GetContentByGuidQuery,
   type GetContentByGuidQueryVariables,
-  type LayoutBlock,
 } from '@/lib/optimizely/types/generated'
 import ContentAreaMapper from '../components/content-area/mapper'
 
 /**
- * Type guard to check if an item has `properties` (LayoutBlock or similar).
+ * Props passed by Next.js to dynamic route components.
+ * In Next.js 15, params is now a Promise.
  */
-function hasProperties(
-  item: GetContentByGuidQuery['_Content']['items'][number]
-): item is LayoutBlock {
-  return '__typename' in item && 'properties' in item
+type PageProps = {
+  params: Promise<{
+    slug?: string[]
+  }>
 }
 
-export default async function DynamicPage({
-  params,
-}: {
-  params: { slug?: string[] }
-}) {
-  const guid = params.slug?.[0]
+/**
+ * Loose shape of a content item with content blocks.
+ */
+interface BlockItem {
+  properties: {
+    blocks?: unknown[]
+  }
+}
+
+/**
+ * Type guard to check if an object has `properties.blocks`.
+ */
+function isBlockItem(item: unknown): item is BlockItem {
+  return (
+    typeof item === 'object' &&
+    item !== null &&
+    'properties' in item &&
+    typeof (item as any).properties === 'object' &&
+    Array.isArray((item as any).properties.blocks)
+  )
+}
+
+export default async function DynamicPage({ params }: PageProps) {
+  // Await the params promise
+  const resolvedParams = await params
+  const guid = resolvedParams.slug?.[0]
 
   if (!guid) {
     return <p>Missing content GUID in URL.</p>
@@ -33,10 +53,14 @@ export default async function DynamicPage({
       GetContentByGuidQueryVariables
     >(GetContentByGuidDocument, { guid }, { cacheTag: `content-${guid}` })
 
-    const item = result._Content?.items?.find(hasProperties)
-    const blocks = item?.properties?.blocks ?? []
+    const items = result._Content?.items ?? []
 
-    if (!Array.isArray(blocks) || blocks.length === 0) {
+    // Cast to unknown for type guard usage
+    const item = (items as unknown[]).find(isBlockItem)
+
+    const blocks = item?.properties.blocks ?? []
+
+    if (blocks.length === 0) {
       return <p>No content blocks found for this GUID.</p>
     }
 

@@ -111,13 +111,13 @@ Step definitions live in `features/step_definitions/`.
 
 ## 📦 PNPM Scripts
 
-| Command               | Description                                 |
-|-----------------------|---------------------------------------------|
-| `pnpm dev`            | Start local dev server                      |
-| `pnpm build`          | Create production build                     |
-| `pnpm start`          | Serve production build                      |
-| `pnpm test:bdd`       | Run Cucumber BDD feature tests              |
-| `pnpm codegen`        | Generate GraphQL types from schema/queries  |
+| Command         | Description                                 |
+|-----------------|---------------------------------------------|
+| `pnpm dev`      | Start local dev server                      |
+| `pnpm build`    | Create production build                     |
+| `pnpm start`    | Serve production build                      |
+| `pnpm test:bdd` | Run Cucumber BDD feature tests              |
+| `pnpm codegen`  | Generate GraphQL types from schema/queries  |
 
 ---
 
