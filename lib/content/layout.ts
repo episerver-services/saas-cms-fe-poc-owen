@@ -1,23 +1,30 @@
 import { fetchFromOptimizely } from './fetchFromOptimizely'
-import { GetContentByGuidDocument } from '@/lib/optimizely/types/generated'
-// import type { LayoutBlockFragment } from '@/lib/optimizely/types/generated' // Not used yet
+import {
+  GetContentByGuidDocument,
+  type GetContentByGuidQuery,
+} from '@/lib/optimizely/types/generated'
 import { logger } from '../utils/logger'
 import { ensureExists } from '../utils/assert'
 
 /**
- * Fetches layout content from the Optimizely Delivery API.
+ * Fetches layout content from the Optimizely Delivery API using a GUID.
  *
- * Falls back to mock data if running in development or missing an API token.
+ * - If no API key is present, returns mock layout content.
+ * - Uses the `OPTIMIZELY_LAYOUT_ID` environment variable to target the layout content item.
  *
- * @returns A promise that resolves to layout content.
- * @throws If required environment variables are missing or no content is returned.
+ * @returns A promise resolving to the layout content object from the CMS.
+ * @throws If the content ID is missing or no layout content is returned.
+ *
+ * Required environment variables:
+ * - `OPTIMIZELY_SINGLE_KEY`: Delivery API auth key.
+ * - `OPTIMIZELY_LAYOUT_ID`: Content GUID to query.
  */
 export async function getLayoutContent(): Promise<any> {
   const isDev = process.env.NODE_ENV === 'development'
   const token = process.env.OPTIMIZELY_SINGLE_KEY
 
-  if (isDev || !token) {
-    logger.warn('Using mock layout content (no token or dev environment)')
+  if (!token) {
+    logger.warn('Using mock layout content (no token provided)')
     return {
       __typename: 'LayoutBlock',
       _metadata: {
@@ -41,20 +48,24 @@ export async function getLayoutContent(): Promise<any> {
     }
   }
 
+  if (isDev) {
+    logger.info('Running in development mode using real layout content.')
+  }
+
   const contentId = process.env.OPTIMIZELY_LAYOUT_ID
-  const contentVersion = process.env.OPTIMIZELY_LAYOUT_VERSION ?? 'published'
 
   if (!contentId) {
     logger.error('Missing OPTIMIZELY_LAYOUT_ID in environment')
     throw new Error('OPTIMIZELY_LAYOUT_ID is not defined in environment.')
   }
 
-  const { _Content } = await fetchFromOptimizely(GetContentByGuidDocument, {
-    guid: contentId,
-  })
+  const result: GetContentByGuidQuery = await fetchFromOptimizely(
+    GetContentByGuidDocument,
+    { guid: contentId }
+  )
 
   const layout = ensureExists(
-    _Content?.items?.[0],
+    result._Content?.items?.[0],
     'No layout content returned from CMS.'
   )
 

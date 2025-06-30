@@ -1,19 +1,19 @@
 import { fetchFromOptimizely } from '@/lib/content/fetchFromOptimizely'
-import { BlockRenderer } from '../components/BlockRenderer'
 import {
   GetContentByGuidDocument,
-  GetContentByGuidQuery,
-  GetContentByGuidQueryVariables,
-  LayoutBlock, // or another content type that has `properties`
+  type GetContentByGuidQuery,
+  type GetContentByGuidQueryVariables,
+  type LayoutBlock,
 } from '@/lib/optimizely/types/generated'
+import ContentAreaMapper from '../components/content-area/mapper'
 
 /**
- * Type guard to check if item is a LayoutBlock (has `properties`)
+ * Type guard to check if an item has `properties` (LayoutBlock or similar).
  */
 function hasProperties(
   item: GetContentByGuidQuery['_Content']['items'][number]
 ): item is LayoutBlock {
-  return '__typename' in item && item.__typename === 'LayoutBlock'
+  return '__typename' in item && 'properties' in item
 }
 
 export default async function DynamicPage({
@@ -28,30 +28,23 @@ export default async function DynamicPage({
   }
 
   try {
-    const data = await fetchFromOptimizely<
+    const result = await fetchFromOptimizely<
       GetContentByGuidQuery,
       GetContentByGuidQueryVariables
     >(GetContentByGuidDocument, { guid }, { cacheTag: `content-${guid}` })
 
-    const item = data._Content?.items?.find(hasProperties)
-
+    const item = result._Content?.items?.find(hasProperties)
     const blocks = item?.properties?.blocks ?? []
 
     if (!Array.isArray(blocks) || blocks.length === 0) {
       return <p>No content blocks found for this GUID.</p>
     }
 
-    return (
-      <main>
-        {blocks.map((block, index) => (
-          <BlockRenderer key={block?.id ?? index} block={block} />
-        ))}
-      </main>
-    )
-  } catch (err) {
+    return <ContentAreaMapper blocks={blocks} />
+  } catch (error) {
     console.error(
-      `[DynamicPage] Failed to fetch content for GUID: ${guid}`,
-      err
+      `[DynamicPage] Error loading content for GUID: ${guid}`,
+      error
     )
     return <p>There was a problem loading this page.</p>
   }

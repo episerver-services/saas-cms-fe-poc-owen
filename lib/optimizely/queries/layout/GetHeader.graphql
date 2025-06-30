@@ -1,0 +1,38 @@
+query GetHeader($locale: [Locales!]) {
+  LayoutSettingsBlock(locale: $locale) {
+    items {
+      _metadata {
+        displayName
+        key
+      }
+      mainMenu {
+        ... on MenuNavigationBlock {
+          MenuNavigationHeading
+          NavigationLinks {
+            text
+            title
+            target
+            url {
+              base
+              default
+              internal
+            }
+          }
+        }
+      }
+      serviceButtons {
+        ... on ButtonBlock {
+          ButtonText
+          ButtonUrl {
+            base
+            default
+            internal
+          }
+          ButtonType
+          ButtonClass
+          ButtonVariant
+        }
+      }
+    }
+  }
+}

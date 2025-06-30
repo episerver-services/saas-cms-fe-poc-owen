@@ -79,6 +79,9 @@ devDependencies:
   graphql:
     specifier: ^16.11.0
     version: 16.11.0
+  graphql-request:
+    specifier: ^7.2.0
+    version: 7.2.0(graphql@16.11.0)
   jiti:
     specifier: ^2.4.2
     version: 2.4.2
@@ -4622,6 +4625,15 @@ packages:
       graphql: 16.11.0
     transitivePeerDependencies:
       - encoding
+    dev: true
+
+  /graphql-request@7.2.0(graphql@16.11.0):
+    resolution: {integrity: sha512-0GR7eQHBFYz372u9lxS16cOtEekFlZYB2qOyq8wDvzRmdRSJ0mgUVX1tzNcIzk3G+4NY+mGtSz411wZdeDF/+A==}
+    peerDependencies:
+      graphql: 14 - 16
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
+      graphql: 16.11.0
     dev: true
 
   /graphql-scalars@1.24.2(graphql@16.11.0):

@@ -1,0 +1,32 @@
+query GetLandingPage($key: String!, $locale: [Locales!]) {
+  LandingPage(locale: $locale, where: { _metadata: { key: { eq: $key } } }) {
+    items {
+      _metadata {
+        key
+        displayName
+      }
+      TopContentArea {
+        ...ContentAreaFragment
+      }
+      MainContentArea {
+        ...ContentAreaFragment
+      }
+    }
+  }
+}
+
+fragment ContentAreaFragment on ContentArea {
+  items {
+    __typename
+    ... on HeroBlock {
+      title
+      image {
+        url
+      }
+    }
+    ... on TextBlock {
+      text
+    }
+    # Add more block types as you wire them up
+  }
+}

@@ -3436,6 +3436,7 @@ export type QueryArticleListElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ArticleListElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ArticleListElementWhereInput>;
 };
 
@@ -3447,6 +3448,7 @@ export type QueryBlankExperienceArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<BlankExperienceOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<BlankExperienceWhereInput>;
 };
 
@@ -3458,6 +3460,7 @@ export type QueryBlankSectionArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<BlankSectionOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<BlankSectionWhereInput>;
 };
 
@@ -3469,6 +3472,7 @@ export type QueryBlogPostPageArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<BlogPostPageOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<BlogPostPageWhereInput>;
 };
 
@@ -3480,6 +3484,7 @@ export type QueryBlogSectionExperienceArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<BlogSectionExperienceOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<BlogSectionExperienceWhereInput>;
 };
 
@@ -3491,6 +3496,7 @@ export type QueryButtonBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ButtonBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ButtonBlockWhereInput>;
 };
 
@@ -3502,6 +3508,7 @@ export type QueryCtaElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<CtaElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<CtaElementWhereInput>;
 };
 
@@ -3513,6 +3520,7 @@ export type QueryCarouselBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<CarouselBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<CarouselBlockWhereInput>;
 };
 
@@ -3524,6 +3532,7 @@ export type QueryContentRecsElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ContentRecsElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ContentRecsElementWhereInput>;
 };
 
@@ -3535,6 +3544,7 @@ export type QueryContinueReadingComponentArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ContinueReadingComponentOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ContinueReadingComponentWhereInput>;
 };
 
@@ -3546,6 +3556,7 @@ export type QueryDataArgs = {
   locale: InputMaybe<Array<InputMaybe<System_Locales>>>;
   orderBy: InputMaybe<DataOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<DataWhereInput>;
 };
 
@@ -3557,6 +3568,7 @@ export type QueryDocumentArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<DocumentOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<DocumentWhereInput>;
 };
 
@@ -3568,6 +3580,7 @@ export type QueryGenericMediaArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<GenericMediaOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<GenericMediaWhereInput>;
 };
 
@@ -3579,6 +3592,7 @@ export type QueryHeadingElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<HeadingElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<HeadingElementWhereInput>;
 };
 
@@ -3590,6 +3604,7 @@ export type QueryHeroBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<HeroBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<HeroBlockWhereInput>;
 };
 
@@ -3601,6 +3616,7 @@ export type QueryImageElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ImageElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ImageElementWhereInput>;
 };
 
@@ -3612,6 +3628,7 @@ export type QueryImageMediaArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ImageMediaOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ImageMediaWhereInput>;
 };
 
@@ -3623,6 +3640,7 @@ export type QueryLandingPageArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<LandingPageOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<LandingPageWhereInput>;
 };
 
@@ -3634,6 +3652,7 @@ export type QueryLayoutSettingsBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<LayoutSettingsBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<LayoutSettingsBlockWhereInput>;
 };
 
@@ -3645,6 +3664,7 @@ export type QueryMegaMenuGroupBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<MegaMenuGroupBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<MegaMenuGroupBlockWhereInput>;
 };
 
@@ -3656,6 +3676,7 @@ export type QueryMenuNavigationBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<MenuNavigationBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<MenuNavigationBlockWhereInput>;
 };
 
@@ -3667,6 +3688,7 @@ export type QueryOdpEmbedBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<OdpEmbedBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<OdpEmbedBlockWhereInput>;
 };
 
@@ -3678,6 +3700,7 @@ export type QueryPageSeoSettingsArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<PageSeoSettingsOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<PageSeoSettingsWhereInput>;
 };
 
@@ -3689,6 +3712,7 @@ export type QueryParagraphElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ParagraphElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ParagraphElementWhereInput>;
 };
 
@@ -3700,6 +3724,7 @@ export type QueryPartnerTokensArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<PartnerTokensOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<PartnerTokensWhereInput>;
 };
 
@@ -3711,6 +3736,7 @@ export type QueryQuoteBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<QuoteBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<QuoteBlockWhereInput>;
 };
 
@@ -3722,6 +3748,7 @@ export type QueryRichTextElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<RichTextElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<RichTextElementWhereInput>;
 };
 
@@ -3733,6 +3760,7 @@ export type QuerySysContentFolderArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<SysContentFolderOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<SysContentFolderWhereInput>;
 };
 
@@ -3744,6 +3772,7 @@ export type QueryTestimonialElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<TestimonialElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<TestimonialElementWhereInput>;
 };
 
@@ -3755,6 +3784,7 @@ export type QueryTextBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<TextBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<TextBlockWhereInput>;
 };
 
@@ -3766,6 +3796,7 @@ export type QueryTokensArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<TokensOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<TokensWhereInput>;
 };
 
@@ -3777,6 +3808,7 @@ export type QueryVideoElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<VideoElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<VideoElementWhereInput>;
 };
 
@@ -3788,6 +3820,7 @@ export type QueryVideoMediaArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<VideoMediaOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<VideoMediaWhereInput>;
 };
 
@@ -3799,6 +3832,7 @@ export type Query_ComponentArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_ComponentOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_ComponentWhereInput>;
 };
 
@@ -3810,6 +3844,7 @@ export type Query_ContentArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_ContentOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_ContentWhereInput>;
 };
 
@@ -3821,6 +3856,7 @@ export type Query_ExperienceArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_ExperienceOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_ExperienceWhereInput>;
 };
 
@@ -3832,6 +3868,7 @@ export type Query_FolderArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_FolderOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_FolderWhereInput>;
 };
 
@@ -3843,6 +3880,7 @@ export type Query_ImageArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_ImageOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_ImageWhereInput>;
 };
 
@@ -3854,6 +3892,7 @@ export type Query_MediaArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_MediaOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_MediaWhereInput>;
 };
 
@@ -3865,6 +3904,7 @@ export type Query_PageArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_PageOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_PageWhereInput>;
 };
 
@@ -3876,6 +3916,7 @@ export type Query_SectionArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_SectionOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_SectionWhereInput>;
 };
 
@@ -3887,6 +3928,7 @@ export type Query_VideoArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_VideoOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_VideoWhereInput>;
 };
 
@@ -3944,6 +3986,7 @@ export type QueryRefArticleListElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ArticleListElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ArticleListElementWhereInput>;
 };
 
@@ -3955,6 +3998,7 @@ export type QueryRefBlankExperienceArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<BlankExperienceOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<BlankExperienceWhereInput>;
 };
 
@@ -3966,6 +4010,7 @@ export type QueryRefBlankSectionArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<BlankSectionOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<BlankSectionWhereInput>;
 };
 
@@ -3977,6 +4022,7 @@ export type QueryRefBlogPostPageArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<BlogPostPageOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<BlogPostPageWhereInput>;
 };
 
@@ -3988,6 +4034,7 @@ export type QueryRefBlogSectionExperienceArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<BlogSectionExperienceOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<BlogSectionExperienceWhereInput>;
 };
 
@@ -3999,6 +4046,7 @@ export type QueryRefButtonBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ButtonBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ButtonBlockWhereInput>;
 };
 
@@ -4010,6 +4058,7 @@ export type QueryRefCtaElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<CtaElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<CtaElementWhereInput>;
 };
 
@@ -4021,6 +4070,7 @@ export type QueryRefCarouselBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<CarouselBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<CarouselBlockWhereInput>;
 };
 
@@ -4032,6 +4082,7 @@ export type QueryRefContentRecsElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ContentRecsElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ContentRecsElementWhereInput>;
 };
 
@@ -4043,6 +4094,7 @@ export type QueryRefContinueReadingComponentArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ContinueReadingComponentOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ContinueReadingComponentWhereInput>;
 };
 
@@ -4054,6 +4106,7 @@ export type QueryRefDataArgs = {
   locale: InputMaybe<Array<InputMaybe<System_Locales>>>;
   orderBy: InputMaybe<DataOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<DataWhereInput>;
 };
 
@@ -4065,6 +4118,7 @@ export type QueryRefDocumentArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<DocumentOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<DocumentWhereInput>;
 };
 
@@ -4076,6 +4130,7 @@ export type QueryRefGenericMediaArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<GenericMediaOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<GenericMediaWhereInput>;
 };
 
@@ -4087,6 +4142,7 @@ export type QueryRefHeadingElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<HeadingElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<HeadingElementWhereInput>;
 };
 
@@ -4098,6 +4154,7 @@ export type QueryRefHeroBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<HeroBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<HeroBlockWhereInput>;
 };
 
@@ -4109,6 +4166,7 @@ export type QueryRefImageElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ImageElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ImageElementWhereInput>;
 };
 
@@ -4120,6 +4178,7 @@ export type QueryRefImageMediaArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ImageMediaOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ImageMediaWhereInput>;
 };
 
@@ -4131,6 +4190,7 @@ export type QueryRefLandingPageArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<LandingPageOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<LandingPageWhereInput>;
 };
 
@@ -4142,6 +4202,7 @@ export type QueryRefLayoutSettingsBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<LayoutSettingsBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<LayoutSettingsBlockWhereInput>;
 };
 
@@ -4153,6 +4214,7 @@ export type QueryRefMegaMenuGroupBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<MegaMenuGroupBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<MegaMenuGroupBlockWhereInput>;
 };
 
@@ -4164,6 +4226,7 @@ export type QueryRefMenuNavigationBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<MenuNavigationBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<MenuNavigationBlockWhereInput>;
 };
 
@@ -4175,6 +4238,7 @@ export type QueryRefOdpEmbedBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<OdpEmbedBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<OdpEmbedBlockWhereInput>;
 };
 
@@ -4186,6 +4250,7 @@ export type QueryRefPageSeoSettingsArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<PageSeoSettingsOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<PageSeoSettingsWhereInput>;
 };
 
@@ -4197,6 +4262,7 @@ export type QueryRefParagraphElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<ParagraphElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<ParagraphElementWhereInput>;
 };
 
@@ -4208,6 +4274,7 @@ export type QueryRefPartnerTokensArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<PartnerTokensOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<PartnerTokensWhereInput>;
 };
 
@@ -4219,6 +4286,7 @@ export type QueryRefQuoteBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<QuoteBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<QuoteBlockWhereInput>;
 };
 
@@ -4230,6 +4298,7 @@ export type QueryRefRichTextElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<RichTextElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<RichTextElementWhereInput>;
 };
 
@@ -4241,6 +4310,7 @@ export type QueryRefSysContentFolderArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<SysContentFolderOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<SysContentFolderWhereInput>;
 };
 
@@ -4252,6 +4322,7 @@ export type QueryRefTestimonialElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<TestimonialElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<TestimonialElementWhereInput>;
 };
 
@@ -4263,6 +4334,7 @@ export type QueryRefTextBlockArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<TextBlockOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<TextBlockWhereInput>;
 };
 
@@ -4274,6 +4346,7 @@ export type QueryRefTokensArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<TokensOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<TokensWhereInput>;
 };
 
@@ -4285,6 +4358,7 @@ export type QueryRefVideoElementArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<VideoElementOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<VideoElementWhereInput>;
 };
 
@@ -4296,6 +4370,7 @@ export type QueryRefVideoMediaArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<VideoMediaOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<VideoMediaWhereInput>;
 };
 
@@ -4307,6 +4382,7 @@ export type QueryRef_ComponentArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_ComponentOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_ComponentWhereInput>;
 };
 
@@ -4318,6 +4394,7 @@ export type QueryRef_ContentArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_ContentOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_ContentWhereInput>;
 };
 
@@ -4329,6 +4406,7 @@ export type QueryRef_ExperienceArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_ExperienceOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_ExperienceWhereInput>;
 };
 
@@ -4340,6 +4418,7 @@ export type QueryRef_FolderArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_FolderOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_FolderWhereInput>;
 };
 
@@ -4351,6 +4430,7 @@ export type QueryRef_ImageArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_ImageOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_ImageWhereInput>;
 };
 
@@ -4362,6 +4442,7 @@ export type QueryRef_MediaArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_MediaOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_MediaWhereInput>;
 };
 
@@ -4373,6 +4454,7 @@ export type QueryRef_PageArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_PageOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_PageWhereInput>;
 };
 
@@ -4384,6 +4466,7 @@ export type QueryRef_SectionArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_SectionOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_SectionWhereInput>;
 };
 
@@ -4395,6 +4478,7 @@ export type QueryRef_VideoArgs = {
   locale: InputMaybe<Array<InputMaybe<Locales>>>;
   orderBy: InputMaybe<_VideoOrderByInput>;
   skip?: Scalars['Int']['input'];
+  variation: InputMaybe<VariationInput>;
   where: InputMaybe<_VideoWhereInput>;
 };
 
@@ -4985,6 +5069,18 @@ export type TokensWhereInput = {
   _modified: InputMaybe<DateFilterInput>;
   _not: InputMaybe<Array<InputMaybe<TokensWhereInput>>>;
   _or: InputMaybe<Array<InputMaybe<TokensWhereInput>>>;
+};
+
+export enum VariationIncludeMode {
+  All = 'ALL',
+  None = 'NONE',
+  Some = 'SOME'
+}
+
+export type VariationInput = {
+  include: InputMaybe<VariationIncludeMode>;
+  includeOriginal: InputMaybe<Scalars['Boolean']['input']>;
+  value: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type VideoElement = IData & _IComponent & _IContent & {
@@ -5974,6 +6070,21 @@ export type GetContentByGuidQueryVariables = Exact<{
 
 export type GetContentByGuidQuery = { __typename?: 'Query', _Content: { __typename?: '_ContentOutput', items: Array<{ __typename?: 'ArticleListElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'BlankExperience', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'BlankSection', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'BlogPostPage', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'BlogSectionExperience', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'ButtonBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'CTAElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'CarouselBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'ContentRecsElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'ContinueReadingComponent', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'Document', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'GenericMedia', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'HeadingElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'HeroBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'ImageElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'ImageMedia', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'LandingPage', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'LayoutSettingsBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'MegaMenuGroupBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'MenuNavigationBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'OdpEmbedBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'PageSeoSettings', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'ParagraphElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'PartnerTokens', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'QuoteBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'RichTextElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'SysContentFolder', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'TestimonialElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'TextBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'Tokens', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'VideoElement', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: 'VideoMedia', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Component', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Content', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Experience', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Folder', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Image', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Media', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Page', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Section', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | { __typename?: '_Video', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, version: string | null, key: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null } | null> | null } | null };
 
+export type GetHeaderQueryVariables = Exact<{
+  locale: InputMaybe<Array<Locales> | Locales>;
+}>;
+
+
+export type GetHeaderQuery = { __typename?: 'Query', LayoutSettingsBlock: { __typename?: 'LayoutSettingsBlockOutput', items: Array<{ __typename?: 'LayoutSettingsBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, key: string | null } | { __typename?: 'InstanceMetadata', displayName: string | null, key: string | null } | { __typename?: 'ItemMetadata', displayName: string | null, key: string | null } | { __typename?: 'MediaMetadata', displayName: string | null, key: string | null } | null, mainMenu: Array<{ __typename?: 'ArticleListElement' } | { __typename?: 'BlankExperience' } | { __typename?: 'BlankSection' } | { __typename?: 'BlogPostPage' } | { __typename?: 'BlogSectionExperience' } | { __typename?: 'ButtonBlock' } | { __typename?: 'CTAElement' } | { __typename?: 'CarouselBlock' } | { __typename?: 'ContentRecsElement' } | { __typename?: 'ContinueReadingComponent' } | { __typename?: 'Document' } | { __typename?: 'GenericMedia' } | { __typename?: 'HeadingElement' } | { __typename?: 'HeroBlock' } | { __typename?: 'ImageElement' } | { __typename?: 'ImageMedia' } | { __typename?: 'LandingPage' } | { __typename?: 'LayoutSettingsBlock' } | { __typename?: 'MegaMenuGroupBlock' } | { __typename?: 'MenuNavigationBlock', MenuNavigationHeading: string | null, NavigationLinks: Array<{ __typename?: 'Link', text: string | null, title: string | null, target: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null, internal: string | null } | null } | null> | null } | { __typename?: 'OdpEmbedBlock' } | { __typename?: 'PageSeoSettings' } | { __typename?: 'ParagraphElement' } | { __typename?: 'PartnerTokens' } | { __typename?: 'QuoteBlock' } | { __typename?: 'RichTextElement' } | { __typename?: 'SysContentFolder' } | { __typename?: 'TestimonialElement' } | { __typename?: 'TextBlock' } | { __typename?: 'Tokens' } | { __typename?: 'VideoElement' } | { __typename?: 'VideoMedia' } | { __typename?: '_Component' } | { __typename?: '_Content' } | { __typename?: '_Experience' } | { __typename?: '_Folder' } | { __typename?: '_Image' } | { __typename?: '_Media' } | { __typename?: '_Page' } | { __typename?: '_Section' } | { __typename?: '_Video' } | null> | null, serviceButtons: Array<{ __typename?: 'ArticleListElement' } | { __typename?: 'BlankExperience' } | { __typename?: 'BlankSection' } | { __typename?: 'BlogPostPage' } | { __typename?: 'BlogSectionExperience' } | { __typename?: 'ButtonBlock', ButtonText: string | null, ButtonType: string | null, ButtonClass: string | null, ButtonVariant: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null, internal: string | null } | null } | { __typename?: 'CTAElement' } | { __typename?: 'CarouselBlock' } | { __typename?: 'ContentRecsElement' } | { __typename?: 'ContinueReadingComponent' } | { __typename?: 'Document' } | { __typename?: 'GenericMedia' } | { __typename?: 'HeadingElement' } | { __typename?: 'HeroBlock' } | { __typename?: 'ImageElement' } | { __typename?: 'ImageMedia' } | { __typename?: 'LandingPage' } | { __typename?: 'LayoutSettingsBlock' } | { __typename?: 'MegaMenuGroupBlock' } | { __typename?: 'MenuNavigationBlock' } | { __typename?: 'OdpEmbedBlock' } | { __typename?: 'PageSeoSettings' } | { __typename?: 'ParagraphElement' } | { __typename?: 'PartnerTokens' } | { __typename?: 'QuoteBlock' } | { __typename?: 'RichTextElement' } | { __typename?: 'SysContentFolder' } | { __typename?: 'TestimonialElement' } | { __typename?: 'TextBlock' } | { __typename?: 'Tokens' } | { __typename?: 'VideoElement' } | { __typename?: 'VideoMedia' } | { __typename?: '_Component' } | { __typename?: '_Content' } | { __typename?: '_Experience' } | { __typename?: '_Folder' } | { __typename?: '_Image' } | { __typename?: '_Media' } | { __typename?: '_Page' } | { __typename?: '_Section' } | { __typename?: '_Video' } | null> | null } | null> | null } | null };
+
+export type GetLandingPageQueryVariables = Exact<{
+  key: Scalars['String']['input'];
+  locale: InputMaybe<Array<Locales> | Locales>;
+}>;
+
+
+export type GetLandingPageQuery = { __typename?: 'Query', LandingPage: { __typename?: 'LandingPageOutput', items: Array<{ __typename?: 'LandingPage', _metadata: { __typename?: 'ContentMetadata', key: string | null, displayName: string | null } | { __typename?: 'InstanceMetadata', key: string | null, displayName: string | null } | { __typename?: 'ItemMetadata', key: string | null, displayName: string | null } | { __typename?: 'MediaMetadata', key: string | null, displayName: string | null } | null } | null> | null } | null };
+
 
 export const GetContentByGuidDocument = gql`
     query GetContentByGuid($guid: String) {
@@ -5995,11 +6106,69 @@ export const GetContentByGuidDocument = gql`
   }
 }
     `;
+export const GetHeaderDocument = gql`
+    query GetHeader($locale: [Locales!]) {
+  LayoutSettingsBlock(locale: $locale) {
+    items {
+      _metadata {
+        displayName
+        key
+      }
+      mainMenu {
+        ... on MenuNavigationBlock {
+          MenuNavigationHeading
+          NavigationLinks {
+            text
+            title
+            target
+            url {
+              base
+              default
+              internal
+            }
+          }
+        }
+      }
+      serviceButtons {
+        ... on ButtonBlock {
+          ButtonText
+          ButtonUrl {
+            base
+            default
+            internal
+          }
+          ButtonType
+          ButtonClass
+          ButtonVariant
+        }
+      }
+    }
+  }
+}
+    `;
+export const GetLandingPageDocument = gql`
+    query GetLandingPage($key: String!, $locale: [Locales!]) {
+  LandingPage(locale: $locale, where: {_metadata: {key: {eq: $key}}}) {
+    items {
+      _metadata {
+        key
+        displayName
+      }
+    }
+  }
+}
+    `;
 export type Requester<C = {}, E = unknown> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<ExecutionResult<R, E>> | AsyncIterable<ExecutionResult<R, E>>
 export function getSdk<C, E>(requester: Requester<C, E>) {
   return {
     GetContentByGuid(variables?: GetContentByGuidQueryVariables, options?: C): Promise<ExecutionResult<GetContentByGuidQuery, E>> {
       return requester<GetContentByGuidQuery, GetContentByGuidQueryVariables>(GetContentByGuidDocument, variables, options) as Promise<ExecutionResult<GetContentByGuidQuery, E>>;
+    },
+    GetHeader(variables?: GetHeaderQueryVariables, options?: C): Promise<ExecutionResult<GetHeaderQuery, E>> {
+      return requester<GetHeaderQuery, GetHeaderQueryVariables>(GetHeaderDocument, variables, options) as Promise<ExecutionResult<GetHeaderQuery, E>>;
+    },
+    GetLandingPage(variables: GetLandingPageQueryVariables, options?: C): Promise<ExecutionResult<GetLandingPageQuery, E>> {
+      return requester<GetLandingPageQuery, GetLandingPageQueryVariables>(GetLandingPageDocument, variables, options) as Promise<ExecutionResult<GetLandingPageQuery, E>>;
     }
   };
 }
