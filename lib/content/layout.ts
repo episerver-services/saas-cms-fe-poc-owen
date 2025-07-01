@@ -52,16 +52,14 @@ const mockLayout: LayoutContent = {
 export async function getLayoutContent(
   preview = false
 ): Promise<LayoutContent> {
-  const isDev = process.env.NODE_ENV === 'development'
+  const env = process.env.NODE_ENV
   const contentId = process.env.OPTIMIZELY_LAYOUT_ID
 
   if (!contentId) {
     logger.error('Missing OPTIMIZELY_LAYOUT_ID in environment')
-    throw new Error('OPTIMIZELY_LAYOUT_ID is not defined in environment.')
-  }
-
-  if (isDev) {
-    logger.info('Running in development mode using real layout content.')
+    if (env !== 'production')
+      throw new Error('OPTIMIZELY_LAYOUT_ID is not defined.')
+    return mockLayout // fallback in prod too
   }
 
   try {
@@ -86,7 +84,6 @@ export async function getLayoutContent(
       if (!singleKey) {
         throw new Error('Missing OPTIMIZELY_SINGLE_KEY')
       }
-      // Note: key is appended to URL in public mode
       endpoint.concat(`?auth=${singleKey}`)
     }
 
@@ -94,7 +91,6 @@ export async function getLayoutContent(
     const sdk = getSdk(client)
 
     const { _Content } = await sdk.GetContentByGuid({ guid: contentId })
-
     const layout = ensureExists(
       _Content?.items?.[0],
       'No layout content returned from CMS.'
@@ -102,14 +98,10 @@ export async function getLayoutContent(
 
     return layout
   } catch (err) {
-    if (isDev) {
-      logger.warn(
-        '⚠️ Layout fetch failed in dev. Falling back to mock layout.',
-        err
-      )
-      return mockLayout
-    }
-    logger.error('❌ Failed to load layout content from CMS.', err)
-    throw err
+    logger.warn(
+      `⚠️ Failed to load layout content (${env}). Using fallback.`,
+      err
+    )
+    return mockLayout
   }
 }
