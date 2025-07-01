@@ -1,0 +1,54 @@
+query GetLayoutSettings($key: String!) {
+  _Content(where: { _metadata: { key: { eq: $key } } }) {
+    items {
+      ... on LayoutSettingsBlock {
+        contactInfoHeading
+        copyright
+        appIdentifiers
+        mainMenu {
+          ... on MenuNavigationBlock {
+            MenuNavigationHeading
+            NavigationLinks {
+              text
+              url {
+                base
+                internal
+                hierarchical
+                default
+                type
+              }
+            }
+          }
+        }
+        footerMenus {
+          ... on MenuNavigationBlock {
+            MenuNavigationHeading
+            NavigationLinks {
+              text
+              url {
+                base
+                internal
+                hierarchical
+                default
+                type
+              }
+            }
+          }
+        }
+        legalLinks {
+          text
+          url {
+            base
+            internal
+            hierarchical
+            default
+            type
+          }
+        }
+        contactInfo {
+          html
+        }
+      }
+    }
+  }
+}

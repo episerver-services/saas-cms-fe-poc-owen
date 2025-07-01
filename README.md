@@ -110,13 +110,14 @@ Feature: Homepage Content
 
 ## 📦 PNPM Scripts
 
-| Command         | Description                                   |
-| --------------- | --------------------------------------------- |
-| `pnpm dev`      | Start dev server                              |
-| `pnpm build`    | Production build                              |
-| `pnpm start`    | Serve production build                        |
-| `pnpm test:bdd` | Run Cucumber tests                            |
-| `pnpm codegen`  | Generate TypeScript types from schema/queries |
+| Command                   | Description                                                   |
+| ------------------------- | ------------------------------------------------------------- |
+| `pnpm dev`                | Start dev server                                              |
+| `pnpm build`              | Production build                                              |
+| `pnpm start`              | Serve production build                                        |
+| `pnpm test:bdd`           | Run Cucumber tests                                            |
+| `pnpm fetch:live-schema`  | Generate TypeScript types from live schema/queries            |
+| `pnpm fetch:local-schema` | Generate TypeScript types from local/hardcoded schema queries |
 
 ---
 

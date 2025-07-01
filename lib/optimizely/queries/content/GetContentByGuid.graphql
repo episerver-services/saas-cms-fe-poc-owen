@@ -1,5 +1,5 @@
-query GetContentByGuid($guid: String) {
-  _Content(where: { _metadata: { key: { eq: $guid } } }) {
+query GetContentByGuid($guid: String!) {
+  _Content(where: { guid: { eq: $guid } }) {
     items {
       _metadata {
         displayName

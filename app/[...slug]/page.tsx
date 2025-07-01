@@ -1,33 +1,19 @@
-import { fetchFromOptimizely } from '@/lib/content/fetchFromOptimizely'
-import {
-  GetContentByGuidDocument,
-  type GetContentByGuidQuery,
-  type GetContentByGuidQueryVariables,
-} from '@/lib/optimizely/types/generated'
+import { getSdk } from '@/lib/optimizely/sdk'
+import { GraphQLClient } from 'graphql-request'
 import ContentAreaMapper from '../components/content-area/mapper'
 
-/**
- * Props passed by Next.js to dynamic route components.
- * In Next.js 15, params is now a Promise.
- */
 type PageProps = {
   params: Promise<{
     slug?: string[]
   }>
 }
 
-/**
- * Loose shape of a content item with content blocks.
- */
 interface BlockItem {
   properties: {
     blocks?: unknown[]
   }
 }
 
-/**
- * Type guard to check if an object has `properties.blocks`.
- */
 function isBlockItem(item: unknown): item is BlockItem {
   return (
     typeof item === 'object' &&
@@ -39,7 +25,6 @@ function isBlockItem(item: unknown): item is BlockItem {
 }
 
 export default async function DynamicPage({ params }: PageProps) {
-  // Await the params promise
   const resolvedParams = await params
   const guid = resolvedParams.slug?.[0]
 
@@ -48,16 +33,25 @@ export default async function DynamicPage({ params }: PageProps) {
   }
 
   try {
-    const result = await fetchFromOptimizely<
-      GetContentByGuidQuery,
-      GetContentByGuidQueryVariables
-    >(GetContentByGuidDocument, { guid }, { cacheTag: `content-${guid}` })
+    const endpoint = process.env.OPTIMIZELY_API_URL ?? ''
+    const singleKey = process.env.OPTIMIZELY_SINGLE_KEY
 
-    const items = result._Content?.items ?? []
+    if (!singleKey) {
+      throw new Error('Missing OPTIMIZELY_SINGLE_KEY')
+    }
 
-    // Cast to unknown for type guard usage
+    const client = new GraphQLClient(`${endpoint}?auth=${singleKey}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+
+    const sdk = getSdk(client)
+    const { _Content } = await sdk.GetContentByGuid({ guid })
+
+    const items = _Content?.items ?? []
     const item = (items as unknown[]).find(isBlockItem)
-
     const blocks = item?.properties.blocks ?? []
 
     if (blocks.length === 0) {

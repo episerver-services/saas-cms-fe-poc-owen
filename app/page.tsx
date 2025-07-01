@@ -1,8 +1,5 @@
-import { fetchFromOptimizely } from '@/lib/content/fetchFromOptimizely'
-import {
-  GetContentByGuidDocument,
-  type GetContentByGuidQuery,
-} from '@/lib/optimizely/types/generated'
+import { getSdk } from '@/lib/optimizely/sdk'
+import { GraphQLClient } from 'graphql-request'
 import ContentAreaMapper from './components/content-area/mapper'
 
 /**
@@ -11,8 +8,6 @@ import ContentAreaMapper from './components/content-area/mapper'
  *
  * Required ENV vars:
  * - `OPTIMIZELY_CONTENT_ID`: The GUID of the homepage content.
- *
- * @returns A server-rendered React component containing homepage content.
  */
 export default async function HomePage() {
   const contentId = process.env.OPTIMIZELY_CONTENT_ID
@@ -22,28 +17,37 @@ export default async function HomePage() {
     return <p>Homepage content is temporarily unavailable (missing config).</p>
   }
 
-  let blocks: any[] = []
-
   try {
-    const result: GetContentByGuidQuery = await fetchFromOptimizely(
-      GetContentByGuidDocument,
-      { guid: contentId }
-    )
+    const endpoint = process.env.OPTIMIZELY_API_URL ?? ''
+    const singleKey = process.env.OPTIMIZELY_SINGLE_KEY
 
-    const homepage = result._Content?.items?.[0]
-
-    // Prefer properties.blocks if typed later
-    if (Array.isArray((homepage as any)?.blocks)) {
-      blocks = (homepage as any).blocks
+    if (!singleKey) {
+      throw new Error('Missing OPTIMIZELY_SINGLE_KEY')
     }
+
+    const client = new GraphQLClient(`${endpoint}?auth=${singleKey}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+
+    const sdk = getSdk(client)
+    const { _Content } = await sdk.GetContentByGuid({ guid: contentId })
+
+    const homepage = _Content?.items?.[0]
+
+    const blocks = Array.isArray((homepage as any)?.blocks)
+      ? (homepage as any).blocks
+      : []
+
+    if (!blocks.length) {
+      return <p>Homepage content not found or empty.</p>
+    }
+
+    return <ContentAreaMapper blocks={blocks} />
   } catch (error) {
     console.error('[BUILD] Optimizely fetch failed:', error)
     return <p>Homepage content could not be loaded (fetch error).</p>
   }
-
-  if (!blocks.length) {
-    return <p>Homepage content not found or empty.</p>
-  }
-
-  return <ContentAreaMapper blocks={blocks} />
 }

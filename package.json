@@ -11,7 +11,7 @@
     "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts",
     "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
     "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require features/step-definitions/**/*.ts --require features/support/**/*.ts",
-    "gen-types": "graphql-codegen -r dotenv/config --config codegen.yaml",
+    "codegen": "cross-env graphql-codegen --config codegen.ts",
     "fetch:local-schema": "ts-node scripts/fetch-local-schema.cjs",
     "fetch:live-schema": "ts-node scripts/fetch-live-schema.cjs"
   },
@@ -40,6 +40,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "chai": "^5.2.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.6.0",
     "eslint": "^9.28.0",
     "eslint-config-next": "^15.3.3",

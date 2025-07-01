@@ -24,6 +24,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Default mock data to avoid UI break if fetch fails
   let menuLinks = [
     { text: 'Home', href: '/' },
     { text: 'Products', href: '/products' },
@@ -32,9 +33,12 @@ export default async function RootLayout({
   let footerText = '© Mock Company'
 
   try {
-    const layoutContent = await getLayoutContent()
-    menuLinks = layoutContent.properties.menuLinks
-    footerText = layoutContent.properties.footerText
+    // Pass preview = true to get draft/unpublished content in dev
+    const layoutContent = await getLayoutContent(true)
+
+    // Based on your query and schema, access these fields directly (no .properties)
+    menuLinks = layoutContent.mainMenu?.[0]?.NavigationLinks ?? menuLinks
+    footerText = layoutContent.footerText ?? footerText
   } catch (err) {
     console.warn('⚠️ Failed to load layout content:', err)
   }

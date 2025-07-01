@@ -6077,13 +6077,18 @@ export type GetHeaderQueryVariables = Exact<{
 
 export type GetHeaderQuery = { __typename?: 'Query', LayoutSettingsBlock: { __typename?: 'LayoutSettingsBlockOutput', items: Array<{ __typename?: 'LayoutSettingsBlock', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, key: string | null } | { __typename?: 'InstanceMetadata', displayName: string | null, key: string | null } | { __typename?: 'ItemMetadata', displayName: string | null, key: string | null } | { __typename?: 'MediaMetadata', displayName: string | null, key: string | null } | null, mainMenu: Array<{ __typename?: 'ArticleListElement' } | { __typename?: 'BlankExperience' } | { __typename?: 'BlankSection' } | { __typename?: 'BlogPostPage' } | { __typename?: 'BlogSectionExperience' } | { __typename?: 'ButtonBlock' } | { __typename?: 'CTAElement' } | { __typename?: 'CarouselBlock' } | { __typename?: 'ContentRecsElement' } | { __typename?: 'ContinueReadingComponent' } | { __typename?: 'Document' } | { __typename?: 'GenericMedia' } | { __typename?: 'HeadingElement' } | { __typename?: 'HeroBlock' } | { __typename?: 'ImageElement' } | { __typename?: 'ImageMedia' } | { __typename?: 'LandingPage' } | { __typename?: 'LayoutSettingsBlock' } | { __typename?: 'MegaMenuGroupBlock' } | { __typename?: 'MenuNavigationBlock', MenuNavigationHeading: string | null, NavigationLinks: Array<{ __typename?: 'Link', text: string | null, title: string | null, target: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null, internal: string | null } | null } | null> | null } | { __typename?: 'OdpEmbedBlock' } | { __typename?: 'PageSeoSettings' } | { __typename?: 'ParagraphElement' } | { __typename?: 'PartnerTokens' } | { __typename?: 'QuoteBlock' } | { __typename?: 'RichTextElement' } | { __typename?: 'SysContentFolder' } | { __typename?: 'TestimonialElement' } | { __typename?: 'TextBlock' } | { __typename?: 'Tokens' } | { __typename?: 'VideoElement' } | { __typename?: 'VideoMedia' } | { __typename?: '_Component' } | { __typename?: '_Content' } | { __typename?: '_Experience' } | { __typename?: '_Folder' } | { __typename?: '_Image' } | { __typename?: '_Media' } | { __typename?: '_Page' } | { __typename?: '_Section' } | { __typename?: '_Video' } | null> | null, serviceButtons: Array<{ __typename?: 'ArticleListElement' } | { __typename?: 'BlankExperience' } | { __typename?: 'BlankSection' } | { __typename?: 'BlogPostPage' } | { __typename?: 'BlogSectionExperience' } | { __typename?: 'ButtonBlock', ButtonText: string | null, ButtonType: string | null, ButtonClass: string | null, ButtonVariant: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null, internal: string | null } | null } | { __typename?: 'CTAElement' } | { __typename?: 'CarouselBlock' } | { __typename?: 'ContentRecsElement' } | { __typename?: 'ContinueReadingComponent' } | { __typename?: 'Document' } | { __typename?: 'GenericMedia' } | { __typename?: 'HeadingElement' } | { __typename?: 'HeroBlock' } | { __typename?: 'ImageElement' } | { __typename?: 'ImageMedia' } | { __typename?: 'LandingPage' } | { __typename?: 'LayoutSettingsBlock' } | { __typename?: 'MegaMenuGroupBlock' } | { __typename?: 'MenuNavigationBlock' } | { __typename?: 'OdpEmbedBlock' } | { __typename?: 'PageSeoSettings' } | { __typename?: 'ParagraphElement' } | { __typename?: 'PartnerTokens' } | { __typename?: 'QuoteBlock' } | { __typename?: 'RichTextElement' } | { __typename?: 'SysContentFolder' } | { __typename?: 'TestimonialElement' } | { __typename?: 'TextBlock' } | { __typename?: 'Tokens' } | { __typename?: 'VideoElement' } | { __typename?: 'VideoMedia' } | { __typename?: '_Component' } | { __typename?: '_Content' } | { __typename?: '_Experience' } | { __typename?: '_Folder' } | { __typename?: '_Image' } | { __typename?: '_Media' } | { __typename?: '_Page' } | { __typename?: '_Section' } | { __typename?: '_Video' } | null> | null } | null> | null } | null };
 
+export type GetLayoutSettingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLayoutSettingsQuery = { __typename?: 'Query', _Content: { __typename?: '_ContentOutput', items: Array<{ __typename?: 'ArticleListElement' } | { __typename?: 'BlankExperience' } | { __typename?: 'BlankSection' } | { __typename?: 'BlogPostPage' } | { __typename?: 'BlogSectionExperience' } | { __typename?: 'ButtonBlock' } | { __typename?: 'CTAElement' } | { __typename?: 'CarouselBlock' } | { __typename?: 'ContentRecsElement' } | { __typename?: 'ContinueReadingComponent' } | { __typename?: 'Document' } | { __typename?: 'GenericMedia' } | { __typename?: 'HeadingElement' } | { __typename?: 'HeroBlock' } | { __typename?: 'ImageElement' } | { __typename?: 'ImageMedia' } | { __typename?: 'LandingPage' } | { __typename?: 'LayoutSettingsBlock', contactInfoHeading: string | null, copyright: string | null, appIdentifiers: string | null, mainMenu: Array<{ __typename?: 'ArticleListElement' } | { __typename?: 'BlankExperience' } | { __typename?: 'BlankSection' } | { __typename?: 'BlogPostPage' } | { __typename?: 'BlogSectionExperience' } | { __typename?: 'ButtonBlock' } | { __typename?: 'CTAElement' } | { __typename?: 'CarouselBlock' } | { __typename?: 'ContentRecsElement' } | { __typename?: 'ContinueReadingComponent' } | { __typename?: 'Document' } | { __typename?: 'GenericMedia' } | { __typename?: 'HeadingElement' } | { __typename?: 'HeroBlock' } | { __typename?: 'ImageElement' } | { __typename?: 'ImageMedia' } | { __typename?: 'LandingPage' } | { __typename?: 'LayoutSettingsBlock' } | { __typename?: 'MegaMenuGroupBlock' } | { __typename?: 'MenuNavigationBlock', MenuNavigationHeading: string | null, NavigationLinks: Array<{ __typename?: 'Link', text: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null> | null } | { __typename?: 'OdpEmbedBlock' } | { __typename?: 'PageSeoSettings' } | { __typename?: 'ParagraphElement' } | { __typename?: 'PartnerTokens' } | { __typename?: 'QuoteBlock' } | { __typename?: 'RichTextElement' } | { __typename?: 'SysContentFolder' } | { __typename?: 'TestimonialElement' } | { __typename?: 'TextBlock' } | { __typename?: 'Tokens' } | { __typename?: 'VideoElement' } | { __typename?: 'VideoMedia' } | { __typename?: '_Component' } | { __typename?: '_Content' } | { __typename?: '_Experience' } | { __typename?: '_Folder' } | { __typename?: '_Image' } | { __typename?: '_Media' } | { __typename?: '_Page' } | { __typename?: '_Section' } | { __typename?: '_Video' } | null> | null, footerMenus: Array<{ __typename?: 'ArticleListElement' } | { __typename?: 'BlankExperience' } | { __typename?: 'BlankSection' } | { __typename?: 'BlogPostPage' } | { __typename?: 'BlogSectionExperience' } | { __typename?: 'ButtonBlock' } | { __typename?: 'CTAElement' } | { __typename?: 'CarouselBlock' } | { __typename?: 'ContentRecsElement' } | { __typename?: 'ContinueReadingComponent' } | { __typename?: 'Document' } | { __typename?: 'GenericMedia' } | { __typename?: 'HeadingElement' } | { __typename?: 'HeroBlock' } | { __typename?: 'ImageElement' } | { __typename?: 'ImageMedia' } | { __typename?: 'LandingPage' } | { __typename?: 'LayoutSettingsBlock' } | { __typename?: 'MegaMenuGroupBlock' } | { __typename?: 'MenuNavigationBlock', MenuNavigationHeading: string | null, NavigationLinks: Array<{ __typename?: 'Link', text: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null> | null } | { __typename?: 'OdpEmbedBlock' } | { __typename?: 'PageSeoSettings' } | { __typename?: 'ParagraphElement' } | { __typename?: 'PartnerTokens' } | { __typename?: 'QuoteBlock' } | { __typename?: 'RichTextElement' } | { __typename?: 'SysContentFolder' } | { __typename?: 'TestimonialElement' } | { __typename?: 'TextBlock' } | { __typename?: 'Tokens' } | { __typename?: 'VideoElement' } | { __typename?: 'VideoMedia' } | { __typename?: '_Component' } | { __typename?: '_Content' } | { __typename?: '_Experience' } | { __typename?: '_Folder' } | { __typename?: '_Image' } | { __typename?: '_Media' } | { __typename?: '_Page' } | { __typename?: '_Section' } | { __typename?: '_Video' } | null> | null, legalLinks: Array<{ __typename?: 'Link', text: string | null, url: { __typename?: 'ContentUrl', base: string | null, internal: string | null, hierarchical: string | null, default: string | null, type: string | null } | null } | null> | null, contactInfo: { __typename?: 'RichText', html: string | null } | null } | { __typename?: 'MegaMenuGroupBlock' } | { __typename?: 'MenuNavigationBlock' } | { __typename?: 'OdpEmbedBlock' } | { __typename?: 'PageSeoSettings' } | { __typename?: 'ParagraphElement' } | { __typename?: 'PartnerTokens' } | { __typename?: 'QuoteBlock' } | { __typename?: 'RichTextElement' } | { __typename?: 'SysContentFolder' } | { __typename?: 'TestimonialElement' } | { __typename?: 'TextBlock' } | { __typename?: 'Tokens' } | { __typename?: 'VideoElement' } | { __typename?: 'VideoMedia' } | { __typename?: '_Component' } | { __typename?: '_Content' } | { __typename?: '_Experience' } | { __typename?: '_Folder' } | { __typename?: '_Image' } | { __typename?: '_Media' } | { __typename?: '_Page' } | { __typename?: '_Section' } | { __typename?: '_Video' } | null> | null } | null };
+
 export type GetLandingPageQueryVariables = Exact<{
   key: Scalars['String']['input'];
   locale: InputMaybe<Array<Locales> | Locales>;
 }>;
 
 
-export type GetLandingPageQuery = { __typename?: 'Query', LandingPage: { __typename?: 'LandingPageOutput', items: Array<{ __typename?: 'LandingPage', _metadata: { __typename?: 'ContentMetadata', key: string | null, displayName: string | null } | { __typename?: 'InstanceMetadata', key: string | null, displayName: string | null } | { __typename?: 'ItemMetadata', key: string | null, displayName: string | null } | { __typename?: 'MediaMetadata', key: string | null, displayName: string | null } | null } | null> | null } | null };
+export type GetLandingPageQuery = { __typename?: 'Query', LandingPage: { __typename?: 'LandingPageOutput', items: Array<{ __typename?: 'LandingPage', _metadata: { __typename?: 'ContentMetadata', key: string | null, displayName: string | null } | { __typename?: 'InstanceMetadata', key: string | null, displayName: string | null } | { __typename?: 'ItemMetadata', key: string | null, displayName: string | null } | { __typename?: 'MediaMetadata', key: string | null, displayName: string | null } | null, TopContentArea: Array<{ __typename: 'ArticleListElement' } | { __typename: 'BlankExperience' } | { __typename: 'BlankSection' } | { __typename: 'BlogPostPage' } | { __typename: 'BlogSectionExperience' } | { __typename: 'ButtonBlock' } | { __typename: 'CTAElement' } | { __typename: 'CarouselBlock' } | { __typename: 'ContentRecsElement' } | { __typename: 'ContinueReadingComponent' } | { __typename: 'Document' } | { __typename: 'GenericMedia' } | { __typename: 'HeadingElement' } | { __typename: 'HeroBlock', Heading: string | null, HeroImage: { __typename?: 'ContentReference', url: { __typename?: 'ContentUrl', base: string | null } | null } | null } | { __typename: 'ImageElement' } | { __typename: 'ImageMedia' } | { __typename: 'LandingPage' } | { __typename: 'LayoutSettingsBlock', contactInfoHeading: string | null, copyright: string | null, appIdentifiers: string | null } | { __typename: 'MegaMenuGroupBlock' } | { __typename: 'MenuNavigationBlock' } | { __typename: 'OdpEmbedBlock' } | { __typename: 'PageSeoSettings' } | { __typename: 'ParagraphElement' } | { __typename: 'PartnerTokens' } | { __typename: 'QuoteBlock' } | { __typename: 'RichTextElement' } | { __typename: 'SysContentFolder' } | { __typename: 'TestimonialElement' } | { __typename: 'TextBlock', TextBlockHeading: string | null, TextBlockDescription: { __typename?: 'RichText', html: string | null } | null } | { __typename: 'Tokens' } | { __typename: 'VideoElement' } | { __typename: 'VideoMedia' } | { __typename: '_Component' } | { __typename: '_Content' } | { __typename: '_Experience' } | { __typename: '_Folder' } | { __typename: '_Image' } | { __typename: '_Media' } | { __typename: '_Page' } | { __typename: '_Section' } | { __typename: '_Video' } | null> | null } | null> | null } | null };
 
 
 export const GetContentByGuidDocument = gql`
@@ -6146,6 +6151,64 @@ export const GetHeaderDocument = gql`
   }
 }
     `;
+export const GetLayoutSettingsDocument = gql`
+    query GetLayoutSettings {
+  _Content(
+    where: {_metadata: {key: {eq: "587b82b0-de1d-4145-a721-1cbc31a6cf36"}}}
+  ) {
+    items {
+      ... on LayoutSettingsBlock {
+        contactInfoHeading
+        copyright
+        appIdentifiers
+        mainMenu {
+          ... on MenuNavigationBlock {
+            MenuNavigationHeading
+            NavigationLinks {
+              text
+              url {
+                base
+                internal
+                hierarchical
+                default
+                type
+              }
+            }
+          }
+        }
+        footerMenus {
+          ... on MenuNavigationBlock {
+            MenuNavigationHeading
+            NavigationLinks {
+              text
+              url {
+                base
+                internal
+                hierarchical
+                default
+                type
+              }
+            }
+          }
+        }
+        legalLinks {
+          text
+          url {
+            base
+            internal
+            hierarchical
+            default
+            type
+          }
+        }
+        contactInfo {
+          html
+        }
+      }
+    }
+  }
+}
+    `;
 export const GetLandingPageDocument = gql`
     query GetLandingPage($key: String!, $locale: [Locales!]) {
   LandingPage(locale: $locale, where: {_metadata: {key: {eq: $key}}}) {
@@ -6153,6 +6216,28 @@ export const GetLandingPageDocument = gql`
       _metadata {
         key
         displayName
+      }
+      TopContentArea {
+        __typename
+        ... on HeroBlock {
+          Heading
+          HeroImage {
+            url {
+              base
+            }
+          }
+        }
+        ... on TextBlock {
+          TextBlockHeading
+          TextBlockDescription {
+            html
+          }
+        }
+        ... on LayoutSettingsBlock {
+          contactInfoHeading
+          copyright
+          appIdentifiers
+        }
       }
     }
   }
@@ -6166,6 +6251,9 @@ export function getSdk<C, E>(requester: Requester<C, E>) {
     },
     GetHeader(variables?: GetHeaderQueryVariables, options?: C): Promise<ExecutionResult<GetHeaderQuery, E>> {
       return requester<GetHeaderQuery, GetHeaderQueryVariables>(GetHeaderDocument, variables, options) as Promise<ExecutionResult<GetHeaderQuery, E>>;
+    },
+    GetLayoutSettings(variables?: GetLayoutSettingsQueryVariables, options?: C): Promise<ExecutionResult<GetLayoutSettingsQuery, E>> {
+      return requester<GetLayoutSettingsQuery, GetLayoutSettingsQueryVariables>(GetLayoutSettingsDocument, variables, options) as Promise<ExecutionResult<GetLayoutSettingsQuery, E>>;
     },
     GetLandingPage(variables: GetLandingPageQueryVariables, options?: C): Promise<ExecutionResult<GetLandingPageQuery, E>> {
       return requester<GetLandingPageQuery, GetLandingPageQueryVariables>(GetLandingPageDocument, variables, options) as Promise<ExecutionResult<GetLandingPageQuery, E>>;

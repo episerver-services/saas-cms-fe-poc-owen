@@ -1,16 +1,29 @@
-import { fetchFromOptimizely } from './fetchFromOptimizely'
-import {
-  GetContentByGuidDocument,
-  type GetContentByGuidQuery,
-  type GetContentByGuidQueryVariables,
-} from '@/lib/optimizely/types/generated'
+import { getSdk } from '@/lib/optimizely/sdk'
+import { GraphQLClient } from 'graphql-request'
 import { logger } from '../utils/logger'
 import { ensureExists } from '../utils/assert'
 
-/**
- * Mock layout fallback used in development or when no API key is provided.
- */
-const mockLayout = {
+interface LayoutContent {
+  __typename: string
+  _metadata: {
+    displayName: string
+    version: string
+    key: string
+    url: {
+      base: string
+      internal: string
+      hierarchical: string
+      default: string
+      type: string
+    }
+  }
+  footerText: string
+  mainMenu?: Array<{
+    NavigationLinks: Array<{ text: string; href: string }>
+  }>
+}
+
+const mockLayout: LayoutContent = {
   __typename: 'LayoutBlock',
   _metadata: {
     displayName: 'Mock Layout',
@@ -24,34 +37,23 @@ const mockLayout = {
       type: 'Mock',
     },
   },
-  menuLinks: [
-    { text: 'Home', href: '/' },
-    { text: 'Products', href: '/products' },
-    { text: 'About', href: '/about' },
-  ],
   footerText: '© Mock Company 2025',
+  mainMenu: [
+    {
+      NavigationLinks: [
+        { text: 'Home', href: '/' },
+        { text: 'Products', href: '/products' },
+        { text: 'About', href: '/about' },
+      ],
+    },
+  ],
 }
 
-/**
- * Fetches layout content from the Optimizely Delivery API using a GUID.
- *
- * - If no API key is present, returns mock layout content.
- * - If CMS fetch fails in dev mode, returns mock layout as fallback.
- * - Uses the `OPTIMIZELY_LAYOUT_ID` environment variable to target the layout content item.
- *
- * Required environment variables:
- * - `OPTIMIZELY_SINGLE_KEY`: Delivery API auth key.
- * - `OPTIMIZELY_LAYOUT_ID`: Content GUID to query.
- */
-export async function getLayoutContent(): Promise<any> {
+export async function getLayoutContent(
+  preview = false
+): Promise<LayoutContent> {
   const isDev = process.env.NODE_ENV === 'development'
-  const token = process.env.OPTIMIZELY_SINGLE_KEY
   const contentId = process.env.OPTIMIZELY_LAYOUT_ID
-
-  if (!token) {
-    logger.warn('Using mock layout content (no token provided)')
-    return mockLayout
-  }
 
   if (!contentId) {
     logger.error('Missing OPTIMIZELY_LAYOUT_ID in environment')
@@ -63,15 +65,42 @@ export async function getLayoutContent(): Promise<any> {
   }
 
   try {
-    const result = await fetchFromOptimizely<
-      GetContentByGuidQuery,
-      GetContentByGuidQueryVariables
-    >(GetContentByGuidDocument, { guid: contentId })
+    const endpoint = process.env.OPTIMIZELY_API_URL ?? ''
+    const headers: Record<string, string> = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
 
-    return ensureExists(
-      result._Content?.items?.[0],
+    if (preview) {
+      const appKey = process.env.OPTIMIZELY_APP_KEY
+      const appSecret = process.env.OPTIMIZELY_APP_SECRET
+      if (!appKey || !appSecret) {
+        throw new Error('Missing OPTIMIZELY_APP_KEY or OPTIMIZELY_APP_SECRET')
+      }
+      const basicToken = Buffer.from(`${appKey}:${appSecret}`).toString(
+        'base64'
+      )
+      headers.Authorization = `Basic ${basicToken}`
+    } else {
+      const singleKey = process.env.OPTIMIZELY_SINGLE_KEY
+      if (!singleKey) {
+        throw new Error('Missing OPTIMIZELY_SINGLE_KEY')
+      }
+      // Note: key is appended to URL in public mode
+      endpoint.concat(`?auth=${singleKey}`)
+    }
+
+    const client = new GraphQLClient(endpoint, { headers })
+    const sdk = getSdk(client)
+
+    const { _Content } = await sdk.GetContentByGuid({ guid: contentId })
+
+    const layout = ensureExists(
+      _Content?.items?.[0],
       'No layout content returned from CMS.'
-    )
+    ) as LayoutContent
+
+    return layout
   } catch (err) {
     if (isDev) {
       logger.warn(
@@ -80,7 +109,6 @@ export async function getLayoutContent(): Promise<any> {
       )
       return mockLayout
     }
-
     logger.error('❌ Failed to load layout content from CMS.', err)
     throw err
   }

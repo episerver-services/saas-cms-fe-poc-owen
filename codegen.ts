@@ -1,0 +1,31 @@
+import 'dotenv/config'
+import type { CodegenConfig } from '@graphql-codegen/cli'
+
+const config: CodegenConfig = {
+  schema: `${process.env.OPTIMIZELY_API_URL}?auth=${process.env.OPTIMIZELY_SINGLE_KEY}`,
+  documents: './lib/optimizely/queries/**/*.graphql',
+  generates: {
+    './lib/optimizely/sdk.ts': {
+      plugins: [
+        'typescript',
+        'typescript-operations',
+        'typescript-graphql-request',
+      ],
+      config: {
+        rawRequest: false,
+        avoidOptionals: true,
+        useTypeImports: true,
+        dedupeOperationSuffix: true,
+        exportFragmentSpreadSubTypes: true,
+        enumsAsTypes: true,
+        scalars: {
+          DateTime: 'string',
+          Url: 'string',
+          GUID: 'string',
+        },
+      },
+    },
+  },
+}
+
+export default config

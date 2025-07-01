@@ -6,27 +6,30 @@ query GetLandingPage($key: String!, $locale: [Locales!]) {
         displayName
       }
       TopContentArea {
-        ...ContentAreaFragment
-      }
-      MainContentArea {
-        ...ContentAreaFragment
-      }
-    }
-  }
-}
+        __typename
 
-fragment ContentAreaFragment on ContentArea {
-  items {
-    __typename
-    ... on HeroBlock {
-      title
-      image {
-        url
+        ... on HeroBlock {
+          Heading
+          HeroImage {
+            url {
+              base
+            }
+          }
+        }
+
+        ... on TextBlock {
+          TextBlockHeading
+          TextBlockDescription {
+            html
+          }
+        }
+
+        ... on LayoutSettingsBlock {
+          contactInfoHeading
+          copyright
+          appIdentifiers
+        }
       }
     }
-    ... on TextBlock {
-      text
-    }
-    # Add more block types as you wire them up
   }
 }
