@@ -1,25 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { validatePreviewAuth } from '@/app/preview/validateSignature'
 
 export async function GET(req: NextRequest) {
-  const searchParams = req.nextUrl.searchParams
-  const contentId = searchParams.get('id')
-  const version = searchParams.get('version') ?? 'draft'
-  const token = searchParams.get('token')
+  const { searchParams } = new URL(req.url)
+  const key = searchParams.get('key') ?? ''
+  const version = searchParams.get('ver') ?? ''
+  const locale = searchParams.get('loc') ?? ''
+  const auth = searchParams.get('auth') ?? ''
+  const psk = process.env.OPTIMIZELY_PREVIEW_PSK!
 
-  if (!contentId) {
-    return new NextResponse('Missing content ID', { status: 400 })
+  const isValid = validatePreviewAuth({
+    key,
+    version,
+    locale,
+    providedAuth: auth,
+    psk,
+  })
+
+  if (!isValid) {
+    return NextResponse.json(
+      { error: 'Invalid preview signature' },
+      { status: 403 }
+    )
   }
 
-  // Optional: check token
-  const expectedToken = process.env.OPTIMIZELY_PREVIEW_TOKEN
-  if (expectedToken && token !== expectedToken) {
-    return new NextResponse('Invalid preview token', { status: 401 })
-  }
+  // optionally store previewToken or set cookies here
 
-  const redirectUrl = `/${contentId.replace('contentreference:/content/optimizely.com/en/', '').replace(/\/$/, '')}?preview=true&version=${version}`
-
-  const response = NextResponse.redirect(new URL(redirectUrl, req.url))
-  response.cookies.set('__prerender_bypass', '1')
-  response.cookies.set('__next_preview_data', '1')
-  return response
+  return NextResponse.redirect(`/preview`)
 }

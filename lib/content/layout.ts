@@ -3,6 +3,9 @@ import { GraphQLClient } from 'graphql-request'
 import { logger } from '../utils/logger'
 import { ensureExists } from '../utils/assert'
 
+/**
+ * Structure of layout content returned from the CMS.
+ */
 interface LayoutContent {
   __typename: string
   _metadata: {
@@ -23,6 +26,9 @@ interface LayoutContent {
   }>
 }
 
+/**
+ * Fallback mock layout content used if CMS content is unavailable.
+ */
 const mockLayout: LayoutContent = {
   __typename: 'LayoutBlock',
   _metadata: {
@@ -49,27 +55,47 @@ const mockLayout: LayoutContent = {
   ],
 }
 
+/**
+ * Fetches layout content from the Optimizely CMS GraphQL API.
+ *
+ * Depending on the mode, this function uses either:
+ * - a public delivery API key (for published content),
+ * - basic auth (for preview in dev),
+ * - or a Bearer preview token (for live previewing).
+ *
+ * Falls back to mock content if the CMS is unavailable or misconfigured.
+ *
+ * @param preview - If true, uses preview mode for draft/unpublished content.
+ * @param previewToken - Optional Bearer token for authenticated preview requests.
+ * @returns A layout content object or mock content if fetch fails.
+ */
 export async function getLayoutContent(
-  preview = false
+  preview = false,
+  previewToken?: string
 ): Promise<LayoutContent> {
   const env = process.env.NODE_ENV
   const contentId = process.env.OPTIMIZELY_LAYOUT_ID
 
   if (!contentId) {
     logger.error('Missing OPTIMIZELY_LAYOUT_ID in environment')
-    if (env !== 'production')
+    if (env !== 'production') {
       throw new Error('OPTIMIZELY_LAYOUT_ID is not defined.')
-    return mockLayout // fallback in prod too
+    }
+    return mockLayout
   }
 
   try {
-    const endpoint = process.env.OPTIMIZELY_API_URL ?? ''
+    let endpoint = process.env.OPTIMIZELY_API_URL ?? ''
     const headers: Record<string, string> = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     }
 
-    if (preview) {
+    if (preview && previewToken) {
+      // Use Bearer token for authenticated preview
+      headers.Authorization = `Bearer ${previewToken}`
+    } else if (preview) {
+      // Use Basic auth in development preview fallback
       const appKey = process.env.OPTIMIZELY_APP_KEY
       const appSecret = process.env.OPTIMIZELY_APP_SECRET
       if (!appKey || !appSecret) {
@@ -80,17 +106,19 @@ export async function getLayoutContent(
       )
       headers.Authorization = `Basic ${basicToken}`
     } else {
+      // Public delivery access using ?auth=...
       const singleKey = process.env.OPTIMIZELY_SINGLE_KEY
       if (!singleKey) {
         throw new Error('Missing OPTIMIZELY_SINGLE_KEY')
       }
-      endpoint.concat(`?auth=${singleKey}`)
+      endpoint = `${endpoint}?auth=${singleKey}`
     }
 
     const client = new GraphQLClient(endpoint, { headers })
     const sdk = getSdk(client)
 
     const { _Content } = await sdk.GetContentByGuid({ guid: contentId })
+
     const layout = ensureExists(
       _Content?.items?.[0],
       'No layout content returned from CMS.'
