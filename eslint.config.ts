@@ -12,7 +12,7 @@ const compat = new FlatCompat({
 const eslintConfig = [
   // Completely ignore this generated file
   {
-    ignores: ['lib/optimizely/types/generated.ts'],
+    ignores: ['lib/optimizely/sdk.ts'],
   },
 
   // Apply the base config

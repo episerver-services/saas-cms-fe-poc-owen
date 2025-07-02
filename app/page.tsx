@@ -4,10 +4,10 @@ import ContentAreaMapper from './components/content-area/mapper'
 
 /**
  * HomePage is the root route of the site. It renders CMS-driven blocks
- * using the content fetched from Optimizely by GUID.
+ * using the content fetched from Optimizely by internal `_id`.
  *
  * Required ENV vars:
- * - `OPTIMIZELY_CONTENT_ID`: The GUID of the homepage content.
+ * - `OPTIMIZELY_CONTENT_ID`: The internal `_id` of the homepage content.
  */
 export default async function HomePage() {
   const contentId = process.env.OPTIMIZELY_CONTENT_ID
@@ -33,19 +33,23 @@ export default async function HomePage() {
     })
 
     const sdk = getSdk(client)
-    const { _Content } = await sdk.GetContentByGuid({ guid: contentId })
+    const { _Content } = await sdk.GetContentById()
 
-    const homepage = _Content?.items?.[0]
+    const homepage = (_Content?.items ?? []).find(
+      (item) =>
+        typeof item === 'object' &&
+        item !== null &&
+        '_id' in item &&
+        item._id === contentId &&
+        'blocks' in item &&
+        Array.isArray((item as any).blocks)
+    ) as { blocks: unknown[] } | undefined
 
-    const blocks = Array.isArray((homepage as any)?.blocks)
-      ? (homepage as any).blocks
-      : []
-
-    if (!blocks.length) {
+    if (!homepage || homepage.blocks.length === 0) {
       return <p>Homepage content not found or empty.</p>
     }
 
-    return <ContentAreaMapper blocks={blocks} />
+    return <ContentAreaMapper blocks={homepage.blocks} />
   } catch (error) {
     console.error('[BUILD] Optimizely fetch failed:', error)
     return <p>Homepage content could not be loaded (fetch error).</p>

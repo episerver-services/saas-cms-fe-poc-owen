@@ -5808,2512 +5808,2223 @@ export type _VideoWhereInput = {
 
 export type System_Locales = 'ALL' | 'NEUTRAL'
 
-export type GetContentByGuidQueryVariables = Exact<{
-  guid: InputMaybe<Scalars['String']['input']>
-}>
+export type GetContentByIdQueryVariables = Exact<{ [key: string]: never }>
 
-export type GetContentByGuidQuery = {
+export type GetContentByIdQuery = {
   __typename?: 'Query'
   _Content: {
     __typename?: '_ContentOutput'
     items: Array<
       | {
-          __typename?: 'ArticleListElement'
+          __typename: 'ArticleListElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'BlankExperience'
+          __typename: 'BlankExperience'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'BlankSection'
+          __typename: 'BlankSection'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'BlogPostPage'
+          __typename: 'BlogPostPage'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'BlogSectionExperience'
+          __typename: 'BlogSectionExperience'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'ButtonBlock'
+          __typename: 'ButtonBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'CTAElement'
+          __typename: 'CTAElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'CarouselBlock'
+          __typename: 'CarouselBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'ContentRecsElement'
+          __typename: 'ContentRecsElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'ContinueReadingComponent'
+          __typename: 'ContinueReadingComponent'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'Document'
+          __typename: 'Document'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'GenericMedia'
+          __typename: 'GenericMedia'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'HeadingElement'
+          __typename: 'HeadingElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'HeroBlock'
+          __typename: 'HeroBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'ImageElement'
+          __typename: 'ImageElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'ImageMedia'
+          __typename: 'ImageMedia'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'LandingPage'
+          __typename: 'LandingPage'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'LayoutSettingsBlock'
+          __typename: 'LayoutSettingsBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'MegaMenuGroupBlock'
+          __typename: 'MegaMenuGroupBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'MenuNavigationBlock'
+          __typename: 'MenuNavigationBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'OdpEmbedBlock'
+          __typename: 'OdpEmbedBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'PageSeoSettings'
+          __typename: 'PageSeoSettings'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'ParagraphElement'
+          __typename: 'ParagraphElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'PartnerTokens'
+          __typename: 'PartnerTokens'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'QuoteBlock'
+          __typename: 'QuoteBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'RichTextElement'
+          __typename: 'RichTextElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'SysContentFolder'
+          __typename: 'SysContentFolder'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'TestimonialElement'
+          __typename: 'TestimonialElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'TextBlock'
+          __typename: 'TextBlock'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'Tokens'
+          __typename: 'Tokens'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'VideoElement'
+          __typename: 'VideoElement'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: 'VideoMedia'
+          __typename: 'VideoMedia'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Component'
+          __typename: '_Component'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Content'
+          __typename: '_Content'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Experience'
+          __typename: '_Experience'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Folder'
+          __typename: '_Folder'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Image'
+          __typename: '_Image'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Media'
+          __typename: '_Media'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Page'
+          __typename: '_Page'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Section'
+          __typename: '_Section'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
         }
       | {
-          __typename?: '_Video'
+          __typename: '_Video'
+          _id: string | null
           _metadata:
             | {
                 __typename?: 'ContentMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'InstanceMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'ItemMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | {
                 __typename?: 'MediaMetadata'
+                key: string | null
                 displayName: string | null
                 version: string | null
-                key: string | null
+                status: string | null
                 url: {
                   __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
                   default: string | null
-                  type: string | null
+                  base: string | null
                 } | null
               }
             | null
@@ -8765,20 +8476,20 @@ export type GetLandingPageQuery = {
   } | null
 }
 
-export const GetContentByGuidDocument = gql`
-  query GetContentByGuid($guid: String) {
-    _Content(where: { _metadata: { key: { eq: $guid } } }) {
+export const GetContentByIdDocument = gql`
+  query GetContentById {
+    _Content {
       items {
+        __typename
+        _id
         _metadata {
+          key
           displayName
           version
-          key
+          status
           url {
-            base
-            internal
-            hierarchical
             default
-            type
+            base
           }
         }
       }
@@ -8923,7 +8634,7 @@ export type SdkFunctionWrapper = <T>(
   variables?: any
 ) => Promise<T>
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const defaultWrapper: SdkFunctionWrapper = (
   action,
   _operationName,
@@ -8936,20 +8647,20 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper
 ) {
   return {
-    GetContentByGuid(
-      variables?: GetContentByGuidQueryVariables,
+    GetContentById(
+      variables?: GetContentByIdQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
       signal?: RequestInit['signal']
-    ): Promise<GetContentByGuidQuery> {
+    ): Promise<GetContentByIdQuery> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.request<GetContentByGuidQuery>({
-            document: GetContentByGuidDocument,
+          client.request<GetContentByIdQuery>({
+            document: GetContentByIdDocument,
             variables,
             requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders },
             signal,
           }),
-        'GetContentByGuid',
+        'GetContentById',
         'query',
         variables
       )

@@ -5,21 +5,25 @@ import { fetchPreviewContent } from '@/lib/preview/fetchPreviewContent'
 import { usePreview } from '@/lib/preview/usePreview'
 import Editable from '../components/Editable'
 
+/**
+ * Renders preview content from Optimizely CMS using the preview GraphQL endpoint.
+ * Relies on the `usePreview` hook to extract preview parameters (e.g. content _id).
+ * Also injects the editor communication script for inline editing in Optimizely CMS.
+ */
 export default function PreviewContent() {
-  const { key, version, locale, previewToken, isEditMode } = usePreview()
+  const { key, previewToken, isEditMode } = usePreview()
   const [content, setContent] = useState<Record<string, any> | null>(null)
-  const [token, setToken] = useState(previewToken)
 
-  // Fetch preview content when key/token/locale/version changes
+  // Fetch content by _id when it becomes available
   useEffect(() => {
-    if (!key || !token) return
+    if (!key) return
 
-    fetchPreviewContent({ key, version, locale, previewToken: token })
+    fetchPreviewContent({ id: key, previewToken })
       .then(setContent)
       .catch((err) => console.error('❌ Failed to fetch preview content:', err))
-  }, [key, version, locale, token])
+  }, [key, previewToken])
 
-  // Inject Optimizely's communication script (for edit mode)
+  // Inject the Optimizely CMS editor bridge for communication
   useEffect(() => {
     const host = process.env.NEXT_PUBLIC_OPTIMIZELY_CMS_HOST
     if (!host) {
@@ -34,28 +38,6 @@ export default function PreviewContent() {
 
     return () => {
       document.body.removeChild(script)
-    }
-  }, [])
-
-  // Listen for Optimizely CMS editor events to update token dynamically
-  useEffect(() => {
-    const handler = (event: Event) => {
-      if (!(event instanceof CustomEvent)) return
-
-      try {
-        const url = new URL(event.detail.previewUrl)
-        const newToken = url.searchParams.get('preview_token')
-        if (newToken) {
-          setToken(newToken)
-        }
-      } catch (e) {
-        console.warn('⚠️ Could not extract preview token from event', e)
-      }
-    }
-
-    window.addEventListener('optimizely:cms:contentSaved', handler)
-    return () => {
-      window.removeEventListener('optimizely:cms:contentSaved', handler)
     }
   }, [])
 

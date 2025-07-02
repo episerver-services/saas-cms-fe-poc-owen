@@ -1,0 +1,18 @@
+query GetContentById {
+  _Content {
+    items {
+      __typename
+      _id
+      _metadata {
+        key
+        displayName
+        version
+        status
+        url {
+          default
+          base
+        }
+      }
+    }
+  }
+}
