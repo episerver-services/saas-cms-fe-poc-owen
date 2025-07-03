@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { Geist, Geist_Mono } from 'next/font/google'
-import '@/app/globals.css'
+import '../../globals.css'
 import { LOCALES } from '@/lib/optimizely/utils/language'
 import { Header } from '@/app/components/layout/header'
 import { Footer } from '@/app/components/layout/footer'
