@@ -18,10 +18,18 @@ const eslintConfig = [
   // Apply the base config
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
 
-  // Optional: override additional rules globally
+  // Global rule overrides
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+
+  // ✅ Allow `require()` in PostCSS config files
+  {
+    files: ['postcss.config.{js,cjs,mjs}'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
 ]
