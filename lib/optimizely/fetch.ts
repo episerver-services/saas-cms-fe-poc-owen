@@ -30,20 +30,38 @@ const optimizelyFetch = async <Response, Variables = object>({
 }: OptimizelyFetch<Variables>): Promise<
   GraphqlResponse<Response> & { headers: Headers }
 > => {
-  const configHeaders = { ...headers }
+  // 🚫 Skip fetch if we're in a build context
+  if (process.env.IS_BUILD === 'true') {
+    console.warn('Skipping Optimizely fetch due to IS_BUILD=true')
+    return {
+      data: {} as Response,
+      errors: [],
+      headers: new Headers(),
+    }
+  }
 
+  // 🧪 Check preview mode
+  const configHeaders = { ...headers }
   if (preview) {
+    if (!process.env.OPTIMIZELY_PREVIEW_SECRET) {
+      throw new Error('Missing OPTIMIZELY_PREVIEW_SECRET in preview mode')
+    }
     configHeaders.Authorization = `Basic ${process.env.OPTIMIZELY_PREVIEW_SECRET}`
     cache = 'no-store'
   }
 
-  const cacheTags = ['optimizely-content']
-  if (cacheTag) {
-    cacheTags.push(cacheTag)
+  const apiUrl = process.env.OPTIMIZELY_API_URL
+  const apiKey = process.env.OPTIMIZELY_SINGLE_KEY
+
+  if (!apiUrl || !apiKey) {
+    console.error('Missing OPTIMIZELY_API_URL or OPTIMIZELY_SINGLE_KEY')
+    throw new Error('Optimizely API configuration is incomplete')
   }
 
+  const endpoint = `${apiUrl}?auth=${apiKey}`
+  const cacheTags = ['optimizely-content', cacheTag].filter(Boolean)
+
   try {
-    const endpoint = `${process.env.OPTIMIZELY_API_URL}?auth=${process.env.OPTIMIZELY_SINGLE_KEY}`
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -56,7 +74,7 @@ const optimizelyFetch = async <Response, Variables = object>({
         ...(variables && { variables }),
       }),
       cache,
-      next: { tags: cacheTags },
+      next: { tags: cacheTags as string[] },
     })
 
     const result = await response.json()

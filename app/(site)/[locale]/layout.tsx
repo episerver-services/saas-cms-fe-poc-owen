@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '@/app/globals.css'
 import { LOCALES } from '@/lib/optimizely/utils/language'
@@ -31,14 +32,19 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>
 }>) {
   const { locale } = await params
+
   return (
     <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header locale={locale} />
+        <Suspense>
+          <Header locale={locale} />
+        </Suspense>
         <main className="container mx-auto min-h-screen px-4">{children}</main>
-        <Footer locale={locale} />
+        <Suspense>
+          <Footer locale={locale} />
+        </Suspense>
       </body>
     </html>
   )

@@ -21,40 +21,59 @@ export async function generateMetadata(props: {
   const locales = getValidLocale(locale)
   const formattedSlug = `/${slug}`
 
-  const pageData = await optimizely.getPageByURL({
-    locales: [locales],
-    slug: formattedSlug,
-  })
+  if (process.env.IS_BUILD === 'true') {
+    // Fallback metadata during build
+    return {
+      title: 'Optimizely Page',
+      description: '',
+    }
+  }
 
-  const page = pageData?.CMSPage?.item
-  if (!page) {
-    const experienceData = await optimizely.GetVisualBuilderBySlug({
+  try {
+    const pageData = await optimizely.getPageByURL({
       locales: [locales],
       slug: formattedSlug,
     })
 
-    const experience = experienceData?.SEOExperience?.item
-    if (experience) {
-      return {
-        title: experience?.title,
-        description: experience?.shortDescription || '',
-        keywords: experience?.keywords ?? '',
-        alternates: generateAlternates(locale, formattedSlug),
+    const page = pageData?.CMSPage?.item
+    if (!page) {
+      const experienceData = await optimizely.GetVisualBuilderBySlug({
+        locales: [locales],
+        slug: formattedSlug,
+      })
+
+      const experience = experienceData?.SEOExperience?.item
+      if (experience) {
+        return {
+          title: experience?.title,
+          description: experience?.shortDescription || '',
+          keywords: experience?.keywords ?? '',
+          alternates: generateAlternates(locale, formattedSlug),
+        }
       }
+
+      return {}
     }
 
-    return {}
-  }
-
-  return {
-    title: page.title,
-    description: page.shortDescription || '',
-    keywords: page.keywords ?? '',
-    alternates: generateAlternates(locale, formattedSlug),
+    return {
+      title: page.title,
+      description: page.shortDescription || '',
+      keywords: page.keywords ?? '',
+      alternates: generateAlternates(locale, formattedSlug),
+    }
+  } catch (error) {
+    console.error('generateMetadata fallback:', error)
+    return {
+      title: `Optimizely Page ${slug ? `- ${slug}` : ''}`,
+    }
   }
 }
 
 export async function generateStaticParams() {
+  if (process.env.IS_BUILD === 'true') {
+    return [] // Skip building params during Docker build
+  }
+
   try {
     const pageTypes = ['CMSPage', 'SEOExperience']
     const pathsResp = await optimizely.AllPages({ pageType: pageTypes })
@@ -74,7 +93,7 @@ export async function generateStaticParams() {
       slug,
     }))
   } catch (e) {
-    console.error(e)
+    console.error('generateStaticParams fallback:', e)
     return []
   }
 }

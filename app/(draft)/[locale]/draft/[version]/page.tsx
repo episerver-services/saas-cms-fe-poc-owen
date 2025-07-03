@@ -19,12 +19,20 @@ export default async function HomePage(props: {
 
   const { locale, version } = await props.params
   const locales = getValidLocale(locale)
+
   const pageResponse = await optimizely.GetPreviewStartPage(
     { locales, version },
     { preview: true }
   )
-  const startPage = pageResponse.StartPage?.item
-  const blocks = (startPage?.blocks ?? []).filter(
+
+  const startPage = pageResponse?.StartPage?.item
+
+  if (!startPage) {
+    console.warn('StartPage not found, skipping render.')
+    return notFound() // or return null if you prefer
+  }
+
+  const blocks = (startPage.blocks ?? []).filter(
     (block) => block !== null && block !== undefined
   )
 

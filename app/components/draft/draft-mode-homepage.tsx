@@ -8,30 +8,40 @@ export default async function DraftModeHomePage({
 }: {
   locales: string
 }) {
+  if (process.env.IS_BUILD === 'true') {
+    console.warn('IS_BUILD is true, skipping DraftModeHomePage render')
+    return null
+  }
+
   const validLocale = getValidLocale(locales)
 
-  const { StartPage } = await optimizely.GetAllStartPageVersions(
-    { locales: [validLocale] },
-    { preview: true }
-  )
-
-  const startPageItems = StartPage?.items ?? []
-
-  const maxStartPageVersion = Math.max(
-    ...startPageItems.map((item) =>
-      parseInt(item?._metadata?.version || '0', 10)
+  try {
+    const { StartPage } = await optimizely.GetAllStartPageVersions(
+      { locales: [validLocale] },
+      { preview: true }
     )
-  )
 
-  const page = startPageItems.find(
-    (p) => parseInt(p?._metadata?.version || '0', 10) === maxStartPageVersion
-  )
+    const startPageItems = StartPage?.items ?? []
 
-  const blocks = (page?.blocks ?? []).filter(Boolean)
+    const maxStartPageVersion = Math.max(
+      ...startPageItems.map((item) =>
+        parseInt(item?._metadata?.version || '0', 10)
+      )
+    )
 
-  return (
-    <Suspense>
-      <ContentAreaMapper blocks={blocks} />
-    </Suspense>
-  )
+    const page = startPageItems.find(
+      (p) => parseInt(p?._metadata?.version || '0', 10) === maxStartPageVersion
+    )
+
+    const blocks = (page?.blocks ?? []).filter(Boolean)
+
+    return (
+      <Suspense>
+        <ContentAreaMapper blocks={blocks} />
+      </Suspense>
+    )
+  } catch (e) {
+    console.error('DraftModeHomePage fallback:', e)
+    return null
+  }
 }
