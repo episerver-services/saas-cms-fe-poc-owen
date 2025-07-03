@@ -4,6 +4,14 @@ import { type NextRequest, NextResponse } from 'next/server'
 
 const OPTIMIZELY_REVALIDATE_SECRET = process.env.OPTIMIZELY_REVALIDATE_SECRET
 
+/**
+ * Handles Optimizely webhook POST requests for content publishing.
+ * Validates the webhook, resolves the content by GUID, determines its URL,
+ * and triggers revalidation for the corresponding Next.js page or cache tag.
+ *
+ * @param {NextRequest} request - The incoming webhook POST request.
+ * @returns {Promise<NextResponse>} A JSON response indicating success or failure.
+ */
 export async function POST(request: NextRequest) {
   try {
     validateWebhookSecret(request)
@@ -18,9 +26,8 @@ export async function POST(request: NextRequest) {
 
     const content = await fetchContentByGuid(formattedGuid)
     const urlType = content?._metadata?.url?.type
-    // In hierarchical routing, the Start Page in Optimizely does not use "/" as its URL.
-    // Instead, it has a custom path like "/start-page". We remove the OPTIMIZELY_START_PAGE_URL
-    // prefix to normalize the URL and make it relative to the site root.
+
+    // Normalize the CMS URL to be relative to the site root
     const url =
       urlType === 'SIMPLE'
         ? content?._metadata?.url?.default
@@ -43,6 +50,12 @@ export async function POST(request: NextRequest) {
   }
 }
 
+/**
+ * Validates the Optimizely webhook secret in the request query string.
+ * Throws an error if the secret is missing or invalid.
+ *
+ * @param {NextRequest} request
+ */
 function validateWebhookSecret(request: NextRequest) {
   const webhookSecret = request.nextUrl.searchParams.get('cg_webhook_secret')
   if (webhookSecret !== OPTIMIZELY_REVALIDATE_SECRET) {
@@ -50,11 +63,24 @@ function validateWebhookSecret(request: NextRequest) {
   }
 }
 
+/**
+ * Extracts the document ID from the webhook request JSON body.
+ *
+ * @param {NextRequest} request
+ * @returns {Promise<string>} The document ID (e.g., "guid_locale_Published")
+ */
 async function extractDocId(request: NextRequest): Promise<string> {
   const requestJson = await request.json()
   return requestJson?.data?.docId || ''
 }
 
+/**
+ * Fetches Optimizely content by GUID.
+ *
+ * @param {string} guid - The cleaned GUID (without dashes).
+ * @returns {Promise<any>} The resolved content item from the CMS.
+ * @throws {Error} If content is not found.
+ */
 async function fetchContentByGuid(guid: string) {
   const { _Content } = await optimizely.GetContentByGuid({ guid })
 
@@ -66,21 +92,29 @@ async function fetchContentByGuid(guid: string) {
   return item
 }
 
+/**
+ * Ensures the URL is locale-prefixed and cleaned of trailing slashes.
+ *
+ * @param {string} url - The CMS-provided relative URL.
+ * @param {string} locale - Locale to prefix (e.g., "en").
+ * @returns {string} The locale-prefixed normalized path.
+ */
 function normalizeUrl(url: string, locale: string): string {
-  // Ensure the URL starts with a slash
   let normalizedUrl = url.startsWith('/') ? url : `/${url}`
-
-  // Remove the trailing slash, if present (e.g. "/about/" -> "/about")
   if (normalizedUrl.endsWith('/')) {
     normalizedUrl = normalizedUrl.slice(0, -1)
   }
 
-  // If the URL doesn't already start with the locale (e.g. "/en"), prepend it
   return normalizedUrl.startsWith(`/${locale}`)
     ? normalizedUrl
     : `/${locale}${normalizedUrl}`
 }
 
+/**
+ * Revalidates either a cache tag or a specific page path.
+ *
+ * @param {string} urlWithLocale - The normalized URL to revalidate.
+ */
 async function handleRevalidation(urlWithLocale: string) {
   if (urlWithLocale.includes('footer')) {
     console.log(`Revalidating tag: optimizely-footer`)
@@ -94,6 +128,12 @@ async function handleRevalidation(urlWithLocale: string) {
   }
 }
 
+/**
+ * Handles and formats errors into a JSON response.
+ *
+ * @param {unknown} error
+ * @returns {NextResponse}
+ */
 function handleError(error: unknown) {
   console.error('Error processing webhook:', error)
   if (error instanceof Error) {

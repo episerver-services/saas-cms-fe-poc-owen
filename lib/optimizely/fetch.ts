@@ -20,6 +20,11 @@ interface GraphqlResponse<Response> {
   data: Response
 }
 
+/**
+ * Fetches data from the Optimizely GraphQL API.
+ * Handles auth, caching, preview mode, and Vercel error wrapping.
+ * Skips execution if IS_BUILD=true.
+ */
 const optimizelyFetch = async <Response, Variables = object>({
   query,
   variables,
@@ -30,7 +35,6 @@ const optimizelyFetch = async <Response, Variables = object>({
 }: OptimizelyFetch<Variables>): Promise<
   GraphqlResponse<Response> & { headers: Headers }
 > => {
-  // 🚫 Skip fetch if we're in a build context
   if (process.env.IS_BUILD === 'true') {
     console.warn('Skipping Optimizely fetch due to IS_BUILD=true')
     return {
@@ -40,7 +44,6 @@ const optimizelyFetch = async <Response, Variables = object>({
     }
   }
 
-  // 🧪 Check preview mode
   const configHeaders = { ...headers }
   if (preview) {
     if (!process.env.OPTIMIZELY_PREVIEW_SECRET) {
@@ -99,7 +102,9 @@ const optimizelyFetch = async <Response, Variables = object>({
   }
 }
 
-// This requester conforms to the expected signature of the `getSdk` overload:
+/**
+ * GraphQL requester used by the generated SDK.
+ */
 const requester = async <T, V>(
   doc: DocumentNode,
   variables: V,
