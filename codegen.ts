@@ -9,9 +9,10 @@ const config: CodegenConfig = {
       plugins: [
         'typescript',
         'typescript-operations',
-        'typescript-graphql-request',
+        'typescript-generic-sdk',
       ],
       config: {
+        fetcher: 'function',
         rawRequest: false,
         avoidOptionals: true,
         useTypeImports: true,
