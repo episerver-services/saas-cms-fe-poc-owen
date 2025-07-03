@@ -5,14 +5,9 @@ services:
     image: optimizely-fe:latest
     container_name: optimizely-fe-app
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=production
-      - OPTIMIZELY_BEARER_TOKEN=${OPTIMIZELY_BEARER_TOKEN}
-      - OPTIMIZELY_CONTENT_ID=${OPTIMIZELY_CONTENT_ID}
-      - OPTIMIZELY_CONTENT_VERSION=${OPTIMIZELY_CONTENT_VERSION}
-      - OPTIMIZELY_LAYOUT_ID=${OPTIMIZELY_LAYOUT_ID}
-      - OPTIMIZELY_LAYOUT_VERSION=${OPTIMIZELY_LAYOUT_VERSION}
       - SITE_DOMAIN=localhost:3000
     env_file:
       - .env.local
