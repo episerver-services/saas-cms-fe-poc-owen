@@ -1,6 +1,6 @@
-import ContentAreaMapper from '../components/content-area/mapper'
-import DraftModeHomePage from '../components/draft/draft-mode-homepage'
-import { DraftModeLoader } from '../components/draft/draft-mode-loader'
+import ContentAreaMapper from '@/app/components/content-area/mapper'
+import DraftModeHomePage from '@/app/components/draft/draft-mode-homepage'
+import { DraftModeLoader } from '@/app/components/draft/draft-mode-loader'
 import { optimizely } from '@/lib/optimizely/fetch'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
 import { generateAlternates } from '@/lib/utils/metadata'
@@ -33,7 +33,6 @@ export default async function HomePage(props: {
   const { locale } = await props.params
   const locales = getValidLocale(locale)
   const { isEnabled: isDraftModeEnabled } = await draftMode()
-
   if (isDraftModeEnabled) {
     return (
       <Suspense fallback={<DraftModeLoader />}>
@@ -43,12 +42,17 @@ export default async function HomePage(props: {
   }
 
   const pageResponse = await optimizely.GetStartPage({ locales })
+
   const startPage = pageResponse.StartPage?.item
-  const blocks = (startPage?.blocks ?? []).filter(Boolean)
+  const blocks = (startPage?.blocks ?? []).filter(
+    (block) => block !== null && block !== undefined
+  )
 
   return (
-    <Suspense>
-      <ContentAreaMapper blocks={blocks} />
-    </Suspense>
+    <>
+      <Suspense>
+        <ContentAreaMapper blocks={blocks} />
+      </Suspense>
+    </>
   )
 }
