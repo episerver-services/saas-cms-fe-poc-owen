@@ -10,6 +10,11 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
+  // Ignore these files
+  {
+    ignores: ['lib/optimizely/sdk.ts', 'app/globals.css'],
+  },
+
   // Apply the base config
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
 
