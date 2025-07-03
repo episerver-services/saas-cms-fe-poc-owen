@@ -4,6 +4,7 @@ import {
   LogoItemBlock,
 } from '@/lib/optimizely/sdk'
 import { castContent } from '@/lib/optimizely/types/typeUtils'
+import placeholder from '@/public/placeholder.svg'
 
 export default function LogosBlock({ logos }: LogosBlockProps) {
   return (
@@ -19,10 +20,11 @@ export default function LogosBlock({ logos }: LogosBlockProps) {
           return (
             <div key={index} className="flex items-center">
               <Image
-                src={safeLogoItem.src || '/placeholder.svg'}
+                src={safeLogoItem.src || placeholder}
                 alt={safeLogoItem.alt || ''}
                 width={100}
                 height={40}
+                unoptimized={!safeLogoItem.src}
               />
             </div>
           )

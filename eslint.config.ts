@@ -10,11 +10,6 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-  // Completely ignore this generated file
-  {
-    ignores: ['lib/optimizely/sdk.ts'],
-  },
-
   // Apply the base config
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
 
@@ -30,6 +25,16 @@ const eslintConfig = [
     files: ['postcss.config.{js,cjs,mjs}'],
     rules: {
       '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+
+  // ✅ Disable linting rules for CSS files
+  {
+    files: ['**/*.css'],
+    rules: {
+      'no-unused-expressions': 'off',
+      'no-undef': 'off',
+      'import/no-unresolved': 'off',
     },
   },
 ]

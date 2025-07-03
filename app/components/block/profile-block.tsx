@@ -47,6 +47,7 @@ export default function ProfileBlock({
                 fill
                 className="rounded-lg object-cover"
                 priority={isFirst}
+                unoptimized={!imageSrc}
               />
             </div>
             <div className="space-y-4">

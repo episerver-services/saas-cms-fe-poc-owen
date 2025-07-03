@@ -20,10 +20,11 @@ export default function ServicesBlock({ services }: ServicesBlockProps) {
               <CardHeader>
                 <div className="mb-4">
                   <Image
-                    src={service.icon ?? './placeholder.svg'}
+                    src={service.icon ?? '/placeholder.svg'}
                     alt={service?.title ?? ''}
                     width={50}
                     height={50}
+                    unoptimized={!service.icon}
                   />
                 </div>
                 <CardTitle data-epi-edit="title">{service?.title}</CardTitle>

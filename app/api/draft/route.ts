@@ -13,67 +13,82 @@ import { optimizely } from '@/lib/optimizely/fetch'
  * - `ver`: Content version number.
  * - `loc`: Current locale (e.g., "en", "fr").
  *
- * The route structure depends on the type of content:
- * - `_Experience`: redirected to `/[locale]/draft/[version]/experience/[key]`
- * - `_Component`: redirected to `/[locale]/draft/[version]/block/[key]`
- * - Others (e.g. `CMSPage`): redirected to a hierarchical URL.
- *
  * @param {NextRequest} request - The incoming request containing preview parameters.
- * @returns {Promise<Response>} Redirects to the appropriate draft preview route, or returns 404/400 if invalid.
+ * @returns {Promise<Response>} Redirects to draft route or returns error if not possible.
  */
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url)
+  try {
+    const { searchParams } = new URL(request.url)
 
-  const token = searchParams.get('preview_token')
-  const key = searchParams.get('key')
-  const ver = searchParams.get('ver')
-  const loc = searchParams.get('loc')
+    const token = searchParams.get('preview_token')
+    const key = searchParams.get('key')
+    const ver = searchParams.get('ver')
+    const loc = searchParams.get('loc')
 
-  // Missing required params: treat as 404
-  if (!ver || !token || !key) {
-    return notFound()
-  }
+    // Basic param validation
+    if (!ver || !token || !key || !loc) {
+      console.warn('Missing required preview parameters:', {
+        token,
+        key,
+        ver,
+        loc,
+      })
+      return notFound()
+    }
 
-  // Look up the content in preview mode by key/version
-  const { _Content } = await optimizely.GetContentByKeyAndVersion(
-    { key, ver },
-    { preview: true }
-  )
-
-  const content = _Content?.item
-
-  // If content doesn't exist, return a 400 error
-  if (!content) {
-    return new NextResponse('Bad Request', { status: 400 })
-  }
-
-  // Enable Next.js draft mode (sets cookies)
-  ;(await draftMode()).enable()
-
-  let newUrl = ''
-
-  // Build the correct redirect URL based on content type
-  if (content.__typename === '_Experience') {
-    newUrl = `/${loc}/draft/${ver}/experience/${key}`
-  } else if (content.__typename === '_Component') {
-    newUrl = `/${loc}/draft/${ver}/block/${key}`
-  } else {
-    // Fallback to using the hierarchical URL from metadata
-    const startPageBase = process.env.OPTIMIZELY_START_PAGE_URL ?? ''
-    const hierarchicalUrl = content?._metadata?.url?.hierarchical?.replace(
-      startPageBase,
-      ''
+    // Lookup content in preview mode
+    const result = await optimizely.GetContentByKeyAndVersion(
+      { key, ver },
+      { preview: true }
     )
 
-    // Strip the locale from the hierarchical path, then build draft URL
-    const hierarchicalUrlWithoutLocale = hierarchicalUrl?.replace(
-      `/${loc}/`,
-      ''
-    )
+    if (!result || !result._Content?.item) {
+      console.error('No preview content found for key/version:', {
+        key,
+        ver,
+      })
+      return new NextResponse('Content not found', { status: 400 })
+    }
 
-    newUrl = `/${loc}/draft/${ver}/${hierarchicalUrlWithoutLocale}`
+    const content = result._Content.item
+
+    // Enable Next.js draft mode (sets cookies)
+    ;(await draftMode()).enable()
+
+    let newUrl = ''
+
+    if (content.__typename === '_Experience') {
+      newUrl = `/${loc}/draft/${ver}/experience/${key}`
+    } else if (content.__typename === '_Component') {
+      newUrl = `/${loc}/draft/${ver}/block/${key}`
+    } else {
+      const startPageBase = process.env.OPTIMIZELY_START_PAGE_URL ?? ''
+      const hierarchicalUrl = content?._metadata?.url?.hierarchical?.replace(
+        startPageBase,
+        ''
+      )
+
+      const hierarchicalUrlWithoutLocale = hierarchicalUrl?.replace(
+        `/${loc}/`,
+        ''
+      )
+
+      if (!hierarchicalUrlWithoutLocale) {
+        console.error('Could not resolve hierarchical URL:', {
+          key,
+          ver,
+          hierarchicalUrl,
+        })
+        return new NextResponse('Invalid URL', { status: 400 })
+      }
+
+      newUrl = `/${loc}/draft/${ver}/${hierarchicalUrlWithoutLocale}`
+    }
+
+    // Redirect to appropriate preview route
+    redirect(newUrl)
+  } catch (err) {
+    console.error('Error handling preview request:', err)
+    return new NextResponse('Internal Server Error', { status: 500 })
   }
-
-  // Redirect to the appropriate draft content URL
-  redirect(`${newUrl}`)
 }

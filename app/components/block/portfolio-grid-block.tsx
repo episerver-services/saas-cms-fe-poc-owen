@@ -33,6 +33,7 @@ export default function PortfolioGridBlock({
                   width={400}
                   height={300}
                   className="h-48 w-full object-cover"
+                  unoptimized={!safeItem?.imageUrl}
                 />
                 <div className="p-4">
                   <Link href={safeItem?.link ?? ''}>
