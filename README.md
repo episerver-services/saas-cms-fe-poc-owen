@@ -22,8 +22,8 @@ A **Next.js 15** front-end template using the **App Router** and **TypeScript** 
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/your-org/optimizely-fe-template.git
-cd optimizely-fe-template
+git clone https://github.com/episerver-services/saas-cms-fe-poc-owen.git
+cd saas-cms-fe-poc-owen
 pnpm install
 ```
 
@@ -48,6 +48,8 @@ SITE_DOMAIN=http://localhost:3000
 ```
 
 ### 3. Run the Dev Server
+
+Please note that this feature has yet to be implemented, but is set up ready to be integrated.
 
 ```bash
 pnpm dev
@@ -110,14 +112,13 @@ Feature: Homepage Content
 
 ## 📦 PNPM Scripts
 
-| Command                   | Description                                                   |
-| ------------------------- | ------------------------------------------------------------- |
-| `pnpm dev`                | Start dev server                                              |
-| `pnpm build`              | Production build                                              |
-| `pnpm start`              | Serve production build                                        |
-| `pnpm test:bdd`           | Run Cucumber tests                                            |
-| `pnpm fetch:live-schema`  | Generate TypeScript types from live schema/queries            |
-| `pnpm fetch:local-schema` | Generate TypeScript types from local/hardcoded schema queries |
+| Command         | Description                                        |
+| --------------- | -------------------------------------------------- |
+| `pnpm dev`      | Start dev server                                   |
+| `pnpm build`    | Production build                                   |
+| `pnpm start`    | Serve production build                             |
+| `pnpm test:bdd` | Run Cucumber tests                                 |
+| `pnpm codegen`  | Generate TypeScript types from live schema/queries |
 
 ---
 
@@ -126,13 +127,13 @@ Feature: Homepage Content
 Build the app into a production-ready image:
 
 ```bash
-docker build -t optimizely-fe-template .
+docker build -t saas-cms-fe-poc-owen .
 ```
 
 Then run it:
 
 ```bash
-docker run -p 3000:3000 optimizely-fe-template
+docker run -p 3000:3000 saas-cms-fe-poc-owen
 ```
 
 > ⚠️ Pass `OPTIMIZELY_BEARER_TOKEN` securely as a Docker build arg or secret at runtime.
