@@ -1,5 +1,5 @@
 import { Card, CardContent } from '../ui/card'
-import { StoryBlock as StoryBlockProps } from '@/lib/optimizely/sdk'
+import { StoryBlock as StoryBlockProps } from '@/lib/optimizely/queries/custom/sdk'
 
 interface HighlightProps {
   text?: string

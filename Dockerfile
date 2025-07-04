@@ -16,7 +16,7 @@ ARG OPTIMIZELY_API_URL
 ARG OPTIMIZELY_SINGLE_KEY
 ARG OPTIMIZELY_PREVIEW_SECRET
 ARG OPTIMIZELY_LAYOUT_ID
-ARG IS_BUILD=false
+ARG IS_BUILD
 
 ENV NODE_ENV=${NODE_ENV}
 ENV OPTIMIZELY_API_URL=${OPTIMIZELY_API_URL}
@@ -32,7 +32,14 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY . .
 
-RUN pnpm build
+# Conditional hybrid build logic
+RUN if [ "$IS_BUILD" = "vb" ]; then \
+      echo "Building Visual Builder setup..."; \
+      pnpm build:vb; \
+    else \
+      echo "Building Custom setup..."; \
+      pnpm build:custom; \
+    fi
 
 # --- Run production image ---
 FROM node:20-alpine AS runner

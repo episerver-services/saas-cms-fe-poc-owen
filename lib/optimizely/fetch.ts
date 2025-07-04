@@ -1,6 +1,6 @@
 import { DocumentNode } from 'graphql'
 import { print } from 'graphql/language/printer'
-import { getSdk } from './sdk'
+import { getSdk } from './queries/custom/sdk'
 import { isVercelError } from '../type-guards'
 
 interface OptimizelyFetchOptions {

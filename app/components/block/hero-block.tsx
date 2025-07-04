@@ -1,4 +1,4 @@
-import { HeroBlock as HeroBlockProps } from '@/lib/optimizely/sdk'
+import { HeroBlock as HeroBlockProps } from '@/lib/optimizely/queries/custom/sdk'
 import { cn } from '@/lib/utils'
 
 export default function HeroBlock({

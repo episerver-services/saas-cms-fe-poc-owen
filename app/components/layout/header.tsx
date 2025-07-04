@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 import { optimizely } from '@/lib/optimizely/fetch'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
 import { castContent, SafeContent } from '@/lib/optimizely/types/typeUtils'
-import { NavItem } from '@/lib/optimizely/sdk'
+import { NavItem } from '@/lib/optimizely/queries/custom/sdk'
 import { LanguageSwitcher } from './language-switcher'
 
 export async function Header({ locale }: { locale: string }) {

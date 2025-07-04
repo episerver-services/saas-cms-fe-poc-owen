@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Card, CardContent } from '../ui/card'
-import { ProfileBlock as ProfileBlockProps } from '@/lib/optimizely/sdk'
+import { ProfileBlock as ProfileBlockProps } from '@/lib/optimizely/queries/custom/sdk'
 import { BlockBase } from '@/lib/optimizely/types/block'
 import { cva } from 'class-variance-authority'
 

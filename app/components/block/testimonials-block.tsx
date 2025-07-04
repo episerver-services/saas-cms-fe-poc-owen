@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import {
   TestimonialsBlock as TestimonialsBlockProps,
   TestimonialItemBlock,
-} from '@/lib/optimizely/sdk'
+} from '@/lib/optimizely/queries/custom/sdk'
 import { castContent } from '@/lib/optimizely/types/typeUtils'
 
 export default function TestimonialsBlock({

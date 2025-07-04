@@ -1,4 +1,4 @@
-import type { SeoExperience } from '../sdk'
+import type { SeoExperience } from '../queries/custom/sdk'
 
 export interface Grid {
   key: string

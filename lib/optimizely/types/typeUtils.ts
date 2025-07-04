@@ -1,4 +1,4 @@
-import type { _IContent } from '../sdk'
+import type { _IContent } from '../queries/custom/sdk'
 
 export type SafeContent = {
   __typename?: string

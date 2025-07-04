@@ -3,7 +3,11 @@ import { Icons } from '../ui/icons'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
 import { optimizely } from '@/lib/optimizely/fetch'
 import { castContent, SafeContent } from '@/lib/optimizely/types/typeUtils'
-import { SocialLink, FooterColumn, NavItem } from '@/lib/optimizely/sdk'
+import {
+  SocialLink,
+  FooterColumn,
+  NavItem,
+} from '@/lib/optimizely/queries/custom/sdk'
 
 export async function Footer({ locale }: { locale: string }) {
   const validLocale = getValidLocale(locale)

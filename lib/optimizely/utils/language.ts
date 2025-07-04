@@ -1,4 +1,4 @@
-import { Locales } from '../sdk'
+import { Locales } from '../queries/custom/sdk'
 
 /**
  * The default locale to fall back to when an invalid locale is encountered.

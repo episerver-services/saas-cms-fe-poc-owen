@@ -2,7 +2,7 @@ import Image from 'next/image'
 import {
   LogosBlock as LogosBlockProps,
   LogoItemBlock,
-} from '@/lib/optimizely/sdk'
+} from '@/lib/optimizely/queries/custom/sdk'
 import { castContent } from '@/lib/optimizely/types/typeUtils'
 import placeholder from '@/public/placeholder.svg'
 

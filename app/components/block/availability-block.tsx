@@ -1,5 +1,5 @@
 import { Card, CardContent } from '../ui/card'
-import type { AvailabilityBlock } from '@/lib/optimizely/sdk'
+import type { AvailabilityBlock } from '@/lib/optimizely/queries/custom/sdk'
 
 type AvailabilityBlockProps = {
   availability: string

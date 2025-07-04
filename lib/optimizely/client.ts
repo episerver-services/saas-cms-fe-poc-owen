@@ -1,4 +1,4 @@
-import { getSdk } from './sdk'
+import { getSdk } from './queries/custom/sdk'
 import { print } from 'graphql'
 import type { DocumentNode } from 'graphql'
 import type { RequestInit } from 'node-fetch'

@@ -2,7 +2,7 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { ContactBlock as ContactBlockProps } from '@/lib/optimizely/sdk'
+import { ContactBlock as ContactBlockProps } from '@/lib/optimizely/queries/custom/sdk'
 
 export default function ContactBlock({
   title,

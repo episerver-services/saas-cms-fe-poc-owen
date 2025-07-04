@@ -4,7 +4,7 @@ import Link from 'next/link'
 import {
   PortfolioGridBlock as PortfolioGridBlockProps,
   PortfolioItemBlock,
-} from '@/lib/optimizely/sdk'
+} from '@/lib/optimizely/queries/custom/sdk'
 import { castContent } from '@/lib/optimizely/types/typeUtils'
 
 export default function PortfolioGridBlock({

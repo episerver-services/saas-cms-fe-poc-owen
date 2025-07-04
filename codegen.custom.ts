@@ -1,11 +1,18 @@
 import 'dotenv/config'
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
+/**
+ * GraphQL Code Generator config for Optimizely Delivery API (v2).
+ * This setup is used for the CUSTOM (non-Visual Builder) integration.
+ */
+
+const schema = `${process.env.OPTIMIZELY_API_URL}?auth=${process.env.OPTIMIZELY_SINGLE_KEY}`
+
 const config: CodegenConfig = {
-  schema: `${process.env.OPTIMIZELY_API_URL}?auth=${process.env.OPTIMIZELY_SINGLE_KEY}`,
-  documents: './lib/optimizely/queries/**/*.graphql',
+  schema,
+  documents: './lib/optimizely/queries/custom/**/*.graphql',
   generates: {
-    './lib/optimizely/sdk.ts': {
+    './lib/optimizely/queries/custom/sdk.ts': {
       plugins: [
         'typescript',
         'typescript-operations',
@@ -13,9 +20,8 @@ const config: CodegenConfig = {
       ],
       config: {
         fetcher: 'function',
-        rawRequest: false,
-        avoidOptionals: true,
         useTypeImports: true,
+        avoidOptionals: true,
         dedupeOperationSuffix: true,
         exportFragmentSpreadSubTypes: true,
         enumsAsTypes: true,
@@ -27,6 +33,7 @@ const config: CodegenConfig = {
       },
     },
   },
+  ignoreNoDocuments: false,
 }
 
 export default config

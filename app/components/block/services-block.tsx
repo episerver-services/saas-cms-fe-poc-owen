@@ -4,7 +4,7 @@ import Image from 'next/image'
 import {
   ServicesBlock as ServicesBlockProps,
   ServiceItem,
-} from '@/lib/optimizely/sdk'
+} from '@/lib/optimizely/queries/custom/sdk'
 import { castContent } from '@/lib/optimizely/types/typeUtils'
 
 export default function ServicesBlock({ services }: ServicesBlockProps) {

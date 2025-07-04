@@ -37,9 +37,20 @@ jobs:
       - name: Run tests (optional)
         run: pnpm test:bdd || true
 
+      - name: Extract short SHA
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest .
+          docker build \
+            --build-arg NODE_ENV=production \
+            --build-arg IS_BUILD=custom \
+            --build-arg OPTIMIZELY_API_URL=${{ secrets.OPTIMIZELY_API_URL }} \
+            --build-arg OPTIMIZELY_SINGLE_KEY=${{ secrets.OPTIMIZELY_SINGLE_KEY }} \
+            --build-arg OPTIMIZELY_PREVIEW_SECRET=${{ secrets.OPTIMIZELY_PREVIEW_SECRET }} \
+            --build-arg OPTIMIZELY_LAYOUT_ID=${{ secrets.OPTIMIZELY_LAYOUT_ID }} \
+            -t ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:${{ steps.vars.outputs.sha_short }} .
 
   docker-publish:
     name: Publish Docker Image
@@ -57,7 +68,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Extract short SHA
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest .
+          docker build \
+            --build-arg NODE_ENV=production \
+            --build-arg IS_BUILD=custom \
+            --build-arg OPTIMIZELY_API_URL=${{ secrets.OPTIMIZELY_API_URL }} \
+            --build-arg OPTIMIZELY_SINGLE_KEY=${{ secrets.OPTIMIZELY_SINGLE_KEY }} \
+            --build-arg OPTIMIZELY_PREVIEW_SECRET=${{ secrets.OPTIMIZELY_PREVIEW_SECRET }} \
+            --build-arg OPTIMIZELY_LAYOUT_ID=${{ secrets.OPTIMIZELY_LAYOUT_ID }} \
+            -t ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:${{ steps.vars.outputs.sha_short }} \
+            -t ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest .
+
+          docker push ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:${{ steps.vars.outputs.sha_short }}
           docker push ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest
