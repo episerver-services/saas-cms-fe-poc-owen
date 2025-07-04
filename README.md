@@ -1,19 +1,18 @@
 # Optimizely SaaS CMS FE Template
 
-A **Next.js 15** front-end template using the **App Router** and **TypeScript** to integrate with the **Optimizely SaaS CMS Delivery API**. Built for real-world headless CMS needs like authenticated content, scalable rendering, Dockerized CI/CD, and BDD testing with Cucumber.
+A **Next.js 15** hybrid front-end template integrating with the **Optimizely SaaS CMS Delivery API**. Supports both **custom integrations** and **Visual Builder (VB) experiences**, with CI/CD pipelines, multi-site scaling, Docker builds, and BDD test coverage.
 
 ---
 
-## 🧩 Features
+## 🧩 Key Features
 
-- ✅ **Structured GraphQL content fetching** from Optimizely CMS
-- 🔧 **Environment-driven** layout and homepage IDs
-- 🐳 **Docker-optimised build pipeline** for production
-- 🧪 **BDD testing** via Cucumber + Gherkin syntax
-- 🧠 **Scalable folder structure** supporting CMS blocks and preview mode
-- 🌐 **Mock fallback data** for local development
-- 📐 **Type-safe CMS integration** with `graphql-codegen`
-- 🧾 **Metadata generation** from CMS for SEO
+- ✅ **Hybrid build support**: `custom` and `visual-builder` modes via `IS_BUILD` env
+- 🌍 **Multi-site ready**: scale across domains or layout configurations
+- 📦 **Docker-optimised builds** with per-site configs and build-time args
+- 🧪 **BDD testing** via Cucumber + Gherkin
+- 📐 **GraphQL SDK** generated with `graphql-codegen`
+- 🧾 **CMS metadata + SEO tags** extracted at build time
+- 🔁 **Preview/edit mode-ready** (stubbed, next in roadmap)
 
 ---
 
@@ -27,35 +26,33 @@ cd saas-cms-fe-poc-owen
 pnpm install
 ```
 
-### 2. Configure Environment
+---
 
-Create `.env.local`:
+## ⚙️ Environment Configuration
+
+### 🔧 `.env.custom-styling.local`
+
+Used for the **custom** integration:
 
 ```env
-# === Delivery API ===
-OPTIMIZELY_BEARER_TOKEN=your_real_token_here
-
-# Homepage content ID and version
-OPTIMIZELY_CONTENT_ID=contentreference:/content/optimizely.com/en/homepage/
-OPTIMIZELY_CONTENT_VERSION=published
-
-# Layout content ID and version
+OPTIMIZELY_API_URL=https://cg.optimizely.com/content/v3/graphql
+OPTIMIZELY_SINGLE_KEY=your_delivery_key
 OPTIMIZELY_LAYOUT_ID=contentreference:/content/optimizely.com/en/layout/
-OPTIMIZELY_LAYOUT_VERSION=published
-
-# === Frontend-specific ===
-SITE_DOMAIN=http://localhost:3000
+OPTIMIZELY_PREVIEW_SECRET=your_preview_secret
+IS_BUILD=custom
 ```
 
-### 3. Run the Dev Server
+### 🔧 `.env.visual-builder.local`
 
-Please note that this feature has yet to be implemented, but is set up ready to be integrated.
+Used for the **Visual Builder** integration:
 
-```bash
-pnpm dev
+```env
+OPTIMIZELY_API_URL=https://cg.optimizely.com/content/v3/graphql
+OPTIMIZELY_SINGLE_KEY=your_delivery_key
+OPTIMIZELY_LAYOUT_ID=contentreference:/content/optimizely.com/en/layout/
+OPTIMIZELY_PREVIEW_SECRET=your_preview_secret
+IS_BUILD=vb
 ```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
@@ -78,75 +75,82 @@ Feature: Homepage Content
 
 ---
 
-## 🗂️ Project Structure
+## 🛠 Docker Usage
+
+### 🔨 Build for Custom Integration
+
+```bash
+docker build   --build-arg NODE_ENV=production   --build-arg IS_BUILD=custom   --build-arg OPTIMIZELY_API_URL=https://cg.optimizely.com/content/v3/graphql   --build-arg OPTIMIZELY_SINGLE_KEY=your_delivery_key   --build-arg OPTIMIZELY_PREVIEW_SECRET=your_preview_secret   --build-arg OPTIMIZELY_LAYOUT_ID=layout_id   -t optimizely-fe:custom .
+```
+
+### 🔨 Build for Visual Builder
+
+```bash
+docker build   --build-arg NODE_ENV=production   --build-arg IS_BUILD=vb   --build-arg OPTIMIZELY_API_URL=https://cg.optimizely.com/content/v3/graphql   --build-arg OPTIMIZELY_SINGLE_KEY=your_delivery_key   --build-arg OPTIMIZELY_PREVIEW_SECRET=your_preview_secret   --build-arg OPTIMIZELY_LAYOUT_ID=layout_id   -t optimizely-fe:vb .
+```
+
+---
+
+## 🤖 CI/CD (GitHub Actions)
+
+This project supports CI/CD via GitHub Actions:
+
+- Validates and lints
+- Runs tests
+- Builds Docker image
+- Tags with short SHA
+- Publishes to DockerHub if on `main` branch
+
+Key envs are passed securely using GitHub Secrets.
+
+---
+
+## 🗂 Project Structure
 
 ```
 📁 app/                     # Next.js App Router structure
-│  ├─ [...slug]/           # Dynamic page loading by GUID
-│  ├─ components/          # React block/component mappers
-│  ├─ page.tsx             # Homepage route
+│  ├─ [...slug]/           # CMS page rendering by path
+│  ├─ components/          # Shared content blocks
+│  ├─ page.tsx             # Homepage
 │  ├─ layout.tsx           # Shared layout
-│  ├─ metadata.ts          # Metadata pulled from CMS
+│  ├─ metadata.ts          # SEO metadata from CMS
 │
 📁 lib/
-│  ├─ content/             # CMS fetch logic and helpers
-│  ├─ optimizely/          # GraphQL SDK and schema handling
-│  ├─ session/             # Placeholder for auth/session logic
-│  └─ utils/               # Misc utilities like logger
+│  ├─ content/             # CMS fetch helpers
+│  ├─ optimizely/          # GraphQL codegen SDK
+│  ├─ session/             # Placeholder for auth/session
+│  └─ utils/               # Logger, helpers
 │
-📁 features/               # Cucumber BDD files
-│  ├─ homepage.feature
-│  └─ step-definitions/
-│
-📁 types/                  # Type overrides and shims
-📁 mocks/                  # OpenAPI mock responses
-📁 scripts/                # Schema tooling
-📁 public/                 # Static assets
-📄 schema.graphql          # Latest schema
-📄 codegen.yaml            # GraphQL Codegen config
-📄 Dockerfile              # Production Dockerfile
-📄 docker-compose.yml      # Optional Docker support
+📁 features/               # BDD tests
+📁 types/                  # Custom TypeScript types
+📁 mocks/                  # Local CMS mocks
+📁 scripts/                # Codegen tooling
+📄 Dockerfile              # Hybrid Dockerfile
+📄 docker-compose.yml      # Optional Docker dev support
 ```
 
 ---
 
 ## 📦 PNPM Scripts
 
-| Command         | Description                                        |
-| --------------- | -------------------------------------------------- |
-| `pnpm dev`      | Start dev server                                   |
-| `pnpm build`    | Production build                                   |
-| `pnpm start`    | Serve production build                             |
-| `pnpm test:bdd` | Run Cucumber tests                                 |
-| `pnpm codegen`  | Generate TypeScript types from live schema/queries |
+| Command            | Description                                  |
+|--------------------|----------------------------------------------|
+| `pnpm dev:custom`  | Dev server using `.env.custom-styling.local` |
+| `pnpm dev:vb`      | Dev server using `.env.visual-builder.local` |
+| `pnpm build:custom`| Prod build for custom setup                  |
+| `pnpm build:vb`    | Prod build for VB setup                      |
+| `pnpm test:bdd`    | Run Cucumber tests                           |
+| `pnpm codegen:*`   | Run GraphQL codegen for custom or VB         |
 
 ---
 
-## 🛠️ Docker Support
+## 🔮 Roadmap
 
-Build the app into a production-ready image:
-
-```bash
-docker build -t saas-cms-fe-poc-owen .
-```
-
-Then run it:
-
-```bash
-docker run -p 3000:3000 saas-cms-fe-poc-owen
-```
-
-> ⚠️ Pass `OPTIMIZELY_BEARER_TOKEN` securely as a Docker build arg or secret at runtime.
-
----
-
-## 📌 Known Gaps / Next Steps
-
-- [ ] Preview/edit mode for CMS authoring
-- [ ] Better layout type coverage (e.g. footer, menu nav)
-- [ ] Add Jest unit tests alongside Cucumber
-- [ ] Extend routing with content modelling patterns
-- [ ] Add full E2E suite via Playwright or Cypress
+- [ ] Enable preview mode & inline editing (Visual Builder)
+- [ ] Add Jest/RTL unit test suite
+- [ ] Support domain-based routing and multi-site selection
+- [ ] Add Playwright or Cypress for E2E coverage
+- [ ] Complete full CMS component mapping for layout blocks
 
 ---
 
