@@ -5,15 +5,15 @@
   "scripts": {
     "clean": "rm -rf .next/cache",
     "dev": "npm run clean && next dev",
+    "dev:custom": "dotenv -e .env.custom-styling.local -- pnpm dev",
+    "dev:visual": "dotenv -e .env.visual-builder.local -- pnpm dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts",
     "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
     "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require features/step-definitions/**/*.ts --require features/support/**/*.ts",
-    "codegen": "cross-env graphql-codegen --config codegen.ts",
-    "fetch:local-schema": "ts-node scripts/fetch-local-schema.cjs",
-    "fetch:live-schema": "ts-node scripts/fetch-live-schema.cjs"
+    "codegen": "cross-env graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
@@ -51,6 +51,7 @@
     "chai": "^5.2.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.6.0",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9.28.0",
     "eslint-config-next": "^15.3.3",
     "graphql": "^16.11.0",

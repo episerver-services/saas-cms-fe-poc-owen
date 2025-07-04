@@ -18,12 +18,13 @@ export default function LogosBlock({ logos }: LogosBlockProps) {
           if (!safeLogoItem) return null
 
           return (
-            <div key={index} className="flex items-center">
+            <div key={index} className="relative w-32 aspect-[5/2]">
               <Image
                 src={safeLogoItem.src || placeholder}
                 alt={safeLogoItem.alt || ''}
-                width={100}
-                height={40}
+                fill
+                sizes="(max-width: 768px) 50vw, 100px"
+                className="object-contain"
                 unoptimized={!safeLogoItem.src}
               />
             </div>
