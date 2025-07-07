@@ -133,24 +133,68 @@ Key envs are passed securely using GitHub Secrets.
 
 ## 📦 PNPM Scripts
 
-| Command            | Description                                  |
-|--------------------|----------------------------------------------|
-| `pnpm dev:custom`  | Dev server using `.env.custom-styling.local` |
-| `pnpm dev:vb`      | Dev server using `.env.visual-builder.local` |
-| `pnpm build:custom`| Prod build for custom setup                  |
-| `pnpm build:vb`    | Prod build for VB setup                      |
-| `pnpm test:bdd`    | Run Cucumber tests                           |
-| `pnpm codegen:*`   | Run GraphQL codegen for custom or VB         |
+| Command             | Description                                  |
+| ------------------- | -------------------------------------------- |
+| `pnpm dev:custom`   | Dev server using `.env.custom-styling.local` |
+| `pnpm dev:vb`       | Dev server using `.env.visual-builder.local` |
+| `pnpm build:custom` | Prod build for custom setup                  |
+| `pnpm build:vb`     | Prod build for VB setup                      |
+| `pnpm test:bdd`     | Run Cucumber tests                           |
+| `pnpm codegen:*`    | Run GraphQL codegen for custom or VB         |
 
 ---
 
-## 🔮 Roadmap
+# Visual Builder Migration Plan
 
-- [ ] Enable preview mode & inline editing (Visual Builder)
-- [ ] Add Jest/RTL unit test suite
-- [ ] Support domain-based routing and multi-site selection
-- [ ] Add Playwright or Cypress for E2E coverage
-- [ ] Complete full CMS component mapping for layout blocks
+This checklist outlines the steps required to bring the custom app to parity with the Visual Builder integration in the official `cms-saas-vercel-demo`.
+
+---
+
+## ✅ Phase 1: Core Visual Builder Experience Support
+
+- [ ] Add and configure `OptimizelyProvider` (if needed)
+- [ ] Implement a reusable `PageWrapper` component (VB & CMS fallback)
+- [ ] Normalize experience data: extract layout `nodes`, `meta`, and `contentId`
+- [ ] Ensure `VisualBuilderExperienceWrapper` handles display settings and all node types
+- [ ] Render VB component content with full fidelity
+- [ ] Add support for fallback pages (VB-only paths)
+
+---
+
+## 🧪 Phase 2: Draft / Preview Mode Support
+
+- [ ] Handle draft mode tokens from URL (`?epieditmode=true`)
+- [ ] Use `fetchPreviewExperience()` or support preview API responses
+- [ ] Implement logic for `draft`, `published`, `scheduled` states
+- [ ] Wire up `/api/draft`, `/draft/[version]`, etc.
+
+---
+
+## 🧠 Phase 3: Personalisation, Experiments, Flags
+
+- [ ] Integrate feature flag support from `optimizely-graph-functions` (optional)
+- [ ] Support conditional rendering by segment or flag
+- [ ] Load experiments and context providers
+
+---
+
+## 🔁 Phase 4: Middleware + Routing
+
+- [ ] Restore or recreate `middleware.ts` logic for preview redirect
+- [ ] Handle VB fallback paths if CMS content not found
+- [ ] Ensure locale-aware routes function with VB pages
+
+---
+
+## 🧰 Optional / Advanced
+
+- [ ] Use `useOptimizelyExperience()` hook (optional)
+- [ ] Migrate remaining demo utils (path parsing, fallback generation)
+- [ ] Support custom component mapping for Experience elements
+
+---
+
+> 📝 Tip: Check off each item as you implement it. Revisit the official demo codebase if you're unsure how a feature works.
 
 ---
 
