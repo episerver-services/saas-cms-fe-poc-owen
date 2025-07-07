@@ -144,53 +144,56 @@ Key envs are passed securely using GitHub Secrets.
 
 ---
 
-# Visual Builder Migration Plan
+# ✅ Visual Builder Migration Plan
 
-This checklist outlines the steps required to bring the custom app to parity with the Visual Builder integration in the official `cms-saas-vercel-demo`.
-
----
-
-## ✅ Phase 1: Core Visual Builder Experience Support
-
-- [ ] Add and configure `OptimizelyProvider` (if needed)
-- [ ] Implement a reusable `PageWrapper` component (VB & CMS fallback)
-- [ ] Normalize experience data: extract layout `nodes`, `meta`, and `contentId`
-- [ ] Ensure `VisualBuilderExperienceWrapper` handles display settings and all node types
-- [ ] Render VB component content with full fidelity
-- [ ] Add support for fallback pages (VB-only paths)
+This checklist tracks the steps required to bring the custom front-end implementation up to parity with the official `cms-saas-vercel-demo` Visual Builder setup.
 
 ---
 
-## 🧪 Phase 2: Draft / Preview Mode Support
+## ✅ Phase 1: Get custom build working with hybrid rendering
 
-- [ ] Handle draft mode tokens from URL (`?epieditmode=true`)
-- [ ] Use `fetchPreviewExperience()` or support preview API responses
-- [ ] Implement logic for `draft`, `published`, `scheduled` states
-- [ ] Wire up `/api/draft`, `/draft/[version]`, etc.
-
----
-
-## 🧠 Phase 3: Personalisation, Experiments, Flags
-
-- [ ] Integrate feature flag support from `optimizely-graph-functions` (optional)
-- [ ] Support conditional rendering by segment or flag
-- [ ] Load experiments and context providers
+- [x] Create `SafeVisualBuilderExperience` type to align with partial VB structure
+- [x] Patch `_metadata` to include only `version` for use in experience version resolution
+- [x] Ensure `fetchVisualBuilderExperience` returns a `Partial<SafeVisualBuilderExperience>`
+- [x] Update `VisualBuilderExperienceWrapper` to safely handle `experience?` shape
+- [x] Adjust `CmsPage` fallback to Visual Builder if `CMSPage.item?._modified` is false
+- [x] Handle hybrid metadata resolution using `vb.meta.title`, `vb.meta.description` as fallback
+- [x] Build passes for `build:custom`
+- [x] Docker + CI pipelines confirmed working
 
 ---
 
-## 🔁 Phase 4: Middleware + Routing
+## ⏳ Phase 2: Replace patched `_metadata` with valid `IContentMetadata` values
 
-- [ ] Restore or recreate `middleware.ts` logic for preview redirect
-- [ ] Handle VB fallback paths if CMS content not found
-- [ ] Ensure locale-aware routes function with VB pages
+- [ ] Import and reuse correct `IContentMetadata` shape from SDK
+- [ ] Remove the fake `_metadata` object and ensure type compliance
+- [ ] Ensure fallback experience metadata is valid and minimal
+- [ ] Refactor `as unknown as SafeVisualBuilderExperience` cast out cleanly
+- [ ] Re-type VB experience loader to return accurate structure
 
 ---
 
-## 🧰 Optional / Advanced
+## ⏳ Phase 3: Add layout support from demo
 
-- [ ] Use `useOptimizelyExperience()` hook (optional)
-- [ ] Migrate remaining demo utils (path parsing, fallback generation)
-- [ ] Support custom component mapping for Experience elements
+- [ ] Implement layout-aware rendering using VB layout structure
+- [ ] Use layout nodes and dynamic component loading based on type key
+- [ ] Pull in missing layout node types and styling from demo
+
+---
+
+## ⏳ Phase 4: Add Visual Builder runtime editing support (optional)
+
+- [ ] Add Opti ID & Opti Auth logic
+- [ ] Integrate preview/edit toolbar from demo
+- [ ] Allow client-side refresh/edit mode toggle
+
+---
+
+## ⏳ Phase 5: Clean up and promote shared types
+
+- [ ] Promote `SafeVisualBuilderExperience` and related types to a shared library folder
+- [ ] Ensure no divergence between VB and CMS experiences
+- [ ] Add unit tests for `fetchVisualBuilderExperience`
 
 ---
 
