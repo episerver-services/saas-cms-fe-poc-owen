@@ -3,7 +3,7 @@ import DraftModeCmsPage from '@/app/components/draft/draft-mode-cms-page'
 import { DraftModeLoader } from '@/app/components/draft/draft-mode-loader'
 import VisualBuilderExperienceWrapper from '@/app/components/visual-builder/wrapper'
 import { optimizely } from '@/lib/optimizely/fetch'
-import { SafeVisualBuilderExperience } from '@/lib/optimizely/types/experience'
+import { fetchVisualBuilderExperience } from '@/lib/optimizely/fetchVisualBuilderExperience'
 import {
   getValidLocale,
   mapPathWithoutLocale,
@@ -14,6 +14,13 @@ import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
+/**
+ * Generates SEO metadata for both custom CMS content and Visual Builder pages.
+ * Falls back to default metadata if nothing is found or during Docker builds.
+ *
+ * @param props - Route parameters including locale and slug
+ * @returns Metadata object for Next.js
+ */
 export async function generateMetadata(props: {
   params: Promise<{ locale: string; slug?: string }>
 }): Promise<Metadata> {
@@ -22,7 +29,6 @@ export async function generateMetadata(props: {
   const formattedSlug = `/${slug}`
 
   if (process.env.IS_BUILD === 'true') {
-    // Fallback metadata during build
     return {
       title: 'Optimizely Page',
       description: '',
@@ -37,17 +43,14 @@ export async function generateMetadata(props: {
 
     const page = pageData?.CMSPage?.item
     if (!page) {
-      const experienceData = await optimizely.GetVisualBuilderBySlug({
-        locales: [locales],
-        slug: formattedSlug,
-      })
+      // Fallback: try to fetch Visual Builder content
+      const vb = await fetchVisualBuilderExperience(formattedSlug)
 
-      const experience = experienceData?.SEOExperience?.item
-      if (experience) {
+      if (vb?.meta?.title) {
         return {
-          title: experience?.title,
-          description: experience?.shortDescription || '',
-          keywords: experience?.keywords ?? '',
+          title: vb.meta.title,
+          description: vb.meta.description || '',
+          keywords: '',
           alternates: generateAlternates(locale, formattedSlug),
         }
       }
@@ -69,18 +72,26 @@ export async function generateMetadata(props: {
   }
 }
 
+/**
+ * Generates static paths for all CMS and Visual Builder pages
+ * used during static site generation.
+ *
+ * @returns A list of slug paths for dynamic routing
+ */
 export async function generateStaticParams() {
   if (process.env.IS_BUILD === 'true') {
-    return [] // Skip building params during Docker build
+    return [] // Skip building paths in CI builds
   }
 
   try {
     const pageTypes = ['CMSPage', 'SEOExperience']
     const pathsResp = await optimizely.AllPages({ pageType: pageTypes })
     const paths = pathsResp._Content?.items ?? []
+
     const filterPaths = paths.filter(
       (path) => path && path._metadata?.url?.default !== null
     )
+
     const uniquePaths = new Set<string>()
     filterPaths.forEach((path) => {
       const cleanPath = mapPathWithoutLocale(
@@ -98,6 +109,13 @@ export async function generateStaticParams() {
   }
 }
 
+/**
+ * Main route handler for CMS/Visual Builder hybrid pages.
+ * Uses CMS content if available, otherwise falls back to VB experience.
+ *
+ * @param props - Route parameters including locale and slug
+ * @returns React component for the requested page
+ */
 export default async function CmsPage(props: {
   params: Promise<{ locale: string; slug?: string }>
 }) {
@@ -121,20 +139,14 @@ export default async function CmsPage(props: {
 
   const page = pageData?.CMSPage?.item
 
+  // If no CMS page is found, try to render a Visual Builder experience
   if (!page?._modified) {
-    const experienceData = await optimizely.GetVisualBuilderBySlug({
-      locales: [locales],
-      slug: formattedSlug,
-    })
+    const vb = await fetchVisualBuilderExperience(formattedSlug)
 
-    const experience = experienceData?.SEOExperience?.item as
-      | SafeVisualBuilderExperience
-      | undefined
-
-    if (experience) {
+    if (vb?.composition) {
       return (
         <Suspense>
-          <VisualBuilderExperienceWrapper experience={experience} />
+          <VisualBuilderExperienceWrapper experience={vb} />
         </Suspense>
       )
     }
@@ -142,6 +154,7 @@ export default async function CmsPage(props: {
     return notFound()
   }
 
+  // Fallback to CMS content block rendering
   const blocks = (page.blocks ?? []).filter(
     (block) => block !== null && block !== undefined
   )

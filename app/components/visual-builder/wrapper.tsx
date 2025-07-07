@@ -9,7 +9,7 @@ import type {
 export default function VisualBuilderExperienceWrapper({
   experience,
 }: {
-  experience?: SafeVisualBuilderExperience
+  experience?: Partial<SafeVisualBuilderExperience>
 }) {
   if (!experience?.composition?.nodes) {
     return null

@@ -32,7 +32,22 @@ export interface VisualBuilderNode {
 }
 
 export type SafeVisualBuilderExperience = {
+  contentId?: string
   composition?: {
+    key: string
+    type: string
+    nodeType: string
+    displayName: string
+    displayTemplateKey: string
+    displaySettings: any[]
     nodes?: VisualBuilderNode[]
+  }
+  meta?: {
+    title?: string
+    guid?: string
+    description?: string
+  }
+  _metadata?: {
+    version?: string
   }
 } & SeoExperience
