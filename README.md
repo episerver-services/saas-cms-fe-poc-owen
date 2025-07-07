@@ -194,10 +194,6 @@ This checklist outlines the steps required to bring the custom app to parity wit
 
 ---
 
-> 📝 Tip: Check off each item as you implement it. Revisit the official demo codebase if you're unsure how a feature works.
-
----
-
 ## 👨‍💻 Maintainer
 
 **Owen Liversidge**  
