@@ -1,0 +1,13 @@
+fragment HeroBlock on HeroBlock {
+  __typename
+  heading
+  image {
+    url
+    alt
+  }
+  links {
+    uid
+    text
+    href
+  }
+}

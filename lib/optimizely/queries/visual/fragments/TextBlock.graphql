@@ -1,0 +1,6 @@
+fragment TextBlock on TextBlock {
+  __typename
+  body {
+    copy
+  }
+}

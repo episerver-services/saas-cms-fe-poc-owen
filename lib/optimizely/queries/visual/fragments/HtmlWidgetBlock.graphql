@@ -1,0 +1,8 @@
+fragment HtmlWidgetBlock on HtmlWidgetBlock {
+  __typename
+  title
+  codeText
+  description {
+    copy
+  }
+}
