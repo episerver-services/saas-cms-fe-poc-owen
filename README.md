@@ -1,18 +1,18 @@
 # Optimizely SaaS CMS FE Template
 
-A **Next.js 15** hybrid front-end template integrating with the **Optimizely SaaS CMS Delivery API**. Supports both **custom integrations** and **Visual Builder (VB) experiences**, with CI/CD pipelines, multi-site scaling, Docker builds, and BDD test coverage.
+A **Next.js 15** hybrid front-end template integrating with the **Optimizely SaaS CMS Delivery API**. Currently focused on rendering **published content only** (MVP), with plans to incrementally add Visual Builder (VB) preview/editing support in later phases.
 
 ---
 
-## 🧩 Key Features
+## 🧩 Key Features (MVP)
 
 - ✅ **Hybrid build support**: `custom` and `visual-builder` modes via `IS_BUILD` env
-- 🌍 **Multi-site ready**: scale across domains or layout configurations
+- ✅ **Published content rendering** via GraphQL SDK
+- 📐 **GraphQL SDK** generated with `graphql-codegen`
 - 📦 **Docker-optimised builds** with per-site configs and build-time args
 - 🧪 **BDD testing** via Cucumber + Gherkin
-- 📐 **GraphQL SDK** generated with `graphql-codegen`
-- 🧾 **CMS metadata + SEO tags** extracted at build time
-- 🔁 **Preview/edit mode-ready** (stubbed, next in roadmap)
+- 🌍 **Multi-site ready**: scale across domains or layout configurations
+- 🔁 **Preview/edit mode**: deferred to later phase
 
 ---
 
@@ -80,13 +80,13 @@ Feature: Homepage Content
 ### 🔨 Build for Custom Integration
 
 ```bash
-docker build   --build-arg NODE_ENV=production   --build-arg IS_BUILD=custom   --build-arg OPTIMIZELY_API_URL=https://cg.optimizely.com/content/v3/graphql   --build-arg OPTIMIZELY_SINGLE_KEY=your_delivery_key   --build-arg OPTIMIZELY_PREVIEW_SECRET=your_preview_secret   --build-arg OPTIMIZELY_LAYOUT_ID=layout_id   -t optimizely-fe:custom .
+docker build --build-arg NODE_ENV=production --build-arg IS_BUILD=custom --build-arg OPTIMIZELY_API_URL=https://cg.optimizely.com/content/v3/graphql --build-arg OPTIMIZELY_SINGLE_KEY=your_delivery_key --build-arg OPTIMIZELY_PREVIEW_SECRET=your_preview_secret --build-arg OPTIMIZELY_LAYOUT_ID=layout_id -t optimizely-fe:custom .
 ```
 
-### 🔨 Build for Visual Builder
+### 🔨 Build for Visual Builder (future)
 
 ```bash
-docker build   --build-arg NODE_ENV=production   --build-arg IS_BUILD=vb   --build-arg OPTIMIZELY_API_URL=https://cg.optimizely.com/content/v3/graphql   --build-arg OPTIMIZELY_SINGLE_KEY=your_delivery_key   --build-arg OPTIMIZELY_PREVIEW_SECRET=your_preview_secret   --build-arg OPTIMIZELY_LAYOUT_ID=layout_id   -t optimizely-fe:vb .
+docker build --build-arg NODE_ENV=production --build-arg IS_BUILD=vb --build-arg OPTIMIZELY_API_URL=https://cg.optimizely.com/content/v3/graphql --build-arg OPTIMIZELY_SINGLE_KEY=your_delivery_key --build-arg OPTIMIZELY_PREVIEW_SECRET=your_preview_secret --build-arg OPTIMIZELY_LAYOUT_ID=layout_id -t optimizely-fe:vb .
 ```
 
 ---
@@ -138,62 +138,30 @@ Key envs are passed securely using GitHub Secrets.
 | `pnpm dev:custom`   | Dev server using `.env.custom-styling.local` |
 | `pnpm dev:vb`       | Dev server using `.env.visual-builder.local` |
 | `pnpm build:custom` | Prod build for custom setup                  |
-| `pnpm build:vb`     | Prod build for VB setup                      |
+| `pnpm build:vb`     | Prod build for VB setup (future)             |
 | `pnpm test:bdd`     | Run Cucumber tests                           |
 | `pnpm codegen:*`    | Run GraphQL codegen for custom or VB         |
 
 ---
 
-# ✅ Visual Builder Migration Plan
+# ✅ Visual Builder Integration Plan
 
-This checklist tracks the steps required to bring the custom front-end implementation up to parity with the official `cms-saas-vercel-demo` Visual Builder setup.
+This checklist outlines the steps required to extend the MVP to include **Visual Builder (VB)** support.
 
----
+## ✅ Phase 1: Published Content (MVP)
+- [x] Support rendering published CMS pages via GraphQL
+- [x] Dynamic page routing via `[...slug]`
+- [x] Typed SDK via `graphql-codegen`
+- [x] Docker + CI pipeline validation
 
-## ✅ Phase 1: Get custom build working with hybrid rendering
+## ⏳ Phase 2: Layout Support (VB-specific)
+- [ ] Add layout-aware rendering from official VB demo
+- [ ] Use layout nodes and component mapping
 
-- [x] Create `SafeVisualBuilderExperience` type to align with partial VB structure
-- [x] Patch `_metadata` to include only `version` for use in experience version resolution
-- [x] Ensure `fetchVisualBuilderExperience` returns a `Partial<SafeVisualBuilderExperience>`
-- [x] Update `VisualBuilderExperienceWrapper` to safely handle `experience?` shape
-- [x] Adjust `CmsPage` fallback to Visual Builder if `CMSPage.item?._modified` is false
-- [x] Handle hybrid metadata resolution using `vb.meta.title`, `vb.meta.description` as fallback
-- [x] Build passes for `build:custom`
-- [x] Docker + CI pipelines confirmed working
-
----
-
-## ⏳ Phase 2: Replace patched `_metadata` with valid `IContentMetadata` values
-
-- [ ] Import and reuse correct `IContentMetadata` shape from SDK
-- [ ] Remove the fake `_metadata` object and ensure type compliance
-- [ ] Ensure fallback experience metadata is valid and minimal
-- [ ] Refactor `as unknown as SafeVisualBuilderExperience` cast out cleanly
-- [ ] Re-type VB experience loader to return accurate structure
-
----
-
-## ⏳ Phase 3: Add layout support from demo
-
-- [ ] Implement layout-aware rendering using VB layout structure
-- [ ] Use layout nodes and dynamic component loading based on type key
-- [ ] Pull in missing layout node types and styling from demo
-
----
-
-## ⏳ Phase 4: Add Visual Builder runtime editing support (optional)
-
-- [ ] Add Opti ID & Opti Auth logic
-- [ ] Integrate preview/edit toolbar from demo
-- [ ] Allow client-side refresh/edit mode toggle
-
----
-
-## ⏳ Phase 5: Clean up and promote shared types
-
-- [ ] Promote `SafeVisualBuilderExperience` and related types to a shared library folder
-- [ ] Ensure no divergence between VB and CMS experiences
-- [ ] Add unit tests for `fetchVisualBuilderExperience`
+## ⏳ Phase 3: Visual Builder Preview & Editing (Deferred)
+- [ ] Add dynamic route for draft preview (e.g. `/draft/[version]/[...slug]`)
+- [ ] Handle Opti ID and preview token flow
+- [ ] Support live editing with Optimizely's editing toolbar
 
 ---
 
