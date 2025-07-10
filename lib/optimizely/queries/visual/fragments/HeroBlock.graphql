@@ -1,4 +1,4 @@
-fragment HeroBlockData on HeroBlock {
+fragment HeroBlock on HeroBlock {
   HeroImage {
     __typename
   }

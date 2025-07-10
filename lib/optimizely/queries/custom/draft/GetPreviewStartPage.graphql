@@ -5,7 +5,9 @@ query GetPreviewStartPage($locales: [Locales], $version: String) {
   ) {
     item {
       blocks {
-        ...ItemsInContentArea
+        ... on _Component {
+          ...ItemsInContentArea
+        }
       }
     }
   }

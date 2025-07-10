@@ -12,7 +12,9 @@ query GetAllPagesVersionByURL($locales: [Locales], $slug: String) {
       keywords
       _modified
       blocks {
-        ...ItemsInContentArea
+        ... on _Component {
+          ...ItemsInContentArea
+        }
       }
     }
   }

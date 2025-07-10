@@ -20,7 +20,9 @@ query GetAllVisualBuilderVesrionsBySlug($locales: [Locales], $slug: String) {
           }
           ... on CompositionComponentNode {
             component {
-              ...ItemsInContentArea
+              ... on _Component {
+                ...ItemsInContentArea
+              }
             }
           }
           ... on CompositionStructureNode {
@@ -39,7 +41,9 @@ query GetAllVisualBuilderVesrionsBySlug($locales: [Locales], $slug: String) {
                       }
                       ... on CompositionComponentNode {
                         component {
-                          ...ItemsInContentArea
+                          ... on _Component {
+                            ...ItemsInContentArea
+                          }
                         }
                       }
                     }

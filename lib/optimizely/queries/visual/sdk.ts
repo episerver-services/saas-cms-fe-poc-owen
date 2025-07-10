@@ -6057,6 +6057,15 @@ export type BlankExperienceDataFragment = { __typename?: 'BlankExperience', Blan
 
 export type BlogSectionExperienceDataFragment = { __typename?: 'BlogSectionExperience', _metadata: { __typename?: 'ContentMetadata', displayName: string | null } | { __typename?: 'InstanceMetadata', displayName: string | null } | { __typename?: 'ItemMetadata', displayName: string | null } | { __typename?: 'MediaMetadata', displayName: string | null } | null };
 
+export type GetBlogSectionExperienceByPathQueryVariables = Exact<{
+  key: Scalars['String']['input'];
+  version: InputMaybe<Scalars['String']['input']>;
+  locale: InputMaybe<Array<Locales> | Locales>;
+}>;
+
+
+export type GetBlogSectionExperienceByPathQuery = { __typename?: 'Query', experience: { __typename?: 'BlogSectionExperienceOutput', items: Array<{ __typename?: 'BlogSectionExperience', _metadata: { __typename?: 'ContentMetadata', key: string | null, version: string | null, displayName: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'InstanceMetadata', key: string | null, version: string | null, displayName: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'ItemMetadata', key: string | null, version: string | null, displayName: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'MediaMetadata', key: string | null, version: string | null, displayName: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null, composition: { __typename?: 'CompositionStructureNode', nodes: Array<{ __typename?: 'CompositionComponentNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null, nodes: Array<{ __typename?: 'CompositionComponentNode', key: string | null, component: { __typename: 'ArticleListElement' } | { __typename: 'BlankSection' } | { __typename: 'ButtonBlock' } | { __typename: 'CTAElement' } | { __typename: 'CarouselBlock' } | { __typename: 'ContentRecsElement' } | { __typename: 'ContinueReadingComponent' } | { __typename: 'Document' } | { __typename: 'HeadingElement' } | { __typename: 'HeroBlock', Eyebrow: string | null, Heading: string | null, SubHeading: string | null, HeroColor: string | null, HeroImage: { __typename: 'ContentReference' } | null, Description: { __typename?: 'RichText', json: any | null, html: string | null } | null, HeroButton: { __typename?: 'ButtonBlockProperty', ButtonText: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null } | { __typename: 'ImageElement' } | { __typename: 'LayoutSettingsBlock' } | { __typename: 'MegaMenuGroupBlock' } | { __typename: 'MenuNavigationBlock' } | { __typename: 'OdpEmbedBlock' } | { __typename: 'PageSeoSettings' } | { __typename: 'ParagraphElement' } | { __typename: 'PartnerTokens' } | { __typename: 'QuoteBlock' } | { __typename: 'RichTextElement' } | { __typename: 'TestimonialElement' } | { __typename: 'TextBlock', TextBlockOverline: string | null, TextBlockHeadingSize: string | null, TextBlockHeading: string | null, TextCenter: boolean | null, TextBlockWidth: string | null, TextClassName: string | null, TextBlockDescription: { __typename?: 'RichText', json: any | null, html: string | null } | null } | { __typename: 'Tokens' } | { __typename: 'VideoElement' } | { __typename: '_Component' } | { __typename: '_Section' } | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | { __typename?: 'CompositionNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | { __typename?: 'CompositionStructureNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } | null };
+
 export type GetExperienceByIdQueryVariables = Exact<{
   ids: Array<Scalars['String']['input']> | Scalars['String']['input'];
   locale: InputMaybe<Array<Locales> | Locales>;
@@ -6065,7 +6074,18 @@ export type GetExperienceByIdQueryVariables = Exact<{
 
 export type GetExperienceByIdQuery = { __typename?: 'Query', _Experience: { __typename?: '_ExperienceOutput', items: Array<{ __typename?: 'BlankExperience', BlankExperienceSeoSettings: { __typename?: 'PageSeoSettingsProperty', MetaTitle: string | null, MetaDescription: string | null, MetaKeywords: Array<string | null> | null, GraphType: string | null } | null } | { __typename?: 'BlogSectionExperience', _metadata: { __typename?: 'ContentMetadata', displayName: string | null } | { __typename?: 'InstanceMetadata', displayName: string | null } | { __typename?: 'ItemMetadata', displayName: string | null } | { __typename?: 'MediaMetadata', displayName: string | null } | null } | { __typename?: '_Experience' } | null> | null } | null };
 
+export type GetExperienceByPathQueryVariables = Exact<{
+  key: Scalars['String']['input'];
+  version: InputMaybe<Scalars['String']['input']>;
+  locale: InputMaybe<Array<Locales> | Locales>;
+}>;
+
+
+export type GetExperienceByPathQuery = { __typename?: 'Query', experience: { __typename?: '_ExperienceOutput', items: Array<{ __typename?: 'BlankExperience', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, key: string | null, version: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, key: string | null, version: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, key: string | null, version: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, key: string | null, version: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null, composition: { __typename?: 'CompositionStructureNode', nodes: Array<{ __typename?: 'CompositionComponentNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null, nodes: Array<{ __typename?: 'CompositionComponentNode', key: string | null, component: { __typename: 'ArticleListElement' } | { __typename: 'BlankSection' } | { __typename: 'ButtonBlock' } | { __typename: 'CTAElement' } | { __typename: 'CarouselBlock' } | { __typename: 'ContentRecsElement' } | { __typename: 'ContinueReadingComponent' } | { __typename: 'Document' } | { __typename: 'HeadingElement' } | { __typename: 'HeroBlock', Eyebrow: string | null, Heading: string | null, SubHeading: string | null, HeroColor: string | null, HeroImage: { __typename: 'ContentReference' } | null, Description: { __typename?: 'RichText', json: any | null, html: string | null } | null, HeroButton: { __typename?: 'ButtonBlockProperty', ButtonText: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null } | { __typename: 'ImageElement' } | { __typename: 'LayoutSettingsBlock' } | { __typename: 'MegaMenuGroupBlock' } | { __typename: 'MenuNavigationBlock' } | { __typename: 'OdpEmbedBlock' } | { __typename: 'PageSeoSettings' } | { __typename: 'ParagraphElement' } | { __typename: 'PartnerTokens' } | { __typename: 'QuoteBlock' } | { __typename: 'RichTextElement' } | { __typename: 'TestimonialElement' } | { __typename: 'TextBlock', TextBlockOverline: string | null, TextBlockHeadingSize: string | null, TextBlockHeading: string | null, TextCenter: boolean | null, TextBlockWidth: string | null, TextClassName: string | null, TextBlockDescription: { __typename?: 'RichText', json: any | null, html: string | null } | null } | { __typename: 'Tokens' } | { __typename: 'VideoElement' } | { __typename: '_Component' } | { __typename: '_Section' } | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | { __typename?: 'CompositionNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | { __typename?: 'CompositionStructureNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | null> | null } | null> | null } | null } | { __typename?: 'BlogSectionExperience', _metadata: { __typename?: 'ContentMetadata', displayName: string | null, key: string | null, version: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'InstanceMetadata', displayName: string | null, key: string | null, version: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'ItemMetadata', displayName: string | null, key: string | null, version: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'MediaMetadata', displayName: string | null, key: string | null, version: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null, composition: { __typename?: 'CompositionStructureNode', nodes: Array<{ __typename?: 'CompositionComponentNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null, nodes: Array<{ __typename?: 'CompositionComponentNode', key: string | null, component: { __typename: 'ArticleListElement' } | { __typename: 'BlankSection' } | { __typename: 'ButtonBlock' } | { __typename: 'CTAElement' } | { __typename: 'CarouselBlock' } | { __typename: 'ContentRecsElement' } | { __typename: 'ContinueReadingComponent' } | { __typename: 'Document' } | { __typename: 'HeadingElement' } | { __typename: 'HeroBlock', Eyebrow: string | null, Heading: string | null, SubHeading: string | null, HeroColor: string | null, HeroImage: { __typename: 'ContentReference' } | null, Description: { __typename?: 'RichText', json: any | null, html: string | null } | null, HeroButton: { __typename?: 'ButtonBlockProperty', ButtonText: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null } | { __typename: 'ImageElement' } | { __typename: 'LayoutSettingsBlock' } | { __typename: 'MegaMenuGroupBlock' } | { __typename: 'MenuNavigationBlock' } | { __typename: 'OdpEmbedBlock' } | { __typename: 'PageSeoSettings' } | { __typename: 'ParagraphElement' } | { __typename: 'PartnerTokens' } | { __typename: 'QuoteBlock' } | { __typename: 'RichTextElement' } | { __typename: 'TestimonialElement' } | { __typename: 'TextBlock', TextBlockOverline: string | null, TextBlockHeadingSize: string | null, TextBlockHeading: string | null, TextCenter: boolean | null, TextBlockWidth: string | null, TextClassName: string | null, TextBlockDescription: { __typename?: 'RichText', json: any | null, html: string | null } | null } | { __typename: 'Tokens' } | { __typename: 'VideoElement' } | { __typename: '_Component' } | { __typename: '_Section' } | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | { __typename?: 'CompositionNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | { __typename?: 'CompositionStructureNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | null> | null } | null> | null } | null } | { __typename?: '_Experience', _metadata: { __typename?: 'ContentMetadata', key: string | null, version: string | null, displayName: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'InstanceMetadata', key: string | null, version: string | null, displayName: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'ItemMetadata', key: string | null, version: string | null, displayName: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | { __typename?: 'MediaMetadata', key: string | null, version: string | null, displayName: string | null, published: string | null, url: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null } | null> | null } | null };
+
 export type ButtonBlockPropertyDataFragment = { __typename?: 'ButtonBlockProperty', ButtonText: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null };
+
+export type CompositionNodeFragment = { __typename?: 'CompositionStructureNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null, nodes: Array<{ __typename?: 'CompositionComponentNode', key: string | null, component: { __typename: 'ArticleListElement' } | { __typename: 'BlankSection' } | { __typename: 'ButtonBlock' } | { __typename: 'CTAElement' } | { __typename: 'CarouselBlock' } | { __typename: 'ContentRecsElement' } | { __typename: 'ContinueReadingComponent' } | { __typename: 'Document' } | { __typename: 'HeadingElement' } | { __typename: 'HeroBlock', Eyebrow: string | null, Heading: string | null, SubHeading: string | null, HeroColor: string | null, HeroImage: { __typename: 'ContentReference' } | null, Description: { __typename?: 'RichText', json: any | null, html: string | null } | null, HeroButton: { __typename?: 'ButtonBlockProperty', ButtonText: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null } | { __typename: 'ImageElement' } | { __typename: 'LayoutSettingsBlock' } | { __typename: 'MegaMenuGroupBlock' } | { __typename: 'MenuNavigationBlock' } | { __typename: 'OdpEmbedBlock' } | { __typename: 'PageSeoSettings' } | { __typename: 'ParagraphElement' } | { __typename: 'PartnerTokens' } | { __typename: 'QuoteBlock' } | { __typename: 'RichTextElement' } | { __typename: 'TestimonialElement' } | { __typename: 'TextBlock', TextBlockOverline: string | null, TextBlockHeadingSize: string | null, TextBlockHeading: string | null, TextCenter: boolean | null, TextBlockWidth: string | null, TextClassName: string | null, TextBlockDescription: { __typename?: 'RichText', json: any | null, html: string | null } | null } | { __typename: 'Tokens' } | { __typename: 'VideoElement' } | { __typename: '_Component' } | { __typename: '_Section' } | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | { __typename?: 'CompositionNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | { __typename?: 'CompositionStructureNode', key: string | null, displaySettings: Array<{ __typename?: 'CompositionDisplaySetting', key: string | null, value: string | null } | null> | null } | null> | null };
 
 export type ExperienceData_BlankExperience_Fragment = { __typename?: 'BlankExperience', BlankExperienceSeoSettings: { __typename?: 'PageSeoSettingsProperty', MetaTitle: string | null, MetaDescription: string | null, MetaKeywords: Array<string | null> | null, GraphType: string | null } | null };
 
@@ -6075,11 +6095,65 @@ export type ExperienceData__Experience_Fragment = { __typename?: '_Experience' }
 
 export type ExperienceDataFragment = ExperienceData_BlankExperience_Fragment | ExperienceData_BlogSectionExperience_Fragment | ExperienceData__Experience_Fragment;
 
-export type HeroBlockDataFragment = { __typename?: 'HeroBlock', Eyebrow: string | null, Heading: string | null, SubHeading: string | null, HeroColor: string | null, HeroImage: { __typename: 'ContentReference' } | null, Description: { __typename?: 'RichText', json: any | null, html: string | null } | null, HeroButton: { __typename?: 'ButtonBlockProperty', ButtonText: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null };
+export type HeroBlockFragment = { __typename?: 'HeroBlock', Eyebrow: string | null, Heading: string | null, SubHeading: string | null, HeroColor: string | null, HeroImage: { __typename: 'ContentReference' } | null, Description: { __typename?: 'RichText', json: any | null, html: string | null } | null, HeroButton: { __typename?: 'ButtonBlockProperty', ButtonText: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null };
+
+export type ItemsInContentArea_ArticleListElement_Fragment = { __typename: 'ArticleListElement' };
+
+export type ItemsInContentArea_BlankSection_Fragment = { __typename: 'BlankSection' };
+
+export type ItemsInContentArea_ButtonBlock_Fragment = { __typename: 'ButtonBlock' };
+
+export type ItemsInContentArea_CtaElement_Fragment = { __typename: 'CTAElement' };
+
+export type ItemsInContentArea_CarouselBlock_Fragment = { __typename: 'CarouselBlock' };
+
+export type ItemsInContentArea_ContentRecsElement_Fragment = { __typename: 'ContentRecsElement' };
+
+export type ItemsInContentArea_ContinueReadingComponent_Fragment = { __typename: 'ContinueReadingComponent' };
+
+export type ItemsInContentArea_Document_Fragment = { __typename: 'Document' };
+
+export type ItemsInContentArea_HeadingElement_Fragment = { __typename: 'HeadingElement' };
+
+export type ItemsInContentArea_HeroBlock_Fragment = { __typename: 'HeroBlock', Eyebrow: string | null, Heading: string | null, SubHeading: string | null, HeroColor: string | null, HeroImage: { __typename: 'ContentReference' } | null, Description: { __typename?: 'RichText', json: any | null, html: string | null } | null, HeroButton: { __typename?: 'ButtonBlockProperty', ButtonText: string | null, ButtonUrl: { __typename?: 'ContentUrl', base: string | null, default: string | null } | null } | null };
+
+export type ItemsInContentArea_ImageElement_Fragment = { __typename: 'ImageElement' };
+
+export type ItemsInContentArea_LayoutSettingsBlock_Fragment = { __typename: 'LayoutSettingsBlock' };
+
+export type ItemsInContentArea_MegaMenuGroupBlock_Fragment = { __typename: 'MegaMenuGroupBlock' };
+
+export type ItemsInContentArea_MenuNavigationBlock_Fragment = { __typename: 'MenuNavigationBlock' };
+
+export type ItemsInContentArea_OdpEmbedBlock_Fragment = { __typename: 'OdpEmbedBlock' };
+
+export type ItemsInContentArea_PageSeoSettings_Fragment = { __typename: 'PageSeoSettings' };
+
+export type ItemsInContentArea_ParagraphElement_Fragment = { __typename: 'ParagraphElement' };
+
+export type ItemsInContentArea_PartnerTokens_Fragment = { __typename: 'PartnerTokens' };
+
+export type ItemsInContentArea_QuoteBlock_Fragment = { __typename: 'QuoteBlock' };
+
+export type ItemsInContentArea_RichTextElement_Fragment = { __typename: 'RichTextElement' };
+
+export type ItemsInContentArea_TestimonialElement_Fragment = { __typename: 'TestimonialElement' };
+
+export type ItemsInContentArea_TextBlock_Fragment = { __typename: 'TextBlock', TextBlockOverline: string | null, TextBlockHeadingSize: string | null, TextBlockHeading: string | null, TextCenter: boolean | null, TextBlockWidth: string | null, TextClassName: string | null, TextBlockDescription: { __typename?: 'RichText', json: any | null, html: string | null } | null };
+
+export type ItemsInContentArea_Tokens_Fragment = { __typename: 'Tokens' };
+
+export type ItemsInContentArea_VideoElement_Fragment = { __typename: 'VideoElement' };
+
+export type ItemsInContentArea__Component_Fragment = { __typename: '_Component' };
+
+export type ItemsInContentArea__Section_Fragment = { __typename: '_Section' };
+
+export type ItemsInContentAreaFragment = ItemsInContentArea_ArticleListElement_Fragment | ItemsInContentArea_BlankSection_Fragment | ItemsInContentArea_ButtonBlock_Fragment | ItemsInContentArea_CtaElement_Fragment | ItemsInContentArea_CarouselBlock_Fragment | ItemsInContentArea_ContentRecsElement_Fragment | ItemsInContentArea_ContinueReadingComponent_Fragment | ItemsInContentArea_Document_Fragment | ItemsInContentArea_HeadingElement_Fragment | ItemsInContentArea_HeroBlock_Fragment | ItemsInContentArea_ImageElement_Fragment | ItemsInContentArea_LayoutSettingsBlock_Fragment | ItemsInContentArea_MegaMenuGroupBlock_Fragment | ItemsInContentArea_MenuNavigationBlock_Fragment | ItemsInContentArea_OdpEmbedBlock_Fragment | ItemsInContentArea_PageSeoSettings_Fragment | ItemsInContentArea_ParagraphElement_Fragment | ItemsInContentArea_PartnerTokens_Fragment | ItemsInContentArea_QuoteBlock_Fragment | ItemsInContentArea_RichTextElement_Fragment | ItemsInContentArea_TestimonialElement_Fragment | ItemsInContentArea_TextBlock_Fragment | ItemsInContentArea_Tokens_Fragment | ItemsInContentArea_VideoElement_Fragment | ItemsInContentArea__Component_Fragment | ItemsInContentArea__Section_Fragment;
 
 export type PageSeoSettingsPropertyDataFragment = { __typename?: 'PageSeoSettingsProperty', MetaTitle: string | null, MetaDescription: string | null, MetaKeywords: Array<string | null> | null, GraphType: string | null };
 
-export type TextBlockDataFragment = { __typename?: 'TextBlock', overline: string | null, headingSize: string | null, heading: string | null, center: boolean | null, width: string | null, className: string | null, description: { __typename?: 'RichText', json: any | null, html: string | null } | null };
+export type TextBlockFragment = { __typename?: 'TextBlock', TextBlockOverline: string | null, TextBlockHeadingSize: string | null, TextBlockHeading: string | null, TextCenter: boolean | null, TextBlockWidth: string | null, TextClassName: string | null, TextBlockDescription: { __typename?: 'RichText', json: any | null, html: string | null } | null };
 
 export const ButtonBlockPropertyDataFragmentDoc = gql`
     fragment ButtonBlockPropertyData on ButtonBlockProperty {
@@ -6090,6 +6164,66 @@ export const ButtonBlockPropertyDataFragmentDoc = gql`
   }
 }
     `;
+export const HeroBlockFragmentDoc = gql`
+    fragment HeroBlock on HeroBlock {
+  HeroImage {
+    __typename
+  }
+  Eyebrow
+  Heading
+  SubHeading
+  Description {
+    json
+    html
+  }
+  HeroColor
+  HeroButton {
+    ButtonText
+    ButtonUrl {
+      base
+      default
+    }
+  }
+}
+    `;
+export const TextBlockFragmentDoc = gql`
+    fragment TextBlock on TextBlock {
+  TextBlockOverline
+  TextBlockHeadingSize
+  TextBlockHeading
+  TextBlockDescription {
+    json
+    html
+  }
+  TextCenter
+  TextBlockWidth
+  TextClassName
+}
+    `;
+export const CompositionNodeFragmentDoc = gql`
+    fragment CompositionNode on CompositionStructureNode {
+  key
+  displaySettings {
+    key
+    value
+  }
+  nodes {
+    key
+    displaySettings {
+      key
+      value
+    }
+    ... on CompositionComponentNode {
+      component {
+        __typename
+        ...HeroBlock
+        ...TextBlock
+      }
+    }
+  }
+}
+    ${HeroBlockFragmentDoc}
+${TextBlockFragmentDoc}`;
 export const PageSeoSettingsPropertyDataFragmentDoc = gql`
     fragment PageSeoSettingsPropertyData on PageSeoSettingsProperty {
   MetaTitle
@@ -6123,42 +6257,44 @@ export const ExperienceDataFragmentDoc = gql`
 }
     ${BlankExperienceDataFragmentDoc}
 ${BlogSectionExperienceDataFragmentDoc}`;
-export const HeroBlockDataFragmentDoc = gql`
-    fragment HeroBlockData on HeroBlock {
-  HeroImage {
-    __typename
+export const ItemsInContentAreaFragmentDoc = gql`
+    fragment ItemsInContentArea on _IComponent {
+  __typename
+  ... on HeroBlock {
+    ...HeroBlock
   }
-  Eyebrow
-  Heading
-  SubHeading
-  Description {
-    json
-    html
+  ... on TextBlock {
+    ...TextBlock
   }
-  HeroColor
-  HeroButton {
-    ButtonText
-    ButtonUrl {
-      base
-      default
+}
+    ${HeroBlockFragmentDoc}
+${TextBlockFragmentDoc}`;
+export const GetBlogSectionExperienceByPathDocument = gql`
+    query getBlogSectionExperienceByPath($key: String!, $version: String, $locale: [Locales!]) {
+  experience: BlogSectionExperience(
+    where: {_metadata: {key: {eq: $key}, version: {eq: $version}}}
+    locale: $locale
+  ) {
+    items {
+      _metadata {
+        key
+        version
+        url {
+          base
+          default
+        }
+        displayName
+        published
+      }
+      composition {
+        nodes {
+          ...CompositionNode
+        }
+      }
     }
   }
 }
-    `;
-export const TextBlockDataFragmentDoc = gql`
-    fragment TextBlockData on TextBlock {
-  overline: TextBlockOverline
-  headingSize: TextBlockHeadingSize
-  heading: TextBlockHeading
-  description: TextBlockDescription {
-    json
-    html
-  }
-  center: TextCenter
-  width: TextBlockWidth
-  className: TextClassName
-}
-    `;
+    ${CompositionNodeFragmentDoc}`;
 export const GetExperienceByIdDocument = gql`
     query GetExperienceById($ids: [String!]!, $locale: [Locales!]) {
   _Experience(ids: $ids, locale: $locale) {
@@ -6170,11 +6306,58 @@ export const GetExperienceByIdDocument = gql`
   }
 }
     ${ExperienceDataFragmentDoc}`;
+export const GetExperienceByPathDocument = gql`
+    query getExperienceByPath($key: String!, $version: String, $locale: [Locales!]) {
+  experience: _Experience(
+    where: {_metadata: {key: {eq: $key}, version: {eq: $version}}}
+    locale: $locale
+  ) {
+    items {
+      _metadata {
+        key
+        version
+        displayName
+        published
+        url {
+          base
+          default
+        }
+      }
+      ... on BlankExperience {
+        _metadata {
+          displayName
+        }
+        composition {
+          nodes {
+            ...CompositionNode
+          }
+        }
+      }
+      ... on BlogSectionExperience {
+        _metadata {
+          displayName
+        }
+        composition {
+          nodes {
+            ...CompositionNode
+          }
+        }
+      }
+    }
+  }
+}
+    ${CompositionNodeFragmentDoc}`;
 export type Requester<C = {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R> | AsyncIterable<R>
 export function getSdk<C>(requester: Requester<C>) {
   return {
+    getBlogSectionExperienceByPath(variables: GetBlogSectionExperienceByPathQueryVariables, options?: C): Promise<GetBlogSectionExperienceByPathQuery> {
+      return requester<GetBlogSectionExperienceByPathQuery, GetBlogSectionExperienceByPathQueryVariables>(GetBlogSectionExperienceByPathDocument, variables, options) as Promise<GetBlogSectionExperienceByPathQuery>;
+    },
     GetExperienceById(variables: GetExperienceByIdQueryVariables, options?: C): Promise<GetExperienceByIdQuery> {
       return requester<GetExperienceByIdQuery, GetExperienceByIdQueryVariables>(GetExperienceByIdDocument, variables, options) as Promise<GetExperienceByIdQuery>;
+    },
+    getExperienceByPath(variables: GetExperienceByPathQueryVariables, options?: C): Promise<GetExperienceByPathQuery> {
+      return requester<GetExperienceByPathQuery, GetExperienceByPathQueryVariables>(GetExperienceByPathDocument, variables, options) as Promise<GetExperienceByPathQuery>;
     }
   };
 }

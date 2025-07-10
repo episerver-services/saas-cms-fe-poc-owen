@@ -12,7 +12,9 @@ query getPreviewPageByURL(
   ) {
     item {
       blocks {
-        ...ItemsInContentArea
+        ... on _Component {
+          ...ItemsInContentArea
+        }
       }
     }
   }

@@ -5,7 +5,9 @@ query GetStartPage($locales: [Locales]) {
       shortDescription
       keywords
       blocks {
-        ...ItemsInContentArea
+        ... on _Component {
+          ...ItemsInContentArea
+        }
       }
     }
   }

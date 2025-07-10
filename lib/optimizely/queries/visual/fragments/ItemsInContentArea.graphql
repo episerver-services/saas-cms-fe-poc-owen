@@ -1,0 +1,13 @@
+fragment ItemsInContentArea on _IComponent {
+  __typename
+
+  ... on HeroBlock {
+    ...HeroBlock
+  }
+
+  ... on TextBlock {
+    ...TextBlock
+  }
+
+  # Add additional fragments for other component types as needed
+}

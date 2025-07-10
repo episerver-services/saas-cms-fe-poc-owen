@@ -1,0 +1,46 @@
+query getExperienceByPath(
+  $key: String!
+  $version: String
+  $locale: [Locales!]
+) {
+  experience: _Experience(
+    where: { _metadata: { key: { eq: $key }, version: { eq: $version } } }
+    locale: $locale
+  ) {
+    items {
+      _metadata {
+        key
+        version
+        displayName
+        published
+        url {
+          base
+          default
+        }
+      }
+
+      # Add inline fragments for each supported Experience type
+      ... on BlankExperience {
+        _metadata {
+          displayName
+        }
+        composition {
+          nodes {
+            ...CompositionNode
+          }
+        }
+      }
+
+      ... on BlogSectionExperience {
+        _metadata {
+          displayName
+        }
+        composition {
+          nodes {
+            ...CompositionNode
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,7 +9,9 @@ query getPageByURL($locales: [Locales], $slug: String) {
       keywords
       _modified
       blocks {
-        ...ItemsInContentArea
+        ... on _Component {
+          ...ItemsInContentArea
+        }
       }
     }
   }

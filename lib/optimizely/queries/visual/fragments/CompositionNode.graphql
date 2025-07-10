@@ -1,0 +1,21 @@
+fragment CompositionNode on CompositionStructureNode {
+  key
+  displaySettings {
+    key
+    value
+  }
+  nodes {
+    key
+    displaySettings {
+      key
+      value
+    }
+    ... on CompositionComponentNode {
+      component {
+        __typename
+        ...HeroBlock
+        ...TextBlock
+      }
+    }
+  }
+}

@@ -17,7 +17,9 @@ query VisualBuilder($locales: [Locales], $key: String, $version: String) {
           }
           ... on CompositionComponentNode {
             component {
-              ...ItemsInContentArea
+              ... on _Component {
+                ...ItemsInContentArea
+              }
             }
           }
           ... on CompositionStructureNode {
@@ -36,7 +38,9 @@ query VisualBuilder($locales: [Locales], $key: String, $version: String) {
                       }
                       ... on CompositionComponentNode {
                         component {
-                          ...ItemsInContentArea
+                          ... on _Component {
+                            ...ItemsInContentArea
+                          }
                         }
                       }
                     }
