@@ -1,5 +1,8 @@
 # Optimizely SaaS CMS FE Template
 
+> [!WARNING]
+> This repository is not production ready and should not be used in production environments. The codebase is currently under active development and may contain incomplete features, breaking changes, and potential security vulnerabilities.
+
 A **Next.js 15** hybrid front-end template integrating with the **Optimizely SaaS CMS Delivery API**. Currently focused on rendering **published content only** (MVP), with plans to incrementally add Visual Builder (VB) preview/editing support in later phases.
 
 ---
@@ -8,6 +11,7 @@ A **Next.js 15** hybrid front-end template integrating with the **Optimizely Saa
 
 - ✅ **Hybrid build support**: `custom` and `visual-builder` modes via `IS_BUILD` env
 - ✅ **Published content rendering** via GraphQL SDK
+- ✅ **Visual Builder fragment rendering** for published `Experience` pages
 - 📐 **GraphQL SDK** generated with `graphql-codegen`
 - 📦 **Docker-optimised builds** with per-site configs and build-time args
 - 🧪 **BDD testing** via Cucumber + Gherkin
@@ -117,7 +121,10 @@ Key envs are passed securely using GitHub Secrets.
 │
 📁 lib/
 │  ├─ content/             # CMS fetch helpers
-│  ├─ optimizely/          # GraphQL codegen SDK
+│  ├─ optimizely/
+│  │   ├─ queries/         # GraphQL documents (custom + visual)
+│  │   ├─ sdk.ts           # Codegen output (custom)
+│  │   └─ visual/sdk.ts    # Codegen output (VB)
 │  ├─ session/             # Placeholder for auth/session
 │  └─ utils/               # Logger, helpers
 │
@@ -146,19 +153,40 @@ Key envs are passed securely using GitHub Secrets.
 
 # ✅ Visual Builder Integration Plan
 
-This checklist outlines the steps required to extend the MVP to include **Visual Builder (VB)** support.
+This checklist outlines the steps required to extend the MVP to include **Visual Builder (VB)** support. You’re currently wrapping up **Phase 1.5**, having implemented a hybrid architecture that supports published VB experiences via fragment-based rendering.
 
-## ✅ Phase 1: Published Content (MVP)
+---
+
+### ✅ Phase 1: Published Content (MVP)
+
 - [x] Support rendering published CMS pages via GraphQL
 - [x] Dynamic page routing via `[...slug]`
 - [x] Typed SDK via `graphql-codegen`
 - [x] Docker + CI pipeline validation
 
-## ⏳ Phase 2: Layout Support (VB-specific)
+---
+
+### ✅ Phase 1.5: Visual Builder Schema Integration (Published Only)
+
+- [x] Added separate `visual` query namespace for Experience-based rendering
+- [x] Introduced core VB query: `getExperienceById.graphql`
+- [x] Added reusable VB fragments: `ExperienceData`, `HeroBlockData`, etc.
+- [x] Resolved fragment type errors via schema-guided refinement
+- [x] Codegen validation passes for all VB queries and fragments
+- [x] Maintains custom/visual build separation via env flags
+
+---
+
+### ⏳ Phase 2: Layout Support (VB-specific)
+
 - [ ] Add layout-aware rendering from official VB demo
 - [ ] Use layout nodes and component mapping
+- [ ] Inject VB layout shell dynamically per Experience
 
-## ⏳ Phase 3: Visual Builder Preview & Editing (Deferred)
+---
+
+### ⏳ Phase 3: Visual Builder Preview & Editing (Deferred)
+
 - [ ] Add dynamic route for draft preview (e.g. `/draft/[version]/[...slug]`)
 - [ ] Handle Opti ID and preview token flow
 - [ ] Support live editing with Optimizely's editing toolbar
@@ -169,4 +197,4 @@ This checklist outlines the steps required to extend the MVP to include **Visual
 
 **Owen Liversidge**  
 📍 Weymouth, UK  
-🐕 Dog enthusiast. React/Next specialist. FE Architect for Optimizely SaaS CMS.
+🎸 Musician. React/Next specialist. FE Architect for Optimizely SaaS CMS.
