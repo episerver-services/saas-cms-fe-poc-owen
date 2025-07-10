@@ -12,7 +12,11 @@ const compat = new FlatCompat({
 const eslintConfig = [
   // Ignore these files
   {
-    ignores: ['lib/optimizely/queries/custom/sdk.ts', 'app/globals.css'],
+    ignores: [
+      'lib/optimizely/queries/custom/sdk.ts',
+      'lib/optimizely/queries/visual/sdk.ts',
+      'app/globals.css',
+    ],
   },
 
   // Apply the base config
