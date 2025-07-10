@@ -1,0 +1,7 @@
+fragment ButtonBlockPropertyData on ButtonBlockProperty {
+  ButtonText
+  ButtonUrl {
+    base
+    default
+  }
+}

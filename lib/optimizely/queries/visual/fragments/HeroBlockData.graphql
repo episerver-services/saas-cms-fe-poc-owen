@@ -1,0 +1,20 @@
+fragment HeroBlockData on HeroBlock {
+  HeroImage {
+    __typename
+  }
+  Eyebrow
+  Heading
+  SubHeading
+  Description {
+    json
+    html
+  }
+  HeroColor
+  HeroButton {
+    ButtonText
+    ButtonUrl {
+      base
+      default
+    }
+  }
+}

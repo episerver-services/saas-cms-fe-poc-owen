@@ -1,0 +1,5 @@
+fragment BlogSectionExperienceData on BlogSectionExperience {
+  _metadata {
+    displayName
+  }
+}

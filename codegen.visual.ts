@@ -7,7 +7,7 @@ const config: CodegenConfig = {
   schema,
   documents: './lib/optimizely/queries/visual/**/*.graphql',
   generates: {
-    './lib/optimizely/visual/sdk.ts': {
+    './lib/optimizely/queries/visual/sdk.ts': {
       plugins: [
         'typescript',
         'typescript-operations',

@@ -1,5 +1,0 @@
-query getExperienceByUrl($website: String!, $path: String!) {
-  experience: getExperienceByUrl(website: $website, path: $path) {
-    ...ExperienceFields
-  }
-}

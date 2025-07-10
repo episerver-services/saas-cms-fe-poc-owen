@@ -1,0 +1,8 @@
+fragment ExperienceData on _IExperience {
+  ... on BlankExperience {
+    ...BlankExperienceData
+  }
+  ... on BlogSectionExperience {
+    ...BlogSectionExperienceData
+  }
+}
