@@ -14,33 +14,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout source code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Setup pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
 
+      # Setup Node.js with pnpm caching
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
           cache: 'pnpm'
 
+      # Install dependencies
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Run linter
       - name: Run linter
         run: pnpm lint
 
+      # Run optional BDD tests
       - name: Run tests (optional)
         run: pnpm test:bdd || true
 
+      # Extract short commit SHA for Docker tagging
       - name: Extract short SHA
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
+      # Build Docker image with build-time env args
       - name: Build Docker image
         run: |
           docker build \
@@ -59,19 +67,23 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
+      # Checkout source code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Authenticate with DockerHub
       - name: Log in to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # Recompute SHA (safe guard)
       - name: Extract short SHA
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
+      # Build and publish Docker image
       - name: Build and push Docker image
         run: |
           docker build \

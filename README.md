@@ -114,24 +114,25 @@ Key envs are passed securely using GitHub Secrets.
 ```
 📁 app/                     # Next.js App Router structure
 │  ├─ [...slug]/           # CMS page rendering by path
-│  ├─ components/          # Shared content blocks
-│  ├─ page.tsx             # Homepage
 │  ├─ layout.tsx           # Shared layout
 │  ├─ metadata.ts          # SEO metadata from CMS
 │
 📁 lib/
 │  ├─ content/             # CMS fetch helpers
 │  ├─ optimizely/
-│  │   ├─ queries/         # GraphQL documents (custom + visual)
-│  │   ├─ sdk.ts           # Codegen output (custom)
-│  │   └─ visual/sdk.ts    # Codegen output (VB)
+│  │   ├─ components/      # Shared blocks and mappers
+│  │   ├─ queries/
+│  │   │   ├─ custom/      # GraphQL queries and fragments for custom
+│  │   │   └─ visual/      # GraphQL queries and fragments for VB
+│  │   │       └─ sdk/     # Codegen output for Visual Builder
+│  │   └─ types/           # Experience types, block props, etc.
 │  ├─ session/             # Placeholder for auth/session
-│  └─ utils/               # Logger, helpers
+│  └─ utils/               # Logger, block factory, etc.
 │
+📁 scripts/                # Centralised codegen configs
 📁 features/               # BDD tests
 📁 types/                  # Custom TypeScript types
 📁 mocks/                  # Local CMS mocks
-📁 scripts/                # Codegen tooling
 📄 Dockerfile              # Hybrid Dockerfile
 📄 docker-compose.yml      # Optional Docker dev support
 ```

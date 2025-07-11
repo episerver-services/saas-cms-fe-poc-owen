@@ -14,8 +14,8 @@
     "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts",
     "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
     "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require features/step-definitions/**/*.ts --require features/support/**/*.ts",
-    "codegen:custom": "dotenv -e .env.custom-styling.local -- graphql-codegen --config codegen.custom.ts",
-    "codegen:vb": "dotenv -e .env.visual-builder.local -- graphql-codegen --config codegen.visual.ts"
+    "codegen:custom": "dotenv -e .env.custom-styling.local -- graphql-codegen --config scripts/codegen.custom.ts",
+    "codegen:vb": "dotenv -e .env.visual-builder.local -- graphql-codegen --config scripts/codegen.visual.ts"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
