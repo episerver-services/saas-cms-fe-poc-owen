@@ -1,14 +1,16 @@
-import 'dotenv/config'
+import { config } from 'dotenv'
 import type { CodegenConfig } from '@graphql-codegen/cli'
+
+// Explicitly load the custom env file before using process.env
+config({ path: '.env.custom-styling.local' })
 
 /**
  * GraphQL Code Generator config for Optimizely Delivery API (v2).
  * This setup is used for the CUSTOM (non-Visual Builder) integration.
  */
-
 const schema = `${process.env.OPTIMIZELY_API_URL}?auth=${process.env.OPTIMIZELY_SINGLE_KEY}`
 
-const config: CodegenConfig = {
+const configObj: CodegenConfig = {
   schema,
   documents: './lib/optimizely/queries/custom/**/*.graphql',
   generates: {
@@ -36,4 +38,4 @@ const config: CodegenConfig = {
   ignoreNoDocuments: false,
 }
 
-export default config
+export default configObj

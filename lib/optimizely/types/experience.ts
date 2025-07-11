@@ -25,7 +25,7 @@ export interface ExperienceElement {
 }
 
 export interface VisualBuilderNode {
-  nodeType: 'section' | 'component'
+  nodeType: 'layout' | 'section' | 'component' // <-- ✅ includes 'layout'
   key: string
   component?: any
   rows?: Row[]
@@ -41,6 +41,7 @@ export type SafeVisualBuilderExperience = {
     displayTemplateKey: string
     displaySettings: any[]
     nodes?: VisualBuilderNode[]
+    layout?: VisualBuilderNode
   }
   meta?: {
     title?: string

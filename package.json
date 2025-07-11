@@ -5,17 +5,17 @@
   "scripts": {
     "clean": "rm -rf .next/cache",
     "dev": "npm run clean && next dev",
-    "dev:custom": "dotenv -e .env.custom-styling.local -- pnpm dev",
-    "dev:vb": "dotenv -e .env.visual-builder.local -- pnpm dev",
-    "build:custom": "dotenv -e .env.custom-styling.local -- next build",
-    "build:vb": "dotenv -e .env.visual-builder.local -- next build",
+    "dev:custom": "dotenv -e .env/.env.custom.local -- pnpm dev",
+    "dev:vb": "dotenv -e .env/.env.visual.local -- pnpm dev",
+    "build:custom": "dotenv -e .env/.env.custom.local -- next build",
+    "build:vb": "dotenv -e .env/.env.visual.local -- next build",
     "start": "next start",
     "lint": "next lint",
     "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts",
     "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
     "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require features/step-definitions/**/*.ts --require features/support/**/*.ts",
-    "codegen:custom": "dotenv -e .env.custom-styling.local -- graphql-codegen --config scripts/codegen.custom.ts",
-    "codegen:vb": "dotenv -e .env.visual-builder.local -- graphql-codegen --config scripts/codegen.visual.ts"
+    "codegen:custom": "dotenv -e .env/.env.custom.local -- graphql-codegen --config scripts/codegen.custom.ts",
+    "codegen:vb": "dotenv -e .env/.env.visual.local -- graphql-codegen --config scripts/codegen.visual.ts"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",

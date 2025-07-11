@@ -1,7 +1,7 @@
 import ContentAreaMapper from '@/lib/optimizely/components/content-area/mapper'
 import DraftModeCmsPage from '@/lib/optimizely/components/draft/draft-mode-cms-page'
 import { DraftModeLoader } from '@/lib/optimizely/components/draft/draft-mode-loader'
-import VisualBuilderExperienceWrapper from '@/lib/optimizely/components/visual-builder/visual-builder-wrapper'
+import VisualBuilderExperienceWrapper from '@/lib/optimizely/components/visual-builder/experience-wrapper'
 import { optimizely } from '@/lib/optimizely/fetch'
 import { fetchVisualBuilderExperience } from '@/lib/optimizely/fetchVisualBuilderExperience'
 import {

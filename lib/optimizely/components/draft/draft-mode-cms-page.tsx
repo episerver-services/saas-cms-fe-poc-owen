@@ -1,7 +1,7 @@
 import { optimizely } from '@/lib/optimizely/fetch'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
 import { Suspense } from 'react'
-import VisualBuilderExperienceWrapper from '../visual-builder/visual-builder-wrapper'
+import VisualBuilderExperienceWrapper from '../visual-builder/experience-wrapper'
 import { notFound } from 'next/navigation'
 import { SafeVisualBuilderExperience } from '@/lib/optimizely/types/experience'
 import ContentAreaMapper from '../content-area/mapper'
