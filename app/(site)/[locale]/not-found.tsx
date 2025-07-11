@@ -1,4 +1,4 @@
-import { Button } from '@/app/components/ui/button'
+import { Button } from '@/lib/optimizely/components/ui/button'
 import Link from 'next/link'
 
 export default function NotFound() {

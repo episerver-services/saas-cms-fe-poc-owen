@@ -6,7 +6,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from 'app/components/ui/dropdown-menu'
+} from '@/lib/optimizely/components/ui/dropdown-menu'
 import { Globe } from 'lucide-react'
 import { LOCALES } from '@/lib/optimizely/utils/language'
 import { Button } from '../ui/button'

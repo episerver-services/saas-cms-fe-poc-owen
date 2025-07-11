@@ -14,7 +14,7 @@ const eslintConfig = [
   {
     ignores: [
       'lib/optimizely/queries/custom/sdk.ts',
-      'lib/optimizely/queries/visual/sdk.ts',
+      'lib/optimizely/queries/visual/sdk/**/*',
       'app/globals.css',
     ],
   },

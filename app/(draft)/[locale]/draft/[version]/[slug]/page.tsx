@@ -1,5 +1,5 @@
-import ContentAreaMapper from '@/app/components/content-area/mapper'
-import OnPageEdit from '@/app/components/draft/on-page-edit'
+import ContentAreaMapper from '@/lib/optimizely/components/content-area/mapper'
+import OnPageEdit from '@/lib/optimizely/components/draft/on-page-edit'
 import { optimizely } from '@/lib/optimizely/fetch'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
 import { checkDraftMode } from '@/lib/utils/draft-mode'

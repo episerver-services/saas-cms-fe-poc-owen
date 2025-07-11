@@ -1,5 +1,5 @@
-import OnPageEdit from '@/app/components/draft/on-page-edit'
-import VisualBuilderExperienceWrapper from '@/app/components/visual-builder/wrapper'
+import OnPageEdit from '@/lib/optimizely/components/draft/on-page-edit'
+import VisualBuilderExperienceWrapper from '@/lib/optimizely/components/visual-builder/visual-builder-wrapper'
 import { optimizely } from '@/lib/optimizely/fetch'
 import { SafeVisualBuilderExperience } from '@/lib/optimizely/types/experience'
 import { getValidLocale } from '@/lib/optimizely/utils/language'

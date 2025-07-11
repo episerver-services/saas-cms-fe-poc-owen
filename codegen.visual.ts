@@ -7,14 +7,14 @@ const config: CodegenConfig = {
   schema,
   documents: './lib/optimizely/queries/visual/**/*.graphql',
   generates: {
-    './lib/optimizely/queries/visual/sdk.ts': {
-      plugins: [
-        'typescript',
-        'typescript-operations',
-        'typescript-generic-sdk',
-      ],
+    './lib/optimizely/queries/visual/sdk/': {
+      preset: 'client',
+      plugins: [],
+      presetConfig: {
+        gqlTagName: 'gql',
+        fragmentMasking: false,
+      },
       config: {
-        fetcher: 'function',
         useTypeImports: true,
         avoidOptionals: true,
         dedupeOperationSuffix: true,

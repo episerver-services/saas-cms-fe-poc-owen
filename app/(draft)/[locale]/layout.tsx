@@ -1,7 +1,7 @@
 import '../../globals.css'
 import { Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
-import DraftActions from '@/app/components/draft/draft-actions'
+import DraftActions from '@/lib/optimizely/components/draft/draft-actions'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

@@ -69,7 +69,7 @@ devDependencies:
     version: 4.0.2(graphql-tag@2.12.6)(graphql@16.11.0)
   '@graphql-codegen/typescript-graphql-request':
     specifier: ^6.3.0
-    version: 6.3.0(graphql-request@7.2.0)(graphql-tag@2.12.6)(graphql@16.11.0)
+    version: 6.3.0(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.11.0)
   '@graphql-codegen/typescript-operations':
     specifier: ^4.6.1
     version: 4.6.1(graphql-sock@1.0.1)(graphql@16.11.0)
@@ -81,10 +81,10 @@ devDependencies:
     version: 15.3.5
   '@remkoj/optimizely-graph-client':
     specifier: ^5.1.0
-    version: 5.1.0(graphql-request@7.2.0)
+    version: 5.1.0(graphql-request@6.1.0)
   '@remkoj/optimizely-graph-functions':
     specifier: ^5.1.0
-    version: 5.1.0(@graphql-typed-document-node/core@3.2.0)(@remkoj/optimizely-graph-client@5.1.0)(graphql-request@7.2.0)(graphql-tag@2.12.6)(graphql@16.11.0)
+    version: 5.1.0(@graphql-typed-document-node/core@3.2.0)(@remkoj/optimizely-graph-client@5.1.0)(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.11.0)
   '@tailwindcss/postcss':
     specifier: ^4.1.11
     version: 4.1.11
@@ -134,8 +134,8 @@ devDependencies:
     specifier: ^16.11.0
     version: 16.11.0
   graphql-request:
-    specifier: ^7.2.0
-    version: 7.2.0(graphql@16.11.0)
+    specifier: ^6.1.0
+    version: 6.1.0(graphql@16.11.0)
   jiti:
     specifier: ^2.4.2
     version: 2.4.2
@@ -1391,7 +1391,7 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/typescript-graphql-request@6.3.0(graphql-request@7.2.0)(graphql-tag@2.12.6)(graphql@16.11.0):
+  /@graphql-codegen/typescript-graphql-request@6.3.0(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.11.0):
     resolution: {integrity: sha512-IX42XakdcbGosIQo0jkH/4Tj5hk5smDmACYHMJbuSAA9vlcJNHkl3LGyG1Ggy2qVSI20nmNMaxpTg74SSyb4Yg==}
     engines: {node: '>= 16.0.0'}
     peerDependencies:
@@ -1403,7 +1403,7 @@ packages:
       '@graphql-codegen/visitor-plugin-common': 2.13.8(graphql@16.11.0)
       auto-bind: 4.0.0
       graphql: 16.11.0
-      graphql-request: 7.2.0(graphql@16.11.0)
+      graphql-request: 6.1.0(graphql@16.11.0)
       graphql-tag: 2.12.6(graphql@16.11.0)
       tslib: 2.8.1
     transitivePeerDependencies:
@@ -2844,17 +2844,17 @@ packages:
     resolution: {integrity: sha512-HPwpGIzkl28mWyZqG52jiqDJ12waP11Pa1lGoiyUkIEuMLBP0oeK/C89esbXrxsky5we7dfd8U58nm0SgAWpVw==}
     dev: false
 
-  /@remkoj/optimizely-graph-client@5.1.0(graphql-request@7.2.0):
+  /@remkoj/optimizely-graph-client@5.1.0(graphql-request@6.1.0):
     resolution: {integrity: sha512-xv52cdqwb1mUnKGtbLGMPc7BkgC1+5ZdD3lCgxTLbmLFUyeX+ok0VNhKNUrrFj04IAFDkfB9j3OBi8RSLWEhjw==}
     peerDependencies:
       graphql-request: ^6
     dependencies:
       crypto-js: 4.2.0
-      graphql-request: 7.2.0(graphql@16.11.0)
+      graphql-request: 6.1.0(graphql@16.11.0)
       uuid: 11.1.0
     dev: true
 
-  /@remkoj/optimizely-graph-functions@5.1.0(@graphql-typed-document-node/core@3.2.0)(@remkoj/optimizely-graph-client@5.1.0)(graphql-request@7.2.0)(graphql-tag@2.12.6)(graphql@16.11.0):
+  /@remkoj/optimizely-graph-functions@5.1.0(@graphql-typed-document-node/core@3.2.0)(@remkoj/optimizely-graph-client@5.1.0)(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.11.0):
     resolution: {integrity: sha512-HBA19uek4tZ6fQ3tlBetijLwQclpZdi+WP74BzxTnXCc3IliGs0i8jBoY/wCKPUAuUOYuSyrJkRwhBMGw7rlXQ==}
     hasBin: true
     peerDependencies:
@@ -2868,12 +2868,12 @@ packages:
       '@graphql-codegen/client-preset': 4.8.3(graphql-sock@1.0.1)(graphql@16.11.0)
       '@graphql-codegen/plugin-helpers': 5.1.1(graphql@16.11.0)
       '@graphql-codegen/typescript': 4.1.6(graphql@16.11.0)
-      '@graphql-codegen/typescript-graphql-request': 6.3.0(graphql-request@7.2.0)(graphql-tag@2.12.6)(graphql@16.11.0)
+      '@graphql-codegen/typescript-graphql-request': 6.3.0(graphql-request@6.1.0)(graphql-tag@2.12.6)(graphql@16.11.0)
       '@graphql-codegen/typescript-operations': 4.6.1(graphql-sock@1.0.1)(graphql@16.11.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
-      '@remkoj/optimizely-graph-client': 5.1.0(graphql-request@7.2.0)
+      '@remkoj/optimizely-graph-client': 5.1.0(graphql-request@6.1.0)
       graphql: 16.11.0
-      graphql-request: 7.2.0(graphql@16.11.0)
+      graphql-request: 6.1.0(graphql@16.11.0)
       graphql-sock: 1.0.1(graphql@16.11.0)
       graphql-tag: 2.12.6(graphql@16.11.0)
       tslib: 2.8.1
@@ -5581,15 +5581,6 @@ packages:
       graphql: 16.11.0
     transitivePeerDependencies:
       - encoding
-    dev: true
-
-  /graphql-request@7.2.0(graphql@16.11.0):
-    resolution: {integrity: sha512-0GR7eQHBFYz372u9lxS16cOtEekFlZYB2qOyq8wDvzRmdRSJ0mgUVX1tzNcIzk3G+4NY+mGtSz411wZdeDF/+A==}
-    peerDependencies:
-      graphql: 14 - 16
-    dependencies:
-      '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
-      graphql: 16.11.0
     dev: true
 
   /graphql-scalars@1.24.2(graphql@16.11.0):
