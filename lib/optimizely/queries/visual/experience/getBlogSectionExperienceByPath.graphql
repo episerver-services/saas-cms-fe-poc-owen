@@ -20,7 +20,7 @@ query getBlogSectionExperienceByPath(
       }
       composition {
         nodes {
-          ...CompositionNode
+          ...CompositionNodeData
         }
       }
     }

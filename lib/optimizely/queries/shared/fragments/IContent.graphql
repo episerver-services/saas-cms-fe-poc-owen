@@ -1,0 +1,21 @@
+fragment IContentInfo on IContentMetadata {
+  key
+  locale
+  types
+  displayName
+  version
+  url {
+    ...LinkData
+  }
+}
+
+fragment IContentData on _IContent {
+  _metadata {
+    ...IContentInfo
+  }
+  _type: __typename
+}
+
+fragment IContentListItem on _IContent {
+  ...IContentData
+}

@@ -1,0 +1,20 @@
+fragment LinkData on ContentUrl {
+  base
+  default
+}
+
+fragment ReferenceData on ContentReference {
+  key
+  url {
+    ...LinkData
+  }
+}
+
+fragment LinkItemData on Link {
+  title
+  text
+  target
+  url {
+    ...LinkData
+  }
+}

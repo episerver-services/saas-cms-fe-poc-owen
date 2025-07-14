@@ -1,3 +1,5 @@
+#import "../../shared/fragments/Composition.graphql"
+
 query getExperienceByPath(
   $key: String!
   $version: String
@@ -19,14 +21,13 @@ query getExperienceByPath(
         }
       }
 
-      # Add inline fragments for each supported Experience type
       ... on BlankExperience {
         _metadata {
           displayName
         }
         composition {
           nodes {
-            ...CompositionNode
+            ...CompositionNodeData
           }
         }
       }
@@ -37,7 +38,7 @@ query getExperienceByPath(
         }
         composition {
           nodes {
-            ...CompositionNode
+            ...CompositionNodeData
           }
         }
       }

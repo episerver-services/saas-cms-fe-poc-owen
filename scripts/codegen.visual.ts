@@ -12,7 +12,10 @@ const schema = `${process.env.OPTIMIZELY_API_URL}?auth=${process.env.OPTIMIZELY_
 
 const configObj: CodegenConfig = {
   schema,
-  documents: './lib/optimizely/queries/visual/**/*.graphql',
+  documents: [
+    './lib/optimizely/queries/visual/**/*.graphql',
+    './lib/optimizely/queries/shared/**/*.graphql',
+  ],
   generates: {
     './lib/optimizely/queries/visual/sdk/': {
       preset: 'client',
