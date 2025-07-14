@@ -2,7 +2,11 @@ query GetExperienceById($ids: [String!]!, $locale: [Locales!]) {
   _Experience(ids: $ids, locale: $locale) {
     items {
       ... on _IExperience {
-        ...ExperienceData
+        composition {
+          nodes {
+            ...CompositionNodeData
+          }
+        }
       }
     }
   }

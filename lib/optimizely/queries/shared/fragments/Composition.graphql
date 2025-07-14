@@ -1,29 +1,3 @@
-fragment ExperienceData on _IExperience {
-  composition {
-    ...CompositionNodeData
-    nodes {
-      ...CompositionNodeData
-      ... on ICompositionStructureNode {
-        nodes {
-          ...CompositionNodeData
-          ... on ICompositionStructureNode {
-            nodes {
-              ...CompositionNodeData
-              ... on ICompositionStructureNode {
-                nodes {
-                  ...CompositionNodeData
-                  ...CompositionComponentNodeData
-                }
-              }
-            }
-          }
-        }
-      }
-      ...CompositionComponentNodeData
-    }
-  }
-}
-
 fragment CompositionNodeData on ICompositionNode {
   name: displayName
   layoutType: nodeType

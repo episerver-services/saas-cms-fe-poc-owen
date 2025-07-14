@@ -1,5 +1,3 @@
-#import "../../shared/fragments/Composition.graphql"
-
 query getExperienceByPath(
   $key: String!
   $version: String
