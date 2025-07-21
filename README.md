@@ -82,30 +82,35 @@ Feature: Homepage Content
 
 ```
 📁 app/                     # Next.js App Router structure
-│  ├─ [...slug]/           # Dynamic page loading by GUID
-│  ├─ components/          # React block/component mappers
-│  ├─ page.tsx             # Homepage route
-│  ├─ layout.tsx           # Shared layout
-│  ├─ metadata.ts          # Metadata pulled from CMS
+│  ├─ (site)/[locale]/     # Localised routing
+│  │   └─ [slug]/          # Slug-based CMS page routing
+│  ├─ components/          # Shared UI components and mappers
+│  │   ├─ block/           # CMS block components
+│  │   ├─ content-area/    # Block renderer for CMS content areas
+│  │   ├─ draft/           # Draft mode-specific wrappers
+│  │   ├─ layout/          # Page layout and navigation
+│  │   ├─ ui/              # Generic UI elements
+│  │   └─ visual-builder/  # Optional: Experience (VB) components
+│  ├─ (draft)/             # API handlers for preview/draft support
+│  ├─ api/                 # Placeholder for API routes
+│  ├─ globals.css          # Global styles
+│  └─ metadata.ts          # CMS-powered metadata setup
 │
 📁 lib/
-│  ├─ content/             # CMS fetch logic and helpers
-│  ├─ optimizely/          # GraphQL SDK and schema handling
-│  ├─ session/             # Placeholder for auth/session logic
-│  └─ utils/               # Misc utilities like logger
+│  ├─ optimizely/          # GraphQL SDK, client and helpers
+│  ├─ utils/               # Language, metadata, misc helpers
+│  └─ content/             # (Optional) Rich text renderers etc.
 │
-📁 features/               # Cucumber BDD files
-│  ├─ homepage.feature
-│  └─ step-definitions/
-│
-📁 types/                  # Type overrides and shims
-📁 mocks/                  # OpenAPI mock responses
-📁 scripts/                # Schema tooling
+📁 features/               # Cucumber features and step definitions
+📁 types/                  # Project-level type utilities and shims
 📁 public/                 # Static assets
-📄 schema.graphql          # Latest schema
-📄 codegen.yaml            # GraphQL Codegen config
+📁 .github/                # GitHub Actions workflows
+📁 mocks/                  # (Optional) Mocked API responses
+📄 codegen.ts              # GraphQL Codegen config
 📄 Dockerfile              # Production Dockerfile
-📄 docker-compose.yml      # Optional Docker support
+📄 docker-compose.yml      # Docker orchestration config
+📄 tsconfig.json           # TypeScript config
+📄 README.md               # This file
 ```
 
 ---
@@ -147,6 +152,11 @@ docker run -p 3000:3000 saas-cms-fe-poc-owen
 - [ ] Add Jest unit tests alongside Cucumber
 - [ ] Extend routing with content modelling patterns
 - [ ] Add full E2E suite via Playwright or Cypress
+- [ ] Improve error handling for unknown blocks
+- [ ] Add Suspense loading boundaries for blocks
+- [ ] Refine a11y and semantic HTML (esp. for skip links, nav)
+- [ ] Add fallback UX for CMS fetch failures
+- [ ] Implement logging & observability (errors, perf)
 
 ---
 
@@ -154,4 +164,4 @@ docker run -p 3000:3000 saas-cms-fe-poc-owen
 
 **Owen Liversidge**  
 📍 Weymouth, UK  
-🐕 Dog enthusiast. React/Next specialist. FE Architect for Optimizely SaaS CMS.
+🎸 Musician. React/Next specialist. FE Architect for Optimizely SaaS CMS.
