@@ -15,6 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+/**
+ * Generates static parameters for locale-based routing.
+ * Ensures that each supported locale will be statically rendered.
+ *
+ * @returns An array of locale param objects used by Next.js App Router
+ */
 export function generateStaticParams() {
   try {
     return LOCALES.map((locale) => ({ locale }))
@@ -24,6 +30,15 @@ export function generateStaticParams() {
   }
 }
 
+/**
+ * Root layout component for all pages.
+ * Includes site-wide header, footer, global fonts, and layout structure.
+ *
+ * @param props - Component props containing locale and children
+ * @param props.children - Page content to render inside layout
+ * @param props.params - Async route parameters including locale
+ * @returns HTML structure with layout wrappers and theming
+ */
 export default async function RootLayout({
   children,
   params,

@@ -8,8 +8,18 @@ import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { Suspense } from 'react'
 
+/**
+ * Forces this route to be dynamically rendered on every request.
+ * Useful for handling CMS preview mode and dynamic content in development.
+ */
 export const dynamic = 'force-dynamic'
 
+/**
+ * Generates metadata for the homepage based on the locale and CMS content.
+ *
+ * @param props - Contains a `params` Promise that resolves to route params with locale.
+ * @returns A `Metadata` object for the page head.
+ */
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
@@ -43,6 +53,12 @@ export async function generateMetadata(props: {
   }
 }
 
+/**
+ * Renders the homepage. Supports both live and draft preview modes.
+ *
+ * @param props - Contains a `params` Promise with the current route locale.
+ * @returns The homepage JSX rendered either from live CMS data or preview mode.
+ */
 export default async function HomePage(props: {
   params: Promise<{ locale: string }>
 }) {
@@ -74,11 +90,9 @@ export default async function HomePage(props: {
     )
 
     return (
-      <>
-        <Suspense>
-          <ContentAreaMapper blocks={blocks} />
-        </Suspense>
-      </>
+      <Suspense>
+        <ContentAreaMapper blocks={blocks} />
+      </Suspense>
     )
   } catch (e) {
     console.error('HomePage render fallback:', e)

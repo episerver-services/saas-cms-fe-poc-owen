@@ -5,6 +5,14 @@ import { optimizely } from '@/lib/optimizely/fetch'
 import { castContent, SafeContent } from '@/lib/optimizely/types/typeUtils'
 import { SocialLink, FooterColumn, NavItem } from '@/lib/optimizely/sdk'
 
+/**
+ * Renders the site footer based on Optimizely CMS content.
+ *
+ * Fetches columns, social links, and copyright text based on the current locale.
+ *
+ * @param locale - The current locale string (e.g. `'en'`, `'fr'`)
+ * @returns JSX element for the footer or `null` if no footer content is available.
+ */
 export async function Footer({ locale }: { locale: string }) {
   const validLocale = getValidLocale(locale)
   const locales = validLocale === 'ALL' ? null : [validLocale]
@@ -13,6 +21,7 @@ export async function Footer({ locale }: { locale: string }) {
     { locales },
     { cacheTag: 'optimizely-footer' }
   )
+
   const footer = result.Footer?.item
   if (!footer || !('columns' in footer)) {
     return null
@@ -23,6 +32,7 @@ export async function Footer({ locale }: { locale: string }) {
   return (
     <footer className="border-t">
       <div className="container mx-auto px-4 py-12">
+        {/* Footer navigation columns */}
         <div className="grid gap-8 md:grid-cols-4">
           {columns?.map((columnItem, index) => {
             const column = castContent<FooterColumn>(
@@ -54,6 +64,8 @@ export async function Footer({ locale }: { locale: string }) {
             )
           })}
         </div>
+
+        {/* Social media icons */}
         <div className="mt-8 flex justify-center gap-4">
           {socialLinks?.map((linkItem, index) => {
             const link = castContent<SocialLink>(
@@ -76,6 +88,8 @@ export async function Footer({ locale }: { locale: string }) {
             )
           })}
         </div>
+
+        {/* Footer copyright */}
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
           {copyrightText}
         </div>

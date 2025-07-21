@@ -6,6 +6,13 @@ import type {
   SafeVisualBuilderExperience,
 } from '@/lib/optimizely/types/experience'
 
+/**
+ * Renders a Visual Builder experience based on layout composition.
+ * Supports both `section` and `component` node types.
+ *
+ * @param experience - The Visual Builder experience object containing layout nodes
+ * @returns Rendered layout or `null` if invalid
+ */
 export default function VisualBuilderExperienceWrapper({
   experience,
 }: {
@@ -21,6 +28,7 @@ export default function VisualBuilderExperienceWrapper({
     <div className="vb:outline relative w-full flex-1">
       <div className="vb:outline relative w-full flex-1">
         {nodes.map((node: VisualBuilderNode) => {
+          // Render section with rows and columns
           if (node.nodeType === 'section') {
             return (
               <div
@@ -35,8 +43,8 @@ export default function VisualBuilderExperienceWrapper({
                   >
                     {row.columns?.map((column: Column) => (
                       <div
-                        className="vb:col flex flex-1 flex-col flex-nowrap justify-start"
                         key={column.key}
+                        className="vb:col flex flex-1 flex-col flex-nowrap justify-start"
                       >
                         <ContentAreaMapper
                           experienceElements={column.elements}
@@ -50,6 +58,7 @@ export default function VisualBuilderExperienceWrapper({
             )
           }
 
+          // Render standalone component node
           if (node.nodeType === 'component' && node.component) {
             return (
               <div

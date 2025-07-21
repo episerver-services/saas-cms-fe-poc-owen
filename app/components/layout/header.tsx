@@ -7,6 +7,22 @@ import { castContent, SafeContent } from '@/lib/optimizely/types/typeUtils'
 import { NavItem } from '@/lib/optimizely/sdk'
 import { LanguageSwitcher } from './language-switcher'
 
+/**
+ * Builds a safe, locale-prefixed href for navigation.
+ *
+ * @param locale - The current locale string (e.g. 'en')
+ * @param path - The raw href from CMS or config
+ * @returns A valid path like `/en/about` or `/en`
+ */
+function withLocale(locale: string, path: string | null | undefined): string {
+  const safePath = path ?? '/'
+  return `/${locale}${safePath.startsWith('/') ? safePath : `/${safePath}`}`
+}
+
+/**
+ * Site header component with logo, navigation, CTA, and language switcher.
+ * Pulls content from Optimizely CMS and renders locale-aware links.
+ */
 export async function Header({ locale }: { locale: string }) {
   const validLocale = getValidLocale(locale)
 
@@ -26,7 +42,8 @@ export async function Header({ locale }: { locale: string }) {
     <header className="sticky top-0 z-30 border-b bg-white">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-xl font-bold lg:min-w-[150px]">
+          {/* Logo */}
+          <Link href={`/${locale}`} className="text-xl font-bold lg:min-w-[150px]">
             <Image
               src={logo || '/placeholder.svg'}
               width={50}
@@ -35,6 +52,8 @@ export async function Header({ locale }: { locale: string }) {
               unoptimized={!logo}
             />
           </Link>
+
+          {/* Navigation Menu */}
           <nav className="hidden items-center gap-6 md:flex">
             {navItems?.map((navItem) => {
               const item = castContent<NavItem>(
@@ -46,7 +65,7 @@ export async function Header({ locale }: { locale: string }) {
               return (
                 <Link
                   key={item.href}
-                  href={item?.href ?? '/'}
+                  href={withLocale(locale, item.href)}
                   className="text-sm font-medium"
                 >
                   {item.label}
@@ -54,10 +73,12 @@ export async function Header({ locale }: { locale: string }) {
               )
             })}
           </nav>
+
+          {/* CTA + Language Switcher */}
           <div className="flex items-center gap-4">
             <LanguageSwitcher currentLocale={locale} />
             <Button variant="outline" asChild>
-              <Link href={ctaHref ?? '/'}>{ctaText}</Link>
+              <Link href={withLocale(locale, ctaHref)}>{ctaText}</Link>
             </Button>
           </div>
         </div>

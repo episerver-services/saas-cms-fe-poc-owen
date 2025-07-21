@@ -14,6 +14,13 @@ import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
+/**
+ * Generates SEO metadata for a given locale and slug.
+ * Attempts to retrieve metadata from CMSPage or Experience content.
+ *
+ * @param props - Async props containing locale and slug from route params
+ * @returns Metadata object used in the <head> section of the page
+ */
 export async function generateMetadata(props: {
   params: Promise<{ locale: string; slug?: string }>
 }): Promise<Metadata> {
@@ -22,7 +29,6 @@ export async function generateMetadata(props: {
   const formattedSlug = `/${slug}`
 
   if (process.env.IS_BUILD === 'true') {
-    // Fallback metadata during build
     return {
       title: 'Optimizely Page',
       description: '',
@@ -45,9 +51,9 @@ export async function generateMetadata(props: {
       const experience = experienceData?.SEOExperience?.item
       if (experience) {
         return {
-          title: experience?.title,
-          description: experience?.shortDescription || '',
-          keywords: experience?.keywords ?? '',
+          title: experience.title,
+          description: experience.shortDescription || '',
+          keywords: experience.keywords ?? '',
           alternates: generateAlternates(locale, formattedSlug),
         }
       }
@@ -64,29 +70,33 @@ export async function generateMetadata(props: {
   } catch (error) {
     console.error('generateMetadata fallback:', error)
     return {
-      title: `Optimizely Page ${slug ? `- ${slug}` : ''}`,
+      title: `Optimizely Page${slug ? ` - ${slug}` : ''}`,
     }
   }
 }
 
+/**
+ * Generates all static paths (slug + locale) for prerendering.
+ * Falls back to dynamic rendering if running inside a Docker build.
+ *
+ * @returns An array of static params for each known CMS or Experience route
+ */
 export async function generateStaticParams() {
   if (process.env.IS_BUILD === 'true') {
-    return [] // Skip building params during Docker build
+    return [] // Skip during Docker build
   }
 
   try {
     const pageTypes = ['CMSPage', 'SEOExperience']
     const pathsResp = await optimizely.AllPages({ pageType: pageTypes })
     const paths = pathsResp._Content?.items ?? []
-    const filterPaths = paths.filter(
-      (path) => path && path._metadata?.url?.default !== null
-    )
+
     const uniquePaths = new Set<string>()
-    filterPaths.forEach((path) => {
-      const cleanPath = mapPathWithoutLocale(
-        path?._metadata?.url?.default ?? ''
-      )
-      uniquePaths.add(cleanPath)
+    paths.forEach((path) => {
+      const rawPath = path?._metadata?.url?.default
+      if (rawPath) {
+        uniquePaths.add(mapPathWithoutLocale(rawPath))
+      }
     })
 
     return Array.from(uniquePaths).map((slug) => ({
@@ -98,6 +108,13 @@ export async function generateStaticParams() {
   }
 }
 
+/**
+ * Renders a hybrid page from either a CMS content page or a Visual Builder experience.
+ * Supports draft mode rendering and falls back to notFound() if no content is found.
+ *
+ * @param props - Route params including locale and slug
+ * @returns React component tree for the rendered page
+ */
 export default async function CmsPage(props: {
   params: Promise<{ locale: string; slug?: string }>
 }) {
@@ -142,9 +159,7 @@ export default async function CmsPage(props: {
     return notFound()
   }
 
-  const blocks = (page.blocks ?? []).filter(
-    (block) => block !== null && block !== undefined
-  )
+  const blocks = (page.blocks ?? []).filter(Boolean)
 
   return (
     <>
