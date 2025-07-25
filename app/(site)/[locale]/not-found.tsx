@@ -1,6 +1,3 @@
-'use client'
-
-import { useEffect } from 'react'
 import { Button } from '@/app/components/ui/button'
 import Link from 'next/link'
 import { Metadata } from 'next'
@@ -21,10 +18,6 @@ export const metadata: Metadata = {
  * Displayed when a route does not match an existing page.
  */
 export default function NotFound() {
-  useEffect(() => {
-    // Optional: analytics or focus handling
-  }, [])
-
   return (
     <main
       role="main"
