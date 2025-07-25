@@ -30,20 +30,20 @@ _Last updated: 24 July 2025_
 | SDK setup with graphql-codegen     | ✅     | Codegen present in `codegen.ts` and `lib/optimizely` |
 | Content ID config (home, layout)   | ✅     | ENV vars support root layout/content                 |
 | Preview mode support (draft route) | ✅     | All preview routes (including draft mode API) exist  |
-| Fallback & error handling          | 🔄     | 404/500 UI exists but needs UX polish                |
+| Fallback & error handling          | ✅     | not-found.tsx refactored, build passes cleanly       |
 
 ---
 
 ## 🧱 Phase 3: Core Rendering Logic
 
-| Task                                 | Status | Notes                                         |
-| ------------------------------------ | ------ | --------------------------------------------- |
-| Page routing (`[locale]/[slug]`)     | ✅     | Implemented via catch-all dynamic route       |
-| Catch-all content renderer           | ✅     | Working via shared layout/content rendering   |
-| Component factory mapper             | ✅     | Uses `__typename` switcher                    |
-| Slot renderer for named areas        | ✅     | Base implementation working; nested slots TBD |
-| ID resolution (inline/shared blocks) | 🔄     | Includes maincontent, header, etc.            |
-| Rich text and media component base   | ✅     | CTA, Text, Image components supported         |
+| Task                                 | Status | Notes                                                               |
+| ------------------------------------ | ------ | ------------------------------------------------------------------- |
+| Page routing (`[locale]/[slug]`)     | ✅     | Implemented via catch-all dynamic route                             |
+| Catch-all content renderer           | ✅     | Working via shared layout/content rendering                         |
+| Component factory mapper             | ✅     | Uses `__typename` switcher                                          |
+| Slot renderer for named areas        | ✅     | Base implementation working; nested slots TBD                       |
+| ID resolution (inline/shared blocks) | 🔄     | Visual Builder runtime shape guard added; next: nested slot support |
+| Rich text and media component base   | ✅     | CTA, Text, Image components supported                               |
 
 ---
 
@@ -97,7 +97,7 @@ _Last updated: 24 July 2025_
 | ----- | --------------------------------------------- | ---------- |
 | 1     | Commit hooks                                  | Low        |
 | 2     | Preview fallback, error views                 | Medium     |
-| 3     | Slot nesting, shared block ID resolution      | High       |
+| 3     | Slot nesting support                          | High       |
 | 4     | CDN image transform, render fallback handling | Medium     |
 | 5     | ARIA audits, skip links, sitemap              | Medium     |
 | 6     | Unit + E2E test frameworks                    | High       |
