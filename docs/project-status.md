@@ -29,8 +29,8 @@ _Last updated: 24 July 2025_
 | GraphQL API connection             | ✅     | ENV-based bearer token wiring complete               |
 | SDK setup with graphql-codegen     | ✅     | Codegen present in `codegen.ts` and `lib/optimizely` |
 | Content ID config (home, layout)   | ✅     | ENV vars support root layout/content                 |
-| Preview mode support (draft route) | 🔄     | Route scaffolded, token/auth logic pending           |
-| Fallback & error handling          | 🔄     | 404/500 UI not yet user-friendly or complete         |
+| Preview mode support (draft route) | ✅     | All preview routes (including draft mode API) exist  |
+| Fallback & error handling          | 🔄     | 404/500 UI exists but needs UX polish                |
 
 ---
 
@@ -41,8 +41,8 @@ _Last updated: 24 July 2025_
 | Page routing (`[locale]/[slug]`)     | ✅     | Implemented via catch-all dynamic route       |
 | Catch-all content renderer           | ✅     | Working via shared layout/content rendering   |
 | Component factory mapper             | ✅     | Uses `__typename` switcher                    |
-| Slot renderer for named areas        | 🔄     | Base implementation working; nested slots TBD |
-| ID resolution (inline/shared blocks) | 🔄     | Partial handling in place                     |
+| Slot renderer for named areas        | ✅     | Base implementation working; nested slots TBD |
+| ID resolution (inline/shared blocks) | 🔄     | Includes maincontent, header, etc.            |
 | Rich text and media component base   | ✅     | CTA, Text, Image components supported         |
 
 ---
@@ -81,13 +81,13 @@ _Last updated: 24 July 2025_
 
 ## 🧩 Phase 7: Visual Builder Readiness
 
-| Task                                    | Status | Notes                                         |
-| --------------------------------------- | ------ | --------------------------------------------- |
-| Layout-aware slot rendering             | 🔄     | Working base logic, needs enhancements        |
-| ExperienceRenderer for VB compatibility | 🔲     | Not scaffolded yet                            |
-| displayOption / spacing / styling hints | 🔲     | No mapping yet                                |
-| Draft/preview mode from CMS editor      | 🔄     | Route present, token/auth passthrough pending |
-| Opti ID / editor identity passthrough   | 🔲     | Preview impersonation not wired up yet        |
+| Task                                    | Status | Notes                                        |
+| --------------------------------------- | ------ | -------------------------------------------- |
+| Layout-aware slot rendering             | 🔄     | Working base logic, needs enhancements       |
+| ExperienceRenderer for VB compatibility | 🔲     | Not scaffolded yet                           |
+| displayOption / spacing / styling hints | 🔲     | No mapping yet                               |
+| Draft/preview mode from CMS editor      | ✅     | Experience draft route structure is in place |
+| Opti ID / editor identity passthrough   | 🔲     | Preview impersonation not wired up yet       |
 
 ---
 

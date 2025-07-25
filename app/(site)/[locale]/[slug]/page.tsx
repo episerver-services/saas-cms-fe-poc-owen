@@ -1,6 +1,7 @@
 import ContentAreaMapper from '@/app/components/content-area/mapper'
 import DraftModeCmsPage from '@/app/components/draft/draft-mode-cms-page'
 import { DraftModeLoader } from '@/app/components/draft/draft-mode-loader'
+import FallbackErrorUI from '@/app/components/errors/fallback-error-ui'
 import VisualBuilderExperienceWrapper from '@/app/components/visual-builder/wrapper'
 import { optimizely } from '@/lib/optimizely/fetch'
 import { SafeVisualBuilderExperience } from '@/lib/optimizely/types/experience'
@@ -131,22 +132,35 @@ export default async function CmsPage(props: {
     )
   }
 
-  const pageData = await optimizely.getPageByURL({
-    locales: [locales],
-    slug: formattedSlug,
-  })
-
-  const page = pageData?.CMSPage?.item
-
-  if (!page?._modified) {
-    const experienceData = await optimizely.GetVisualBuilderBySlug({
+  let page = null
+  try {
+    const pageData = await optimizely.getPageByURL({
       locales: [locales],
       slug: formattedSlug,
     })
+    page = pageData?.CMSPage?.item ?? null
+  } catch (err) {
+    return <FallbackErrorUI error={err} />
+  }
 
-    const experience = experienceData?.SEOExperience?.item as
-      | SafeVisualBuilderExperience
-      | undefined
+  if (!page?._modified) {
+    let experience = null
+    try {
+      const experienceData = await optimizely.GetVisualBuilderBySlug({
+        locales: [locales],
+        slug: formattedSlug,
+      })
+      const rawExperience = experienceData?.SEOExperience?.item
+      const isValidExperience =
+        rawExperience?.composition !== null &&
+        rawExperience?.composition !== undefined
+
+      if (isValidExperience) {
+        experience = rawExperience as SafeVisualBuilderExperience
+      }
+    } catch (err) {
+      return <FallbackErrorUI error={err} />
+    }
 
     if (experience) {
       return (
@@ -162,10 +176,8 @@ export default async function CmsPage(props: {
   const blocks = (page.blocks ?? []).filter(Boolean)
 
   return (
-    <>
-      <Suspense>
-        <ContentAreaMapper blocks={blocks} />
-      </Suspense>
-    </>
+    <Suspense>
+      <ContentAreaMapper blocks={blocks} />
+    </Suspense>
   )
 }
