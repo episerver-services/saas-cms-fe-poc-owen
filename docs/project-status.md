@@ -6,101 +6,99 @@ This file tracks the current implementation progress of the custom frontend temp
 🔄 = In Progress  
 🔲 = Not Started
 
+_Last updated: 24 July 2025_
+
 ---
 
 ## 🧱 Phase 1: Project Setup & Infrastructure
 
-| Task                             | Status  | Notes |
-|----------------------------------|---------|-------|
-| Project scaffold & folder layout | ✅       | Uses App Router + `/app` layout |
-| Environment config (.env setup) | ✅       | Local and Docker-ready |
-| TypeScript + ESLint config       | ✅       | Strict mode enabled |
-| GitHub CI/CD pipelines           | ✅       | Basic test/build jobs in place |
-| Commit linting / Husky hooks     | 🔲       | Optional enhancement |
+| Task                             | Status | Notes                                        |
+| -------------------------------- | ------ | -------------------------------------------- |
+| Project scaffold & folder layout | ✅     | Uses App Router + `/app` layout              |
+| Environment config (.env setup)  | ✅     | `.env.local` found; Docker-ready             |
+| TypeScript + ESLint config       | ✅     | `tsconfig.json`, `eslint.config.ts` in place |
+| GitHub CI/CD pipelines           | ✅     | `.github/` workflows present                 |
+| Commit linting / Husky hooks     | 🔲     | `.husky/` directory not yet added            |
 
 ---
 
 ## 📦 Phase 2: CMS Integration (Headless Foundation)
 
-| Task                                | Status  | Notes |
-|-------------------------------------|---------|-------|
-| GraphQL API connection              | ✅       | Bearer token auth via ENV |
-| SDK setup with graphql-codegen      | ✅       | Codegen in `lib/optimizely/sdk.ts` |
-| Content ID config (home, layout)    | ✅       | ENV-driven |
-| Preview mode support (draft route)  | 🔄       | Basic route scaffolded, needs secure handling |
-| Fallback & error handling           | 🔄       | Needs user-friendly fallback UI |
+| Task                               | Status | Notes                                                |
+| ---------------------------------- | ------ | ---------------------------------------------------- |
+| GraphQL API connection             | ✅     | ENV-based bearer token wiring complete               |
+| SDK setup with graphql-codegen     | ✅     | Codegen present in `codegen.ts` and `lib/optimizely` |
+| Content ID config (home, layout)   | ✅     | ENV vars support root layout/content                 |
+| Preview mode support (draft route) | 🔄     | Route scaffolded, token/auth logic pending           |
+| Fallback & error handling          | 🔄     | 404/500 UI not yet user-friendly or complete         |
 
 ---
 
 ## 🧱 Phase 3: Core Rendering Logic
 
-| Task                                     | Status  | Notes |
-|------------------------------------------|---------|-------|
-| Page routing (`[locale]/[slug]`)         | ✅       | Supported via Next.js catch-all |
-| Catch-all content renderer               | ✅       | Based on layout/content |
-| Component factory mapper                 | ✅       | Based on `__typename` |
-| Slot renderer for named areas            | 🔄       | Implemented for base blocks, needs nesting refinements |
-| ID resolution (inline/shared blocks)     | 🔄       | Partially supported |
-| Rich text and media component base       | ✅       | Text, CTA, Image supported |
+| Task                                 | Status | Notes                                         |
+| ------------------------------------ | ------ | --------------------------------------------- |
+| Page routing (`[locale]/[slug]`)     | ✅     | Implemented via catch-all dynamic route       |
+| Catch-all content renderer           | ✅     | Working via shared layout/content rendering   |
+| Component factory mapper             | ✅     | Uses `__typename` switcher                    |
+| Slot renderer for named areas        | 🔄     | Base implementation working; nested slots TBD |
+| ID resolution (inline/shared blocks) | 🔄     | Partial handling in place                     |
+| Rich text and media component base   | ✅     | CTA, Text, Image components supported         |
 
 ---
 
 ## 🌐 Phase 4: Performance & Delivery
 
-| Task                           | Status  | Notes |
-|--------------------------------|---------|-------|
-| Rendering model enforcement    | 🔲       | SSG/ISR preferred; fallback logic pending |
-| CDN-based image transformation | 🔲       | Use of `cdn-cgi/image` not yet wired |
-| Core Web Vitals planning       | 🔲       | To be handled post-baseline rendering |
+| Task                           | Status | Notes                                 |
+| ------------------------------ | ------ | ------------------------------------- |
+| Rendering model enforcement    | 🔲     | ISR/SSG strategy not yet enforced     |
+| CDN-based image transformation | 🔲     | `cdn-cgi/image` not wired up yet      |
+| Core Web Vitals planning       | 🔲     | No next/script optimisations seen yet |
 
 ---
 
 ## 🛡️ Phase 5: Accessibility, SEO & Metadata
 
-| Task                        | Status  | Notes |
-|-----------------------------|---------|-------|
-| Metadata from CMS           | ✅       | Title, OG populated via `metadata.ts` |
-| Accessibility baseline      | 🔄       | WCAG checks for components underway |
-| Skip links, ARIA audit      | 🔲       | Yet to be implemented |
-| robots.txt / sitemap setup  | 🔲       | To be added for production readiness |
+| Task                       | Status | Notes                                        |
+| -------------------------- | ------ | -------------------------------------------- |
+| Metadata from CMS          | ✅     | Populated via `metadata.ts`                  |
+| Accessibility baseline     | 🔄     | ARIA enhancements present, still under audit |
+| Skip links, ARIA audit     | 🔲     | Not yet implemented                          |
+| robots.txt / sitemap setup | 🔲     | Missing config/routes                        |
 
 ---
 
 ## 🧪 Phase 6: Testing & Deployment
 
-| Task                            | Status  | Notes |
-|---------------------------------|---------|-------|
-| Jest unit test setup            | 🔲       | Framework not yet added |
-| BDD testing via Cucumber        | ✅       | `features/` folder and one sample test |
-| Playwright/Cypress E2E tests    | 🔲       | Not yet integrated |
-| Dockerfile & runtime container  | ✅       | Working Docker build pipeline |
+| Task                           | Status | Notes                                      |
+| ------------------------------ | ------ | ------------------------------------------ |
+| Jest unit test setup           | 🔲     | No Jest config detected                    |
+| BDD testing via Cucumber       | ✅     | `features/` folder and `cucumber.ts` found |
+| Playwright/Cypress E2E tests   | 🔲     | Not integrated yet                         |
+| Dockerfile & runtime container | ✅     | Dockerfile and Compose config present      |
 
 ---
 
 ## 🧩 Phase 7: Visual Builder Readiness
 
-| Task                                     | Status  | Notes |
-|------------------------------------------|---------|-------|
-| Layout-aware slot rendering              | 🔄       | Functional but needs metadata support |
-| ExperienceRenderer for VB compatibility  | 🔲       | Base component to be created |
-| displayOption / spacing / styling hints  | 🔲       | Needs mapping support |
-| Draft/preview mode from CMS editor       | 🔄       | Draft routing exists, auth token wiring pending |
-| Opti ID / editor identity passthrough    | 🔲       | Preview token handling to be designed |
+| Task                                    | Status | Notes                                         |
+| --------------------------------------- | ------ | --------------------------------------------- |
+| Layout-aware slot rendering             | 🔄     | Working base logic, needs enhancements        |
+| ExperienceRenderer for VB compatibility | 🔲     | Not scaffolded yet                            |
+| displayOption / spacing / styling hints | 🔲     | No mapping yet                                |
+| Draft/preview mode from CMS editor      | 🔄     | Route present, token/auth passthrough pending |
+| Opti ID / editor identity passthrough   | 🔲     | Preview impersonation not wired up yet        |
 
 ---
 
 ## ⏱️ Estimated Remaining Workload
 
-| Phase | Remaining Tasks | Complexity |
-|-------|------------------|------------|
-| 1     | Commit hooks     | Low        |
-| 2     | Preview fallback | Medium     |
-| 3     | Slot renderer refinement, nested blocks | High |
-| 4     | CDN image, fallback logic     | Medium     |
-| 5     | Skip links, robots.txt, sitemap | Medium |
-| 6     | Unit & E2E tests              | High        |
-| 7     | ExperienceRenderer, VB preview | High        |
-
----
-
-_Last updated: {{today’s date}}_
+| Phase | Remaining Tasks                               | Complexity |
+| ----- | --------------------------------------------- | ---------- |
+| 1     | Commit hooks                                  | Low        |
+| 2     | Preview fallback, error views                 | Medium     |
+| 3     | Slot nesting, shared block ID resolution      | High       |
+| 4     | CDN image transform, render fallback handling | Medium     |
+| 5     | ARIA audits, skip links, sitemap              | Medium     |
+| 6     | Unit + E2E test frameworks                    | High       |
+| 7     | Visual Builder renderer, token passthrough    | High       |
