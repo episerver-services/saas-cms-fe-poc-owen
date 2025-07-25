@@ -41,8 +41,8 @@ _Last updated: 24 July 2025_
 | Page routing (`[locale]/[slug]`)     | ✅     | Implemented via catch-all dynamic route                             |
 | Catch-all content renderer           | ✅     | Working via shared layout/content rendering                         |
 | Component factory mapper             | ✅     | Uses `__typename` switcher                                          |
-| Slot renderer for named areas        | ✅     | Base implementation working; nested slots TBD                       |
-| ID resolution (inline/shared blocks) | 🔄     | Visual Builder runtime shape guard added; next: nested slot support |
+| Slot renderer for named areas        | ✅     | Base implementation working; nested slots now supported recursively |
+| ID resolution (inline/shared blocks) | ✅     | Visual Builder runtime shape guard added; next: nested slot support |
 | Rich text and media component base   | ✅     | CTA, Text, Image components supported                               |
 
 ---

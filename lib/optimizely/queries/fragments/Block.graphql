@@ -1,4 +1,6 @@
+# Block type fragments
 fragment HeroBlockFragment on HeroBlock {
+  __typename
   title
   subtitle
   decorationColorsPrimary
@@ -7,11 +9,13 @@ fragment HeroBlockFragment on HeroBlock {
 }
 
 fragment ContactBlockFragment on ContactBlock {
+  __typename
   title
   description
 }
 
 fragment LogosBlockFragment on LogosBlock {
+  __typename
   logos {
     __typename
     ... on LogoItemBlock {
@@ -22,6 +26,7 @@ fragment LogosBlockFragment on LogosBlock {
 }
 
 fragment PortfolioGridBlockFragment on PortfolioGridBlock {
+  __typename
   title
   items {
     __typename
@@ -35,6 +40,7 @@ fragment PortfolioGridBlockFragment on PortfolioGridBlock {
 }
 
 fragment ServicesBlockFragment on ServicesBlock {
+  __typename
   services {
     __typename
     ... on ServiceItem {
@@ -46,6 +52,7 @@ fragment ServicesBlockFragment on ServicesBlock {
 }
 
 fragment TestimonialsBlockFragment on TestimonialsBlock {
+  __typename
   title
   testimonials {
     __typename
@@ -59,6 +66,7 @@ fragment TestimonialsBlockFragment on TestimonialsBlock {
 }
 
 fragment ProfileBlockFragment on ProfileBlock {
+  __typename
   imageSrc
   bio
   name
@@ -66,15 +74,18 @@ fragment ProfileBlockFragment on ProfileBlock {
 }
 
 fragment AvailabilityBlockFragment on AvailabilityBlock {
+  __typename
   availability
   projectTypes
 }
 
 fragment StoryBlockFragment on StoryBlock {
+  __typename
   story
   highlights
 }
 
+# Unified content fragment for any ContentArea
 fragment ItemsInContentArea on _IContent {
   __typename
   ...HeroBlockFragment
