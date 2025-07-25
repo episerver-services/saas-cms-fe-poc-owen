@@ -9,14 +9,14 @@ const OPTIMIZELY_REVALIDATE_SECRET = process.env.OPTIMIZELY_REVALIDATE_SECRET
  * Validates the webhook, resolves the content by GUID, determines its URL,
  * and triggers revalidation for the corresponding Next.js page or cache tag.
  *
- * @param {NextRequest} request - The incoming webhook POST request.
- * @returns {Promise<NextResponse>} A JSON response indicating success or failure.
+ * @param request - The incoming webhook POST request.
+ * @returns A JSON response indicating success or failure.
  */
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     validateWebhookSecret(request)
-    const docId = await extractDocId(request)
 
+    const docId = await extractDocId(request)
     if (!docId || !docId.includes('Published')) {
       return NextResponse.json({ message: 'No action taken' })
     }
@@ -25,13 +25,14 @@ export async function POST(request: NextRequest) {
     const formattedGuid = guid.replaceAll('-', '')
 
     const content = await fetchContentByGuid(formattedGuid)
-    const urlType = content?._metadata?.url?.type
+    const metadata = content?._metadata
+    const urlData = hasUrlMetadata(metadata) ? metadata.url : undefined
 
     // Normalize the CMS URL to be relative to the site root
     const url =
-      urlType === 'SIMPLE'
-        ? content?._metadata?.url?.default
-        : content?._metadata?.url?.hierarchical?.replace(
+      urlData?.type === 'SIMPLE'
+        ? urlData?.default
+        : urlData?.hierarchical?.replace(
             process.env.OPTIMIZELY_START_PAGE_URL ?? '',
             ''
           )
@@ -41,7 +42,6 @@ export async function POST(request: NextRequest) {
     }
 
     const urlWithLocale = normalizeUrl(url, locale)
-
     await handleRevalidation(urlWithLocale)
 
     return NextResponse.json({ revalidated: true, now: Date.now() })
@@ -54,9 +54,9 @@ export async function POST(request: NextRequest) {
  * Validates the Optimizely webhook secret in the request query string.
  * Throws an error if the secret is missing or invalid.
  *
- * @param {NextRequest} request
+ * @param request - Incoming webhook request.
  */
-function validateWebhookSecret(request: NextRequest) {
+function validateWebhookSecret(request: NextRequest): void {
   const webhookSecret = request.nextUrl.searchParams.get('cg_webhook_secret')
   if (webhookSecret !== OPTIMIZELY_REVALIDATE_SECRET) {
     throw new Error('Invalid credentials')
@@ -66,8 +66,8 @@ function validateWebhookSecret(request: NextRequest) {
 /**
  * Extracts the document ID from the webhook request JSON body.
  *
- * @param {NextRequest} request
- * @returns {Promise<string>} The document ID (e.g., "guid_locale_Published")
+ * @param request - Incoming webhook request.
+ * @returns The document ID (e.g., "guid_locale_Published").
  */
 async function extractDocId(request: NextRequest): Promise<string> {
   const requestJson = await request.json()
@@ -77,34 +77,31 @@ async function extractDocId(request: NextRequest): Promise<string> {
 /**
  * Fetches Optimizely content by GUID.
  *
- * @param {string} guid - The cleaned GUID (without dashes).
- * @returns {Promise<any>} The resolved content item from the CMS.
- * @throws {Error} If content is not found.
+ * @param guid - The cleaned GUID (without dashes).
+ * @returns The resolved content item from the CMS.
+ * @throws If content is not found.
  */
-async function fetchContentByGuid(guid: string) {
+async function fetchContentByGuid(guid: string): Promise<any> {
   const { _Content } = await optimizely.GetContentByGuid({ guid })
-
   const item = _Content?.items?.[0]
   if (!item) {
     throw new Error('Content not found')
   }
-
   return item
 }
 
 /**
  * Ensures the URL is locale-prefixed and cleaned of trailing slashes.
  *
- * @param {string} url - The CMS-provided relative URL.
- * @param {string} locale - Locale to prefix (e.g., "en").
- * @returns {string} The locale-prefixed normalized path.
+ * @param url - The CMS-provided relative URL.
+ * @param locale - Locale to prefix (e.g., "en").
+ * @returns The locale-prefixed normalized path.
  */
 function normalizeUrl(url: string, locale: string): string {
   let normalizedUrl = url.startsWith('/') ? url : `/${url}`
   if (normalizedUrl.endsWith('/')) {
     normalizedUrl = normalizedUrl.slice(0, -1)
   }
-
   return normalizedUrl.startsWith(`/${locale}`)
     ? normalizedUrl
     : `/${locale}${normalizedUrl}`
@@ -113,9 +110,9 @@ function normalizeUrl(url: string, locale: string): string {
 /**
  * Revalidates either a cache tag or a specific page path.
  *
- * @param {string} urlWithLocale - The normalized URL to revalidate.
+ * @param urlWithLocale - The normalized URL to revalidate.
  */
-async function handleRevalidation(urlWithLocale: string) {
+async function handleRevalidation(urlWithLocale: string): Promise<void> {
   if (urlWithLocale.includes('footer')) {
     console.log(`Revalidating tag: optimizely-footer`)
     await revalidateTag('optimizely-footer')
@@ -131,10 +128,10 @@ async function handleRevalidation(urlWithLocale: string) {
 /**
  * Handles and formats errors into a JSON response.
  *
- * @param {unknown} error
- * @returns {NextResponse}
+ * @param error - The thrown error during request processing.
+ * @returns A formatted JSON response with error status.
  */
-function handleError(error: unknown) {
+function handleError(error: unknown): NextResponse {
   console.error('Error processing webhook:', error)
   if (error instanceof Error) {
     if (error.message === 'Invalid credentials') {
@@ -148,5 +145,26 @@ function handleError(error: unknown) {
   return NextResponse.json(
     { message: 'Internal Server Error' },
     { status: 500 }
+  )
+}
+
+/**
+ * Type guard to check if the given metadata includes a `url` field.
+ *
+ * @param metadata - The metadata object to check.
+ * @returns True if metadata contains a `url` field of the expected shape.
+ */
+function hasUrlMetadata(metadata: unknown): metadata is {
+  url: {
+    type?: string
+    default?: string
+    hierarchical?: string
+  }
+} {
+  return (
+    !!metadata &&
+    typeof metadata === 'object' &&
+    'url' in metadata &&
+    typeof (metadata as any).url === 'object'
   )
 }
