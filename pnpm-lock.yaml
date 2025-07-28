@@ -41,6 +41,9 @@ dependencies:
   tailwind-merge:
     specifier: ^3.3.1
     version: 3.3.1
+  web-vitals:
+    specifier: ^5.0.3
+    version: 5.0.3
 
 devDependencies:
   '@cucumber/cucumber':
@@ -12111,6 +12114,13 @@ packages:
       }
     engines: { node: '>= 8' }
     dev: true
+
+  /web-vitals@5.0.3:
+    resolution:
+      {
+        integrity: sha512-4KmOFYxj7qT6RAdCH0SWwq8eKeXNhAFXR4PmgF6nrWFmrJ41n7lq3UCA6UK0GebQ4uu+XP8e8zGjaDO3wZlqTg==,
+      }
+    dev: false
 
   /webidl-conversions@3.0.1:
     resolution:

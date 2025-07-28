@@ -4,6 +4,7 @@ import '../../globals.css'
 import { LOCALES } from '@/lib/optimizely/utils/language'
 import { Header } from '@/app/components/layout/header'
 import { Footer } from '@/app/components/layout/footer'
+import VitalsInit from '@/app/components/vitals-init'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -54,6 +55,7 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="antialiased">
+        <VitalsInit />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only absolute left-4 top-4 z-50 rounded bg-black px-4 py-2 text-white"
