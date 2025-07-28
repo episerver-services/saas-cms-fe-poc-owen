@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import type React from 'react'
 import Image from 'next/image'
 import {
   ServicesBlock as ServicesBlockProps,
@@ -7,6 +6,14 @@ import {
 } from '@/lib/optimizely/sdk'
 import { castContent } from '@/lib/optimizely/types/typeUtils'
 
+/**
+ * Renders a grid of service cards.
+ *
+ * Each card displays an icon, a title, and a short description.
+ * Images are auto-optimized using the global image loader.
+ *
+ * @param services - An array of service content blocks from Optimizely CMS.
+ */
 export default function ServicesBlock({ services }: ServicesBlockProps) {
   return (
     <section className="container mx-auto px-4 py-16">
@@ -15,12 +22,14 @@ export default function ServicesBlock({ services }: ServicesBlockProps) {
           const service = castContent<ServiceItem>(serviceItem, 'ServiceItem')
           if (!service) return null
 
+          const iconSrc = service.icon || '/placeholder.svg'
+
           return (
             <Card key={index}>
               <CardHeader>
                 <div className="mb-4">
                   <Image
-                    src={service.icon ?? '/placeholder.svg'}
+                    src={iconSrc}
                     alt={service?.title ?? ''}
                     width={50}
                     height={50}

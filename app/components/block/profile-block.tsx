@@ -19,6 +19,21 @@ const backgroundVariants = cva('container mx-auto px-4 py-16', {
   },
 })
 
+/**
+ * Renders a profile card with image, name, title, and bio.
+ *
+ * Uses Optimizely CMS content to populate a responsive layout,
+ * with optional background color schemes and layout priority.
+ *
+ * Falls back to a local placeholder if no image is provided.
+ *
+ * @param imageSrc - Profile image URL
+ * @param name - Person’s name
+ * @param title - Job title or headline
+ * @param bio - Short biography text
+ * @param isFirst - Whether this is the first block (used to enable priority loading)
+ * @param displaySettings - CMS-driven visual settings like color scheme
+ */
 export default function ProfileBlock({
   imageSrc,
   name,
@@ -31,6 +46,8 @@ export default function ProfileBlock({
     displaySettings?.find((setting) => setting.key === 'colorScheme')?.value ||
     'default'
 
+  const fallbackSrc = imageSrc || '/placeholder.svg'
+
   return (
     <section className="container mx-auto px-4 py-16">
       <Card
@@ -42,12 +59,11 @@ export default function ProfileBlock({
           <div className="grid items-start gap-12 md:grid-cols-2">
             <div className="relative mx-auto aspect-square w-full max-w-md">
               <Image
-                src={imageSrc || '/placeholder.svg'}
+                src={fallbackSrc}
                 alt={title ?? ''}
                 fill
                 className="rounded-lg object-cover"
                 priority={isFirst}
-                unoptimized={!imageSrc}
               />
             </div>
             <div className="space-y-4">

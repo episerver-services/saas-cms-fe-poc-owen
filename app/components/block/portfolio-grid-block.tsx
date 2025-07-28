@@ -7,6 +7,17 @@ import {
 } from '@/lib/optimizely/sdk'
 import { castContent } from '@/lib/optimizely/types/typeUtils'
 
+/**
+ * Renders a responsive grid of portfolio items.
+ *
+ * This component displays a title and a set of portfolio cards,
+ * each containing an image, a linked title, and a description.
+ *
+ * Images are optimized via Next.js loader config and fall back to a local placeholder.
+ *
+ * @param title - Section heading text from the CMS
+ * @param items - Array of portfolio item blocks (with image, link, etc.)
+ */
 export default function PortfolioGridBlock({
   title,
   items,
@@ -28,24 +39,24 @@ export default function PortfolioGridBlock({
             <Card key={index}>
               <CardContent className="p-0">
                 <Image
-                  src={safeItem?.imageUrl || '/placeholder.svg'}
-                  alt={safeItem?.title ?? ''}
+                  src={safeItem.imageUrl || '/placeholder.svg'}
+                  alt={safeItem.title ?? ''}
                   width={400}
                   height={300}
                   className="h-48 w-full object-cover"
-                  unoptimized={!safeItem?.imageUrl}
+                  unoptimized={!safeItem.imageUrl}
                 />
                 <div className="p-4">
-                  <Link href={safeItem?.link ?? ''}>
+                  <Link href={safeItem.link ?? ''}>
                     <h3 className="mb-2 font-semibold" data-epi-edit="title">
-                      {safeItem?.title}
+                      {safeItem.title}
                     </h3>
                   </Link>
                   <p
                     className="text-sm text-muted-foreground"
                     data-epi-edit="description"
                   >
-                    {safeItem?.description}
+                    {safeItem.description}
                   </p>
                 </div>
               </CardContent>

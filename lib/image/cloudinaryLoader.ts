@@ -1,5 +1,3 @@
-'use client'
-
 /**
  * Cloudinary URL regex matcher.
  * Captures cloud name, asset type, delivery type, optional transformations, version, and public ID.

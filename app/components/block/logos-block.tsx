@@ -6,6 +6,17 @@ import {
 import { castContent } from '@/lib/optimizely/types/typeUtils'
 import placeholder from '@/public/placeholder.svg'
 
+/**
+ * Renders a block of logos in a grid layout.
+ *
+ * This component maps over a list of logo items (typically images),
+ * displaying each one with a consistent size and aspect ratio.
+ *
+ * Logos are expected to come from the CMS via the `LogosBlockProps` type.
+ * Falls back to a placeholder image if `src` is missing.
+ *
+ * @param logos - Array of logo block items from Optimizely CMS
+ */
 export default function LogosBlock({ logos }: LogosBlockProps) {
   return (
     <section className="container mx-auto px-4 py-16">

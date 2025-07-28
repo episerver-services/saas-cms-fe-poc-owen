@@ -22,6 +22,9 @@ function withLocale(locale: string, path: string | null | undefined): string {
 /**
  * Site header component with logo, navigation, CTA, and language switcher.
  * Pulls content from Optimizely CMS and renders locale-aware links.
+ *
+ * @param locale - Current active locale (e.g. 'en', 'sv')
+ * @returns Renders the main site header or null if CMS data is unavailable.
  */
 export async function Header({ locale }: { locale: string }) {
   const validLocale = getValidLocale(locale)
@@ -32,9 +35,7 @@ export async function Header({ locale }: { locale: string }) {
   )
 
   const header = result?.Header?.item
-  if (!header) {
-    return null
-  }
+  if (!header) return null
 
   const { logo, ctaHref, ctaText, navItems } = header
 
@@ -52,6 +53,7 @@ export async function Header({ locale }: { locale: string }) {
               width={50}
               height={50}
               alt="logo"
+              priority
               unoptimized={!logo}
             />
           </Link>
