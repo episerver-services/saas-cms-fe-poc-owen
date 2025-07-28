@@ -3,7 +3,7 @@ import {
   LogosBlock as LogosBlockProps,
   LogoItemBlock,
 } from '@/lib/optimizely/sdk'
-import { castContent } from '@/lib/optimizely/types/typeUtils'
+import { castContent } from '@/lib/optimizely/types/type-utils'
 import placeholder from '@/public/placeholder.svg'
 
 /**

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Button } from '../ui/button'
 import { optimizely } from '@/lib/optimizely/fetch'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
-import { castContent, SafeContent } from '@/lib/optimizely/types/typeUtils'
+import { castContent, SafeContent } from '@/lib/optimizely/types/type-utils'
 import { NavItem } from '@/lib/optimizely/sdk'
 import { LanguageSwitcher } from './language-switcher'
 
@@ -52,14 +52,17 @@ export async function Header({ locale }: { locale: string }) {
               src={logo || '/placeholder.svg'}
               width={50}
               height={50}
-              alt="logo"
+              alt="Company logo"
               priority
               unoptimized={!logo}
             />
           </Link>
 
           {/* Navigation Menu */}
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav
+            aria-label="Main navigation"
+            className="hidden items-center gap-6 md:flex"
+          >
             {navItems?.map((navItem) => {
               const item = castContent<NavItem>(
                 navItem as SafeContent,

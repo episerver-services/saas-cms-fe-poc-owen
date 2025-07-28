@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Icons } from '../ui/icons'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
 import { optimizely } from '@/lib/optimizely/fetch'
-import { castContent, SafeContent } from '@/lib/optimizely/types/typeUtils'
+import { castContent, SafeContent } from '@/lib/optimizely/types/type-utils'
 import { SocialLink, FooterColumn, NavItem } from '@/lib/optimizely/sdk'
 
 /**
@@ -30,8 +30,12 @@ export async function Footer({ locale }: { locale: string }) {
   const { columns, socialLinks, copyrightText } = footer
 
   return (
-    <footer className="border-t">
+    <footer className="border-t" aria-labelledby="footer-heading">
       <div className="container mx-auto px-4 py-12">
+        <h2 id="footer-heading" className="sr-only">
+          Footer
+        </h2>
+
         {/* Footer navigation columns */}
         <div className="grid gap-8 md:grid-cols-4">
           {columns?.map((columnItem, index) => {
@@ -44,7 +48,10 @@ export async function Footer({ locale }: { locale: string }) {
             return (
               <div key={index}>
                 <h3 className="mb-4 font-bold">{column.title}</h3>
-                <nav className="grid gap-2">
+                <nav
+                  aria-label={`${column.title} navigation`}
+                  className="grid gap-2"
+                >
                   {column.links?.map((linkItem, linkIndex) => {
                     const link = castContent<NavItem>(linkItem, 'NavItem')
                     if (!link) return null
@@ -66,7 +73,10 @@ export async function Footer({ locale }: { locale: string }) {
         </div>
 
         {/* Social media icons */}
-        <div className="mt-8 flex justify-center gap-4">
+        <div
+          className="mt-8 flex justify-center gap-4"
+          aria-label="Social media"
+        >
           {socialLinks?.map((linkItem, index) => {
             const link = castContent<SocialLink>(
               linkItem as SafeContent,
@@ -82,6 +92,7 @@ export async function Footer({ locale }: { locale: string }) {
                 key={index}
                 href={link.href ?? '/'}
                 className="text-muted-foreground hover:text-foreground"
+                aria-label={link.platform ?? 'Social link'}
               >
                 {Icon && <Icon className="h-5 w-5" />}
               </Link>

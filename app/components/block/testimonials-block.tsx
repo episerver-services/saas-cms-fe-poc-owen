@@ -4,7 +4,7 @@ import {
   TestimonialsBlock as TestimonialsBlockProps,
   TestimonialItemBlock,
 } from '@/lib/optimizely/sdk'
-import { castContent } from '@/lib/optimizely/types/typeUtils'
+import { castContent } from '@/lib/optimizely/types/type-utils'
 
 export default function TestimonialsBlock({
   title,

@@ -1,5 +1,5 @@
-import cloudinaryLoader from './cloudinaryLoader'
-import { getOptimizedImageUrl } from './cdnImage'
+import cloudinaryLoader from './cloudinary-loader'
+import { getOptimizedImageUrl } from './cdn-image'
 
 /**
  * Next.js-compatible global image loader.

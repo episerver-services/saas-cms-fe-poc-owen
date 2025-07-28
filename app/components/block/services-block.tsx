@@ -4,7 +4,7 @@ import {
   ServicesBlock as ServicesBlockProps,
   ServiceItem,
 } from '@/lib/optimizely/sdk'
-import { castContent } from '@/lib/optimizely/types/typeUtils'
+import { castContent } from '@/lib/optimizely/types/type-utils'
 
 /**
  * Renders a grid of service cards.

@@ -59,12 +59,12 @@ _Last updated: 28 July 2025_
 
 ## 🛡️ Phase 5: Accessibility, SEO & Metadata
 
-| Task                       | Status | Notes                                        |
-| -------------------------- | ------ | -------------------------------------------- |
-| Metadata from CMS          | ✅     | Populated via `metadata.ts`                  |
-| Accessibility baseline     | 🔄     | ARIA enhancements present, still under audit |
-| Skip links, ARIA audit     | 🔲     | Not yet implemented                          |
-| robots.txt / sitemap setup | 🔲     | Missing config/routes                        |
+| Task                       | Status | Notes                                                     |
+| -------------------------- | ------ | --------------------------------------------------------- |
+| Metadata from CMS          | ✅     | Populated via `metadata.ts`                               |
+| Accessibility baseline     | 🔄     | ARIA enhancements present, still under audit              |
+| Skip links, ARIA audit     | 🔲     | Not yet implemented                                       |
+| robots.txt / sitemap setup | 🔄     | Placeholder `robots.txt` present; sitemap not implemented |
 
 ---
 

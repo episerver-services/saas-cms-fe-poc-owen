@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
     ],
     // Enables Next.js to use your custom image loader
     loader: 'custom',
-    loaderFile: './lib/image/nextImageLoader.ts',
+    loaderFile: './lib/image/next-image-loader.ts',
   },
 
   async headers() {

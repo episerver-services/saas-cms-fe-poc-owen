@@ -54,10 +54,18 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only absolute left-4 top-4 z-50 rounded bg-black px-4 py-2 text-white"
+        >
+          Skip to main content
+        </a>
         <Suspense>
           <Header locale={locale} />
         </Suspense>
-        <main className="container mx-auto min-h-screen px-4">{children}</main>
+        <main id="main-content" className="container mx-auto min-h-screen px-4">
+          {children}
+        </main>
         <Suspense>
           <Footer locale={locale} />
         </Suspense>

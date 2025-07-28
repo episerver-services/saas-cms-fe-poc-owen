@@ -5,7 +5,7 @@ import {
   PortfolioGridBlock as PortfolioGridBlockProps,
   PortfolioItemBlock,
 } from '@/lib/optimizely/sdk'
-import { castContent } from '@/lib/optimizely/types/typeUtils'
+import { castContent } from '@/lib/optimizely/types/type-utils'
 
 /**
  * Renders a responsive grid of portfolio items.
