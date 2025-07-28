@@ -65,7 +65,7 @@ _Last updated: 28 July 2025_
 | Accessibility baseline     | 🔄     | ARIA enhancements present, still under audit              |
 | Skip links, ARIA audit     | 🔲     | Not yet implemented                                       |
 | robots.txt / sitemap setup | 🔄     | Placeholder `robots.txt` present; sitemap not implemented |
-| Core Web Vitals reporting. | ✅.    | Logs metrics to console; VitalsInit added to layout.      |
+| Core Web Vitals reporting. | ✅     | Logs metrics to console; VitalsInit added to layout.      |
 
 ---
 
