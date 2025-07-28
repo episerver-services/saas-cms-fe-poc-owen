@@ -18,7 +18,7 @@ _Last updated: 24 July 2025_
 | Environment config (.env setup)  | ✅     | `.env.local` found; Docker-ready             |
 | TypeScript + ESLint config       | ✅     | `tsconfig.json`, `eslint.config.ts` in place |
 | GitHub CI/CD pipelines           | ✅     | `.github/` workflows present                 |
-| Commit linting / Husky hooks     | 🔲     | `.husky/` directory not yet added            |
+| Commit linting / Husky hooks     | ✅     | `.husky/pre-commit` set up with lint-staged  |
 
 ---
 
