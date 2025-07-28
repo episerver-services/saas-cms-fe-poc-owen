@@ -92,14 +92,14 @@ _Last updated: 28 July 2025_
 
 ---
 
-## ⏱️ Estimated Remaining Workload
+## ⏱️ Estimated Remaining Workload (Updated)
 
-| Phase | Remaining Tasks                               | Complexity |
-| ----- | --------------------------------------------- | ---------- |
-| 1     | Commit hooks                                  | Low        |
-| 2     | Preview fallback, error views                 | Medium     |
-| 3     | Slot nesting support                          | High       |
-| 4     | CDN image transform, render fallback handling | Medium     |
-| 5     | ARIA audits, skip links, sitemap              | Medium     |
-| 6     | Unit + E2E test frameworks                    | High       |
-| 7     | Visual Builder renderer, token passthrough    | High       |
+| Phase | Remaining Tasks                            | Complexity | Notes                                                                 |
+| ----- | ------------------------------------------ | ---------- | --------------------------------------------------------------------- |
+| 1     | Commit hooks                               | Low        | Can be done with `lint-staged` + `husky`.                             |
+| 2     | Preview fallback, error views              | Medium     | `FallbackErrorUI` implemented; preview fallback partially complete.   |
+| 3     | Slot nesting support                       | High       | Still pending full layout nesting logic from VB.                      |
+| 4     | CDN image transform, render fallback       | Medium     | Placeholder logic exists; image resizing via CDN needs docs/example.  |
+| 5     | ARIA audits, skip links                    | Medium     | Sitemap complete ✅; skip links present ✅; ARIA audit still 🔄.      |
+| 6     | Unit + E2E test frameworks                 | High       | Test plan outlined but not scaffolded yet.                            |
+| 7     | Visual Builder renderer, token passthrough | High       | Wrapper scaffolded; passthrough logic not yet wired for preview mode. |
