@@ -62,6 +62,7 @@ export default function ProfileBlock({
                 src={fallbackSrc}
                 alt={title ?? ''}
                 fill
+                sizes="(min-width: 768px) 50vw, 100vw"
                 className="rounded-lg object-cover"
                 priority={isFirst}
               />
