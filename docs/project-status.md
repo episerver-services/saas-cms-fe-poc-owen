@@ -49,11 +49,11 @@ _Last updated: 24 July 2025_
 
 ## 🌐 Phase 4: Performance & Delivery
 
-| Task                           | Status | Notes                                 |
-| ------------------------------ | ------ | ------------------------------------- |
-| Rendering model enforcement    | 🔲     | ISR/SSG strategy not yet enforced     |
-| CDN-based image transformation | 🔲     | `cdn-cgi/image` not wired up yet      |
-| Core Web Vitals planning       | 🔲     | No next/script optimisations seen yet |
+| Task                           | Status | Notes                                    |
+| ------------------------------ | ------ | ---------------------------------------- |
+| Rendering model enforcement    | ✅     | ISR + webhook-based revalidation working |
+| CDN-based image transformation | 🔲     | `cdn-cgi/image` not wired up yet         |
+| Core Web Vitals planning       | 🔲     | No next/script optimisations seen yet    |
 
 ---
 
