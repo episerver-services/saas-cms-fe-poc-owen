@@ -94,9 +94,15 @@ export async function generateStaticParams() {
 
     const uniquePaths = new Set<string>()
     paths.forEach((path) => {
-      const rawPath = path?._metadata?.url?.default
-      if (rawPath) {
-        uniquePaths.add(mapPathWithoutLocale(rawPath))
+      const metadata = path?._metadata
+
+      if (
+        metadata &&
+        typeof metadata === 'object' &&
+        'url' in metadata &&
+        typeof metadata.url?.default === 'string'
+      ) {
+        uniquePaths.add(mapPathWithoutLocale(metadata.url.default))
       }
     })
 

@@ -30,8 +30,21 @@ export async function GET() {
     const items = data._Content?.items || []
 
     paths = items
-      .map((item) => item?._metadata?.url?.default)
-      .filter((url): url is string => !!url)
+      .map((item) => {
+        const metadata = item?._metadata
+
+        if (
+          metadata &&
+          typeof metadata === 'object' &&
+          'url' in metadata &&
+          typeof metadata.url?.default === 'string'
+        ) {
+          return mapPathWithoutLocale(metadata.url.default)
+        }
+
+        return null
+      })
+      .filter((path): path is string => path !== null)
       .map(mapPathWithoutLocale)
   } catch (e) {
     console.error('Sitemap fetch error:', e)

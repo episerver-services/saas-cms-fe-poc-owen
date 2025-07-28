@@ -5059,6 +5059,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5068,48 +5070,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5120,6 +5083,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5129,48 +5094,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5181,6 +5107,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5190,48 +5118,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5242,6 +5131,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5251,48 +5142,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5303,6 +5155,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5312,48 +5166,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5364,6 +5179,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5373,48 +5190,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5425,6 +5203,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5434,48 +5214,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5486,6 +5227,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5495,48 +5238,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5547,6 +5251,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5556,48 +5262,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5608,6 +5275,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5617,48 +5286,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5669,6 +5299,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5678,48 +5310,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5730,6 +5323,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5739,48 +5334,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5791,6 +5347,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5800,48 +5358,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5852,6 +5371,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5861,48 +5382,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5913,6 +5395,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5922,48 +5406,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -5974,6 +5419,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -5983,48 +5430,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6035,6 +5443,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6044,48 +5454,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6096,6 +5467,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6105,48 +5478,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6157,6 +5491,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6166,48 +5502,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6218,6 +5515,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6227,48 +5526,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6279,6 +5539,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6288,48 +5550,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6340,6 +5563,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6349,48 +5574,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6401,6 +5587,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6410,48 +5598,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6462,6 +5611,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6471,48 +5622,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6523,6 +5635,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6532,48 +5646,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6584,6 +5659,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6593,48 +5670,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6645,6 +5683,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6654,48 +5694,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6706,6 +5707,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6715,48 +5718,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6767,6 +5731,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6776,48 +5742,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6828,6 +5755,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6837,48 +5766,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6889,6 +5779,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6898,48 +5790,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -6950,6 +5803,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -6959,48 +5814,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -7011,6 +5827,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -7020,48 +5838,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -7072,6 +5851,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -7081,48 +5862,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -7133,6 +5875,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -7142,48 +5886,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -7194,6 +5899,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -7203,48 +5910,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -7255,6 +5923,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -7264,48 +5934,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -7316,6 +5947,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -7325,48 +5958,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | {
@@ -7377,6 +5971,8 @@ export type AllPagesQuery = {
                 displayName: string | null
                 types: Array<string | null> | null
                 status: string | null
+                published: string | null
+                lastModified: string | null
                 url: {
                   __typename?: 'ContentUrl'
                   base: string | null
@@ -7386,48 +5982,9 @@ export type AllPagesQuery = {
                   type: string | null
                 } | null
               }
-            | {
-                __typename?: 'InstanceMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'ItemMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
-            | {
-                __typename?: 'MediaMetadata'
-                displayName: string | null
-                types: Array<string | null> | null
-                status: string | null
-                url: {
-                  __typename?: 'ContentUrl'
-                  base: string | null
-                  internal: string | null
-                  hierarchical: string | null
-                  default: string | null
-                  type: string | null
-                } | null
-              }
+            | { __typename?: 'InstanceMetadata' }
+            | { __typename?: 'ItemMetadata' }
+            | { __typename?: 'MediaMetadata' }
             | null
         }
       | null
@@ -10004,6 +8561,23 @@ export type GetVisualBuilderBySlugQuery = {
         > | null
       } | null
     } | null
+  } | null
+}
+
+export type MetadataFieldsFragment = {
+  __typename?: 'ContentMetadata'
+  displayName: string | null
+  types: Array<string | null> | null
+  status: string | null
+  published: string | null
+  lastModified: string | null
+  url: {
+    __typename?: 'ContentUrl'
+    base: string | null
+    internal: string | null
+    hierarchical: string | null
+    default: string | null
+    type: string | null
   } | null
 }
 
@@ -15632,6 +14206,22 @@ export type ItemsInContentAreaFragment =
   | ItemsInContentArea__Section_Fragment
   | ItemsInContentArea__Video_Fragment
 
+export const MetadataFieldsFragmentDoc = gql`
+  fragment MetadataFields on ContentMetadata {
+    displayName
+    url {
+      base
+      internal
+      hierarchical
+      default
+      type
+    }
+    types
+    status
+    published
+    lastModified
+  }
+`
 export const HeroBlockFragmentDoc = gql`
   fragment HeroBlockFragment on HeroBlock {
     __typename
@@ -15755,20 +14345,12 @@ export const AllPagesDocument = gql`
     _Content(where: { _metadata: { types: { in: $pageType } } }) {
       items {
         _metadata {
-          displayName
-          url {
-            base
-            internal
-            hierarchical
-            default
-            type
-          }
-          types
-          status
+          ...MetadataFields
         }
       }
     }
   }
+  ${MetadataFieldsFragmentDoc}
 `
 export const GetContentByGuidDocument = gql`
   query GetContentByGuid($guid: [String!]) {

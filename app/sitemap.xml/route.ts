@@ -1,26 +1,49 @@
 import { optimizely } from '@/lib/optimizely/fetch'
+import { mapPathWithoutLocale } from '@/lib/optimizely/utils/language'
 
 export const dynamic = 'force-dynamic'
 
 /**
- * Dynamic sitemap.xml generator for Optimizely content.
- * Retrieves all published URLs from Optimizely and returns an XML sitemap.
+ * Public-facing sitemap.xml generator.
+ * Includes CMSPage and SEOExperience paths with optional lastmod.
  *
- * @returns An XML Response of sitemap entries
+ * @returns A well-formed XML sitemap response for search engines.
  */
 export async function GET() {
+  const pageTypes = ['CMSPage', 'SEOExperience']
+  const domain = process.env.SITE_DOMAIN ?? 'https://example.com'
+
   try {
-    const result = await optimizely.AllPages()
-    const pages = result._Content?.items ?? []
+    const result = await optimizely.AllPages({ pageType: pageTypes })
+    const items = result._Content?.items ?? []
 
-    const urls = pages
-      .map((item) => item?._metadata?.url?.default)
-      .filter((url): url is string => typeof url === 'string')
+    const entries = items
+      .map((item) => {
+        const meta = item?._metadata
 
-    const domain = process.env.SITE_DOMAIN ?? 'https://example.com'
+        // Only proceed if `url.default` exists — narrows to ContentMetadata
+        if (!meta || !('url' in meta) || !meta.url?.default) return null
+
+        const path = mapPathWithoutLocale(meta.url.default)
+        const lastmod = meta.lastModified ?? meta.published ?? null
+
+        return {
+          loc: `${domain}${path}`,
+          lastmod,
+        }
+      })
+      .filter(
+        (entry): entry is { loc: string; lastmod: string | null } => !!entry
+      )
+
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${urls.map((url) => `<url><loc>${domain}${url}</loc></url>`).join('\n')}
+${entries
+  .map(({ loc, lastmod }) => {
+    const lastmodTag = lastmod ? `<lastmod>${lastmod}</lastmod>` : ''
+    return `  <url><loc>${loc}</loc>${lastmodTag}</url>`
+  })
+  .join('\n')}
 </urlset>`
 
     return new Response(xml, {
@@ -29,7 +52,7 @@ export async function GET() {
       },
     })
   } catch (err) {
-    console.error('Error generating sitemap:', err)
+    console.error('Error generating sitemap.xml:', err)
     return new Response('Sitemap generation error', { status: 500 })
   }
 }
