@@ -59,13 +59,13 @@ _Last updated: 28 July 2025_
 
 ## 🛡️ Phase 5: Accessibility, SEO & Metadata
 
-| Task                       | Status | Notes                                                     |
-| -------------------------- | ------ | --------------------------------------------------------- |
-| Metadata from CMS          | ✅     | Populated via `metadata.ts`                               |
-| Accessibility baseline     | 🔄     | ARIA enhancements present, still under audit              |
-| Skip links, ARIA audit     | 🔲     | Not yet implemented                                       |
-| robots.txt / sitemap setup | 🔄     | Placeholder `robots.txt` present; sitemap not implemented |
-| Core Web Vitals reporting. | ✅     | Logs metrics to console; VitalsInit added to layout.      |
+| Task                       | Status | Notes                                                          |
+| -------------------------- | ------ | -------------------------------------------------------------- |
+| Metadata from CMS          | ✅     | Pulled from CMSPage or SEOExperience via generateMetadata.     |
+| Accessibility baseline     | 🔄     | aria-expanded, aria-hidden, and skip links logic in progress.  |
+| Skip links, ARIA audit     | 🔲     | Skip link is present in layout; full audit work still ongoing. |
+| robots.txt / sitemap setup | ✅     | `sitemap.xml` route complete, robust, and tested.              |
+| Core Web Vitals reporting. | ✅     | Logs metrics to console; VitalsInit added to layout.           |
 
 ---
 
