@@ -43,7 +43,10 @@ export async function Header({ locale }: { locale: string }) {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href={`/${locale}`} className="text-xl font-bold lg:min-w-[150px]">
+          <Link
+            href={`/${locale}`}
+            className="text-xl font-bold lg:min-w-[150px]"
+          >
             <Image
               src={logo || '/placeholder.svg'}
               width={50}
