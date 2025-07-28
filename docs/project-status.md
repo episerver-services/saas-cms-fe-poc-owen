@@ -63,7 +63,7 @@ _Last updated: 28 July 2025_
 | -------------------------- | ------ | -------------------------------------------------------------- |
 | Metadata from CMS          | ✅     | Pulled from CMSPage or SEOExperience via generateMetadata.     |
 | Accessibility baseline     | 🔄     | aria-expanded, aria-hidden, and skip links logic in progress.  |
-| Skip links, ARIA audit     | 🔲     | Skip link is present in layout; full audit work still ongoing. |
+| Skip links, ARIA audit     | 🔄     | Skip link is present in layout; full audit work still ongoing. |
 | robots.txt / sitemap setup | ✅     | `sitemap.xml` route complete, robust, and tested.              |
 | Core Web Vitals reporting. | ✅     | VitalsInit logs CWV in `layout.tsx`; dev-only for now.         |
 
