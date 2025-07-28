@@ -34,8 +34,11 @@ jobs:
       - name: Run linter
         run: pnpm lint
 
-      - name: Run tests (optional)
-        run: pnpm test:bdd || true
+      - name: Run unit tests (Jest)
+        run: pnpm test
+
+      - name: Run BDD tests (Cucumber)
+        run: pnpm test:bdd
 
       - name: Build Docker image
         run: |
