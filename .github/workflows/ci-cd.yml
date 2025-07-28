@@ -34,7 +34,7 @@ jobs:
       - name: Run linter
         run: pnpm lint
 
-      - name: Run tests (optional)
+      - name: Run BDD tests (optional)
         run: pnpm test:bdd || true
 
       - name: Build Docker image

@@ -14,6 +14,8 @@
     "bdd": "cucumber-js --require-module ts-node/register --require features/step-definitions/**/*.ts",
     "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
     "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require features/step-definitions/**/*.ts --require features/support/**/*.ts",
+    "test:playwright": "playwright test",
+    "test:playwright:headed": "playwright test --headed --debug",
     "codegen": "cross-env graphql-codegen --config codegen.ts"
   },
   "lint-staged": {
@@ -53,6 +55,7 @@
     "@graphql-codegen/typescript-graphql-request": "^6.3.0",
     "@graphql-codegen/typescript-operations": "^4.6.1",
     "@graphql-typed-document-node/core": "^3.2.0",
+    "@playwright/test": "^1.54.1",
     "@tailwindcss/postcss": "^4.1.11",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",

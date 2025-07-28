@@ -31,7 +31,7 @@ dependencies:
     version: 1.0.0
   next:
     specifier: 15.3.3
-    version: 15.3.3(@babel/core@7.28.0)(react-dom@19.1.0)(react@19.1.0)
+    version: 15.3.3(@babel/core@7.28.0)(@playwright/test@1.54.1)(react-dom@19.1.0)(react@19.1.0)
   node-fetch:
     specifier: ^3.3.2
     version: 3.3.2
@@ -82,6 +82,9 @@ devDependencies:
   '@graphql-typed-document-node/core':
     specifier: ^3.2.0
     version: 3.2.0(graphql@16.11.0)
+  '@playwright/test':
+    specifier: ^1.54.1
+    version: 1.54.1
   '@tailwindcss/postcss':
     specifier: ^4.1.11
     version: 4.1.11
@@ -3517,6 +3520,16 @@ packages:
       }
     engines: { node: ^12.20.0 || ^14.18.0 || >=16.0.0 }
     dev: true
+
+  /@playwright/test@1.54.1:
+    resolution:
+      {
+        integrity: sha512-FS8hQ12acieG2dYSksmLOF7BNxnVf2afRJdCuM1eMSxj6QTSE6G4InGF7oApGgDb65MX7AwMVlIkpru0yZA4Xw==,
+      }
+    engines: { node: '>=18' }
+    hasBin: true
+    dependencies:
+      playwright: 1.54.1
 
   /@radix-ui/primitive@1.1.2:
     resolution:
@@ -8106,6 +8119,16 @@ packages:
       }
     dev: true
 
+  /fsevents@2.3.2:
+    resolution:
+      {
+        integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==,
+      }
+    engines: { node: ^8.16.0 || ^10.6.0 || >=11.0.0 }
+    os: [darwin]
+    requiresBuild: true
+    optional: true
+
   /fsevents@2.3.3:
     resolution:
       {
@@ -11013,7 +11036,7 @@ packages:
     engines: { node: '>= 0.6' }
     dev: false
 
-  /next@15.3.3(@babel/core@7.28.0)(react-dom@19.1.0)(react@19.1.0):
+  /next@15.3.3(@babel/core@7.28.0)(@playwright/test@1.54.1)(react-dom@19.1.0)(react@19.1.0):
     resolution:
       {
         integrity: sha512-JqNj29hHNmCLtNvd090SyRbXJiivQ+58XjCcrC50Crb5g5u2zi7Y2YivbsEfzk6AtVI80akdOQbaMZwWB1Hthw==,
@@ -11038,6 +11061,7 @@ packages:
         optional: true
     dependencies:
       '@next/env': 15.3.3
+      '@playwright/test': 1.54.1
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
@@ -11793,6 +11817,26 @@ packages:
     dependencies:
       find-up: 4.1.0
     dev: true
+
+  /playwright-core@1.54.1:
+    resolution:
+      {
+        integrity: sha512-Nbjs2zjj0htNhzgiy5wu+3w09YetDx5pkrpI/kZotDlDUaYk0HVA5xrBVPdow4SAUIlhgKcJeJg4GRKW6xHusA==,
+      }
+    engines: { node: '>=18' }
+    hasBin: true
+
+  /playwright@1.54.1:
+    resolution:
+      {
+        integrity: sha512-peWpSwIBmSLi6aW2auvrUtf2DqY16YYcCMO8rTVx486jKmDTJg7UAhyrraP98GB8BoPURZP8+nxO7TSd4cPr5g==,
+      }
+    engines: { node: '>=18' }
+    hasBin: true
+    dependencies:
+      playwright-core: 1.54.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   /pluralize@8.0.0:
     resolution:

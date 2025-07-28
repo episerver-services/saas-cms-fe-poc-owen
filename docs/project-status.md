@@ -76,7 +76,7 @@ _Last updated: 28 July 2025_
 | Jest unit test setup          | ✅     | Config added, runs with JSDOM + RTL                             |
 | RTL + jest-dom assertions     | ✅     | `toBeInTheDocument` and other matchers working                  |
 | Component unit test coverage  | ✅     | `ContentAreaMapper` tested (blocks + recursion); more to follow |
-| E2E/Browsers tests (optional) | 🔲     | Not planned; handled via Cucumber feature + fetch for now       |
+| E2E/Browsers tests (optional) | ✅     | Playwright installed; homepage test running and passing         |
 
 ---
 
@@ -94,12 +94,12 @@ _Last updated: 28 July 2025_
 
 ## ⏱️ Estimated Remaining Workload (Updated)
 
-| Phase | Remaining Tasks                            | Complexity | Notes                                                                  |
-| ----- | ------------------------------------------ | ---------- | ---------------------------------------------------------------------- |
-| 1     | Commit hooks                               | Low        | Can be done with `lint-staged` + `husky`.                              |
-| 2     | Preview fallback, error views              | Medium     | `FallbackErrorUI` implemented; preview fallback partially complete.    |
-| 3     | Slot nesting support                       | High       | Still pending full layout nesting logic from VB.                       |
-| 4     | CDN image transform, render fallback       | Medium     | Placeholder logic exists; image resizing via CDN needs docs/example.   |
-| 5     | ARIA audits, skip links                    | Medium     | Sitemap complete ✅; skip links present ✅; ARIA audit still 🔄.       |
-| 6     | Unit + E2E test frameworks                 | High       | Jest + RTL scaffolded ✅; BDD coverage ✅; more test coverage to come. |
-| 7     | Visual Builder renderer, token passthrough | High       | Wrapper scaffolded; passthrough logic not yet wired for preview mode.  |
+| Phase | Remaining Tasks                            | Complexity | Notes                                                                 |
+| ----- | ------------------------------------------ | ---------- | --------------------------------------------------------------------- |
+| 1     | Commit hooks                               | Low        | Can be done with `lint-staged` + `husky`.                             |
+| 2     | Preview fallback, error views              | Medium     | `FallbackErrorUI` implemented; preview fallback partially complete.   |
+| 3     | Slot nesting support                       | High       | Still pending full layout nesting logic from VB.                      |
+| 4     | CDN image transform, render fallback       | Medium     | Placeholder logic exists; image resizing via CDN needs docs/example.  |
+| 5     | ARIA audits, skip links                    | Medium     | Sitemap complete ✅; skip links present ✅; ARIA audit still 🔄.      |
+| 6     | Unit + E2E test frameworks                 | Medium     | Jest + RTL ✅, Cucumber ✅, Playwright ✅; expand tests as needed     |
+| 7     | Visual Builder renderer, token passthrough | High       | Wrapper scaffolded; passthrough logic not yet wired for preview mode. |

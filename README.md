@@ -1,143 +1,196 @@
-Optimizely SaaS CMS FE Template
+# Optimizely SaaS CMS FE Template
 
 A Next.js 15 front-end template using the App Router and TypeScript to integrate with the Optimizely SaaS CMS Delivery API. Built for real-world headless CMS needs like authenticated content, scalable rendering, Dockerized CI/CD, and BDD testing with Cucumber.
 
-⸻
+---
 
-🧩 Features
-• ✅ Structured GraphQL content fetching from Optimizely CMS
-• 🔧 Environment-driven layout and homepage IDs
-• 🐳 Docker-optimised build pipeline for production
-• 🧪 BDD testing via Cucumber + Gherkin syntax
-• 🧠 Scalable folder structure supporting CMS blocks and preview mode
-• 🌐 Mock fallback data for local development
-• 📐 Type-safe CMS integration with graphql-codegen
+## 🧩 Features
+
+• ✅ Structured GraphQL content fetching from Optimizely CMS  
+• 🔧 Environment-driven layout and homepage IDs  
+• 🐳 Docker-optimised build pipeline for production  
+• 🧪 BDD testing via Cucumber + Gherkin syntax  
+• 🧪 Unit tests via Jest + React Testing Library  
+• 🧪 E2E browser testing via Playwright  
+• 🧠 Scalable folder structure supporting CMS blocks and preview mode  
+• 🌐 Mock fallback data for local development  
+• 📐 Type-safe CMS integration with graphql-codegen  
 • 🧾 Metadata generation from CMS for SEO
 
-⸻
+---
 
-🚀 Getting Started
+## 🚀 Getting Started
 
-1. Clone & Install
+### 1. Clone & Install
 
+```bash
 git clone https://github.com/episerver-services/saas-cms-fe-poc-owen.git
 cd saas-cms-fe-poc-owen
 pnpm install
+```
 
-2. Configure Environment
+### 2. Configure Environment
 
-Create .env.local:
+Create `.env.local`:
 
+```env
 # === Delivery API ===
-
 OPTIMIZELY_BEARER_TOKEN=your_real_token_here
 
 # Homepage content ID and version
-
 OPTIMIZELY_CONTENT_ID=contentreference:/content/optimizely.com/en/homepage/
 OPTIMIZELY_CONTENT_VERSION=published
 
 # Layout content ID and version
-
 OPTIMIZELY_LAYOUT_ID=contentreference:/content/optimizely.com/en/layout/
 OPTIMIZELY_LAYOUT_VERSION=published
 
 # === Frontend-specific ===
-
 SITE_DOMAIN=http://localhost:3000
+```
 
-3. Run the Dev Server
+### 3. Run the Dev Server
 
-Please note that this feature has yet to be implemented, but is set up ready to be integrated.
-
+```bash
 pnpm dev
+```
 
-Open http://localhost:3000 in your browser.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-⸻
+---
 
-🧪 BDD Testing (Cucumber)
+## 🧪 BDD Testing (Cucumber)
 
+Run BDD tests:
+
+```bash
 pnpm test:bdd
+```
 
-Sample test: features/homepage.feature
+Sample test file: `features/homepage.feature`
 
-Feature: Homepage Content
+```gherkin
+Feature: Homepage content rendering
 
-Scenario: Display homepage with mocked CMS content
-Given the CMS is returning homepage content
-When the user visits the homepage
-Then the page should include the title "Mock Homepage"
+  Scenario: Display homepage with mocked CMS content
+    Given the CMS is returning homepage content
+    When the user visits the homepage
+    Then the page should include the title "Optimizely FE PoC"
+    And the page should include the call to action
+```
 
-⸻
+---
 
-🗂️ Project Structure
+## 🧪 Unit & E2E Testing
 
-📁 app/ # Next.js App Router structure
-│ ├─ (site)/[locale]/ # Localised routing
-│ │ └─ [slug]/ # Slug-based CMS page routing
-│ ├─ components/ # Shared UI components and mappers
-│ │ ├─ block/ # CMS block components
-│ │ ├─ content-area/ # Block renderer for CMS content areas
-│ │ ├─ draft/ # Draft mode-specific wrappers
-│ │ ├─ layout/ # Page layout and navigation
-│ │ ├─ ui/ # Generic UI elements
-│ │ └─ visual-builder/ # Optional: Experience (VB) components
-│ ├─ (draft)/ # API handlers for preview/draft support
-│ ├─ api/ # Placeholder for API routes
-│ ├─ globals.css # Global styles
-│ └─ metadata.ts # CMS-powered metadata setup
-│
+Unit tests use **Jest** and **React Testing Library**.
+
+```bash
+pnpm test
+```
+
+Test file example:
+
+```
+app/components/__tests__/content-area-mapper.test.tsx
+```
+
+E2E tests use **Playwright**.
+
+```bash
+pnpm test:playwright
+```
+
+Test file example:
+
+```
+tests/homepage.spec.ts
+```
+
+---
+
+## 🗂️ Project Structure
+
+```
+📁 app/
+│ ├─ (site)/[locale]/[slug]/             # Localised CMS page routing
+│ ├─ components/
+│ │ ├─ block/
+│ │ ├─ content-area/
+│ │ ├─ draft/
+│ │ ├─ layout/
+│ │ ├─ ui/
+│ │ └─ visual-builder/
+│ ├─ __tests__/                          # Unit tests
+│ ├─ (draft)/                            # Preview/draft handlers
+│ ├─ api/
+│ ├─ globals.css
+│ └─ metadata.ts
+
 📁 lib/
-│ ├─ optimizely/ # GraphQL SDK, client and helpers
-│ ├─ utils/ # Language, metadata, misc helpers
-│ └─ content/ # (Optional) Rich text renderers etc.
-│
-📁 features/ # Cucumber features and step definitions
-📁 types/ # Project-level type utilities and shims
-📁 public/ # Static assets
-📁 .github/ # GitHub Actions workflows
-📁 mocks/ # (Optional) Mocked API responses
-📄 codegen.ts # GraphQL Codegen config
-📄 Dockerfile # Production Dockerfile
-📄 docker-compose.yml # Docker orchestration config
-📄 tsconfig.json # TypeScript config
-📄 README.md # This file
+│ ├─ optimizely/
+│ ├─ utils/
+│ └─ content/
 
-⸻
+📁 features/                             # Cucumber BDD specs
+📁 tests/                                # Playwright E2E tests
+📁 types/
+📁 public/
+📁 .github/
+📁 mocks/
 
-📦 PNPM Scripts
+📄 codegen.ts
+📄 playwright.config.ts
+📄 Dockerfile
+📄 docker-compose.yml
+📄 tsconfig.json
+📄 README.md
+```
 
-Command Description
-pnpm dev Start dev server
-pnpm build Production build
-pnpm start Serve production build
-pnpm test:bdd Run Cucumber tests
-pnpm codegen Generate TypeScript types from live schema/queries
+---
 
-⸻
+## 📦 PNPM Scripts
 
-🛠️ Docker Support
+| Command              | Description                     |
+| -------------------- | ------------------------------- |
+| pnpm dev             | Start dev server                |
+| pnpm build           | Production build                |
+| pnpm start           | Serve production build          |
+| pnpm test            | Run Jest unit tests             |
+| pnpm test:bdd        | Run Cucumber tests              |
+| pnpm test:playwright | Run Playwright E2E tests        |
+| pnpm codegen         | Generate GraphQL TypeScript SDK |
 
-Build the app into a production-ready image:
+---
 
+## 🛠️ Docker Support
+
+Build production image:
+
+```bash
 docker build -t saas-cms-fe-poc-owen .
+```
 
-Then run it:
+Run it:
 
+```bash
 docker run -p 3000:3000 saas-cms-fe-poc-owen
+```
 
-⚠️ Pass OPTIMIZELY_BEARER_TOKEN securely as a Docker build arg or secret at runtime.
+⚠️ Pass `OPTIMIZELY_BEARER_TOKEN` securely as a Docker build arg or secret at runtime.
 
-⸻
+---
 
-📌 Known Gaps / Next Steps
-• See docs/project-status.md for implementation status tracking.
+## 📌 Known Gaps / Next Steps
 
-⸻
+• See `docs/project-status.md` for implementation tracking  
+• Expand unit test coverage across more blocks/layouts  
+• Add more robust Playwright coverage (auth, fallback, nav)
 
-👨‍💻 Maintainer
+---
 
-Owen Liversidge
-📍 Weymouth, UK
+## 👨‍💻 Maintainer
+
+**Owen Liversidge**  
+📍 Weymouth, UK  
 🎸 Musician. React/Next specialist. FE Architect for Optimizely SaaS CMS.
