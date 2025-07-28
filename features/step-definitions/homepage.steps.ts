@@ -24,5 +24,5 @@ Then(
 )
 
 Then('the page should include the call to action', function () {
-  expect(responseText).to.include('Replace this with live CMS data once ready.')
+  expect(responseText).to.include('Get in touch')
 })
