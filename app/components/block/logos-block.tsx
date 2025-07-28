@@ -32,11 +32,12 @@ export default function LogosBlock({ logos }: LogosBlockProps) {
             <div key={index} className="relative w-32 aspect-[5/2]">
               <Image
                 src={safeLogoItem.src || placeholder}
-                alt={safeLogoItem.alt || ''}
+                alt={safeLogoItem.alt || 'Company logo'}
                 fill
-                sizes="(max-width: 768px) 50vw, 100px"
+                sizes="128px"
                 className="object-contain"
                 unoptimized={!safeLogoItem.src}
+                priority={index === 0}
               />
             </div>
           )

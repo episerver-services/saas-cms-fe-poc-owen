@@ -49,11 +49,11 @@ _Last updated: 28 July 2025_
 
 ## 🌐 Phase 4: Performance & Delivery
 
-| Task                           | Status | Notes                                                                   |
-| ------------------------------ | ------ | ----------------------------------------------------------------------- |
-| Rendering model enforcement    | ✅     | ISR + webhook-based revalidation working                                |
-| CDN-based image transformation | ✅     | Global Next.js image loader handles both Cloudinary and Optimizely URLs |
-| Core Web Vitals planning       | 🔲     | No next/script optimisations seen yet                                   |
+| Task                           | Status | Notes                                                                                  |
+| ------------------------------ | ------ | -------------------------------------------------------------------------------------- |
+| Rendering model enforcement    | ✅     | ISR + webhook-based revalidation working                                               |
+| CDN-based image transformation | ✅     | Global Next.js image loader handles both Cloudinary and Optimizely URLs                |
+| Core Web Vitals planning       | ✅     | Images audited and optimised (priority, sizes, unoptimized); layout CLS fixes in place |
 
 ---
 

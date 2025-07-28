@@ -60,7 +60,7 @@ export default function ProfileBlock({
             <div className="relative mx-auto aspect-square w-full max-w-md">
               <Image
                 src={fallbackSrc}
-                alt={title ?? ''}
+                alt={name ? `${name} - ${title}` : title || 'Profile image'}
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="rounded-lg object-cover"

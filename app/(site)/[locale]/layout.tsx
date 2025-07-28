@@ -49,10 +49,11 @@ export default async function RootLayout({
   const { locale } = await params
 
   return (
-    <html lang={locale}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html
+      lang={locale}
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body className="antialiased">
         <Suspense>
           <Header locale={locale} />
         </Suspense>

@@ -30,7 +30,7 @@ export default function ServicesBlock({ services }: ServicesBlockProps) {
                 <div className="mb-4">
                   <Image
                     src={iconSrc}
-                    alt={service?.title ?? ''}
+                    alt={service?.title || 'Service icon'}
                     width={50}
                     height={50}
                     unoptimized={!service.icon}

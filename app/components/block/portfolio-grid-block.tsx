@@ -40,11 +40,12 @@ export default function PortfolioGridBlock({
               <CardContent className="p-0">
                 <Image
                   src={safeItem.imageUrl || '/placeholder.svg'}
-                  alt={safeItem.title ?? ''}
+                  alt={safeItem.title || 'Portfolio image'}
                   width={400}
                   height={300}
                   className="h-48 w-full object-cover"
                   unoptimized={!safeItem.imageUrl}
+                  priority={index === 0}
                 />
                 <div className="p-4">
                   <Link href={safeItem.link ?? ''}>
