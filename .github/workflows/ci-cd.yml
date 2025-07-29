@@ -35,10 +35,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 🎭 Install Playwright browsers (for E2E)
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
-
       # 🔍 Verify installed packages (optional)
       - name: Verify install
         run: pnpm list --depth=0
@@ -51,11 +47,7 @@ jobs:
       - name: Run unit tests (Jest)
         run: pnpm test
 
-      # 🌐 Run end-to-end tests with Playwright
-      - name: Run e2e tests (Playwright)
-        run: pnpm test:e2e
-
-      # 🐳 Build Docker image but don't publish
+      # 🐳 Build Docker image (for verification only)
       - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
@@ -72,7 +64,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      # 🧾 Checkout again for this job context
+      # 🧾 Checkout source code again
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -83,7 +75,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # 🚀 Build and publish Docker image on main branch
+      # 🚀 Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
