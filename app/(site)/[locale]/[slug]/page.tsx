@@ -187,3 +187,6 @@ export default async function CmsPage(props: {
     </Suspense>
   )
 }
+
+// Enable ISR (Incremental Static Regeneration)
+export const revalidate = 60

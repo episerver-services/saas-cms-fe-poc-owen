@@ -1,21 +1,23 @@
 # Optimizely SaaS CMS FE Template
 
-A Next.js 15 front-end template using the App Router and TypeScript to integrate with the Optimizely SaaS CMS Delivery API. Built for real-world headless CMS needs like authenticated content, scalable rendering, Dockerized CI/CD, and BDD testing with Cucumber.
+A minimal, production-ready **Next.js 15** front-end template using the App Router and TypeScript to integrate with the **Optimizely SaaS CMS Delivery API**.
+
+Built for real-world headless CMS use cases: authenticated content, CI/CD pipelines, scalable rendering, and full test coverage (unit, E2E, and BDD).
 
 ---
 
 ## 🧩 Features
 
-• ✅ Structured GraphQL content fetching from Optimizely CMS  
-• 🔧 Environment-driven layout and homepage IDs  
-• 🐳 Docker-optimised build pipeline for production  
-• 🧪 BDD testing via Cucumber + Gherkin syntax  
-• 🧪 Unit tests via Jest + React Testing Library  
+• ✅ GraphQL content querying from Optimizely SaaS CMS  
+• 🔧 Environment-based layout + homepage config  
+• 🐳 Docker-optimised CI/CD and deploy flow  
+• 🧪 Unit tests with Jest + React Testing Library  
 • 🧪 E2E browser testing via Playwright  
-• 🧠 Scalable folder structure supporting CMS blocks and preview mode  
-• 🌐 Mock fallback data for local development  
-• 📐 Type-safe CMS integration with graphql-codegen  
-• 🧾 Metadata generation from CMS for SEO
+• 🧪 BDD testing via Cucumber + Gherkin  
+• 📐 GraphQL SDK codegen using graphql-codegen  
+• 📄 SEO metadata generation from CMS  
+• 👓 Draft mode and preview route handling  
+• 📂 Clear folder structure for blocks and layouts
 
 ---
 
@@ -31,10 +33,10 @@ pnpm install
 
 ### 2. Configure Environment
 
-Create `.env.local`:
+Create `.env.local` with your Delivery API token and layout content:
 
 ```env
-# === Delivery API ===
+# === Optimizely Delivery API ===
 OPTIMIZELY_BEARER_TOKEN=your_real_token_here
 
 # Homepage content ID and version
@@ -45,29 +47,27 @@ OPTIMIZELY_CONTENT_VERSION=published
 OPTIMIZELY_LAYOUT_ID=contentreference:/content/optimizely.com/en/layout/
 OPTIMIZELY_LAYOUT_VERSION=published
 
-# === Frontend-specific ===
+# === Frontend Config ===
 SITE_DOMAIN=http://localhost:3000
 ```
 
-### 3. Run the Dev Server
+### 3. Start Development
 
 ```bash
 pnpm dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) in your browser.
+Visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
 ## 🧪 BDD Testing (Cucumber)
 
-Run BDD tests:
-
 ```bash
 pnpm test:bdd
 ```
 
-Sample test file: `features/homepage.feature`
+Sample:
 
 ```gherkin
 Feature: Homepage content rendering
@@ -83,29 +83,22 @@ Feature: Homepage content rendering
 
 ## 🧪 Unit & E2E Testing
 
-Unit tests use **Jest** and **React Testing Library**.
+Run **unit tests** with Jest:
 
 ```bash
 pnpm test
 ```
 
-Test file example:
-
-```
-app/components/__tests__/content-area-mapper.test.tsx
-```
-
-E2E tests use **Playwright**.
+Run **Playwright E2E** tests:
 
 ```bash
 pnpm test:playwright
 ```
 
-Test file example:
+Test files live in:
 
-```
-tests/homepage.spec.ts
-```
+- `app/components/__tests__/`
+- `tests/`
 
 ---
 
@@ -113,34 +106,27 @@ tests/homepage.spec.ts
 
 ```
 📁 app/
-│ ├─ (site)/[locale]/[slug]/             # Localised CMS page routing
-│ ├─ components/
-│ │ ├─ block/
-│ │ ├─ content-area/
-│ │ ├─ draft/
-│ │ ├─ layout/
-│ │ ├─ ui/
-│ │ └─ visual-builder/
-│ ├─ __tests__/                          # Unit tests
-│ ├─ (draft)/                            # Preview/draft handlers
+│ ├─ (site)/[locale]/[slug]/      # Dynamic CMS page route
+│ ├─ components/                  # Blocks, layout, draft mode, etc.
+│ ├─ __tests__/                   # Unit tests
+│ ├─ (draft)/                     # Preview handler
 │ ├─ api/
 │ ├─ globals.css
 │ └─ metadata.ts
 
 📁 lib/
-│ ├─ optimizely/
+│ ├─ optimizely/                  # SDK, queries, utils
 │ ├─ utils/
 │ └─ content/
 
-📁 features/                             # Cucumber BDD specs
-📁 tests/                                # Playwright E2E tests
+📁 features/                      # BDD tests (Cucumber)
+📁 tests/                         # E2E tests (Playwright)
 📁 types/
+📁 mocks/
 📁 public/
 📁 .github/
-📁 mocks/
 
 📄 codegen.ts
-📄 playwright.config.ts
 📄 Dockerfile
 📄 docker-compose.yml
 📄 tsconfig.json
@@ -151,46 +137,46 @@ tests/homepage.spec.ts
 
 ## 📦 PNPM Scripts
 
-| Command              | Description                     |
-| -------------------- | ------------------------------- |
-| pnpm dev             | Start dev server                |
-| pnpm build           | Production build                |
-| pnpm start           | Serve production build          |
-| pnpm test            | Run Jest unit tests             |
-| pnpm test:bdd        | Run Cucumber tests              |
-| pnpm test:playwright | Run Playwright E2E tests        |
-| pnpm codegen         | Generate GraphQL TypeScript SDK |
+| Command                | Description                     |
+| ---------------------- | ------------------------------- |
+| `pnpm dev`             | Start dev server                |
+| `pnpm build`           | Production build                |
+| `pnpm start`           | Start production server         |
+| `pnpm test`            | Run Jest unit tests             |
+| `pnpm test:bdd`        | Run Cucumber tests              |
+| `pnpm test:playwright` | Run Playwright E2E tests        |
+| `pnpm codegen`         | Generate GraphQL TypeScript SDK |
 
 ---
 
 ## 🛠️ Docker Support
 
-Build production image:
+Build the production image:
 
 ```bash
 docker build -t saas-cms-fe-poc-owen .
 ```
 
-Run it:
+Run it locally:
 
 ```bash
-docker run -p 3000:3000 saas-cms-fe-poc-owen
+docker run -p 3000:3000 --env-file .env.local saas-cms-fe-poc-owen
 ```
 
-⚠️ Pass `OPTIMIZELY_BEARER_TOKEN` securely as a Docker build arg or secret at runtime.
+👉 **Tip:** Pass secrets like `OPTIMIZELY_BEARER_TOKEN` via `--env-file` or secret manager — never hardcode in Dockerfile.
 
 ---
 
-## 📌 Known Gaps / Next Steps
+## 📌 Known Gaps & Next Steps
 
-• See `docs/project-status.md` for implementation tracking  
-• Expand unit test coverage across more blocks/layouts  
-• Add more robust Playwright coverage (auth, fallback, nav)
+• [ ] Expand unit test coverage  
+• [ ] Add E2E tests for fallback and preview mode  
+• [ ] See `docs/project-status.md` for implementation tracker
 
 ---
 
 ## 👨‍💻 Maintainer
 
 **Owen Liversidge**  
-📍 Weymouth, UK  
-🎸 Musician. React/Next specialist. FE Architect for Optimizely SaaS CMS.
+Frontend Architect – Optimizely SaaS CMS  
+Weymouth, UK | [LinkedIn](https://www.linkedin.com/in/owenliversidge/)

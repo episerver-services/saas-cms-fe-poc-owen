@@ -6,7 +6,7 @@ This file tracks the current implementation progress of the custom frontend temp
 🔄 = In Progress  
 🔲 = Not Started
 
-_Last updated: 28 July 2025_
+_Last updated: 29 July 2025_
 
 ---
 
@@ -80,26 +80,21 @@ _Last updated: 28 July 2025_
 
 ---
 
-## 🧩 Phase 7: Visual Builder Readiness
+## 📁 Phase 8: Docs & Developer Experience
 
-| Task                                    | Status | Notes                                        |
-| --------------------------------------- | ------ | -------------------------------------------- |
-| Layout-aware slot rendering             | 🔄     | Working base logic, needs enhancements       |
-| ExperienceRenderer for VB compatibility | 🔲     | Not scaffolded yet                           |
-| displayOption / spacing / styling hints | 🔲     | No mapping yet                               |
-| Draft/preview mode from CMS editor      | ✅     | Experience draft route structure is in place |
-| Opti ID / editor identity passthrough   | 🔲     | Preview impersonation not wired up yet       |
+| Task                    | Status | Notes                                              |
+| ----------------------- | ------ | -------------------------------------------------- |
+| Markdown documentation  | ✅     | All internal guides in `/docs` or README           |
+| Code comments + JSDoc   | ✅     | Function-level JSDoc added throughout key files    |
+| Dev commands (scripts)  | ✅     | Clean, test, build, preview all covered via `pnpm` |
+| DX setup (editorconfig) | ✅     | Formatting and linting enforced across team setups |
 
 ---
 
-## ⏱️ Estimated Remaining Workload (Updated)
+## ⏱️ Estimated Remaining Workload
 
-| Phase | Remaining Tasks                            | Complexity | Notes                                                                 |
-| ----- | ------------------------------------------ | ---------- | --------------------------------------------------------------------- |
-| 1     | Commit hooks                               | Low        | Can be done with `lint-staged` + `husky`.                             |
-| 2     | Preview fallback, error views              | Medium     | `FallbackErrorUI` implemented; preview fallback partially complete.   |
-| 3     | Slot nesting support                       | High       | Still pending full layout nesting logic from VB.                      |
-| 4     | CDN image transform, render fallback       | Medium     | Placeholder logic exists; image resizing via CDN needs docs/example.  |
-| 5     | ARIA audits, skip links                    | Medium     | Sitemap complete ✅; skip links present ✅; ARIA audit still 🔄.      |
-| 6     | Unit + E2E test frameworks                 | Medium     | Jest + RTL ✅, Cucumber ✅, Playwright ✅; expand tests as needed     |
-| 7     | Visual Builder renderer, token passthrough | High       | Wrapper scaffolded; passthrough logic not yet wired for preview mode. |
+| Phase | Remaining Tasks                        | Complexity | Notes                                                        |
+| ----- | -------------------------------------- | ---------- | ------------------------------------------------------------ |
+| 5     | ARIA audits, skip links                | Medium     | Fix DIG2010/12; skip link logic now improves focus detection |
+| 7     | Visual Builder scaffolding (optional)  | Medium     | If next client uses VB, implement `ExperienceRenderer`       |
+| 3     | Fallback UI for invalid VB composition | Low        | Already logged as handled in `FallbackErrorUI`, test pending |
