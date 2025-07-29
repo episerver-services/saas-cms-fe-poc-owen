@@ -11,8 +11,7 @@ _Last updated: 29 July 2025_
 - `app/`: Next.js App Router layout, dynamic routes, and shared components
 - `lib/`: Custom utilities and Optimizely SDK logic
 - `features/`: BDD feature files (Gherkin format)
-- `tests/`: Playwright E2E tests
-- `types/`: Shared TS interfaces and types
+- `e2e/`: Playwright E2E tests
 - `public/`: Static assets
 - `docs/`: Project documentation
 
@@ -92,7 +91,7 @@ Use `dotenv-cli` for running in dev with custom environment configs (see `pnpm d
 | ---- | ------------------ | ---------------- |
 | Unit | Jest + RTL         | `app/__tests__/` |
 | BDD  | Cucumber + Gherkin | `features/`      |
-| E2E  | Playwright         | `tests/`         |
+| E2E  | Playwright         | `e2e/`           |
 
 Tests should cover:
 

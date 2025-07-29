@@ -95,6 +95,5 @@ _Last updated: 29 July 2025_
 
 | Phase | Remaining Tasks                        | Complexity | Notes                                                        |
 | ----- | -------------------------------------- | ---------- | ------------------------------------------------------------ |
-| 5     | ARIA audits, skip links                | Medium     | Fix DIG2010/12; skip link logic now improves focus detection |
 | 7     | Visual Builder scaffolding (optional)  | Medium     | If next client uses VB, implement `ExperienceRenderer`       |
 | 3     | Fallback UI for invalid VB composition | Low        | Already logged as handled in `FallbackErrorUI`, test pending |

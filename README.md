@@ -120,8 +120,7 @@ Test files live in:
 │ └─ content/
 
 📁 features/                      # BDD tests (Cucumber)
-📁 tests/                         # E2E tests (Playwright)
-📁 types/
+📁 e2e/                           # E2E tests (Playwright)
 📁 mocks/
 📁 public/
 📁 .github/
