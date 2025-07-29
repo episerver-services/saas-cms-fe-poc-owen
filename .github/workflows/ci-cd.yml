@@ -28,6 +28,12 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify install
+        run: pnpm list --depth=0
+
       - name: Run linter
         run: pnpm lint
 
