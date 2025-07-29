@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf .next/cache",
-    "dev": "npm run clean && next dev",
+    "dev": "pnpm clean && next dev",
     "dev:custom": "dotenv -e .env.custom-styling.local -- pnpm dev",
     "dev:visual": "dotenv -e .env.visual-builder.local -- pnpm dev",
     "build": "next build",
@@ -12,10 +12,10 @@
     "lint": "next lint",
     "test": "jest",
     "bdd": "cucumber-js --require-module ts-node/register --require features/step-definitions/**/*.ts",
-    "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
     "test:features": "cucumber-js features/**/*.feature --require-module ts-node/register --require features/step-definitions/**/*.ts --require features/support/**/*.ts",
-    "test:playwright": "playwright test",
-    "test:playwright:headed": "playwright test --headed --debug",
+    "test:bdd": "start-server-and-test dev http://localhost:3000 bdd",
+    "test:e2e": "pnpm exec playwright test",
+    "test:e2e:headed": "pnpm exec playwright test --headed --debug",
     "codegen": "cross-env graphql-codegen --config codegen.ts"
   },
   "lint-staged": {

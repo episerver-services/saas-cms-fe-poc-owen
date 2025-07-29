@@ -35,6 +35,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # 🎭 Install Playwright browsers (for E2E)
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+
       # 🔍 Verify installed packages (optional)
       - name: Verify install
         run: pnpm list --depth=0
@@ -47,22 +51,9 @@ jobs:
       - name: Run unit tests (Jest)
         run: pnpm test
 
-      # 🧪 Run BDD tests (blocking on main branch)
-      - name: Run BDD tests (blocking on main)
-        if: github.ref == 'refs/heads/main'
-        run: |
-          OPTIMIZELY_API_URL=${{ secrets.OPTIMIZELY_API_URL }} \
-          OPTIMIZELY_SINGLE_KEY=${{ secrets.OPTIMIZELY_SINGLE_KEY }} \
-          pnpm test:bdd
-
-      # 🧪 Run BDD tests (non-blocking on non-main branches)
-      - name: Run BDD tests (non-blocking on non-main)
-        if: github.ref != 'refs/heads/main'
-        run: |
-          OPTIMIZELY_API_URL=${{ secrets.OPTIMIZELY_API_URL }} \
-          OPTIMIZELY_SINGLE_KEY=${{ secrets.OPTIMIZELY_SINGLE_KEY }} \
-          pnpm test:bdd
-        continue-on-error: true
+      # 🌐 Run end-to-end tests with Playwright
+      - name: Run e2e tests (Playwright)
+        run: pnpm test:e2e
 
       # 🐳 Build Docker image but don't publish
       - name: Build Docker image
