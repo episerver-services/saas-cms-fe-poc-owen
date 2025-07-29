@@ -28,15 +28,18 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Run linter
         run: pnpm lint
+
+      - name: Run unit tests (Jest)
+        run: pnpm test
 
       - name: Run BDD tests (non-blocking on non-main)
         run: pnpm test:bdd
         continue-on-error: ${{ github.ref != 'refs/heads/main' }}
+        env:
+          OPTIMIZELY_API_URL: ${{ secrets.OPTIMIZELY_API_URL }}
+          OPTIMIZELY_SINGLE_KEY: ${{ secrets.OPTIMIZELY_SINGLE_KEY }}
 
       - name: Build Docker image
         uses: docker/build-push-action@v5
