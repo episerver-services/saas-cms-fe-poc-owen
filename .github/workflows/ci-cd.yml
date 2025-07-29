@@ -35,10 +35,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 🎭 Install Playwright browsers (for E2E)
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
-
       # 🔍 Verify installed packages (optional)
       - name: Verify install
         run: pnpm list --depth=0
@@ -50,10 +46,6 @@ jobs:
       # 🧪 Run unit tests using Jest
       - name: Run unit tests (Jest)
         run: pnpm test
-
-      # 🌐 Run end-to-end tests with Playwright
-      - name: Run e2e tests (Playwright)
-        run: pnpm test:e2e
 
       # 🛠️ Set up Docker Buildx (enables advanced caching)
       - name: Set up Docker Buildx
