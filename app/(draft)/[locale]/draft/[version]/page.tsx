@@ -9,7 +9,26 @@ import { Suspense } from 'react'
 export const revalidate = 0
 export const dynamic = 'force-dynamic'
 
-export default async function HomePage(props: {
+/**
+ * Renders the draft preview for the site homepage.
+ *
+ * This route is used to preview the root StartPage (homepage) from the CMS
+ * in draft mode. It ensures draft mode is enabled, fetches the page content
+ * by version, and renders the mapped block content.
+ *
+ * @param props - Async route parameters
+ * @param props.params - A promise resolving to:
+ * - `locale`: The requested locale.
+ * - `version`: The preview version of the homepage content.
+ *
+ * @returns JSX content for the draft homepage, or a 404 if content is missing.
+ *
+ * @example
+ * /en/draft/1a2b3c → renders the draft homepage in English
+ */
+export default async function HomePage({
+  params,
+}: {
   params: Promise<{ locale: string; version: string }>
 }) {
   const isDraftModeEnabled = await checkDraftMode()
@@ -17,7 +36,7 @@ export default async function HomePage(props: {
     return notFound()
   }
 
-  const { locale, version } = await props.params
+  const { locale, version } = await params
   const locales = getValidLocale(locale)
 
   const pageResponse = await optimizely.GetPreviewStartPage(
@@ -26,15 +45,12 @@ export default async function HomePage(props: {
   )
 
   const startPage = pageResponse?.StartPage?.item
-
   if (!startPage) {
     console.warn('StartPage not found, skipping render.')
-    return notFound() // or return null if you prefer
+    return notFound()
   }
 
-  const blocks = (startPage.blocks ?? []).filter(
-    (block) => block !== null && block !== undefined
-  )
+  const blocks = (startPage.blocks ?? []).filter(Boolean)
 
   return (
     <div data-epi-edit="blocks">

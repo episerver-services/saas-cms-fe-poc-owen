@@ -4,12 +4,30 @@ import { optimizely } from '@/lib/optimizely/fetch'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
 import { checkDraftMode } from '@/lib/utils/draft-mode'
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
 
 export const revalidate = 0
 export const dynamic = 'force-dynamic'
 
-export default async function CmsPage(props: {
+/**
+ * Renders a Visual Builder draft preview page for a CMS page identified by its locale, slug, and version.
+ *
+ * This route is used by Optimizely's Visual Builder to render full page content in draft mode.
+ * It validates the draft preview state, fetches the page content by URL, and maps its content blocks.
+ *
+ * @param props - An async route object containing dynamic URL segments.
+ * @param props.params - A promise that resolves to the route parameters:
+ * - `locale`: The locale for the requested page (e.g. "en", "sv").
+ * - `version`: The draft version identifier (GUID or version key).
+ * - `slug` (optional): The URL path for the requested page.
+ *
+ * @returns A React layout rendering the requested draft content, or triggers `notFound()` if invalid.
+ *
+ * @example
+ * /en/draft/7f42.../home → fetches `"/home"` in English from draft version `7f42...`
+ */
+export default async function CmsPage({
+  params,
+}: {
   params: Promise<{ locale: string; version: string; slug?: string }>
 }) {
   const isDraftModeEnabled = await checkDraftMode()
@@ -17,7 +35,7 @@ export default async function CmsPage(props: {
     return notFound()
   }
 
-  const { locale, slug = '', version } = await props.params
+  const { locale, slug = '', version } = await params
   const locales = getValidLocale(locale)
   const formattedSlug = `/${slug}`
 
@@ -25,11 +43,9 @@ export default async function CmsPage(props: {
     { locales, slug: formattedSlug, version },
     { preview: true }
   )
-  const page = pageResponse.CMSPage?.item
 
-  const blocks = (page?.blocks ?? []).filter(
-    (block) => block !== null && block !== undefined
-  )
+  const blocks = (pageResponse.CMSPage?.item?.blocks ?? []).filter(Boolean)
+  if (!blocks.length) return notFound()
 
   return (
     <div className="container py-10" data-epi-edit="blocks">
@@ -37,9 +53,7 @@ export default async function CmsPage(props: {
         version={version}
         currentRoute={`/${locale}/draft/${version}/${slug}`}
       />
-      <Suspense>
-        <ContentAreaMapper blocks={blocks} preview />
-      </Suspense>
+      <ContentAreaMapper blocks={blocks} preview />
     </div>
   )
 }

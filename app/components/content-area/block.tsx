@@ -1,7 +1,12 @@
 import dynamic from 'next/dynamic'
 import blocksMapperFactory from '@/lib/utils/block-factory'
 
-// Dynamically import each block
+/**
+ * Dynamically imports all known CMS block components.
+ * These are used by the CMS renderer to map block types to components.
+ * Lazy loading reduces initial bundle size and improves performance.
+ */
+
 const AvailabilityBlock = dynamic(() => import('../block/availability-block'))
 const ContactBlock = dynamic(() => import('../block/contact-block'))
 const HeroBlock = dynamic(() => import('../block/hero-block'))
@@ -14,7 +19,10 @@ const ServicesBlock = dynamic(() => import('../block/services-block'))
 const StoryBlock = dynamic(() => import('../block/story-block'))
 const TestimonialsBlock = dynamic(() => import('../block/testimonials-block'))
 
-// Map the dynamically imported blocks
+/**
+ * A mapping of Optimizely CMS block types to corresponding React components.
+ * Keys must match the `__typename` returned by the GraphQL API.
+ */
 export const blocks = {
   AvailabilityBlock,
   ContactBlock,
@@ -27,4 +35,8 @@ export const blocks = {
   TestimonialsBlock,
 } as const
 
+/**
+ * Returns a render function that maps CMS block data to matching components.
+ * Used in `ContentAreaMapper` to render block content dynamically.
+ */
 export default blocksMapperFactory(blocks)

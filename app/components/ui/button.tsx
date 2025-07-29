@@ -4,6 +4,10 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
+/**
+ * Utility function that generates class names based on variant and size.
+ * Combines default button styles with conditional variants.
+ */
 const buttonVariants = cva(
   'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
@@ -34,12 +38,29 @@ const buttonVariants = cva(
   }
 )
 
+/**
+ * ButtonProps extends native button attributes with support for:
+ * - variant: visual style variant
+ * - size: button size
+ * - asChild: render as child element using Radix Slot
+ */
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  /**
+   * Whether to render this component as a child (using Radix Slot).
+   */
   asChild?: boolean
 }
 
+/**
+ * A polymorphic button component with support for style variants, sizes, and Radix Slot.
+ *
+ * @example
+ * ```tsx
+ * <Button variant="destructive" size="lg">Delete</Button>
+ * ```
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
@@ -52,6 +73,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   }
 )
+
 Button.displayName = 'Button'
 
 export { Button, buttonVariants }

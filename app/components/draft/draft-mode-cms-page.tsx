@@ -6,6 +6,14 @@ import { notFound } from 'next/navigation'
 import { SafeVisualBuilderExperience } from '@/lib/optimizely/types/experience'
 import ContentAreaMapper from '../content-area/mapper'
 
+/**
+ * Renders the latest draft version of a CMS page or a Visual Builder experience.
+ * Used during preview mode to reflect unsaved or in-progress changes.
+ *
+ * @param locales - The raw locale string from the URL or params
+ * @param slug - The content path (slug) for identifying the page or experience
+ * @returns A Suspense-wrapped React component tree or a notFound() call
+ */
 export default async function DraftModeCmsPage({
   locales,
   slug,

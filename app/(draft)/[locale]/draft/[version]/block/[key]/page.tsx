@@ -4,12 +4,30 @@ import { optimizely } from '@/lib/optimizely/fetch'
 import { getValidLocale } from '@/lib/optimizely/utils/language'
 import { checkDraftMode } from '@/lib/utils/draft-mode'
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
 
 export const revalidate = 0
 export const dynamic = 'force-dynamic'
 
-export default async function Page(props: {
+/**
+ * Renders a Visual Builder draft preview for a single CMS block or component.
+ *
+ * This route is triggered when previewing isolated components in Optimizely's Visual Builder.
+ * It validates the draft mode, fetches the component by its key and version, and renders it.
+ *
+ * @param props - An async route object containing dynamic route parameters.
+ * @param props.params - A promise that resolves to the route parameters:
+ * - `key`: The unique identifier for the CMS component (block GUID or key).
+ * - `locale`: The locale for the requested content (e.g. "en").
+ * - `version`: The draft version identifier (GUID or version key).
+ *
+ * @returns A rendered block component in draft preview mode, or `notFound()` if unavailable.
+ *
+ * @example
+ * /en/draft/7f42.../block/abcd1234 → renders block with key `abcd1234` from version `7f42...`
+ */
+export default async function Page({
+  params,
+}: {
   params: Promise<{ key: string; locale: string; version: string }>
 }) {
   const isDraftModeEnabled = await checkDraftMode()
@@ -17,23 +35,24 @@ export default async function Page(props: {
     return notFound()
   }
 
-  const { locale, version, key } = await props.params
+  const { locale, version, key } = await params
   const locales = getValidLocale(locale)
 
-  const componentData = await optimizely.GetComponentByKey(
+  const response = await optimizely.GetComponentByKey(
     { locales, key, version },
     { preview: true }
   )
 
-  const blocks = componentData._Component?.item
+  const component = response._Component?.item
+  if (!component) return notFound()
 
   return (
-    <Suspense>
+    <>
       <OnPageEdit
         version={version}
         currentRoute={`/${locale}/draft/${version}/block/${key}`}
       />
-      <ContentAreaMapper blocks={[blocks]} preview />
-    </Suspense>
+      <ContentAreaMapper blocks={[component]} preview />
+    </>
   )
 }

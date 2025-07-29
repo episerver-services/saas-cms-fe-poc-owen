@@ -1,6 +1,23 @@
 import { HeroBlock as HeroBlockProps } from '@/lib/optimizely/sdk'
 import { cn } from '@/lib/utils'
 
+/**
+ * Renders a prominent hero section with a title, optional subtitle,
+ * and decorative background shapes.
+ *
+ * @param title - Main heading for the hero block (required)
+ * @param subtitle - Supporting text displayed beneath the title (optional)
+ * @param showDecoration - Whether to display decorative background shapes (default: true)
+ * @param decorationColorsPrimary - Colour for the top-right decoration (default: '#009379')
+ * @param decorationColorsSecondary - Colour for the bottom-left decoration (default: '#ffd285')
+ *
+ * @example
+ * <HeroBlock
+ *   title="Welcome to Optimizely"
+ *   subtitle="Built with the SaaS CMS"
+ *   showDecoration={true}
+ * />
+ */
 export default function HeroBlock({
   title,
   subtitle,

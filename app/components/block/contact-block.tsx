@@ -4,6 +4,19 @@ import { Textarea } from '../ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { ContactBlock as ContactBlockProps } from '@/lib/optimizely/sdk'
 
+/**
+ * Renders a contact form block with a title and description pulled from CMS.
+ * This is a static form UI; no submit handling is implemented.
+ *
+ * @param title - Heading for the contact section
+ * @param description - Optional description below the title
+ *
+ * @example
+ * <ContactBlock
+ *   title="Get in touch"
+ *   description="Have a project in mind? Drop us a message."
+ * />
+ */
 export default function ContactBlock({
   title,
   description,

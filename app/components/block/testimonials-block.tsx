@@ -6,6 +6,18 @@ import {
 } from '@/lib/optimizely/sdk'
 import { castContent } from '@/lib/optimizely/types/type-utils'
 
+/**
+ * Renders a section of testimonials with avatar, name, position, and quote content.
+ *
+ * @param title - The section heading for the testimonial group
+ * @param testimonials - Array of CMS blocks, expected to be TestimonialItemBlock items
+ *
+ * @example
+ * <TestimonialsBlock
+ *   title="What clients say"
+ *   testimonials={[{ fullName: "Alice", position: "CEO", content: "Great work!" }]}
+ * />
+ */
 export default function TestimonialsBlock({
   title,
   testimonials,
