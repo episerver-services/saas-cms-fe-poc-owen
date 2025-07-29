@@ -1,8 +1,8 @@
 import { defineConfig } from '@playwright/test'
 
 export default defineConfig({
-  testDir: 'tests', // Only look for tests in /tests
-  testMatch: '**/*.spec.ts', // Only run *.spec.ts files
+  testDir: 'e2e',
+  testMatch: '**/*.spec.ts',
   fullyParallel: true,
   retries: 0,
   use: {
