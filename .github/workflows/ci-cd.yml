@@ -3,10 +3,10 @@ name: CI/CD
 on:
   push:
     branches:
-      - main
+      - '**'
   pull_request:
     branches:
-      - main
+      - '**'
 
 jobs:
   lint-build-test:
@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -34,22 +34,28 @@ jobs:
       - name: Run linter
         run: pnpm lint
 
-      - name: Run BDD tests (optional)
-        run: pnpm test:bdd || true
+      - name: Run BDD tests (non-blocking on non-main)
+        run: pnpm test:bdd
+        continue-on-error: ${{ github.ref != 'refs/heads/main' }}
 
       - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest .
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   docker-publish:
-    name: Publish Docker Image
+    name: Publish Docker Image (main only)
     runs-on: ubuntu-latest
     needs: lint-build-test
     if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Log in to DockerHub
         uses: docker/login-action@v3
@@ -58,6 +64,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest .
-          docker push ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/optimizely-fe:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
